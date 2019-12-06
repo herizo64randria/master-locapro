@@ -1,0 +1,58 @@
+<div class="modal fade" id="modalHistoriqueEtatModifier">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('historiqueEtat_edit', {'id' : historiqueEtat.id}) }}" method="post" autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tbtn-primary"><i class="fa fa-power-off"></i> Modifier Etat du groupe</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="dateHistoriqueEtat">Date du statut: <b class="text-danger" id="err_dateHistoriqueEtat"></b></label>
+                        <input required type="text" class="form-control" name="dateHistoriqueEtat" id="dateHistoriqueEtat" value="{{ historiqueEtat.date|date('d/m/Y')}}" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="statutEtat">Statut: <b class="text-danger" id="err_statutEtat"></b></label>
+                      <select required  class="form-control" name="statutEtat" id="statutEtat" >
+                          <option value="Marche">Marche</option>
+                          <option value="Arrêt">Arrêt</option>
+                      </select>
+                    </div>
+                    <script>
+                        $('#statutEtat').val('{{ historiqueEtat.statut }}');
+                    </script>
+
+                    <div class="form-group">
+                        <label for="descriptionHistoriqueEtat">Note/Description: <b class="text-danger" id="err_descriptionHistoriqueEtat"></b></label>
+                        <textarea rows="4" class="form-control" name="descriptionHistoriqueEtat" id="descriptionHistoriqueEtat">{{ historiqueEtat.detail }}</textarea>
+                    </div>
+
+                    <p class="text-danger">
+                        *L'état du groupe est pour l'historique de calcul de la facturation
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" > Confirmer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<script>
+    //Date picker
+    $('#dateHistoriqueEtat').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    });
+</script>
+<!-- /.modal -->

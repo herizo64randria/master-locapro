@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-info">Détails de la mission</strong>{% endblock %}
+{% block titre_description %}
+    Détails sur la mission <br>
+    {% if mission.probleme %}
+        Problème numéro: <a href="{{ path('probleme_show', {'id' : mission.probleme.id}) }}">{{ mission.probleme.numero }}</a>
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information sur la mission</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_MISSION') %}
+                            <li>
+                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalSuiviPiece"><i class="fa fa-edit"></i> Modifier</button>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Date de début: </th>
+                            <td>{{ mission.dateDebut|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date prévu de fin:</th>
+                            <td>{{ mission.dateFin|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Site:</th>
+                            <td>{{ mission.site.emplacement }} - <strong class="text-primary">{{ mission.probleme.groupe.numero }}</strong></td>
+                        </tr>
+
+                        {% if mission.description %}
+                        <tr>
+                            <td><b>Description:</b>
+                                <br>
+                                {{ mission.description|nl2br }}
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Employé(s) en mission</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_MISSION') %}
+                            <li>
+                                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modalPersonne"><i class="fa fa-plus-circle"></i> Ajouter une personne</button>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    <table class="table table-striped">
+                        {% if mission.employeMissions %}
+                            {% for employe in mission.employeMissions %}
+                                <tr>
+                                    <td><a href="{{ employe.lien }}" target="_blank">{{ employe.nom }}</a></td>
+                                    <td>{{ employe.poste }}</td>
+                                    {% if app.user|ifRole('ROLE_MISSION') %}
+                                        <td><a href="{{ path('employeMission_supprimer', {"id" : employe.id}) }}" class="btn btn-default btn-xs deleteEmploye" ><i class="fa fa-circle"></i> </a></td>
+
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include '@Groupe/mission/modalPersonne.html.twig' %}
+
+    <script>
+        $('.deleteEmploye').click(function(){
+            return confirm("Voulez-vous supprimer l'employé de la mission?");
+        })
+    </script>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-success">Utilisateur</strong> {% endblock %}
+{% block titre_description %}Création de nouveau utilisateur{% endblock %}
+{% block body %}
+    <style>
+        .active{ background: #0a698a
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <form action="#" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire utilisateur</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="nom">Nom <b class="text-danger" id="err_nom"></b></label>
+                            <input required type="text" class="form-control" name="nom" id="nom"/>
+                        </div>
+
+                        <div class="form-group">
+
+
+
+{#
+
+                            <label for="role">Choisir role(s) : <b class="text-danger" id="err_role"></b></label><br>
+                            <input name="roles[]"  type="checkbox"  value="ROLE_ADMIN">
+                            <label for="role">ROLE_ADMIN</label>
+                            <input name="roles[]" type="checkbox" value="ROLE_USER">
+                            <label for="role">ROLE_USER</label>
+                            <input name="roles[]" type="checkbox" value="ROLE_PROD">
+                             <label for="role">ROLE_PROD</label>
+
+                            <input name="roles[]" type="checkbox" value="ROLE_RESP">
+                            <label for="role">ROLE_RESP</label>
+#}
+
+
+
+                            <label for="role">Type de compte : <b class="text-danger" id="err_role"></b></label><br>
+
+
+                        <div class="btn-group  btn-group-toggle" data-toggle="buttons">
+                            <label class="btn  btn-secondary">
+                                <input type="radio" name="role"  value="ROLE_ADMIN" id="role" autocomplete="off" > Administrateur
+                            </label>
+                            <label class="btn btn-secondary  active">
+                                <input type="radio" name="role" value="ROLE_USER"  id="role1" autocomplete="off" checked> Simple utilisateur
+                            </label>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username">Username <b class="text-danger" id="err_username"></b></label>
+                            <input required type="text" class="form-control" name="username" id="username"   />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email  <b class="text-danger" id="err_email"></b></label>
+                            <input required type="text" class="form-control" name="email" id="email"   />
+                        </div>
+                        <div class="form-group">
+                            <label for="passeword">Passeword  <b class="text-danger" id="err_passeword"></b></label>
+                            <input required type="text" class="form-control" name="passeword" id="passeword"   />
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" value="Créer" id="btn" class="btn btn-success btn-block" />
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('entre_index') }}" class="btn btn-default btn-block">Annuler</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br><br>
+
+
+
+
+    {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
+
+    {#NUMERAL FORMAT#}
+    <script>
+
+    </script>
+
+{% endblock %}

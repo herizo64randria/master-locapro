@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Modifier catalogue{% endblock %}
+{% block titre_page %}Modifier catalogue{% endblock %}
+{% block titre_description %}Liste des Catalogues attribuables{% endblock %}
+
+{% block body %}
+    <style>
+        li {
+            display: inline;
+            list-style: none; /* pour enlever les puces sur IE7 */
+            margin: 10px;
+        }
+        .gallery {
+            display: inline-block;
+            margin-right: 20px;
+            vertical-align: top;
+
+        }
+    </style>
+    <style>
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        #btn {
+            border: 2px solid gray;
+            color: gray;
+            background-color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+    </style>
+    <div class="row">
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="col-md-10">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Titre: <b>{{ catalogue.titre }}</b></h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="titre">Titre: <b class="text-danger" id="err_titre"></b></label>
+                                    <input required type="text" class="form-control" name="titre" id="titre" value="{{ catalogue.titre }}" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label for="nompj">Nom du fichier: </label>
+                                        <input  type="text" class="form-control" name="nompj"  />
+                                    </div>
+                                <div class="form-group">
+                                    <input type="file" name="file"  class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="text"> Piece jointe : <b class="text-danger" id="err_text"></b></label>
+                            <div class="row">
+                                <ul>
+                                    {% for pjcatalogue in pjcatalogues %}
+                                        <li>
+                                            <div class="gallery">
+                                                <a target="_blank" href="{{ asset('document/'~pjcatalogue.lien) }}">
+                                                    {% if pjcatalogue.ext =="pdf"%}
+                                                        <img src="{{ asset('document/divers/pdf.png') }}" alt="Cinque Terre" width="50px" height="50px">
+                                                    {% endif %}
+
+                                                    {% if pjcatalogue.ext =="jpg" or pjcatalogue.ext =="png"%}
+                                                        <img src="{{ asset('document/'~pjcatalogue.lien) }}" alt="Cinque Terre" width="50px" height="50px">
+                                                    {% endif %}
+                                                    {% if pjcatalogue.ext =="doc" or pjcatalogue.ext =="docx"%}
+                                                        <img src="{{ asset('document/divers/doc.png') }}" alt="Cinque Terre" width="50px" height="50px">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="desc">
+                                                    <strong>{{ pjcatalogue.nom }}</strong><br>
+                                                    <a href="{{ path('pjcatalogue_modifier', { 'id': pjcatalogue.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                                                </div>
+
+                                            </div>
+                                        </li>
+
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <label for="text">Contenu: <b class="text-danger" id="err_text"></b></label>
+
+                            {% set text = '<h1>Nouveau catalogue</h1>' %}
+                            {% if catalogue.text %}
+                                {% set text = catalogue.text %}
+                            {% endif %}
+
+                            <textarea required class="form-control" name="text" id="text" rows="10" >{{ text }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="box-footer clearfix">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <button class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-save"></i> Enregistrer</button>
+                           </div>
+                           <div class="col-md-6">
+                               <a href="{{ path('catalogue_show', {'id' : catalogue.id}) }}" class="btn btn-default btn-lg btn-block" > Annuler</a>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('text');
+    </script>
+
+{% endblock %}

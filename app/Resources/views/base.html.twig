@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="" style="zoom: 120%">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block titre %}LocaPro{% endblock %}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('AdminLTE/bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{ asset('AdminLTE/bower_components/Ionicons/css/ionicons.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/AdminLTE.min.css') }}">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/skins/skin-blue.min.css') }}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery 3 -->
+    <script src="{{ asset('AdminLTE/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset('AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('AdminLTE/dist/js/adminlte.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/moment.js') }}"></script>
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    {#----------------NUMERAL JS----------------#}
+    <script src="{{ asset('assets/NumeralJs/numeral.js') }}"></script>
+    <script src="{{ asset('assets/NumeralJs/numeralByAllin.js') }}"></script>
+
+    {#-------------CONTRAINTE DE SAISIE-------------#}
+    <script src="{{ asset('assets/js/input_constraint.js') }}"></script>
+
+{#    ------------------ DATE PICKER------------------ #}
+    <link href="{{ asset('AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css') }}">
+    <script src="{{ asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js') }}"></script>
+
+    {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
+    <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css') }}">
+    <script src="{{ asset('assets/select2/js/select2.full.min.js') }}"></script>
+
+
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="{{ path('homepage') }}" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>L</b>cP</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Loca</b>Pro</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+                    <!-- Notifications Menu -->
+                    <li class="dropdown notifications-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">Vos notifications</li>
+                            <li>
+                                <!-- Inner Menu: contains the notifications -->
+                                <ul class="menu">
+                                    <li><!-- start notification -->
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                    <!-- end notification -->
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+{#                    <!-- Tasks Menu -->#}
+{#                    <li class="dropdown tasks-menu">#}
+{#                        <!-- Menu Toggle Button -->#}
+{#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
+{#                            <i class="fa fa-flag-o"></i>#}
+{#                            <span class="label label-danger">9</span>#}
+{#                        </a>#}
+{#                        <ul class="dropdown-menu">#}
+{#                            <li class="header">You have 9 tasks</li>#}
+{#                            <li>#}
+{#                                <!-- Inner menu: contains the tasks -->#}
+{#                                <ul class="menu">#}
+{#                                    <li><!-- Task item -->#}
+{#                                        <a href="#">#}
+{#                                            <!-- Task title and progress text -->#}
+{#                                            <h3>#}
+{#                                                Design some buttons#}
+{#                                                <small class="pull-right">20%</small>#}
+{#                                            </h3>#}
+{#                                            <!-- The progress bar -->#}
+{#                                            <div class="progress xs">#}
+{#                                                <!-- Change the css width attribute to simulate progress -->#}
+{#                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"#}
+{#                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">#}
+{#                                                    <span class="sr-only">20% Complete</span>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </a>#}
+{#                                    </li>#}
+{#                                    <!-- end task item -->#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                            <li class="footer">#}
+{#                                <a href="#">View all tasks</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </li>#}
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+{#                            <!-- The user image in the navbar-->#}
+{#                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">#}
+
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">{{ app.user.nom }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="{{ asset('images/user.svg') }}" class="img-circle" alt="User Image">
+
+                                <p>
+                                    {{ app.user.nom }}
+                                    <br>
+                                </p>
+                            </li>
+
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+
+                                <div class="pull-right">
+                                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ asset('images/user.svg') }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ app.user.nom }}</p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> En ligne</a>
+                </div>
+            </div>
+
+            <!-- search form (Optional) -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Recherche...">
+                    <span class="input-group-btn">
+                          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                          </button>
+                    </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+{#                -------------------------------------------------------------------------#}
+                <li class="header">GESTION DE GROUPE</li>
+
+                <li><a href="{{ path('groupe_index') }}"><i class="fa fa-ioxhost"></i> Liste des groupes</a></li>
+                {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+                    <li><a href="{{ path('site_index') }}"><i class="fa fa-list"></i> Liste des sites</a></li>
+                {% endif %}
+                <li><a href="{{ path('probleme_index') }}"><i class="fa fa-warning"></i> Liste problème</a></li>
+                <li><a href="{{ path('heureMarche_index') }}"><i class="fa fa-clock-o"></i> Heure de marche</a></li>
+                <li><a href="{{ path('catalogue_index') }}"><i class="fa fa-support"></i> Liste catalogue</a></li>
+                <li><a href="{{ path('carteMadagascar_index') }}"><i class="fa fa-won"></i> Carte de Madagascar</a></li>
+
+{#                ------------------------------------------------#}
+                <li class="header">GESTION DE STOCK</li>
+
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-file"></i> <span>Document</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ path('entre_index') }}"><i class="fa fa-mail-forward"></i> Bon d'entrée</a></li>
+                        <li><a href="{{ path('sortie_index') }}"><i class="fa fa-mail-reply"></i> Bon de sortie</a></li>
+                        <li >
+                            <a href="{{ path('deplacement_index') }}"><i class="fa fa-exchange"></i>Transfert produit</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a href="{{ path('produit_index') }}"><i class="fa fa-houzz"></i> <span> Produit</span></a></li>
+                <li ><a href="{{ path('fournisseur_index') }}"><i class="fa fa-gg-circle"></i> <span> Fournisseur</span></a></li>
+
+{#                -----------------------------------------------#}
+                {% if app.user|ifRole('ROLE_ADMIN') %}
+                <li class="header">ADMINISTRATION</li>
+
+                <li class="treeview">
+                <a href="#"><i class="fa fa-wrench"></i> <span>Menu Administrateur</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ path('utilisateur_index') }}"><i class="fa fa-users"></i> Gestion Utilisateur</a></li>
+                    <li><a href="{{ path('nombreconfirmation_index') }}"><i class="fa fa-sort-numeric-asc"></i> Nombre confirmation</a></li>
+                    <li><a href="{{ path('listepiece_index') }}"><i class="fa fa"></i> Liste pièce détachée</a></li>
+                </ul>
+                </li>
+                {% endif %}
+
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+
+            <h1>
+                {% block titre_page %}{% endblock %}
+                <small>
+                    {% block titre_description %}{% endblock %}
+                </small>
+            </h1>
+
+
+        </section>
+        <!-- Main content -->
+        <section class="content container-fluid">
+            {% block body %}
+                <h1>MON BODY</h1>
+
+            {% endblock %}
+
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+{#        <div class="pull-right hidden-xs">#}
+{#            Anything you want#}
+{#        </div>#}
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2019 <a href="#">LocaPro</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Add the sidebar's background. This div must be placed
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
+
+{#------------DANGER MODAL------------#}
+<div class="modal modal-danger fade" id="modalDanger">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >Attention!</h4>
+            </div>
+            <div class="modal-body">
+                <p id="textModalDanger">Erreur!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+
+</body>
+</html>

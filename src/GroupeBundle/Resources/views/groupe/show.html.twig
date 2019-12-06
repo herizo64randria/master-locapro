@@ -1,0 +1,270 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-primary">Fiche Groupe</strong> {% endblock %}
+{% block titre_description %}Information sur le groupe{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-slack"></i> Fiche Information groupe</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-inline">
+                                {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+                                    <li>
+                                        <a href="{{ path('groupe_edit', {'id' : groupe.id}) }}" class="btn btn-primary btn-lg"><i class="fa fa-edit"></i> Modifier</a>
+                                    </li>
+                                {% endif %}
+                                {% if app.user|ifRole('ROLE_GRP_DEPLACER') %}
+                                    <li>
+                                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#modalDeplacement"><i class="fa fa-exchange"></i> Déplacer</button>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>Numero:</th>
+                                    <td>{{ groupe.numero }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Site:</th>
+                                    <td>{{ groupe.site.emplacement}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Marque:</th>
+                                    <td>{{ groupe.marque }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Statut:</th>
+                                    <td class="{{ 'text-'~groupe.etatGroupe.couleur }}"><i class="fa fa-circle"></i> {{ groupe.etatGroupe.etat }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Catalogue</th>
+                                    <td>
+                                        {% if groupe.catalogue %}
+                                            <a href="{{ path('catalogue_show', {"id" : groupe.catalogue.id}) }}" target="_blank">{{ groupe.catalogue.titre }}</a>
+                                        {% else %}
+                                            <a href="{{ path('groupe_edit', {'id' : groupe.id}) }}" class="text-danger">>> Veuillez ajouter le catalogue</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Heure de marche:</th>
+                                    <td>{{ groupe.heureMarche|number_format(0, ' ', ' ') }}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-list-ol"></i> Historique du groupe</h3><br>
+                    <hr>
+                    <ul class="list-inline">
+                        <li>
+                            {% if app.user|ifRole('ROLE_ETAT_GRP') %}
+                                <a href="{{ path('heureMarche_simpleAjoutByGroupe',{'id':groupe.id}) }}" class="btn btn-info" ><i class="fa fa-clock-o" ></i> Ajouter heure(s) marche</a>
+                            {% endif %}
+                            {% if app.user|ifRole('ROLE_PIECE') %}
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#modalSuiviPiece"><i class="fa fa-puzzle-piece"></i> Remplacement pièce</button>
+                            {% endif %}
+                            {% if app.user|ifRole('ROLE_VIDANGE') %}
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalVidange"><i class="fa fa-support"></i> Vidange</button>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped" id="tableHistoriqueGroupe">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Libellé</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for historiqueGroupe in historiqueGroupes %}
+
+{#                            ----------------DEPLACEMENT-------------#}
+                            {% if historiqueGroupe.deplacement %}
+                                <tr>
+                                    <td>
+                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                    </td>
+                                    <td>
+                                        Déplacement du groupe dans le site <b class="text-danger">{{ historiqueGroupe.deplacement.siteDepart.emplacement }}</b> vers <b class="text-success">{{ historiqueGroupe.deplacement.siteDestination.emplacement }}</b>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('groupe_deplacement_show', {'id' : historiqueGroupe.deplacement.id }) }}" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                    </td>
+
+                                </tr>
+                            {% endif %}
+
+{#                            ----------------SUIVI PIECE-------------#}
+                            {% if historiqueGroupe.suiviPiece %}
+                                <tr>
+                                    <td>
+                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                    </td>
+                                    <td>
+                                        (<i class="fa fa-refresh"></i> {{ historiqueGroupe.suiviPiece.typePiece.nom }}) {{ historiqueGroupe.suiviPiece.libelle }}
+                                        {% if historiqueGroupe.suiviPiece.vidange %}
+                                            - <a href="{{ path('vidange_show', {'id' : historiqueGroupe.suiviPiece.vidange.id}) }}">Vidange</a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('suivi_piece_show', {'id' : historiqueGroupe.suiviPiece.id }) }}" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                    </td>
+
+                                </tr>
+                            {% endif %}
+
+{#                            ---------------- VIDANGE -------------#}
+                            {% if historiqueGroupe.vidange %}
+                                <tr>
+                                    <td>
+                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                    </td>
+                                    <td>
+                                         Vidange
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('vidange_show', {'id' : historiqueGroupe.vidange.id }) }}" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+
+
+{#                            ---------------- ETAT -------------#}
+                            {% if historiqueGroupe.historiqueEtat %}
+                                {% if historiqueGroupe.historiqueEtat.statut == 'Marche' %}
+                                    <tr>
+                                        <td>
+                                            {{ historiqueGroupe.date|date('d/m/Y') }}
+                                        </td>
+                                        <td>
+                                            <b><i class="text-success fa fa-power-off"></i></b> Groupe en marche
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('historiqueEtat_show', {'id' : historiqueGroupe.historiqueEtat.id}) }}" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if historiqueGroupe.historiqueEtat.statut == 'Arrêt' %}
+                                    <tr>
+                                        <td>
+                                            {{ historiqueGroupe.date|date('d/m/Y') }}
+                                        </td>
+                                        <td>
+                                            <b><i class="text-danger fa fa-power-off"></i></b> Groupe arrêtée
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('historiqueEtat_show', {'id' : historiqueGroupe.historiqueEtat.id}) }}" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <style>
+        .select2-container {
+            width: 100% !important;
+            padding: 0;
+        }
+    </style>
+
+    {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
+
+{#    //-----------------------------  MODAL  -----------------------------#}
+
+{#    DEPLACEMENT DE SITE#}
+    {% include '@Groupe/deplacement/modalDeplacement.html.twig' %}
+
+{#    SUIVI PIECE DETACHE#}
+    {% include '@Groupe/suiviPiece/modalSuiviPiece.html.twig' %}
+
+{#    VIDANGE GROUPE#}
+    {% include '@Groupe/vidange/modalVidange.html.twig' %}
+
+{#    HISTORIQUE ETAT#}
+    {% include '@Groupe/historiqueEtatGroupe/modalEtatGroupe.html.twig' %}
+
+{#    //-----------------------------////////  MODAL  ////////-----------------------------#}
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+    <script>
+        $(document).ready(function() {
+            $('#tableHistoriqueGroupe').DataTable({
+                pageLength: 100,
+                order: [[ 0, "desc" ]],
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        } );
+    </script>
+
+{% endblock %}

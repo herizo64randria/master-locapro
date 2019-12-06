@@ -1,0 +1,176 @@
+<?php
+
+namespace GroupeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Site
+ *
+ * @ORM\Table(name="site")
+ * @ORM\Entity(repositoryClass="GroupeBundle\Repository\SiteRepository")
+ */
+class Site
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="emplacement", type="string", length=100)
+     */
+    private $emplacement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="couleur", type="string", length=255, nullable=true)
+     */
+    private $couleur;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="coords", type="array")
+     */
+    private $coords;
+
+//------------------------------------------
+
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\Groupe", mappedBy="site")
+     */
+    private $groupes; // Notez le « s », un stocks est liée à plusieurs ligne
+
+//------------------------------------------
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set emplacement
+     *
+     * @param string $emplacement
+     *
+     * @return Site
+     */
+    public function setEmplacement($emplacement)
+    {
+        $this->emplacement = $emplacement;
+
+        return $this;
+    }
+
+    /**
+     * Get emplacement
+     *
+     * @return string
+     */
+    public function getEmplacement()
+    {
+        return $this->emplacement;
+    }
+
+    /**
+     * Set coords
+     *
+     * @param array $coords
+     *
+     * @return Site
+     */
+    public function setCoords($coords)
+    {
+        $this->coords = $coords;
+
+        return $this;
+    }
+
+    /**
+     * Get coords
+     *
+     * @return array
+     */
+    public function getCoords()
+    {
+        return $this->coords;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add groupe
+     *
+     * @param \GroupeBundle\Entity\Groupe $groupe
+     *
+     * @return Site
+     */
+    public function addGroupe(\GroupeBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes[] = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Remove groupe
+     *
+     * @param \GroupeBundle\Entity\Groupe $groupe
+     */
+    public function removeGroupe(\GroupeBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes->removeElement($groupe);
+    }
+
+    /**
+     * Get groupes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroupes()
+    {
+        return $this->groupes;
+    }
+
+    /**
+     * Set couleur
+     *
+     * @param string $couleur
+     *
+     * @return Site
+     */
+    public function setCouleur($couleur)
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    /**
+     * Get couleur
+     *
+     * @return string
+     */
+    public function getCouleur()
+    {
+        return $this->couleur;
+    }
+}

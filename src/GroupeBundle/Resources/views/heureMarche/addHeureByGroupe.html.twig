@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-success">Ajouter heure marche </strong> {% endblock %}
+{% block titre_description %} {% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <form action="#" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire d'ajout  heure de marche</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="fournisseur">Groupe <b class="text-danger" id="err_groupe"></b></label>
+                            <select required  class="form-control" name="groupe" id="groupe" >
+                                    <option value="{{ groupe.id }}">{{ groupe.numero }} </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="input-group date form_date" data-date="" data-link-field="DateDebut" data-link-format="dd/mm/yyyy">
+                                <label for="date" class="input-group-addon control-label">Date Début :</label>
+                                <input  class="form-control "   type="text"  id="DateDebut" name="datedebut">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            <div class="input-group date form_date" data-date="" data-link-field="DateFin" data-link-format="dd/mm/yyyy">
+                                <label for="date" class="input-group-addon control-label">Date Fin:</label>
+                                <input class="form-control"  type="text" id="DateFin"  name="datefin">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            <div class="input-group " >
+                                <label for="date" class="input-group-addon control-label">Heure de marche:</label>
+                                <input class="form-control"  type="text" id="heure"  name="heure">
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="input-group " >
+                                <label for="puissance" class="input-group-addon control-label">Puissance consommer:</label>
+                                <input type="text" name="puissance" class="form-control">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" value="Créer" class="btn btn-success btn-block" />
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('entre_index') }}" class="btn btn-default btn-block">Annuler</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br><br>
+
+
+
+
+
+    {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
+
+    {#NUMERAL FORMAT#}
+    <script>
+        $('#groupe').select2();
+
+    </script>
+
+    {#DATEPICKER#}
+    <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DatePicker1/js/locales/bootstrap-datetimepicker.fr.js') }}" charset="UTF-8"></script>
+    <script>
+        $('.form_date').datetimepicker({
+            format: 'dd/mm/yyyy',
+            language:  'fr',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+{% endblock %}

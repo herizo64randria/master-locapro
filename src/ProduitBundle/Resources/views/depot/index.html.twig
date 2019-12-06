@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Liste dépôt{% endblock %}
+{% block titre_page %}Dépôt{% endblock %}
+{% block titre_description %}<br>Liste des dépôts de stockages des produits{% endblock %}
+
+{% block body %}
+
+    <ul class="list-inline">
+        <li><a href="{{ path('depot_new') }}" class="btn btn-lg btn-success"><i class="fa fa-plus-circle"></i> Nouveau</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Table liste dépôt</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Abréviation</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for depot in depots %}
+                            <tr>
+                                <td>{{ depot.nom }}</td>
+                                <td><b>{{ depot.abrv }}</b></td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a href="{{ path('depot_edit', { 'id': depot.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Modifier</a>
+                                        </li>
+                                        <li>
+                                            <button type="button" lien="{{ path('depot_delete', {'id' : depot.id}) }}"  class="btn btn-danger btn-xs btnSupprimerDepot" data-toggle="modal" data-target="#modalSupprimerDepot"><i class="fa fa-warning"></i> Supprimer</button>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#MODALS SUPPRIMER DEPOT#}
+    <div class="modal modal-danger fade" id="modalSupprimerDepot">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Vérification</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Attention! Voulez-vous supprimer ce dépot?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="lienSupprimerDepot" class="btn btn-outline"><i class="fa fa-minus-circle"></i> Supprimer</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+{#    SCRIPT SUPPRIMER DEPOT#}
+    <script>
+        $('.btnSupprimerDepot').click(function () {
+            lien = $(this).attr('lien');
+            $('#lienSupprimerDepot').attr('href', lien);
+
+        });
+    </script>
+{% endblock %}

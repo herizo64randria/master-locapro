@@ -1,0 +1,138 @@
+<?php
+
+namespace GroupeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Groupe
+ *
+ * @ORM\Table(name="groupe")
+ * @ORM\Entity(repositoryClass="GroupeBundle\Repository\GroupeRepository")
+ */
+class Groupe
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=50)
+     */
+    private $numero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="marque", type="string", length=50)
+     */
+    private $marque;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=50, nullable=true)
+     */
+    private $url;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="heuretotale", type="float", nullable=true)
+     */
+    private $heureMarche;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="puissanceConsommer", type="float", nullable=true)
+     */
+    private $puissanceConsommer;
+
+
+
+    //------UPDATE---------------
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modele", type="string", length=50, nullable=true)
+     */
+    private $modele;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_serie", type="string", length=50, nullable=true)
+     */
+    private $numeroSerie;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="annee", type="float", nullable=true)
+     */
+    private $annee;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="puissance", type="float", nullable=true)
+     */
+    private $puissance;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_debut_service", type="datetime", nullable=true)
+     */
+    private $dateDebutService;
+
+
+    //---------------------------
+
+//-------------------------------------------
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site", inversedBy="groupes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $site;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\ListeEtatGroupe")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $etatGroupe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Catalogue")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $catalogue;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\Depense", mappedBy="groupe")
+     */
+    private $depenses; // Notez le « s », un stocks est liée à plusieurs ligne
+
+    /**
+     * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Moteur", cascade={"persist", "remove"})
+     */
+    private $moteur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Alternateur", cascade={"persist", "remove"})
+     */
+    private $alternateur;
+
+//-------------------------------------------
+
+
+}

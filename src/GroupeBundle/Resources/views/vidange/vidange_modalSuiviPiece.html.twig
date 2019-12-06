@@ -1,0 +1,63 @@
+<div class="modal fade" id="modalSuiviPiece">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('vidange_ajouterSuiviPiece', {"id" : vidange.id}) }}" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-warning">Pièce détachée pour vidange</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="libelleSuivi">Libéllé: <b class="text-danger" id="err_libelleSuivi" ></b></label>
+                        <input required type="text" class="form-control" name="libelleSuivi" id="libelleSuivi" value="Vidange" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="typePiece">Type du pièce: <b class="text-danger" id="err_typePiece"></b></label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select required  class="form-control" name="typePiece" id="typePiece" >
+                                    <option value=""></option>
+                                    {% for listePiece in listePieces %}
+                                        <option value="{{ listePiece.id }}">{{ listePiece.nom }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descriptionSuivi">Note/Description: <b class="text-danger" id="err_descriptionSuivi"></b></label>
+                        <textarea rows="4" class="form-control" name="descriptionSuivi" id="descriptionSuivi" ></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning" > Enregistrer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+<style>
+    .select2-container {
+        width: 100% !important;
+        padding: 0;
+    }
+</style>
+
+<script>
+    $('#typePiece').select2();
+</script>
+<!-- /.modal -->

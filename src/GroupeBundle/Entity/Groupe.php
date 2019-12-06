@@ -1,0 +1,549 @@
+<?php
+
+namespace GroupeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Groupe
+ *
+ * @ORM\Table(name="groupe")
+ * @ORM\Entity(repositoryClass="GroupeBundle\Repository\GroupeRepository")
+ */
+class Groupe
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=50)
+     */
+    private $numero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="marque", type="string", length=50)
+     */
+    private $marque;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=50, nullable=true)
+     */
+    private $url;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="heuretotale", type="float", nullable=true)
+     */
+    private $heureMarche;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="puissanceConsommer", type="float", nullable=true)
+     */
+    private $puissanceConsommer;
+
+
+
+    //------UPDATE---------------
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modele", type="string", length=50, nullable=true)
+     */
+    private $modele;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_serie", type="string", length=50, nullable=true)
+     */
+    private $numeroSerie;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="annee", type="float", nullable=true)
+     */
+    private $annee;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="puissance", type="float", nullable=true)
+     */
+    private $puissance;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_debut_service", type="datetime", nullable=true)
+     */
+    private $dateDebutService;
+
+
+    //---------------------------
+
+//-------------------------------------------
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site", inversedBy="groupes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $site;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\ListeEtatGroupe")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $etatGroupe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Catalogue")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $catalogue;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\Depense", mappedBy="groupe")
+     */
+    private $depenses; // Notez le « s », un stocks est liée à plusieurs ligne
+
+    /**
+     * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Moteur", cascade={"persist", "remove"})
+     */
+    private $moteur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Alternateur", cascade={"persist", "remove"})
+     */
+    private $alternateur;
+
+//-------------------------------------------
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->depenses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param string $numero
+     *
+     * @return Groupe
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return string
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * Set marque
+     *
+     * @param string $marque
+     *
+     * @return Groupe
+     */
+    public function setMarque($marque)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return string
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return Groupe
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set heureMarche
+     *
+     * @param float $heureMarche
+     *
+     * @return Groupe
+     */
+    public function setHeureMarche($heureMarche)
+    {
+        $this->heureMarche = $heureMarche;
+
+        return $this;
+    }
+
+    /**
+     * Get heureMarche
+     *
+     * @return float
+     */
+    public function getHeureMarche()
+    {
+        return $this->heureMarche;
+    }
+
+    /**
+     * Set puissanceConsommer
+     *
+     * @param float $puissanceConsommer
+     *
+     * @return Groupe
+     */
+    public function setPuissanceConsommer($puissanceConsommer)
+    {
+        $this->puissanceConsommer = $puissanceConsommer;
+
+        return $this;
+    }
+
+    /**
+     * Get puissanceConsommer
+     *
+     * @return float
+     */
+    public function getPuissanceConsommer()
+    {
+        return $this->puissanceConsommer;
+    }
+
+    /**
+     * Set modele
+     *
+     * @param string $modele
+     *
+     * @return Groupe
+     */
+    public function setModele($modele)
+    {
+        $this->modele = $modele;
+
+        return $this;
+    }
+
+    /**
+     * Get modele
+     *
+     * @return string
+     */
+    public function getModele()
+    {
+        return $this->modele;
+    }
+
+    /**
+     * Set numeroSerie
+     *
+     * @param string $numeroSerie
+     *
+     * @return Groupe
+     */
+    public function setNumeroSerie($numeroSerie)
+    {
+        $this->numeroSerie = $numeroSerie;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroSerie
+     *
+     * @return string
+     */
+    public function getNumeroSerie()
+    {
+        return $this->numeroSerie;
+    }
+
+    /**
+     * Set annee
+     *
+     * @param float $annee
+     *
+     * @return Groupe
+     */
+    public function setAnnee($annee)
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    /**
+     * Get annee
+     *
+     * @return float
+     */
+    public function getAnnee()
+    {
+        return $this->annee;
+    }
+
+    /**
+     * Set puissance
+     *
+     * @param float $puissance
+     *
+     * @return Groupe
+     */
+    public function setPuissance($puissance)
+    {
+        $this->puissance = $puissance;
+
+        return $this;
+    }
+
+    /**
+     * Get puissance
+     *
+     * @return float
+     */
+    public function getPuissance()
+    {
+        return $this->puissance;
+    }
+
+    /**
+     * Set dateDebutService
+     *
+     * @param \DateTime $dateDebutService
+     *
+     * @return Groupe
+     */
+    public function setDateDebutService($dateDebutService)
+    {
+        $this->dateDebutService = $dateDebutService;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebutService
+     *
+     * @return \DateTime
+     */
+    public function getDateDebutService()
+    {
+        return $this->dateDebutService;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return Groupe
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set etatGroupe
+     *
+     * @param \GroupeBundle\Entity\ListeEtatGroupe $etatGroupe
+     *
+     * @return Groupe
+     */
+    public function setEtatGroupe(\GroupeBundle\Entity\ListeEtatGroupe $etatGroupe = null)
+    {
+        $this->etatGroupe = $etatGroupe;
+
+        return $this;
+    }
+
+    /**
+     * Get etatGroupe
+     *
+     * @return \GroupeBundle\Entity\ListeEtatGroupe
+     */
+    public function getEtatGroupe()
+    {
+        return $this->etatGroupe;
+    }
+
+    /**
+     * Set catalogue
+     *
+     * @param \GroupeBundle\Entity\Catalogue $catalogue
+     *
+     * @return Groupe
+     */
+    public function setCatalogue(\GroupeBundle\Entity\Catalogue $catalogue = null)
+    {
+        $this->catalogue = $catalogue;
+
+        return $this;
+    }
+
+    /**
+     * Get catalogue
+     *
+     * @return \GroupeBundle\Entity\Catalogue
+     */
+    public function getCatalogue()
+    {
+        return $this->catalogue;
+    }
+
+    /**
+     * Add depense
+     *
+     * @param \GroupeBundle\Entity\Depense $depense
+     *
+     * @return Groupe
+     */
+    public function addDepense(\GroupeBundle\Entity\Depense $depense)
+    {
+        $this->depenses[] = $depense;
+
+        return $this;
+    }
+
+    /**
+     * Remove depense
+     *
+     * @param \GroupeBundle\Entity\Depense $depense
+     */
+    public function removeDepense(\GroupeBundle\Entity\Depense $depense)
+    {
+        $this->depenses->removeElement($depense);
+    }
+
+    /**
+     * Get depenses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDepenses()
+    {
+        return $this->depenses;
+    }
+
+    /**
+     * Set moteur
+     *
+     * @param \GroupeBundle\Entity\Moteur $moteur
+     *
+     * @return Groupe
+     */
+    public function setMoteur(\GroupeBundle\Entity\Moteur $moteur = null)
+    {
+        $this->moteur = $moteur;
+
+        return $this;
+    }
+
+    /**
+     * Get moteur
+     *
+     * @return \GroupeBundle\Entity\Moteur
+     */
+    public function getMoteur()
+    {
+        return $this->moteur;
+    }
+
+    /**
+     * Set alternateur
+     *
+     * @param \GroupeBundle\Entity\Alternateur $alternateur
+     *
+     * @return Groupe
+     */
+    public function setAlternateur(\GroupeBundle\Entity\Alternateur $alternateur = null)
+    {
+        $this->alternateur = $alternateur;
+
+        return $this;
+    }
+
+    /**
+     * Get alternateur
+     *
+     * @return \GroupeBundle\Entity\Alternateur
+     */
+    public function getAlternateur()
+    {
+        return $this->alternateur;
+    }
+}

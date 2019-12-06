@@ -1,0 +1,85 @@
+<?php
+
+namespace GroupeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Deplacement
+ *
+ * @ORM\Table(name="deplacement")
+ * @ORM\Entity(repositoryClass="GroupeBundle\Repository\DeplacementRepository")
+ */
+class Deplacement
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+
+    //-----------------------------------------------------
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $siteDepart;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $siteDestination;
+
+
+    //-----------------------------------------------------
+
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Deplacement
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+}
+

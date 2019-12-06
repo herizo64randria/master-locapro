@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Modification{% endblock %}
+{% block titre_page %} <strong class="text-primary">Modification groupe</strong> {% endblock %}
+{% block titre_description %}Modification information sur le groupe{% endblock %}
+{% block body %}
+
+    <form action="#" method="post" autocomplete="off">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="box">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire groupe</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        {{ form_widget(edit_form) }}
+
+                        {% set dateGroupe = '' %}
+                        {% if groupe.dateDebutService %}
+                            {% set dateGroupe = groupe.dateDebutService|date('d/m/Y') %}
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="groupe_dateDebutService">Date début de service: <b class="text-danger" id="err_groupe_dateDebutService"></b></label>
+                            <input type="text" class="form-control" name="groupe_dateDebutService" id="groupe_dateDebutService" value="{{ dateGroupe }}"   />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="etatGroupe">Statut actuel du groupe <b class="text-danger" id="err_etatGroupe"></b></label>
+                            <select required  class="form-control" name="etatGroupe" id="etatGroupe" >
+                                {% set listeEtats = 'liste'|listeEtatGrp %}
+                                {% for listeEtat in listeEtats %}
+
+                                    <option value="{{ listeEtat.id }}" class="text-{{ listeEtat.couleur }}"
+                                            {% if groupe.etatGroupe == listeEtat %}
+                                                selected
+                                            {% endif %}
+                                    >
+                                        {{ listeEtat.etat }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="catalogue">Catalogue <b class="text-danger" id="err_catalogue"></b></label>
+                            <select  class="form-control" name="catalogue" id="catalogue" >
+                                <option value=""></option>
+                                {% for catalogue in catalogues %}
+                                    {% set selected = '' %}
+                                    {% if groupe.catalogue == catalogue %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="{{ catalogue.id }}" {{ selected }}>{{ catalogue.titre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="box">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-danger"><i class="fa fa-gg"></i> Formulaire du moteur</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="moteur_marque">Marque <b class="text-danger" id="err_moteur_marque"></b></label>
+                            <input required type="text" class="form-control" name="moteur_marque" id="moteur_marque" value="{{ groupe.moteur.marque }}"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="moteur_modele">Modèle <b class="text-danger" id="err_moteur_modele"></b></label>
+                            <input required type="text" class="form-control" name="moteur_modele" id="moteur_modele" value="{{ groupe.moteur.modele }}"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="moteur_numeroSerie">Numero de série <b class="text-danger" id="err_moteur_numeroSerie"></b></label>
+                            <input required type="text" class="form-control" name="moteur_numeroSerie" id="moteur_numeroSerie" value="{{ groupe.moteur.numeroSerie }}"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="moteur_annee">Année <b class="text-danger" id="err_moteur_annee"></b></label>
+                            <input required type="text" class="form-control" name="moteur_annee" id="moteur_annee" value="{{ groupe.moteur.annee }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="moteur_puissance">Puissance <b class="text-danger" id="err_moteur_puissance"></b></label>
+                            <input required type="text" class="form-control" name="moteur_puissance" id="moteur_puissance" value="{{ groupe.moteur.puissance }}" />
+                        </div>
+
+                        {% set dateMoteur = '' %}
+                        {% if groupe.moteur.dateDebutService %}
+                            {% set dateMoteur = groupe.moteur.dateDebutService|date('d/m/Y') %}
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="moteur_dateDebutService">Date de mis en service <b class="text-danger" id="err_moteur_dateDebutService"></b></label>
+                            <input type="text" class="form-control" name="moteur_dateDebutService" id="moteur_dateDebutService" value="{{ dateMoteur }}" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="box">
+
+                    <div class="box-header with-border text-yellow">
+                        <h3 class="box-title"><i class="fa fa-bolt"></i> Formulaire de l'alternateur</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="alternateur_marque">Marque <b class="text-danger" id="err_alternateur_marque"></b></label>
+                            <input required type="text" class="form-control" name="alternateur_marque" id="alternateur_marque" value="{{ groupe.alternateur.marque }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="alternateur_modele">Modèle <b class="text-danger" id="err_alternateur_modele"></b></label>
+                            <input required type="text" class="form-control" name="alternateur_modele" id="alternateur_modele" value="{{ groupe.alternateur.modele }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="alternateur_numeroSerie">Numero de série <b class="text-danger" id="err_alternateur_numeroSerie"></b></label>
+                            <input required type="text" class="form-control" name="alternateur_numeroSerie" id="alternateur_numeroSerie" value="{{ groupe.alternateur.numeroSerie }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="alternateur_annee">Année <b class="text-danger" id="err_alternateur_annee"></b></label>
+                            <input required type="text" class="form-control" name="alternateur_annee" id="alternateur_annee" value="{{ groupe.alternateur.annee }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="alternateur_puissance">Puissance <b class="text-danger" id="err_alternateur_puissance"></b></label>
+                            <input required type="text" class="form-control" name="alternateur_puissance" id="alternateur_puissance" value="{{ groupe.alternateur.puissance }}" />
+                        </div>
+
+                        {% set dateAlternateur = '' %}
+                        {% if groupe.alternateur.dateDebutService %}
+                            {% set dateAlternateur = groupe.alternateur.dateDebutService|date('d/m/Y') %}
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="alternateur_dateDebutService">Date de mis en service <b class="text-danger" id="err_alternateur_dateDebutService"></b></label>
+                            <input type="text" class="form-control" name="alternateur_dateDebutService" id="alternateur_dateDebutService" value="{{ groupe.alternateur. }}" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success btn-block btn-lg"  ><i class="fa fa-save"></i> Enregistrer</button>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ path('groupe_index') }}" class="btn btn-default btn-block btn-lg" >Annuler</a>
+                </div>
+            </div>
+        </div>
+        {{ form_end(edit_form) }}
+    </form>
+
+    <script>
+        //Date picker
+        $('#groupe_dateDebutService').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        });
+
+        //Date picker
+        $('#moteur_dateDebutService').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        });
+
+        //Date picker
+        $('#alternateur_dateDebutService').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        });
+    </script>
+
+{% endblock %}

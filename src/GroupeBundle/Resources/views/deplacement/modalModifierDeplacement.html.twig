@@ -1,0 +1,67 @@
+<div class="modal fade" id="modalDeplacementModifier">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('groupe_deplacement_edit', {'id' : groupe.id}) }}" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-primary">Formulaire de déplacement</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="dateDeplacement">Date de déplacement: <b class="text-danger" id="err_dateDeplacement"></b></label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" name="dateDeplacement" id="dateDeplacement" required value="{{ deplacement.date|date('d/m/Y') }}">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siteDestination">Site de destination: <b class="text-danger" id="err_siteDestination"></b></label>
+                        <select required  class="form-control" name="siteDestination" id="siteDestination" >
+                            <option value=""></option>
+                            {% for site in sites %}
+                                <option value="{{ site.id }}"
+                                        {% if deplacement.siteDestination == site %}
+                                        selected
+                                        {% endif %}
+                                >
+                                    {{ site.emplacement }} ({{ site.groupes|length }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Note/Description: <b class="text-danger" id="err_description"></b></label>
+                        <textarea rows="4" class="form-control" name="description" id="description">{{ deplacement.description }}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" > Confirmer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<script>
+    //Date picker
+    $('#dateDeplacement').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    });
+</script>
+
+
+<!-- /.modal -->

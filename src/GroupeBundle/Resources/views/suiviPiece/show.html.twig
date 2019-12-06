@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-primary">Détail de suivi technique</strong>{% endblock %}
+{% block titre_description %}
+    Les informations une changement de pièce <br>
+    Groupe: <a href="{{ path('groupe_show', {'id' : suivi.groupe.id}) }}"><b>{{ suivi.groupe.numero }}</b></a>
+{% endblock %}
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information de suivi</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_PIECE') %}
+                            <li>
+                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalSuiviPiece"><i class="fa fa-edit"></i> Modifier</button>
+                            </li>
+                            <li>
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalSuiviPieceSupprimer"><i class="fa fa-edit"></i> Supprimer</button>
+                            </li>
+                        {% endif %}
+
+
+                    </ul>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Groupe: </td>
+                            <td>{{ suivi.groupe.numero }} / {{ suivi.groupe.site.emplacement }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{ suivi.date|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Type pièce détaché:</td>
+                            <td>{{ suivi.typePiece.nom }} </td>
+                        </tr>
+                        <tr>
+                            <td>Libellé:</td>
+                            <td><b>{{ suivi.libelle }}</b></td>
+                        </tr>
+
+                        {% if suivi.description %}
+                        <tr>
+                            <td colspan="2">Description/note: <br>
+                                {{ suivi.description|nl2br }}
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% include '@Groupe/suiviPiece/modalSuiviPieceModifier.html.twig' %}
+
+    {% include '@Groupe/suiviPiece/modalSuiviPieceSupprimer.html.twig' %}
+
+
+{% endblock %}

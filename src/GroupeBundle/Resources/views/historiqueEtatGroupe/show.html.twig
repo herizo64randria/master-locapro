@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-primary">Changement statut</strong>{% endblock %}
+{% block titre_description %}
+    Changement statut d'un groupe <br>
+    Groupe: <a href="{{ path('groupe_show', {'id' : historiqueEtat.groupe.id}) }}"><b>{{ historiqueEtat.groupe.numero }}</b></a>
+{% endblock %}
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information sur le statut</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_ETAT_GRP') %}
+                            <li>
+                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalHistoriqueEtatModifier"><i class="fa fa-edit"></i> Modifier</button>
+                            </li>
+                            <li>
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalSuiviPieceSupprimer"><i class="fa fa-edit"></i> Supprimer</button>
+                            </li>
+                        {% endif %}
+
+
+                    </ul>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Groupe: </td>
+                            <td>{{ historiqueEtat.groupe.numero }} / {{ historiqueEtat.groupe.site.emplacement }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{ historiqueEtat.date|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Statut:</td>
+
+                            {% set couleur = 'danger' %}
+                            {% if historiqueEtat.statut == 'Marche' %}
+                                {% set couleur = 'success' %}
+                            {% endif %}
+
+                            <td class="text-{{ couleur }}"><i class="fa fa-power-off"></i> {{ historiqueEtat.statut }} </td>
+                        </tr>
+
+                        {% if historiqueEtat.detail %}
+                        <tr>
+                            <td>Détails/note:</td>
+                            <td>{{ historiqueEtat.detail|nl2br }}</td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include '@Groupe/historiqueEtatGroupe/modalEtatGroupeModifier.html.twig' %}
+
+
+
+{% endblock %}

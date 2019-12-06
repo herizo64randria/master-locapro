@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block titre %}GRH{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/sidemenu.css') }}">
+    {% block stylesheets %}{% endblock %}
+    <style>
+        .btn{
+            border-radius: 0%;
+        }
+
+        .modal-content{
+            border-radius: 0%;
+        }
+
+        .form-control{
+            border-radius: 0%;
+        }
+
+        .well{
+            border-radius: 0%;
+        }
+    </style>
+
+    {#CSS DATEPICKER#}
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.css') }}">
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+    {#JS DATEPICKER#}
+    <script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datetimepicker.js') }}"></script>
+
+    {#SCRIPT CONTRAINTE DE SAISIE#}
+    <script src="{{ asset('assets/js/input_constraint.js') }}"></script>
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px; z-index: 1">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" style='font-family: "Times New Roman", Times, serif; font-size: 26px'><b><i class="fa fa-home"></i> GRC</b></a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li style="margin-right: 10px; margin-top: 5px"><h4>Connecter en tant que: <kbd>{{ app.user.username }}</kbd></h4></li>
+            <li><a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger" style="color: #020202; .hover{color: #000} ;"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
+        </ul>
+    </div>
+</nav>
+
+{% block sidemenu %}
+<div class="row">
+    <!-- uncomment code for absolute positioning tweek see top comment in css -->
+    <!-- <div class="absolute-wrapper"> </div> -->
+    <!-- Menu -->
+
+        <div class="side-menu" style="z-index: 1">
+
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <div class="brand-wrapper">
+                        <!-- Hamburger -->
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <!-- Brand -->
+                        <div class="brand-name-wrapper">
+                            <a class="navbar-brand" href="#" style='font-family: "Times New Roman", Times, serif; font-size: 26px'>
+                                <b><i class="fa fa-home"></i> GRC </b>
+                            </a>
+                        </div>
+
+                        <!-- Search -->
+                        <a data-toggle="collapse" href="#search" class="btn btn-default" id="search-trigger">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+
+                        <!-- Search body -->
+                        <div id="search" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <form class="navbar-form" role="search">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Recherche">
+                                    </div>
+                                    <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-ok"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Main Menu -->
+                <div class="side-menu-container">
+                    <ul class="nav navbar-nav" style="font-size: 17px">
+
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Menu 1</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Menu 2</a></li>
+
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </div>
+
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+
+        <div class="side-body">
+            <br><br><br>
+
+            {% block body %}
+                <h1> Main Content here </h1>
+                <pre> Resize the screen to view the left slide menu </pre>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<div class="container-fluid">
+    <br><br><br>
+    {% block container_sansmenu %}
+    {% endblock %}
+
+</div>
+
+
+{% block javascripts %}{% endblock %}
+
+<script>
+    $(function () {
+        $('.navbar-toggle').click(function () {
+            $('.navbar-nav').toggleClass('slide-in');
+            $('.side-body').toggleClass('body-slide-in');
+            $('#search').removeClass('in').addClass('collapse').slideUp(200);
+
+            /// uncomment code for absolute positioning tweek see top comment in css
+            //$('.absolute-wrapper').toggleClass('slide-in');
+
+        });
+
+        // Remove menu for searching
+        $('#search-trigger').click(function () {
+            $('.navbar-nav').removeClass('slide-in');
+            $('.side-body').removeClass('body-slide-in');
+
+            /// uncomment code for absolute positioning tweek see top comment in css
+            //$('.absolute-wrapper').removeClass('slide-in');
+        });
+    });
+</script>
+
+</body>
+</html>

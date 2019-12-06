@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-primary">Fiche Produit</strong> {% endblock %}
+{% block titre_description %}Information du produit{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-slack"></i> Fiche Information Produit</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-inline">
+                                {% if app.user|ifRole('ROLE_PROD') %}
+                                    <li>
+                                        <a href="{{ path('produit_edit', {'id' : produit.id}) }}" class="btn btn-info btn-lg"><i class="fa fa-edit"></i> Modifier</a>
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>Désignation</th>
+                                    <td>{{ produit.designation }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Code interne</th>
+                                    <td>{{ produit.code }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Réference</th>
+                                    <td>{{ produit.reference }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Réf equi.</th>
+                                    <td>{{ produit.refEqui }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>Prix d'achat</th>
+                                    <td class="text-right">
+                                        {% if produit.prixAchat %}
+                                            {{ produit.prixAchat|number_format('2', ',', ' ') }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Prix de vente</th>
+                                    <td class="text-right">
+                                        {% if produit.prixVente %}
+                                            {{ produit.prixVente|number_format('2', ',', ' ') }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% for depot in depots %}
+                                    <tr>
+                                        <th>{{ depot.abrv }}</th>
+                                        <td class="text-right">{{ depot|stock(produit) }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <th><i class="fa fa-exchange"></i> Stock total</th>
+                                    <td class="text-right"><b>{{ produit.stockTotal }}</b></td>
+                                </tr>
+                                <tr>
+                                    <th><i class="fa fa-warning"></i> Alert de stock</th>
+                                    <td class="text-right">{{ produit.alert }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-list-ol"></i> Historique du produit</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Libellé</th>
+                                <th>Dépôt</th>
+                                <th>Entrée</th>
+                                <th>Sortie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        {% set solde = 0 %}
+
+                        {% for historiqueProduit in produit.historiqueProduits %}
+
+                            {#-----------ENTRE et DEPLACEMET----------#}
+                            {% if historiqueProduit.type == 'credit' %}
+
+                                {% set solde = solde + historiqueProduit.quantite %}
+
+                                {% if historiqueProduit.entre %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>Bon d'entrée: N° {{ historiqueProduit.entre.numero }}</td>
+                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td class="text-center success" >{{ historiqueProduit.quantite }}</td>
+                                        <td class="success"></td>
+                                    </tr>
+                                {% endif %}
+                                {% if historiqueProduit.deplacement %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Transfert de produit(s): N° {{ historiqueProduit.deplacement.numero }}</td>
+                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td class="text-center success">{{ historiqueProduit.quantite }}</td>
+                                        <td class="success"></td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+
+
+                            {#-----------SORTIE et DEPLACEMET----------#}
+                            {% if historiqueProduit.type == 'debit' %}
+
+                                {% set solde = solde - historiqueProduit.quantite %}
+
+                                {% if historiqueProduit.sortie %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Bon de sortie: N° {{ historiqueProduit.sortie.numero }}</td>
+                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if historiqueProduit.deplacement %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Transfert de produit(s): N° {{ historiqueProduit.deplacement.numero }}</td>
+                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

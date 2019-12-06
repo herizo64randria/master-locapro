@@ -1,0 +1,84 @@
+<div class="modal fade" id="modalPersonne">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('employeMission_ajouter', {"id" : mission.id}) }}" method="post" autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-success"><i class="fa fa-plus"></i> Formulaire d'ajout d'employé</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="employe">Nom de l'employé: <b class="text-danger" id="err_employe"></b></label>
+                        <select name="employe" id="employe" class="form-control" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="poste">Poste: <b class="text-danger" id="err_poste"></b></label>
+                        <input readonly required type="text" class="form-control" name="poste" id="poste"  />
+                    </div>
+
+                    <input type="hidden" name="lien" id="lien">
+                    <input type="hidden" name="idEmploye" id="idEmploye">
+                    <input type="hidden" name="nomEmploye" id="nomEmploye">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" > Confirmer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<style>
+    .select2-container {
+        width: 100% !important;
+        padding: 0;
+    }
+</style>
+
+<script>
+    var employes = null;
+    $.getJSON( "http://{{ ipServeur }}/GRH/web/api/externe/liste/personne/actif", function( data ) {
+
+        employes = data;
+        console.log(employes);
+
+        selectEmploye = $('#employe');
+        $.each(employes, function (key, employe) {
+            option = "<option value='"+ employe.id +"'>"+ employe.nom +"</option>";
+
+            selectEmploye.append(option);
+
+
+            // console.log(option);
+        });
+
+        selectEmploye.select2();
+
+        selectEmploye.change(function () {
+            idEmploye = $(this).val();
+
+            $.each(employes, function (key, employe) {
+
+                if(employe.id == idEmploye){
+                    $('#poste').val(employe.poste);
+                    $('#lien').val(employe.lien);
+                    $('#idEmploye').val(employe.id);
+                    $('#nomEmploye').val(employe.nom);
+                }
+
+            });
+        });
+
+    });
+
+</script>
+<!-- /.modal -->

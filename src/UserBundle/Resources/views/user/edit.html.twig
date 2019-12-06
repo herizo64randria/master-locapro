@@ -1,0 +1,219 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-success">Utilisateur</strong> {% endblock %}
+{% block titre_description %}Modification utilisateur{% endblock %}
+{% block body %}
+    {% set admin_status='' %}
+    {% set user_status =''%}
+
+    <style>
+        .active{ background: #0a698a
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <form action="#" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire modification utilisateur</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4><i class="fa fa-user"></i> Information utilisateur:</h4>
+                                <div class="form-group">
+                                    <label for="nom">Nom <b class="text-danger" id="err_nom"></b></label>
+                                    <input required type="text" value="{{ user.nom }}" class="form-control" name="nom" id="nom"/>
+                                </div>
+                                <label for="role">Type de compte : <b class="text-danger" id="err_role"></b></label><br>
+
+
+                                <div class="btn-group  btn-group-toggle" data-toggle="buttons">
+
+                                    {% set roleAdmin='' %}
+                                    {% for role in user.roles %}
+                                        {% if role=='ROLE_ADMIN' %}
+                                            {% set roleAdmin='active' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <label class="btn btn-secondary {{ roleAdmin }}">
+                                        <input type="radio" name="role" class="role" value="ROLE_ADMIN" id="roleAdmin" autocomplete="off" > Administrateur
+                                    </label>
+
+                                    {% set roleUser = '' %}
+                                    {% if roleAdmin == '' %}
+                                        {% set roleUser = "active" %}
+                                    {% endif %}
+                                    
+                                    <label class="btn btn-secondary {{ roleUser }}">
+                                        <input type="radio" name="role"  class="role" value="ROLE_USER"  id="roleUser" autocomplete="off"> Simple utilisateur
+                                    </label>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Username <b class="text-danger" id="err_username"></b></label>
+                                    <input required type="text" class="form-control" value="{{ user.username }}" name="username" id="username"   />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email  <b class="text-danger" id="err_email"></b></label>
+                                    <input required type="text" class="form-control" value="{{ user.email }}" name="email" id="email"   />
+                                </div>
+                                <div class="form-group">
+                                    <label for="passeword">Passeword  <b class="text-danger" id="err_passeword"></b></label>
+                                    <input required type="text" class="form-control" value="•••••••••••••••" name="passeword" id="passeword"   />
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4><i class="fa fa-support"></i> Choix des rôles:</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Gestion de stock:</strong>
+                                        <ul>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_RESP" id="ROLE_RESP"  />
+                                                    <label for="ROLE_RESP" class="text-primary">Responsable  <b class="text-danger" id="err_ROLE_RESP"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_PRODUIT" id="ROLE_PRODUIT"  />
+                                                    <label for="ROLE_PRODUIT">Gestion de produit <b class="text-danger" id="err_ROLE_PRODUIT"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_GESTION_ENTRE" id="ROLE_GESTION_ENTRE"  />
+                                                    <label for="ROLE_GESTION_ENTRE">Demande entrée <b class="text-danger" id="err_ROLE_GESTION_ENTRE"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_GESTION_SORTIE" id="ROLE_GESTION_SORTIE"  />
+                                                    <label for="ROLE_GESTION_SORTIE">Demande sortie <b class="text-danger" id="err_ROLE_GESTION_SORTIE"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_GESTION_DEPLACEMENT" id="ROLE_GESTION_DEPLACEMENT"  />
+                                                    <label for="ROLE_GESTION_DEPLACEMENT">Demande déplacement <b class="text-danger" id="err_ROLE_GESTION_DEPLACEMENT"></b></label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Gestion des groupes:</strong>
+                                        <ul>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_RESP_GRP" id="ROLE_RESP_GRP"  />
+                                                    <label for="ROLE_RESP_GRP" class="text-primary">Responsable <b class="text-danger" id="err_ROLE_RESP_GRP"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_COMPTA" id="ROLE_COMPTA"  />
+                                                    <label for="ROLE_COMPTA" class="text-danger">Comptable Hissab <b class="text-danger" id="err_ROLE_COMPTA"></b></label>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_GESTION_GROUPE" id="ROLE_GESTION_GROUPE"  />
+                                                    <label for="ROLE_GESTION_GROUPE">Gestion des sites <b class="text-danger" id="err_ROLE_GESTION_GROUPE"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_AJOUT_PBM" id="ROLE_AJOUT_PBM"  />
+                                                    <label for="ROLE_AJOUT_PBM">Signaler problème <b class="text-danger" id="err_ROLE_AJOUT_PBM"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_SOLUTION_PBM" id="ROLE_SOLUTION_PBM"  />
+                                                    <label for="ROLE_SOLUTION_PBM">Proposé solution <b class="text-danger" id="err_ROLE_SOLUTION_PBM"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_FINI_PBM" id="ROLE_FINI_PBM"  />
+                                                    <label for="ROLE_FINI_PBM">Résolution <b class="text-danger" id="err_ROLE_FINI_PBM"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_VIDANGE" id="ROLE_VIDANGE"  />
+                                                    <label for="ROLE_VIDANGE">Signaler vidange <b class="text-danger" id="err_ROLE_VIDANGE"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_PIECE" id="ROLE_PIECE"  />
+                                                    <label for="ROLE_PIECE">Signaler remplacement pièce <b class="text-danger" id="err_ROLE_PIECE"></b></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div>
+                                                    <input class="inputChk" type="checkbox" name="roles[]" value="ROLE_ETAT_GRP" id="ROLE_ETAT_GRP"  />
+                                                    <label for="ROLE_ETAT_GRP">Etat groupe <b class="text-danger" id="err_ROLE_ETAT_GRP"></b></label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button id="btn" class="btn btn-primary btn-lg btn-block"><i class="fa fa-save"></i> Enregistrer</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('utilisateur_index') }}" class="btn btn-default btn-lg btn-block">Annuler</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        userRoles = [];
+
+        {% for role in user.roles %}
+            userRoles.push("{{ role }}");
+
+
+        {% endfor %}
+
+        $('.inputChk').each(function (index) {
+            myInput = $(this);
+            
+            if ($.inArray(myInput.val(), userRoles) > -1) {
+                console.log(myInput.val());
+                myInput.attr('checked', 'checked');
+            }
+
+        })
+
+        $('.role').each(function (index) {
+            myInput1 = $(this);
+
+            if ($.inArray(myInput1.val(), userRoles) > -1) {
+                console.log(myInput1.val());
+                myInput1.attr('checked', 'checked');
+            }
+
+        })
+    </script>
+
+{% endblock %}

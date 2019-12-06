@@ -1,0 +1,73 @@
+
+{% extends 'base.html.twig' %}
+
+{% block titre %}Fournisseur{% endblock %}
+{% block titre_page %} <strong class="text-primary"><i class="fa fa-info"></i> Fournisseur</strong> {% endblock %}
+{% block titre_description %}Les informations sur le fournisseur{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information Fournisseur</h3>
+                </div>
+                <!-- /.box-header -->
+
+                <div class="box-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Nom:</td>
+                            <td>{{  fournisseur.nom }}</td>
+                        </tr>
+                        {% if fournisseur.adresse %}
+                            <tr>
+                                <td>Adresse:</td>
+                                <td>{{  fournisseur.adresse }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if fournisseur.contact %}
+                            <tr>
+                                <td>Contact:</td>
+                                <td>{{  fournisseur.contact }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if fournisseur.nif %}
+                            <tr>
+                                <td>NIF:</td>
+                                <td>{{  fournisseur.nif }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if fournisseur.stat %}
+                            <tr>
+                                <td>STAT:</td>
+                                <td>{{  fournisseur.stat }}</td>
+                            </tr>
+                        {% endif %}
+
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-5">
+
+            <ul class="list-inline">
+                <li>
+
+
+
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+

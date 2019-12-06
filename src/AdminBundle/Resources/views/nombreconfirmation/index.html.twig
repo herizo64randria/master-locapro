@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Administration{% endblock %}
+{% block titre_page %}Nombre de confirmation{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Table liste Demande</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Demande</th>
+                            <th>Nombre de confirmation</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for nombreConfirmation in nombreConfirmations %}
+                            <tr>
+                                <td>{{ nombreConfirmation.nomDemande }}</td>
+                                <td>{{ nombreConfirmation.nombre }}</td>
+                                <td>
+                                    <a href="{{ path('nombreconfirmation_edit', {'id' : nombreConfirmation.id}) }}" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-edit"></i> Modifier
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

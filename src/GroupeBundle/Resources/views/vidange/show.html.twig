@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-primary">Détail de la vidange</strong>{% endblock %}
+{% block titre_description %}
+    Les informations sur la vidange  <br>
+    Groupe: <a href="{{ path('groupe_show', {'id' : vidange.groupe.id}) }}"><b>{{ vidange.groupe.numero }}</b></a>
+{% endblock %}
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information de la vidange</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_VIDANGE') %}
+                            <li>
+                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalVidangeModifier"><i class="fa fa-edit"></i> Modifier</button>
+                            </li>
+                            <li>
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalSuiviPieceSupprimer"><i class="fa fa-edit"></i> Supprimer</button>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Groupe: </td>
+                            <td>{{ vidange.groupe.numero }} / {{ vidange.groupe.site.emplacement }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{ vidange.date|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Type:</td>
+                            <td>{{ vidange.type }}</td>
+                        </tr>
+                        <tr>
+                            <td>Heure de marche à la vidange:</td>
+                            <td>{{ vidange.heureMarche|number_format(0, ',', ' ') }}</td>
+                        </tr>
+
+                        {% if vidange.description %}
+                        <tr>
+                            <td>Description/note:</td>
+                            <td>{{ vidange.description|nl2br }}</td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Pièce remplacer pour la vidange</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_VIDANGE') %}
+                            <li>
+                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalSuiviPiece"><i class="fa fa-plus"></i> Ajouter remplacement</button>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    <table class="table table-striped" id="tableHistoriqueGroupe">
+                        <thead>
+                        <tr>
+                            <th>Libellé</th>
+                            <th>Détails</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for suiviPiece in vidange.suiviPieces %}
+                            <tr>
+                                <td>
+                                    (<i class="fa fa-refresh"></i> {{ suiviPiece.typePiece.nom }}) {{ suiviPiece.libelle }}
+                                </td>
+                                <td>
+                                    {{ suiviPiece.description|nl2br }}
+                                </td>
+                                <td>
+                                    <a href="{{ path('suivi_piece_show', {'id' : suiviPiece.id }) }}" target="_blank" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include '@Groupe/vidange/modalVidangeModifier.html.twig' %}
+
+    {% include '@Groupe/vidange/vidange_modalSuiviPiece.html.twig' %}
+
+
+
+
+{% endblock %}

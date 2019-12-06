@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Familleproduit</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ familleProduit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ familleProduit.nom }}</td>
+            </tr>
+            <tr>
+                <th>Tva</th>
+                <td>{{ familleProduit.tva }}</td>
+            </tr>
+            <tr>
+                <th>Champ1</th>
+                <td>{{ familleProduit.champ1 }}</td>
+            </tr>
+            <tr>
+                <th>Champ2</th>
+                <td>{{ familleProduit.champ2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('famille-produit_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('famille-produit_edit', { 'id': familleProduit.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

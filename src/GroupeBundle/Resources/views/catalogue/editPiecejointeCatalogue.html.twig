@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-primary">Modification du Piece jointe </strong>{% endblock %}
+{% block titre_description %}
+{% endblock %}
+{% block body %}
+
+    <style>
+        div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+
+    </style>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="gallery">
+                <a target="_blank" href="{{ asset('document/'~pjcatalogue.lien) }}">
+                    {% if pjcatalogue.ext =="pdf"%}
+                        <img src="{{ asset('document/divers/pdf.png') }}" alt="Cinque Terre" width="50px" height="50px">
+                    {% endif %}
+
+                    {% if pjcatalogue.ext =="jpg" or pjcatalogue.ext =="png"%}
+                        <img src="{{ asset('document/'~pjcatalogue.lien) }}" alt="Cinque Terre" width="50px" height="50px">
+                    {% endif %}
+                    {% if pjcatalogue.ext =="doc" or pjcatalogue.ext =="docx"%}
+                        <img src="{{ asset('document/divers/doc.png') }}" alt="Cinque Terre" width="50px" height="50px">
+                    {% endif %}
+                </a>
+                <div class="desc">
+                    <strong>
+                        {{ pjcatalogue.nom }}
+                    </strong>
+                    </div>
+            </div>
+            
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="box-header with-border">
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="">
+                            <h3 class=""></h3>
+                            <div class="form-group">
+                                <label for="nompj">Nom du fichier: </label>
+                                <input value="{{ pjcatalogue.nom }}" type="text" class="form-control" name="nompj"  />
+                            </div>
+                            <input type="file" name="file" class="form-control" />
+
+                            <input type="hidden"  name="idCatalogue">
+                            <div class="col-md-12">
+
+                                <br>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-edit"></i> Modifier</button>
+                                    <button  type="button" class="btn btn-lg btn-danger btnSupprimer"><i class="fa fa-trash"></i> Supprimer</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+    {#MODALS SUPPRIMER #}
+    <div class="modal modal-danger fade" id="modalSupprimer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Vérification</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Attention! Voulez-vous supprimer cette fichier?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('pjcatalogue_supprimer',{'id':pjcatalogue.id}) }}"  class="btn btn-outline"><i class="fa fa-minus-circle"></i> Supprimer</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <script>
+        $('.btnSupprimer').click(function () {
+
+            $('#modalSupprimer').modal();
+        });
+    </script>
+
+{% endblock %}

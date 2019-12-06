@@ -1,0 +1,59 @@
+<div class="modal fade" id="modalVidangeModifier">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('vidange_edit', {'id' : vidange.id}) }}" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-primary">Vidange</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="dateVidange">Date: <b class="text-danger" id="err_dateVidange"></b></label>
+                        <input required type="text" class="form-control" name="dateVidange" id="dateVidange" value="{{ vidange.date|date('d/m/Y') }}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descriptionVidange">Note: <b class="text-danger" id="err_descriptionVidange"></b></label>
+                        <textarea class="form-control" name="descriptionVidange" id="descriptionVidange" rows="4">{{ vidange.description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="typeVidange">Type du vidange: <b class="text-danger" id="err_typeVidange"></b></label>
+                        <select required class="form-control" name="typeVidange" id="typeVidange" >
+                            <option value="Filtre huile">Filtre huile</option>
+                            <option value="Filtre huile et filtre gasoil">Filtre huile et filtre gasoil</option>
+                            <option value="Vidange complet">Vidange complet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heureMarche">Heure de marche du groupe: <b class="text-danger" id="err_heureMarche"></b></label>
+                        <input required type="text" class="form-control" name="heureMarche" id="heureMarche"  />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" > Confirmer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    //Date picker
+    $('#dateVidange').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    });
+</script>
+<!-- /.modal -->
+
+<script>
+    $('#typeVidange').val('{{ vidange.type }}');
+</script>

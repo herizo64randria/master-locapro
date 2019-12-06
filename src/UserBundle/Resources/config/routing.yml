@@ -1,0 +1,10 @@
+user_index:
+  path:     /
+  defaults: { _controller: UserBundle:Default:index }
+
+user_homepage:
+    path:     /{_locale}/test/{nom}
+    defaults: { _controller: UserBundle:Default:pageTest }
+user_gestion_route:
+  resource: "@UserBundle/Controller/GestionUserController.php"
+  type:     annotation

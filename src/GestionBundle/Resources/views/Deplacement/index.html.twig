@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Transfert de produit(s){% endblock %}
+{% block titre_page %}Transfert de produit(s){% endblock %}
+{% block titre_description %}<br>Liste transfert de produit(s){% endblock %}
+{% block body %}
+    {%  set TRANSFERT_CONFIRME = 'Transfert confirmée'%}
+   {% set TRANSFERT_ATTENTE = 'Transfert en attente'%}
+   {% set TRANSFERT_REFUSER = 'Transfert refusée'%}
+   {% set TRANSFERT_CLOTURE = 'Transfert clôturée'%}
+   {% set TRANSFERT_ATTENTE_REC = 'Transfert en attente de reconfirmation'%}
+
+
+    <ul class="list-inline">
+        {% if app.user|ifRole('ROLE_GESTION_DEPLACEMENT') %}
+            <li><a href="{{ path('transfert_creer') }}" class="btn btn-lg btn-success"><i class="fa fa-mail-forward"></i> Nouvelle Transfert</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste transfert de produit(s)</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped table-bordered" id="tabledeplacement">
+                        <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Date</th>
+                            <th>Utilisateur</th>
+                            <th>Dépôt source</th>
+                            <th>Dépôt déstination</th>
+                            <th>Etat</th>
+
+                        </tr>
+                        </thead>
+                        {% set couleurEtat = '' %}
+                        <tbody>
+                        {% for deplacement in deplacements %}
+                            
+
+
+                            {#                            COULEUR ETAT#}
+                            {% if deplacement.etat == TRANSFERT_ATTENTE or deplacement.etat == TRANSFERT_ATTENTE_REC %}
+                                {% set couleurEtat = 'warning' %}
+                            {% endif %}
+                            {% if deplacement.etat == TRANSFERT_CONFIRME %}
+                                {% set couleurEtat = 'success' %}
+                            {% endif %}
+                            {% if deplacement.etat == TRANSFERT_REFUSER or deplacement.etat == TRANSFERT_CLOTURE %}
+                                {% set couleurEtat = 'danger' %}
+                            {% endif %}
+                            <tr>
+                                <td><a href="{{ path('deplacement_affcher', {'id' : deplacement.id}) }}">{{ deplacement.numero }}</a></td>
+                                <td>{{ deplacement.date|date('d/m/Y') }}</td>
+                                <td>{{ deplacement.userCreer.nom }}</td>
+                                <td>{{ deplacement.sourcedepot.nom }}</td>
+                                <td>{{ deplacement.destinationdepot.nom }}</td>
+                                <td class="{{ couleurEtat }}">{{ deplacement.etat }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+
+    <script>
+        $(document).ready(function() {
+            $('#tabledeplacement').DataTable({
+                pageLength: 100,
+                order: [[ 0, "desc" ]],
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        } );
+    </script>
+
+{% endblock %}

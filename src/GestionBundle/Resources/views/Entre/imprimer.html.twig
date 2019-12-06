@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            font-size: 111%;
+        }
+
+        div#bandeau {
+            width: 1000px;
+            height:360px;
+
+        }
+        div#contenu {
+            width:1000px;
+            height: auto;
+
+        }
+        div#piedpage {
+            width:1000px;
+            margin-top: 10px;
+
+
+        }
+        div#gauche {
+            float: left;
+            width:500px;
+            height:50px;
+
+        }
+        div#droit {
+            float: right;
+            width:500px;
+            height:50px;
+
+        }
+        div#titre1 {
+            float: left;
+            width:500px;
+            height:150px;
+
+        }
+        div#titre2 {
+            float: right;
+            width:500px;
+            height:150px;
+
+        }
+        div#Scontenu {
+            width:920px;
+            height: auto;
+            margin-top:100px ;
+            margin-left: 30px;
+        }
+        img {
+            margin-left: 45px;
+            margin-top: 45px;
+
+        }
+        div#sgauche {
+            margin-left: 30px;
+        }
+        div#sdroit {
+            border: 1px solid black;
+            width:450px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        div#stitre1 {
+            border: 1px solid black;
+            width:400px;
+            margin-left: 30px;
+
+            font-style: italic;
+        }
+        p{
+            line-height: 0.5;
+        }
+        h2{
+            margin: 10px;
+        }
+        div#stitre2 {
+
+            margin-top: 50px;
+            margin-left: 20px;}
+
+        table {
+            border: 1px solid #7f7f7f;
+            border-collapse:collapse;
+            width:920px;
+            text-align: center;
+            margin: auto;
+        }
+        td,th{
+            font-size: large;
+			padding-left:10px;
+        }
+
+        #footer {
+            border: 1px;
+            width:920px;
+
+        }
+        td{
+            margin-right: 20px;
+            border-bottom: hidden;
+
+        }
+        #piedtr{
+
+            border-bottom: 1px solid #7f7f7f;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="bandeau">
+    <div id="gauche">
+
+        <img src="{{ asset('images/logoLoc.jpg') }}"  alt="">
+        <div id="sgauche">
+            <p>28 , rue de la Poudrière Anjoma ,</p>
+            <p>Plle 23/25 Atsinanana</p>
+            <p>501 Toamasina</p>
+            <p>Tél. : 034 59 109 62</p>
+			<U>
+            <p>contact.locapro@groupe-ibc.com</p>
+            <p>NIF 3003 300 382</p>
+            <p>STAT 77100 31 2019 0 00212</p>
+			</U>
+        </div>
+    </div>
+    <div id="droit">
+        <div id="sdroit">
+            <h2 ><br>DEPOT {{ entre.depot.nom|upper }} <br><br>
+
+            </h2>
+        </div>
+    </div>
+</div>
+<div id="contenu">
+    <br>
+    <div id="titre1">
+        <div id="stitre1">
+            <h2>
+				BON D’ENTREE MATERIEL<br><br>
+				N° {{ entre.numero }}
+
+            </h2>
+        </div></div>
+    <div id="titre2">
+        <div id="stitre2">
+            <h2><b>Ce {{ entre.date|date('d/m/Y') }}</b></h2>
+        </div>
+
+    </div>
+    <div id="Scontenu">
+        <table border="1">
+
+            <thead >
+                <tr>
+                    <th>DESIGNATION</th>
+                    <th>QAUNTITE</th>
+                    <th>UTILITE</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% set nbrLigne = 0 %}
+            {% for ligne in entre.ligneEntres %}
+                {% set nbrLigne = nbrLigne + 1 %}
+                <tr>
+                    <td>{{ ligne.produit.designation }}</td>
+                    <td>{{ ligne.quantite }}</td>
+                    <td>{{ ligne.utilite }}</td>
+                </tr>
+
+            {% endfor %}
+
+            {% for i in nbrLigne..32 %}
+                <tr> <td ><p></p></td><td ><p></p></td><td ><p></p></td></tr>
+            {% endfor %}
+
+            <tr> <td id="piedtr"><p></p></td><td id="piedtr"><p></p></td><td id="piedtr"><p></p></td></tr>
+
+            </tbody>
+
+        </table>
+        <br>
+
+    </div>
+
+
+</div>
+<div id="piedpage">
+    <table id="footer">
+        <thead>
+        <tr >
+            <th>LE DEMANDEUR</th>
+            <th>LE RESPONSABLE</th>
+            <th >LA DIRECTION</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+{#<script>#}
+{#    window.print();#}
+{#</script>#}
+</body>
+</html>

@@ -1,0 +1,27 @@
+<div class="modal fade" id="modalSuiviPieceSupprimer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-danger">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+
+               <p>Voulez-vous supprimer cette suivis de l'historique?</p>
+
+            </div>
+            <div class="modal-footer">
+                <a href="{{ path('suivi_piece_delete', {'id' : suivi.id}) }}" class="btn btn-danger" ><i class="fa fa-save"></i> Supprimer</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- /.modal -->

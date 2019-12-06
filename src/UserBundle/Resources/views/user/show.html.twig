@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-success"> <a href="{{ path('utilisateur_index') }}" class="btn btn-warning float-right"><i class="fa fa-arrow-left"></i></a> Utilisateur</strong> {% endblock %}
+{% block titre_description %}Détail sur l'utilisateur {% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <form action="#" method="post">
+                    <div class="box-header with-border">
+
+
+
+                        <h3 class="box-title"><i class="fa fa-info-circle"></i> Information utilisateur</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Nom </td><td>{{ user.nom }}</td>
+                            </tr>
+                            <tr>
+                                <td>Role(s) </td>
+                                <td>
+                                    {% for role in user.roles %}
+                                        {{ role }},
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Username </td><td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td><td>{{ user.email }}</td>
+                            </tr>
+
+                        </table>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="{{ path('utilisateur_edit',{'id':user.id}) }}" class="btn btn-info btn-block">Modifier</a>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <a href="{{ path('utilisateur_delete',{'id': user.id}) }}" class="btn btn-danger btn-block">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br><br>
+
+
+    </script>
+
+    {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
+
+    {#NUMERAL FORMAT#}
+    <script>
+
+    </script>
+
+{% endblock %}

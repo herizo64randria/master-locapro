@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-primary">Détail de déplacement</strong>{% endblock %}
+{% block titre_description %}Les informations sur le déplacement <br>
+    Groupe <a href="{{ path('groupe_show', {'id' : groupe.id}) }}"><b>{{ groupe.numero }}</b></a>
+{% endblock %}
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information de déplacement</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_GRP_DEPLACER') %}
+                            <li>
+                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalDeplacementModifier"><i class="fa fa-edit"></i> Modifier</button>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{ deplacement.date|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Groupe:</td>
+                            <td><b>{{ groupe.numero }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Site de départ:</td>
+                            <td>{{ deplacement.siteDepart.emplacement }} </td>
+                        </tr>
+                        <tr>
+                            <td>Site de destination:</td>
+                            <td>{{ deplacement.siteDestination.emplacement }}</td>
+                        </tr>
+                        {% if deplacement.description %}
+                        <tr>
+                            <td>Description/note:</td>
+                            <td>{{ deplacement.description|nl2br }}</td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% include '@Groupe/deplacement/modalModifierDeplacement.html.twig' %}
+
+
+{% endblock %}

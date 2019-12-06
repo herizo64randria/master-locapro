@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-primary">Modification ligne</strong> {% endblock %}
+{% block titre_description %}Modification dans la ligne de deplacement {{ ligneDeplacement.deplacement.numero }}{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <form action="#" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Modification dans Bon de deplacement n°
+                            <a href="{{ path('deplacement_affcher', {'id' : ligneDeplacement.deplacement.id}) }}">{{ ligneDeplacement.deplacement.numero }}</a>
+                        </h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <input type="hidden" id="qttProduit" value="{{ ligneDeplacement.deplacement.sourcedepot|stock(ligneDeplacement.produit) }}">
+
+                        <div class="form-group">
+                            <label for="produit">Produit <b class="text-danger" id="err_produit"></b></label>
+                            <input required readonly type="text" class="form-control" name="produit" id="produit" value="{{ ligneDeplacement.produit.designation }} | {{ ligneDeplacement.produit.reference }} ({{  ligneDeplacement.deplacement.sourcedepot|stock(ligneDeplacement.produit) }})" />
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">Désignation: <b class="text-danger" id="err_designation"></b></label>
+                            <input required type="text" class="form-control" name="designation" id="designation" value="{{ ligneDeplacement.designation }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="quantite">Quantité <b class="text-danger" id="err_quantite"></b></label>
+                            <input required type="text" class="form-control only_float" name="quantite" id="quantite" value="{{ ligneDeplacement.quantite }}" />
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" id="btnModifierProduit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-save"></i> Enregistrer</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('deplacement_affcher', {"id" : ligneDeplacement.deplacement.id}) }}" class="btn btn-default btn-lg btn-block">Annuler</a>
+                            </div>
+                            <div class="col-md-6 col-md-offset-3">
+                                <button type="button" lien="{{ path('deplacement_supprimerLigne', {"id" : ligneDeplacement.id}) }}" class="btn btn-lg btn-danger btnSupprimerLigne btn-block"  ><i class="fa fa-minus-circle "></i> Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br><br>
+
+
+    {#MODALS SUPPRIMER LIGNE#}
+    <div class="modal modal-danger fade" id="modalSupprimerLigne">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Vérification</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Attention! Voulez-vous supprimer cette ligne?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="lienSupprimerLigne" class="btn btn-outline"><i class="fa fa-minus-circle"></i> Supprimer</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    {#    NUMERAL FORMAT#}
+    <script>
+        numeralFormat('#prixAchat');
+    </script>
+
+    {#    SCRIPT SUPPRIMER LIGNE #}
+    <script>
+        $('.btnSupprimerLigne').click(function () {
+            lien = $(this).attr('lien');
+            $('#lienSupprimerLigne').attr('href', lien);
+            $('#modalSupprimerLigne').modal();
+        });
+    </script>
+
+    {#    TEST SI QUANTITE INSUFFISANTE#}
+    <script>
+        $('#btnModifierProduit').click(function () {
+            stockProduit = + $('#qttProduit').val();
+
+            inputQuantite = +  $('#quantite').val();
+
+            if (inputQuantite > stockProduit) {
+                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock source dans le dépot');
+                $('#modalDanger').modal();
+
+                return false;
+            }
+        });
+    </script>
+
+{% endblock %}

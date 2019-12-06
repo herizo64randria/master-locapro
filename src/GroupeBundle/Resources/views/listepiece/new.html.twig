@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-success">Nouvelle pièce</strong> {% endblock %}
+{% block titre_description %}Création d'une pièce détaché{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <form action="#" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Pièce détachée</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        {{ form_widget(form) }}
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" value="Créer" class="btn btn-success btn-block" />
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('listepiece_index') }}" class="btn btn-default btn-block">Annuler</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

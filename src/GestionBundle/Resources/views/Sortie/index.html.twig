@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Bon de sortie{% endblock %}
+{% block titre_page %}Bon de sortie{% endblock %}
+{% block titre_description %}<br>Liste des bons de sortie{% endblock %}
+{% block body %}
+
+    {% set  DEMANDE_ENATTENTE = 'En attente de confirmation' %}
+    {% set  DEMANDE_CONFIRME = 'Demande confirmée' %}
+    {% set  DEMANDE_REFUSER = 'Demande refusée' %}
+    {% set  DEMANDE_CLOTURE = 'Demande clôturée' %}
+    {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
+
+    <ul class="list-inline">
+        {% if app.user|ifRole('ROLE_GESTION_SORTIE') %}
+            <li><a href="{{ path('sortie_creer') }}" class="btn btn-lg btn-danger"><i class="fa fa-mail-reply"></i> Nouvelle Sortie</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Table liste bon de sortie</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped table-bordered" id="tableSortie">
+                        <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Utilisateur</th>
+                            <th>Date</th>
+                            <th>Groupe</th>
+                            <th>Destination</th>
+                            <th>Dépôt</th>
+                            <th>Etat</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for sortie in sorties %}
+
+                            {#COULEUR DE L'ETAT#}
+                            {% set couleurEtat = '' %}
+                            {% if sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC %}
+                                {% set couleurEtat = 'warning' %}
+                            {% endif %}
+                            {% if sortie.etat == DEMANDE_CONFIRME %}
+                                {% set couleurEtat = 'success' %}
+                            {% endif %}
+                            {% if sortie.etat == DEMANDE_REFUSER or sortie.etat == DEMANDE_CLOTURE %}
+                                {% set couleurEtat = 'danger' %}
+                            {% endif %}
+
+
+                            <tr>
+                                <td><a href="{{ path('sortie_afficher', {'id' : sortie.id}) }}">{{ sortie.numero }}</a></td>
+                                <td>{{ sortie.userCreer.nom }}</td>
+                                <td>{{ sortie.date|date('d/m/Y') }}</td>
+
+                                    {% set groupe = '-'  %}
+                                    {% if sortie.groupe %}
+                                        {% set groupe = sortie.groupe.numero  %}
+                                    {% endif %}
+                                <td>
+                                    {{ groupe }}
+                                </td>
+                                {% set destination = '-' %}
+                                {% if sortie.destination %}
+                                    {% set destination = sortie.destination %}
+                                {% endif %}
+                                <td>{{ destination }}</td>
+                                <td>{{ sortie.depot.nom }}</td>
+                                <td class="{{ couleurEtat }} text-center">
+                                    {{ sortie.etat }}
+                                    {% if sortie.userConfirmes|length > 0 and (sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC) %}
+                                        <ul>
+                                            {% for userConfirme in sortie.userConfirmes %}
+                                                <li>{{ userConfirme.nom }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+
+    <script>
+        $(document).ready(function() {
+            $('#tableSortie').DataTable({
+                pageLength: 100,
+                order: [[ 0, "desc" ]],
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        } );
+    </script>
+
+{% endblock %}

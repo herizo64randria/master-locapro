@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Bon d'entrée{% endblock %}
+{% block titre_page %}Bon d'entrée{% endblock %}
+{% block titre_description %}<br>Liste des bons d'entrée{% endblock %}
+{% block body %}
+
+    {% set  DEMANDE_ENATTENTE = 'En attente de confirmation' %}
+    {% set  DEMANDE_CONFIRME = 'Demande confirmée' %}
+    {% set  DEMANDE_REFUSER = 'Demande refusée' %}
+    {% set  DEMANDE_CLOTURE = 'Demande clôturée' %}
+    {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
+    {% set  DEMANDE_CREATION = 'En cour de création' %}
+    {#COULEUR DE L'ETAT#}
+    {% set couleurEtat = '' %}
+
+    <ul class="list-inline">
+        {% if app.user|ifRole('ROLE_GESTION_ENTRE') %}
+            <li><a href="{{ path('entre_creer') }}" class="btn btn-lg btn-success"><i class="fa fa-mail-forward"></i> Nouvelle Entrée</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Table liste bon d'entrée</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped table-bordered" id="tableEntre">
+                        <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Date</th>
+                            <th>Utilisateur</th>
+                            <th>Fournisseur</th>
+                            <th>Dépôt</th>
+                            <th>Etat</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entre in entres %}
+
+{#                            COULEUR ETAT#}
+                            {% if entre.etat == DEMANDE_ENATTENTE or entre.etat == DEMANDE_ENATTENTE_REC %}
+                                {% set couleurEtat = 'warning' %}
+                            {% endif %}
+                            {% if entre.etat == DEMANDE_CONFIRME %}
+                                {% set couleurEtat = 'success' %}
+                            {% endif %}
+                            {% if entre.etat == DEMANDE_REFUSER or entre.etat == DEMANDE_CLOTURE %}
+                                {% set couleurEtat = 'danger' %}
+                            {% endif %}
+                            {% if entre.etat == DEMANDE_CREATION %}
+                                {% set couleurEtat = '' %}
+                            {% endif %}
+
+                            <tr>
+                                <td><a href="{{ path('entre_affcher', {'id' : entre.id}) }}">{{ entre.numero }}</a></td>
+                                <td>{{ entre.date|date('d/m/Y') }}</td>
+                                <td>{{ entre.userCreer.nom }}</td>
+                                <td>
+                                {% if entre.fournisseur %}
+                                    {{ entre.fournisseur.nom }}
+                                {% endif %}
+                                </td>
+
+                                <td>{{ entre.depot.nom }}</td>
+                                <td class="{{ couleurEtat }}">{{ entre.etat }}</td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+
+    <script>
+        $(document).ready(function() {
+            $('#tableEntre').DataTable({
+                pageLength: 100,
+                order: [[ 0, "desc" ]],
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        } );
+    </script>
+
+{% endblock %}

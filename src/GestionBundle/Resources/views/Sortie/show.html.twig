@@ -1,0 +1,562 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}{{ sortie.numero }}{% endblock %}
+{% block titre_page %} <a href="{{ path('sortie_index') }}"><strong class="text-danger"><i class="fa fa-minus-circle"></i>Bon de sortie</strong></a> {% endblock %}
+{% block titre_description %}
+    Les informations sur le bon de sortie
+{% endblock %}
+{% block body %}
+
+    {% set  DEMANDE_ENATTENTE = 'En attente de confirmation' %}
+    {% set  DEMANDE_CONFIRME = 'Demande confirmée' %}
+    {% set  DEMANDE_REFUSER = 'Demande refusée' %}
+    {% set  DEMANDE_CLOTURE = 'Demande clôturée' %}
+    {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
+
+
+    {#COULEUR DE L'ETAT#}
+    {% set couleurEtat = '' %}
+    {% if sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC %}
+        {% set couleurEtat = 'warning' %}
+    {% endif %}
+    {% if sortie.etat == DEMANDE_CONFIRME %}
+        {% set couleurEtat = 'success' %}
+    {% endif %}
+    {% if sortie.etat == DEMANDE_REFUSER or sortie.etat == DEMANDE_CLOTURE %}
+        {% set couleurEtat = 'danger' %}
+    {% endif %}
+
+
+    <input type="hidden" id="hiddenIdDepot" value="{{ sortie.depot.id }}">
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Information du bon de sortie</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Numero:</td>
+                            <td><b>{{ sortie.numero }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{ sortie.date|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dépôt:</td>
+                            <td>{{ sortie.depot.nom }} ({{ sortie.depot.abrv }})</td>
+                        </tr>
+                        {% if sortie.destination %}
+                        <tr>
+                            <td>Destination:</td>
+                            <td>{{ sortie.destination }}</td>
+                        </tr>
+                        {% endif %}
+                            {% if sortie.groupe %}
+                                <tr>
+                                    <td>Groupe de destination :</td>
+
+                                    <td><a href="{{ path('groupe_show',{'id':sortie.groupe.id}) }}">{{ sortie.groupe.numero }}</a></td>
+                                </tr>
+                            {% endif %}
+
+
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h3 class="text-center">Etat du B.S.: <i class="text-{{ couleurEtat }}">{{ sortie.etat }}</i></h3>
+            <ul class="list-inline">
+                <li>
+
+                    <button class="btn btn-lg btn-danger hide" data-toggle="modal" id="btnEnregistrerSortie" data-target="#modalEnregistrerSortie"><i class="fa fa-save" ></i> Enregistrer</button>
+
+                    {% if sortie.motif %}
+                        <div>
+                            <p ><b>Motif:</b></p>
+                            <p>{{ sortie.motif|nl2br }}</p>
+                        </div>
+                    {% endif %}
+                </li>
+                {% if sortie.modifiable or (sortie.etat == 'En attente de confirmation' or sortie.etat == 'Demande confirmée') and sortie.userCreer == app.user %}
+                    <li>
+                        <a href="{{ path('sortie_edit', {'id' : sortie.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
+
+                    </li>
+                {% endif %}
+                {% if sortie.etat == DEMANDE_CONFIRME %}
+                    <li>
+                        <a href="{{ path('sortie_imprimer', {'id' : sortie.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if (sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC ) and app.user|ifRole('ROLE_RESP') %}
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Menu confirmation</h3>
+                </div>
+                <!-- /.box-header -->
+                {% if app.user in sortie.userConfirmes %}
+                <div class="box-body">
+                    <p class="text-success">Vous avez confirmer cette de demande</p>
+                </div>
+                {% else %}
+                <div class="box-body">
+                    {% if sortie.userConfirmes|length > 0 %}
+                        <p>Demande confirmer par:</p>
+                        <ul>
+                        {% for userConfirme in sortie.userConfirmes %}
+                            <li>{{ userConfirme.nom }}</li>
+                        {% endfor %}
+                        </ul>
+
+                    {% endif %}
+
+                    <a href="{{ path('sortie_confirme', {'id' : sortie.id}) }}" id="btnConfirmerSortie" class="btn btn-lg btn-block btn-success">
+                        <i class="fa fa-check-circle"></i> Accepter
+                    </a>
+                    <button type="button" class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#modalRefuserSortie">
+                        <i class="fa fa-minus-circle"></i> Refuser
+                    </button>
+                    <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerSortie">
+                        <i class="fa fa-warning"></i> Clôturer
+                    </button>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+        {% elseif sortie.etat == DEMANDE_REFUSER and app.user|ifRole('ROLE_RESP') %}
+            <div class="col-md-4">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Menu confirmation</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <p class="text-danger">Refusé par: <b>{{ sortie.userRefuser.nom }}</b></p>
+                        <p><b class="text-danger">Motif:</b> {{ sortie.texte }}</p>
+
+                        <a href="{{ path('sortie_confirme', {'id' : sortie.id}) }}" id="btnConfirmerSortie" class="btn btn-lg btn-block btn-success">
+                            <i class="fa fa-check-circle"></i> Reconfirmer
+                        </a>
+
+                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerSortie">
+                            <i class="fa fa-warning"></i> Clôturer
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-md-4">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Menu confirmation</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        {% if sortie.userConfirmes|length > 0 %}
+                            <p>Demande confirmer par:</p>
+                            <ul>
+                                {% for userConfirme in sortie.userConfirmes %}
+                                    <li>{{ userConfirme.nom }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% if sortie.userRefuser and sortie.etat == DEMANDE_REFUSER %}
+                            <p > <b class="text-danger">Refusé par: </b>{{ sortie.userRefuser.nom }}</p>
+                            <p><b class="text-danger">Cause: </b> {{ sortie.texte }}</p>
+                        {% endif %}
+                        {% if sortie.userRefuser and sortie.etat == DEMANDE_CLOTURE %}
+                            <p > <b class="text-danger">Demande clôturée par: </b>{{ sortie.userRefuser.nom }}</p>
+                            <p><b class="text-danger">Cause: </b> {{ sortie.texte }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Produit incluse dans le bon</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <form action="{{ path('sortie_ajouterLigne', {'id' : sortie.id}) }}"  method="post" autocomplete="off" >
+                        <table class="table table-striped table-bordered" id="tableEntre">
+                            <thead>
+                            <tr>
+                                <th>Code Produit</th>
+                                <th>Libellé</th>
+                                <th>Réf. produit</th>
+                                <th>Quantité</th>
+                                {% if sortie.modifiable and sortie.userCreer == app.user %}
+                                    <th class="action">Action</th>
+                                {% endif %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set erreurLigne = 0 %}
+                            {% for ligneSortie in sortie.ligneSorties %}
+                                {% set couleurLigne = '' %}
+                                {% set couleurQuantite = '' %}
+                                {% if ligneSortie.quantite > ligneSortie.sortie.depot|stock(ligneSortie.produit) and sortie.etat != 'Demande confirmée' %}
+                                    {% set couleurLigne = 'danger' %}
+                                    {% set couleurQuantite = 'text-danger' %}
+
+                                    {% set erreurLigne = erreurLigne + 1 %}
+                                {% endif %}
+
+                                <tr class="{{ couleurLigne }} ">
+                                    <td  class="class_produit" idProduit="{{ ligneSortie.produit.id }}" >
+                                        <a href="{{ path('produit_show', { 'id' : ligneSortie.produit.id }) }}" target="_blank">{{ ligneSortie.produit.code }}</a>
+                                    </td>
+                                    <td>
+                                        {{ ligneSortie.designation }}
+                                        {% if ligneSortie.utilite %}
+                                            <br>
+                                            - {{ ligneSortie.utilite }}
+                                        {% endif %}
+
+                                    </td>
+                                    <td>{{ ligneSortie.produit.reference }}</td>
+                                    <td class="{{ couleurQuantite }} ">
+                                        {{ ligneSortie.quantite }}
+                                        {% if couleurLigne != '' %}
+                                            <i style="font-size: 80%">(Quantité actuel insuffisante)</i>
+                                        {% endif %}
+                                    </td>
+                                    {% if sortie.modifiable and sortie.userCreer == app.user %}
+                                        <td class="action">
+                                            <a href="{{ path('sortie_modifierLigne', {'id' : ligneSortie.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                                            <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('sortie_supprimerLigne', { 'id' : ligneSortie.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                        </td>
+                                    {% endif %}
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            {% if sortie.modifiable and sortie.userCreer == app.user %}
+
+                            <tfoot id="formLigne">
+                                <tr >
+                                    <td>
+                                        <div class="form-group" >
+                                            <select required  class="form-control" name="produit" id="produit" >
+                                                <option value=" "></option>
+                                                {% for produit in produits %}
+                                                    <option value="{{ produit.id }}"  quantite="{{ sortie.depot|stock(produit) }}">{{ produit.designation }} - {{ produit.code }} | {{ produit.reference }} <b>({{ sortie.depot|stock(produit) }})</b></option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input required type="text" class="form-control" name="designation" id="designation"   />
+                                            <input  type="text" class="form-control" name="utilite" id="utilite" placeholder="Utilité" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="reference" id="reference"  readonly />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group text-center">
+                                            <input required type="text" class="form-control only_float" name="quantite" id="quantite" placeholder="Quantité"  />
+                                            <button class="btn btn-success" id="btnAjouterProduit"><i class="fa fa-plus-circle"></i> Ajouter la ligne</button>
+                                            <button class="btn btn-default" id="btnAnnulerProduit" type="button">Annuler</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            {% endif %}
+
+                        </table>
+
+                    </form>
+                    {% if sortie.modifiable %}
+                    <div class="center-block text-center" >
+                        <img src="{{ asset('images/loading.gif') }}" alt="" id="imgLoading">
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#MODALS SUPPRIMER LIGNE#}
+    <div class="modal modal-danger fade" id="modalSupprimerLigne">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Vérification</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Attention! Voulez-vous supprimer cette ligne?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="lienSupprimerLigne" class="btn btn-outline"><i class="fa fa-minus-circle"></i> Supprimer</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    {#    MODAL ENREGISTRER ENTRE#}
+    <div class="modal fade" id="modalEnregistrerSortie" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-warning">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p><b class="text-danger">Attention!</b> Voulez-vous vraiment enregistrer le bon de sortie? <br> <i>L'action est irréversible</i></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('sortie_enregistrer', {'id' : sortie.id}) }}" class="btn btn-warning ">Accepter</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL REFUSER ENTRE -->
+    <div class="modal fade" id="modalRefuserSortie" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form action="{{ path('sortie_refuser', { 'id' : sortie.id }) }}" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-danger">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande de bon de sortie? </p>
+                        <br>
+                        <div class="form-group">
+                            <label for="text">Motif du refus <b class="text-danger" id="err_text"></b></label>
+                            <textarea required type="text" class="form-control" name="text" id="text" rows="4" ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" > Refuser</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL CLOTURER ENTRE -->
+    <div class="modal fade" id="modalCloturerSortie" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-warning">Confirmation</h4>
+                </div>
+                <form action="{{ path('sortie_cloturer', { 'id' : sortie.id }) }}" method="post">
+                    <div class="modal-body">
+                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande de bon de sortie? <br> <i>L'action est irréversible</i></p>
+                        <div class="form-group">
+                            <label for="text">Motif du clôture <b class="text-danger" id="err_text"></b></label>
+                            <textarea required type="text" class="form-control" name="text" id="text" rows="4" ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" > Clôturer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+{#    #}
+    <script>
+        idDepot = $('#hiddenIdDepot').val();
+        produits = [];
+    </script>
+
+    {% for produit in produits %}
+        <script>
+            produit = [];
+            produit.id = {{ produit.id }};
+            produit.designation = '{{ produit.designation }}';
+            produit.reference = '{{ produit.reference }}';
+
+            produits.push(produit);
+        </script>
+    {% endfor %}
+
+    <script>
+        $('#formLigne').removeClass('hide');
+        $('#imgLoading').addClass('hide');
+
+        $('#produit').select2();
+    </script>
+
+
+
+
+    {#    ----------------- SCRIPT SELECTION DU PRODUIT ----------------- #}
+    <script>
+        $('#produit').change(function () {
+
+            idProduit = $(this).val();
+
+            $(produits).each(function (index,produit) {
+                if(produit.id == idProduit){
+                    //------ TRAITEMENT --------------
+                    $('#designation').val(produit.designation);
+                    $('#reference').val(produit.reference);
+
+                    $('#quantite').focus();
+                }
+            })
+
+        });
+    </script>
+    {#    ----------------- SCRIPT SELECTION DU PRODUIT ----------------- #}
+
+{#    BTN ANNULER LIGNE#}
+    <script>
+        $('#btnAnnulerProduit').click(function () {
+            $('#designation').val('');
+            $('#reference').val('');
+            $('#produit').val('');
+        });
+    </script>
+
+    {#    TEST DES PRODUITS EXISTANT#}
+    <script>
+        var produitIncluses = new Array();
+
+        $('.class_produit').each(function (item, idProduit) {
+            produitIncluses.push($(idProduit).attr('idProduit'));
+            // console.log(idProduit.attr());
+        });
+
+        // console.log(produits);
+
+        $('#btnAjouterProduit').click(function () {
+
+            if(produitIncluses.indexOf($('#produit').val()) > -1){
+                $('#textModalDanger').text('Erreur! Le produit existe déjà dans les lignes du B.S.');
+                $('#modalDanger').modal();
+                return false;
+            }
+        });
+    </script>
+
+    {#    QUANTITE < 1#}
+    <script>
+        $('#btnAjouterProduit').click(function () {
+            if($('#quantite').val() <= 0){
+                $('#textModalDanger').text('Erreur! La quantité doit être plus grand que zéro (0)');
+                $('#modalDanger').modal();
+                return false;
+            }
+        });
+    </script>
+
+{#    TEST SI QUANTITE INSUFFISANTE#}
+    <script>
+        $('#btnAjouterProduit').click(function () {
+            stockProduit =  + $('#produit').children("option:selected").attr('quantite');
+
+             inputQuantite = + $('#quantite').val();
+
+            if (inputQuantite > stockProduit) {
+                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock dans le dépot');
+                $('#modalDanger').modal();
+
+                return false;
+            }
+        });
+    </script>
+
+    {#    SCRIPT SUPPRIMER LIGNE #}
+    <script>
+        $('.btnSupprimerLigne').click(function () {
+            lien = $(this).attr('lien');
+            $('#lienSupprimerLigne').attr('href', lien);
+            $('#modalSupprimerLigne').modal();
+        });
+    </script>
+
+{#    SCRIPT TEST ERREUR DANS LES LIGNE#}
+    {% if erreurLigne > 0 %}
+    <script>
+        $('#btnEnregistrerSortie').attr('disabled', true);
+        $('#btnEnregistrerSortie').attr('title', 'Erreur! Veuillez vérifier les quantités des produits');
+
+        $('#btnEnregistrerSortie').click(function () {
+            $('#textModalDanger').text('Erreur! Veuillez vérifier les quantités des produits');
+            $('#modalDanger').modal();
+        });
+
+
+    </script>
+    {% endif %}
+
+
+    {% if erreurLigne > 0 and sortie.etat == 'En attente de confirmation' and app.user|ifRole('ROLE_RESP') %}
+    <script>
+        $('#btnConfirmerSortie').attr('disabled', true);
+        $('#btnConfirmerSortie').attr('title', 'Erreur! Veuillez vérifier les quantités des produits');
+        $('#btnConfirmerSortie').attr('href', '#');
+
+
+        $('#btnConfirmerSortie').click(function () {
+            $('#textModalDanger').text('Erreur! Veuillez vérifier les quantités des produits');
+            $('#modalDanger').modal();
+        });
+    </script>
+    {% endif %}
+
+{#    SCRIPT AFFICHE ENREGISTRER#}
+    {% if sortie.modifiable and sortie.userCreer == app.user %}
+    <script>
+        $('#btnEnregistrerSortie').removeClass('hide');
+    </script>
+    {% endif %}
+
+
+{% endblock %}

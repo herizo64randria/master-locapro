@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Familleproduits list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Tva</th>
+                <th>Champ1</th>
+                <th>Champ2</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for familleProduit in familleProduits %}
+            <tr>
+                <td><a href="{{ path('famille-produit_show', { 'id': familleProduit.id }) }}">{{ familleProduit.id }}</a></td>
+                <td>{{ familleProduit.nom }}</td>
+                <td>{{ familleProduit.tva }}</td>
+                <td>{{ familleProduit.champ1 }}</td>
+                <td>{{ familleProduit.champ2 }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('famille-produit_show', { 'id': familleProduit.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('famille-produit_edit', { 'id': familleProduit.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('famille-produit_new') }}">Create a new familleProduit</a>
+        </li>
+    </ul>
+{% endblock %}

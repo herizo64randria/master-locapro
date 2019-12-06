@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Liste des Catalogues{% endblock %}
+{% block titre_page %}Liste des Catalogues{% endblock %}
+{% block titre_description %}Liste des Catalogues attribuables{% endblock %}
+
+{% block body %}
+
+    <ul class="list-inline">
+        {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+            <li><button class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalNewCatalogue"><i class="fa fa-plus-circle"></i> Nouveau catalogue</button></li>
+        {% endif %}
+    </ul>
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tableau</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for catalogue in catalogues %}
+                            <tr>
+                                <td><a href="{{ path('catalogue_show', { 'id': catalogue.id }) }}">{{ catalogue.titre }}</a></td>
+                                <td>
+
+                                    <a href="{{ path('catalogue_show', { 'id': catalogue.id }) }}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> Afficher</a>
+                                    {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+                                        <a href="{{ path('catalogue_edit', { 'id': catalogue.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#    MODAL NOUVEAU CATALOGUE#}
+    <div class="modal fade" id="modalNewCatalogue">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ path('catalogue_new') }}" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-success">Nouveau catalogue</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="titre">Titre du catalogue <b class="text-danger" id="err_titre"></b></label>
+                            <input required type="text" class="form-control" name="titre" id="titre"  />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" > Confirmer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+    
+{% endblock %}
