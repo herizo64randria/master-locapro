@@ -33,42 +33,25 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="23" selection-start-column="23" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+            <state relative-caret-position="449">
+              <caret line="526" column="49" selection-start-line="526" selection-start-column="49" selection-end-line="526" selection-end-column="49" />
               <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
+                <element signature="e#7534#7565#0#PHP" expanded="true" />
+                <element signature="e#19242#19277#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
+            <state relative-caret-position="252">
+              <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
             </state>
           </provider>
         </entry>
@@ -77,12 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Except</find>
-      <find>texte</find>
-      <find>$</find>
-      <find>ifRole</find>
-      <find>ROLE_ENTRE</find>
-      <find>ROLE_GESTION_DEPLACEMENT</find>
       <find>ROLE_SOLUTION_PBM</find>
       <find>value=</find>
       <find>&lt;input required</find>
@@ -107,6 +84,12 @@
       <find>moteur</find>
       <find>signaler</find>
       <find>signalerA</find>
+      <find>modal</find>
+      <find>modalRefuserentre</find>
+      <find>danger</find>
+      <find>Refuser</find>
+      <find>modalClotureEntre</find>
+      <find>modalCloturerEntre</find>
     </findStrings>
     <replaceStrings>
       <replace>text</replace>
@@ -121,6 +104,8 @@
       <replace>sortie.</replace>
       <replace>alternateur_</replace>
       <replace>alternateur</replace>
+      <replace>warning</replace>
+      <replace>Cloturer</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\stock\src\GroupeBundle\Resources</dir>
@@ -165,7 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/CatalogueController.php" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login_content.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" />
@@ -175,10 +159,8 @@
         <option value="$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/editLigneEntre.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig" />
@@ -216,6 +198,9 @@
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" />
       </list>
     </option>
   </component>
@@ -281,7 +266,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -292,23 +276,50 @@
             <path>
               <item name="stock" type="b2602c69:ProjectViewProjectNode" />
               <item name="stock" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stock" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="stock" type="b2602c69:ProjectViewProjectNode" />
               <item name="stock" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="Entre" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -454,17 +465,21 @@
       <workItem from="1574668661035" duration="2827000" />
       <workItem from="1574682175436" duration="55000" />
       <workItem from="1574684460331" duration="2875000" />
+      <workItem from="1575639498624" duration="1468000" />
+      <workItem from="1575868749195" duration="758000" />
+      <workItem from="1575870509478" duration="1177000" />
+      <workItem from="1575877258354" duration="3529000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="544936000" />
+    <option name="totallyTimeSpent" value="551868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32416108" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29194632" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -495,31 +510,10 @@
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="49" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="635" column="54" selection-start-line="635" selection-start-column="54" selection-end-line="635" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -744,13 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-484">
-          <caret line="343" column="25" selection-start-line="343" selection-start-column="25" selection-end-line="343" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Output Messenger/DGAAA/Received Files/pointColor.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -811,13 +798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -827,11 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
+        <state relative-caret-position="1921">
           <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -839,6 +816,47 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show1.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3978">
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="526" column="49" selection-start-line="526" selection-start-column="49" selection-end-line="526" selection-end-column="49" />
+          <folding>
+            <element signature="e#7534#7565#0#PHP" expanded="true" />
+            <element signature="e#19242#19277#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
         </state>
       </provider>
     </entry>

@@ -492,7 +492,7 @@ class EntreController extends Controller
 
             $entre->setUserRefuser($this->getUser());
             $entre->setModifiable(true);
-            $entre->setTexte($_POST['text']);
+            $entre->setTexte($_POST['textRefuser']);
 
             $entre->setEtat(self::DEMANDE_REFUSER);
 
@@ -524,7 +524,7 @@ class EntreController extends Controller
 
             $entre->setUserRefuser($this->getUser());
             $entre->setModifiable(false);
-            $entre->setTexte($_POST['text']);
+            $entre->setTexte($_POST['textCloturer']);
 
             $entre->setEtat(self::DEMANDE_CLOTURE);
 

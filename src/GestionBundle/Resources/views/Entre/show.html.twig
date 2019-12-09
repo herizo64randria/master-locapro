@@ -109,10 +109,10 @@
                             <a href="{{ path('entre_confirme', {'id' : entre.id}) }}" id="btnConfirmerentre" class="btn btn-lg btn-block btn-success">
                                 <i class="fa fa-check-circle"></i> Accepter
                             </a>
-                            <button type="button" class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#modalRefuserentre">
+                            <button type="button" class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#modalRefuserEntre">
                                 <i class="fa fa-minus-circle"></i> Refuser
                             </button>
-                            <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerentre">
+                            <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerEntre">
                                 <i class="fa fa-warning"></i> Clôturer
                             </button>
                         </div>
@@ -135,7 +135,7 @@
                             <i class="fa fa-check-circle"></i> Reconfirmer
                         </a>
 
-                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerentre">
+                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerEntre">
                             <i class="fa fa-warning"></i> Clôturer
                         </button>
 
@@ -296,6 +296,64 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
+
+        </div>
+    </div>
+
+    {#    MODAL REFUSER ENTRE#}
+    <div class="modal fade" id="modalRefuserEntre" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{ path('entre_refuser', {'id' : entre.id}) }}" method="post">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-danger">Refuser</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande d'entrée?</p>
+                        <div class="form-group">
+                            <label for="textRefuser">Motif: <b class="text-danger" id="err_textRefuser"></b></label>
+                            <textarea required class="form-control" name="textRefuser" id="textRefuser" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger ">Accepter</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    {#    MODAL CLOTURER ENTRE#}
+    <div class="modal fade" id="modalCloturerEntre" role="dialog">
+        <div class="modal-dialog">
+
+            <form action="{{ path('entre_cloturer', {'id' : entre.id}) }}" method="post">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-warning">Cloturer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande d'entrée?</p>
+                        <div class="form-group">
+                            <label for="textCloturer">Motif: <b class="text-warning" id="err_textCloturer"></b></label>
+                            <textarea required class="form-control" name="textCloturer" id="textCloturer" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning ">Clôturer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </form>
+
 
         </div>
     </div>
