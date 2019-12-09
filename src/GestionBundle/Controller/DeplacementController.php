@@ -56,7 +56,7 @@ class DeplacementController extends Controller
 
     }
 
-    private function nextNumero($em){
+    private function nextNumero(ObjectManager $em){
 //        $em = $this->getDoctrine()->getManager();
 
         $repositoryNumero = $em->getRepository('GestionBundle:NumDoc');
@@ -181,6 +181,8 @@ class DeplacementController extends Controller
 
        return $res;
     }
+
+
     /**
      * INDEX
      *
@@ -200,6 +202,7 @@ class DeplacementController extends Controller
         ));
 
     }
+
     /**
      * nouveau entity.
      *
@@ -249,6 +252,7 @@ class DeplacementController extends Controller
         ));
 
     }
+
     /**
      * deplacement entity.
      *
@@ -319,6 +323,7 @@ class DeplacementController extends Controller
         ));
 
     }
+
     /**
      * Deplacement entity.
      *
@@ -568,7 +573,7 @@ class DeplacementController extends Controller
 
             $deplacement->setUserRefuser($this->getUser());
             $deplacement->setModifiable(true);
-            $deplacement->setTexte($_POST['text']);
+            $deplacement->setTexte($_POST['textRefuser']);
 
             $deplacement->setEtat(self::TRANSFERT_REFUSER);
 
@@ -600,18 +605,18 @@ class DeplacementController extends Controller
 
             $deplacement->setUserRefuser($this->getUser());
             $deplacement->setModifiable(false);
-            $deplacement->setTexte($_POST['text']);
+            $deplacement->setTexte($_POST['textCloturer']);
 
             $deplacement->setEtat(self::TRANSFERT_CLOTURE);
 
             $em->persist($deplacement);
             $em->flush();
 
-            return $this->redirectToRoute('sortie_afficher', array('id' => $deplacement->getId()));
+            return $this->redirectToRoute('deplacement_affcher', array('id' => $deplacement->getId()));
 
         }
 
-        return $this->redirectToRoute('sortie_afficher', array('id' => $deplacement->getId()));
+        return $this->redirectToRoute('deplacement_affcher', array('id' => $deplacement->getId()));
 
     }
     /**

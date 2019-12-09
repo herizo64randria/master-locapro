@@ -35,19 +35,27 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="559" column="37" selection-start-line="559" selection-start-column="37" selection-end-line="559" selection-end-column="37" />
+            <state relative-caret-position="652">
+              <caret line="614" column="62" selection-start-line="614" selection-start-column="62" selection-end-line="614" selection-end-column="62" />
+              <caret line="618" column="58" selection-start-line="618" selection-start-column="58" selection-end-line="618" selection-end-column="58" />
+              <folding>
+                <element signature="e#1952#1974#1#PHP" expanded="true" />
+                <element signature="e#2433#2455#1#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="355" column="12" selection-start-line="355" selection-start-column="12" selection-end-line="355" selection-end-column="12" />
+            <state relative-caret-position="249">
+              <caret line="505" column="33" selection-start-line="505" selection-start-column="33" selection-end-line="505" selection-end-column="33" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,10 +64,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ROLE_SOLUTION_PBM</find>
-      <find>value=</find>
-      <find>&lt;input required</find>
-      <find>&lt;input</find>
       <find>AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css</find>
       <find>ROLE_GESTIOIN</find>
       <find>catch</find>
@@ -86,6 +90,10 @@
       <find>Refuser</find>
       <find>modalClotureEntre</find>
       <find>modalCloturerEntre</find>
+      <find>text</find>
+      <find>warnig</find>
+      <find>modalCloturerTransfertt</find>
+      <find>sorti</find>
     </findStrings>
     <replaceStrings>
       <replace>text</replace>
@@ -100,8 +108,9 @@
       <replace>sortie.</replace>
       <replace>alternateur_</replace>
       <replace>alternateur</replace>
-      <replace>warning</replace>
       <replace>Cloturer</replace>
+      <replace>textRefuser</replace>
+      <replace>warning</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\stock\src\GroupeBundle\Resources</dir>
@@ -146,8 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login.html.twig" />
-        <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login_content.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/ProduitBundle/Controller/DepotController.php" />
         <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" />
@@ -197,6 +204,8 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" />
       </list>
     </option>
   </component>
@@ -309,7 +318,7 @@
               <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
               <item name="Resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="Entre" type="462c0819:PsiDirectoryNode" />
+              <item name="Deplacement" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -464,12 +473,12 @@
       <workItem from="1575639498624" duration="1468000" />
       <workItem from="1575868749195" duration="758000" />
       <workItem from="1575870509478" duration="1177000" />
-      <workItem from="1575877258354" duration="4137000" />
+      <workItem from="1575877258354" duration="8824000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="552476000" />
+    <option name="totallyTimeSpent" value="557163000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -506,20 +515,6 @@
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="35" column="70" selection-start-line="35" selection-start-column="70" selection-end-line="35" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
@@ -815,13 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show1.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3978">
@@ -842,6 +830,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6035">
+          <caret line="355" selection-start-line="355" selection-end-line="355" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="635">
@@ -849,10 +851,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="355" column="12" selection-start-line="355" selection-start-column="12" selection-end-line="355" selection-end-column="12" />
+        <state relative-caret-position="652">
+          <caret line="614" column="62" selection-start-line="614" selection-start-column="62" selection-end-line="614" selection-end-column="62" />
+          <caret line="618" column="58" selection-start-line="618" selection-start-column="58" selection-end-line="618" selection-end-column="58" />
+          <folding>
+            <element signature="e#1952#1974#1#PHP" expanded="true" />
+            <element signature="e#2433#2455#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="505" column="33" selection-start-line="505" selection-start-column="33" selection-end-line="505" selection-end-column="33" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

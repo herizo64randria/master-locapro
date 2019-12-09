@@ -5,7 +5,7 @@
 {% block titre_description %}Les informations sur le transfert{% endblock %}
 {% block body %}
     {% set ETAT_REFUSER = 'Transfert refusée' %}
-    {% set ETAT_CLOTURE = 'Etat clôturée' %}
+    {% set ETAT_CLOTURE = 'Transfert clôturée' %}
     {% set ETAT_ATTENTE = 'Transfert en attente de confirmation' %}
     {% set ETAT_CONFIRMER = 'Transfert confirmée' %}
     {% set ETAT_ATTENTE_REC = 'Transfert en attente de reconfirmation' %}
@@ -129,7 +129,7 @@
                             <i class="fa fa-check-circle"></i> Reconfirmer
                         </a>
 
-                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerSortie">
+                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerTransfertt">
                             <i class="fa fa-warning"></i> Clôturer
                         </button>
 
@@ -324,11 +324,11 @@
                         <h4 class="modal-title text-danger">Confirmation</h4>
                     </div>
                     <div class="modal-body">
-                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande de bon de sortie? </p>
+                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande de transfert? </p>
                         <br>
                         <div class="form-group">
-                            <label for="text">Motif du refus <b class="text-danger" id="err_text"></b></label>
-                            <textarea required type="text" class="form-control" name="text" id="text" rows="4" ></textarea>
+                            <label for="textRefuser">Motif du refus <b class="text-danger" id="err_textRefuser"></b></label>
+                            <textarea required class="form-control" name="textRefuser" id="textRefuser" rows="4" ></textarea>
                         </div>
                     </div>
 
@@ -342,6 +342,39 @@
 
         </div>
     </div>
+
+    <!-- MODAL REFUSER TRANSFERT -->
+    <div class="modal fade" id="modalCloturerTransfertt" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form action="{{ path('transfert_cloturer', { 'id' : deplacement.id }) }}" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-warning">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande de transfert? </p>
+                        <br>
+                        <div class="form-group">
+                            <label for="textCloturer">Motif du clôture <b class="text-danger" id="err_textCloturer"></b></label>
+                            <textarea required  class="form-control" name="textCloturer" id="textCloturer" rows="6"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" > Clôturer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+
     {#    NUMERAL FORMAT#}
     <script>
         numeralFormat('#prixAchat');
