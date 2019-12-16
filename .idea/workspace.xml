@@ -40,56 +40,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="204" column="51" selection-start-line="204" selection-start-column="51" selection-end-line="204" selection-end-column="51" />
+            <state relative-caret-position="398">
+              <caret line="253" column="49" lean-forward="true" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
               <folding>
                 <element signature="e#43#79#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GestionUserController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="148" column="51" lean-forward="true" selection-start-line="148" selection-start-column="51" selection-end-line="148" selection-end-column="51" />
-              <folding>
-                <element signature="e#1911#1938#0#PHP" expanded="true" />
+                <element signature="e#6238#6269#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="652">
-              <caret line="62" column="14" lean-forward="true" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="133" column="104" selection-start-line="133" selection-start-column="104" selection-end-line="133" selection-end-column="104" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="23" column="72" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="72" />
+            <state relative-caret-position="544">
+              <caret line="143" column="163" selection-start-line="143" selection-start-column="163" selection-end-line="143" selection-end-column="163" />
             </state>
           </provider>
         </entry>
@@ -220,7 +185,6 @@
         <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Alternateur.php" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Moteur.php" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig" />
         <option value="$USER_HOME$/AppData/Roaming/Output Messenger/DGAAA/Received Files/pointColor.html" />
         <option value="$PROJECT_DIR$/web/d3/d3.v3.min.js" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/new.html.twig" />
@@ -240,6 +204,7 @@
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig" />
       </list>
     </option>
   </component>
@@ -305,8 +270,44 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GroupeBundle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GroupeBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GroupeBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -456,12 +457,13 @@
       <workItem from="1575868749195" duration="758000" />
       <workItem from="1575870509478" duration="1177000" />
       <workItem from="1575877258354" duration="11269000" />
-      <workItem from="1575978004610" duration="1908000" />
+      <workItem from="1575978004610" duration="2173000" />
+      <workItem from="1576485340105" duration="130000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="561516000" />
+    <option name="totallyTimeSpent" value="561911000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -476,7 +478,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.29597315" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.27315435" />
       <window_info id="Structure" order="1" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
       <window_info id="Favorites" order="2" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -615,13 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2533">
           <caret line="149" selection-start-line="149" selection-end-line="167" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="151" column="25" lean-forward="true" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -824,20 +819,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GestionUserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="72" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="72" />
+        <state relative-caret-position="2465">
+          <caret line="148" column="51" lean-forward="true" selection-start-line="148" selection-start-column="51" selection-end-line="148" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
+    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="204" column="51" selection-start-line="204" selection-start-column="51" selection-end-line="204" selection-end-column="51" />
-          <folding>
-            <element signature="e#43#79#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="652">
+          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -851,23 +843,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GestionUserController.php">
+    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="148" column="51" lean-forward="true" selection-start-line="148" selection-start-column="51" selection-end-line="148" selection-end-column="51" />
+        <state relative-caret-position="340">
+          <caret line="23" column="72" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="253" column="49" lean-forward="true" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
           <folding>
-            <element signature="e#1911#1938#0#PHP" expanded="true" />
+            <element signature="e#43#79#0#PHP" expanded="true" />
+            <element signature="e#6238#6269#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="62" column="14" lean-forward="true" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
+        <state relative-caret-position="544">
+          <caret line="143" column="163" selection-start-line="143" selection-start-column="163" selection-end-line="143" selection-end-column="163" />
         </state>
       </provider>
     </entry>
