@@ -21,6 +21,7 @@
 
     <div class="row">
         <div class="col-md-5">
+
             <h3 class="text-center text-primary">Carte de Madagascar</h3>
 
             <svg id="mysvg" baseprofile="tiny" height="470" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="0 0 1000 1985" width="400" xmlns="http://www.w3.org/2000/svg">
@@ -126,9 +127,24 @@
     </div>
 
     <script src="{{ asset('d3/d3.v3.min.js') }}"></script>
+    <script src="https://ariutta.github.io/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
 
     {#    SCRIPT D'AJOUT DES POINT COLORIE#}
     <script>
+        $(function() {
+            panZoomInstance = svgPanZoom('#mysvg', {
+                zoomEnabled: true,
+                controlIconsEnabled: true,
+                fit: true,
+                center: true,
+                minZoom: 0.1,
+                mouseWheelZoomEnabled: false
+            });
+
+
+
+
+        });
         function nouveauCercle(couleur, cx, cy, idSite)
         {
             var width = cx,
@@ -261,9 +277,9 @@
 
                             tdNumero.innerHTML = "<a href='"+groupe.url+"'>"+groupe.numero+"</a>";
                             tdMarque.innerHTML = groupe.marque;
-                            tdEtat.innerHTML = "<i class='fa fa-circle'></i> "+groupe.etat_groupe.etat;
+                            tdEtat.innerHTML = groupe.etat_groupe.etat;
 
-                            tdEtat.style.color = groupe.etat_groupe.couleur_css;
+                            tdEtat.className = "text-"+groupe.etat_groupe.couleur;
 
                             tr.append(tdNumero);
                             tr.append(tdMarque);
@@ -317,13 +333,7 @@
 
         });
     </script>
-	<script src="https://d3js.org/d3.v4.js"></script>
-	<script>
 
-		var g = d3.select("#myg");
-		g.call(d3.zoom().on("zoom", function () {
-		   g.attr("transform", d3.event.transform)
-		}));
-
-	</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.13/svg.js"></script>
+    <script src="https://d3js.org/d3.v3.js"></script>
 {% endblock %}

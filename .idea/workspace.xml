@@ -37,24 +37,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="253" column="49" lean-forward="true" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
-              <folding>
-                <element signature="e#43#79#0#PHP" expanded="true" />
-                <element signature="e#6238#6269#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="143" column="163" selection-start-line="143" selection-start-column="163" selection-end-line="143" selection-end-column="163" />
+            <state relative-caret-position="306">
+              <caret line="141" column="15" selection-start-line="141" selection-start-column="15" selection-end-line="141" selection-end-column="15" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -194,7 +184,6 @@
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -205,6 +194,7 @@
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig" />
         <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig" />
       </list>
     </option>
   </component>
@@ -302,6 +292,15 @@
               <item name="GroupeBundle" type="462c0819:PsiDirectoryNode" />
               <item name="Resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GroupeBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="carteMadagascar" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -458,12 +457,15 @@
       <workItem from="1575870509478" duration="1177000" />
       <workItem from="1575877258354" duration="11269000" />
       <workItem from="1575978004610" duration="2173000" />
-      <workItem from="1576485340105" duration="130000" />
+      <workItem from="1576485340105" duration="1905000" />
+      <workItem from="1576667823137" duration="182000" />
+      <workItem from="1576829021454" duration="11000" />
+      <workItem from="1578551762230" duration="538000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="561911000" />
+    <option name="totallyTimeSpent" value="564417000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -478,7 +480,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.27315435" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.2852349" />
       <window_info id="Structure" order="1" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
       <window_info id="Favorites" order="2" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -491,7 +493,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32833788" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32833788" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="11" weight="0.4945504" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32833788" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -509,27 +511,6 @@
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/vidange/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="54" column="35" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/VidangeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="76" column="53" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="491">
@@ -714,13 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1921">
@@ -850,21 +824,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitAPIController.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="253" column="49" lean-forward="true" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
+        <state relative-caret-position="4165">
+          <caret line="253" column="49" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
           <folding>
             <element signature="e#43#79#0#PHP" expanded="true" />
-            <element signature="e#6238#6269#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="143" column="163" selection-start-line="143" selection-start-column="163" selection-end-line="143" selection-end-column="163" />
+        <state relative-caret-position="2414">
+          <caret line="142" column="104" selection-start-line="142" selection-start-column="104" selection-end-line="142" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="31" column="53" selection-start-line="31" selection-start-column="53" selection-end-line="31" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="52" column="81" selection-start-line="52" selection-start-column="62" selection-end-line="52" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="141" column="15" selection-start-line="141" selection-start-column="15" selection-end-line="141" selection-end-column="15" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
