@@ -64,7 +64,7 @@
                                 <td class="text-center">{{ produit.alert }}</td>
                                 <td>
                                     <a href="{{ path('produit_show', {'id' : produit.id}) }}" class="btn btn-xs btn-default" title="Afficher les informations et journal du produit"><i class="fa fa-info-circle"></i> Afficher</a>
-                                    {% if app.user|ifRole('ROLE_PROD') %}
+                                    {% if app.user|ifRole('ROLE_PRODUIT') %}
                                         <a href="{{ path('produit_edit', {'id' : produit.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
                                     {% endif %}
                                 </td>
