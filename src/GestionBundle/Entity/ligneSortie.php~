@@ -163,4 +163,28 @@ class ligneSortie
     {
         return $this->sortie;
     }
+
+    /**
+     * Set utilite
+     *
+     * @param string $utilite
+     *
+     * @return ligneSortie
+     */
+    public function setUtilite($utilite)
+    {
+        $this->utilite = $utilite;
+
+        return $this;
+    }
+
+    /**
+     * Get utilite
+     *
+     * @return string
+     */
+    public function getUtilite()
+    {
+        return $this->utilite;
+    }
 }

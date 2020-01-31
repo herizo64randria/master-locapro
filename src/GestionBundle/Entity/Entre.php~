@@ -29,6 +29,13 @@ class Entre
     private $date;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateOperation", type="datetime")
+     */
+    private $dateOperation;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="numero", type="string", length=50, unique=true)

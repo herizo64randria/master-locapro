@@ -29,6 +29,13 @@ class Entre
     private $date;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateOperation", type="datetime")
+     */
+    private $dateOperation;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="numero", type="string", length=50, unique=true)
@@ -104,6 +111,7 @@ class Entre
 
         $this->etat = 'En cour de création';
         $this->modifiable = true;
+        $this->dateOperation = new \DateTime();
     }
 
     /**
@@ -425,5 +433,29 @@ class Entre
     public function getUserRefuser()
     {
         return $this->userRefuser;
+    }
+
+    /**
+     * Set dateOperation
+     *
+     * @param \DateTime $dateOperation
+     *
+     * @return Entre
+     */
+    public function setDateOperation($dateOperation)
+    {
+        $this->dateOperation = $dateOperation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOperation
+     *
+     * @return \DateTime
+     */
+    public function getDateOperation()
+    {
+        return $this->dateOperation;
     }
 }

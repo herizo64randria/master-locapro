@@ -29,6 +29,13 @@ class Deplacement
     private $date;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateOperation", type="datetime")
+     */
+    private $dateOperation;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="numero", type="string", length=255)
@@ -96,6 +103,18 @@ class Deplacement
      */
     private $userRefuser;
 //------------------------------------------////////////////////
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lignedeplacement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->etat = 'En cour de création';
+        $this->modifiable = true;
+        $this->dateOperation = new \DateTime();
+    }
+
     /**
      * Get id
      *
@@ -225,15 +244,7 @@ class Deplacement
     {
         return $this->motif;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->lignedeplacement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->etat = 'En cour de création';
-        $this->modifiable = true;
-    }
+
 
     /**
      * Add lignedeplacement
@@ -421,5 +432,29 @@ class Deplacement
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * Set dateOperation
+     *
+     * @param \DateTime $dateOperation
+     *
+     * @return Deplacement
+     */
+    public function setDateOperation($dateOperation)
+    {
+        $this->dateOperation = $dateOperation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOperation
+     *
+     * @return \DateTime
+     */
+    public function getDateOperation()
+    {
+        return $this->dateOperation;
     }
 }
