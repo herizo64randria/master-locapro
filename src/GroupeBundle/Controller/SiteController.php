@@ -6,6 +6,7 @@ use GroupeBundle\Entity\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Site controller.
@@ -61,6 +62,18 @@ class SiteController extends Controller
             $em->persist($site);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Nouveau site créé: '.$site->getEmplacement());
+            $historiqueGlobal->setLien($this->generateUrl('site_index'));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('site_index');
         }
 
@@ -110,6 +123,18 @@ class SiteController extends Controller
 
             $em->persist($site);
             $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information sur le site: '.$site->getEmplacement().' modifié');
+            $historiqueGlobal->setLien($this->generateUrl('site_index'));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('site_index');
         }

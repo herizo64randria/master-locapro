@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use GroupeBundle\Entity\Groupe;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Entrée controller.
@@ -187,9 +188,19 @@ class SortieController extends Controller
             $em->persist($sortie);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Sortie en stock n° '.$sortie->getNumero().' créé');
+            $historiqueGlobal->setLien($this->generateUrl('sortie_afficher', array('id' => $sortie->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
-
-
         }
 
         return $this->render('@Gestion/Sortie/new.html.twig', array(
@@ -215,13 +226,12 @@ class SortieController extends Controller
         $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
 
 
-
         if($request->getMethod() == 'POST'){
 
             $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
             $sortie->setDate($date);
 
-            if ($sortie->getEtat()=='En attente de confirmation' or $sortie->getEtat()=='Demande confirmée'){
+            if ($sortie->getEtat()=='En attente de confirmation' or $sortie->getEtat()=='Demande confirmé'){
                 $em->flush();
 
                 return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
@@ -255,8 +265,6 @@ class SortieController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
-
-
         }
 
         return $this->render('@Gestion/Sortie/edit.html.twig', array(
@@ -482,6 +490,19 @@ class SortieController extends Controller
         $em->persist($sortie);
         $em->flush();
 
+        // ------------------- HISTORIQUE GLOBAL ---------------------
+
+        $historiqueGlobal = new HistoriqueGlobal();
+        $historiqueGlobal->setUserHistorique($this->getUser());
+        $historiqueGlobal->setLibelle('Sortie en stock n° '.$sortie->getNumero().' confirmé');
+        $historiqueGlobal->setLien($this->generateUrl('sortie_afficher', array('id' => $sortie->getId())));
+
+        $em->persist($historiqueGlobal);
+        $em->flush();
+
+        // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+
         return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
     }
 
@@ -509,6 +530,18 @@ class SortieController extends Controller
 
             $em->persist($sortie);
             $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Sortie en stock n° '.$sortie->getNumero().' refusé');
+            $historiqueGlobal->setLien($this->generateUrl('sortie_afficher', array('id' => $sortie->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
 
@@ -542,6 +575,18 @@ class SortieController extends Controller
 
             $em->persist($sortie);
             $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Sortie en stock n° '.$sortie->getNumero().' clôturé');
+            $historiqueGlobal->setLien($this->generateUrl('sortie_afficher', array('id' => $sortie->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
 

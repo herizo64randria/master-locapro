@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use GestionBundle\Entity\ligneDeplacement;
+use UserBundle\Entity\HistoriqueGlobal;
 
 
 class DeplacementController extends Controller
@@ -241,6 +242,18 @@ class DeplacementController extends Controller
             $em->persist($deplacement);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Transfert de produit n° '.$deplacement->getNumero().' créé');
+            $historiqueGlobal->setLien($this->generateUrl('deplacement_affcher', array('id' => $deplacement->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('deplacement_affcher', array('id' => $deplacement->getId()));
 
         }
@@ -267,8 +280,6 @@ class DeplacementController extends Controller
 
 
         if($request->getMethod() == 'POST'){
-
-
 
             $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
             $deplacement->setDate($date);
@@ -386,6 +397,19 @@ class DeplacementController extends Controller
 
         $em->persist($deplacement);
         $em->flush();
+
+        // ------------------- HISTORIQUE GLOBAL ---------------------
+
+        $historiqueGlobal = new HistoriqueGlobal();
+        $historiqueGlobal->setUserHistorique($this->getUser());
+        $historiqueGlobal->setLibelle('Transfert n° '.$deplacement->getNumero().' confirmé ');
+        $historiqueGlobal->setLien($this->generateUrl('deplacement_affcher', array('id' => $deplacement->getId())));
+
+        $em->persist($historiqueGlobal);
+        $em->flush();
+
+        // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
 
         return $this->redirectToRoute('deplacement_affcher', array('id' => $deplacement->getId()));
     }
@@ -580,6 +604,19 @@ class DeplacementController extends Controller
             $em->persist($deplacement);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Transfert de produit n° '.$deplacement->getNumero().' refusé');
+            $historiqueGlobal->setLien($this->generateUrl('deplacement_affcher', array('id' => $deplacement->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+
             return $this->redirectToRoute('deplacement_affcher', array('id' => $deplacement->getId()));
 
         }
@@ -611,6 +648,19 @@ class DeplacementController extends Controller
 
             $em->persist($deplacement);
             $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Transfert de produit n° '.$deplacement->getNumero().' clôturé');
+            $historiqueGlobal->setLien($this->generateUrl('deplacement_affcher', array('id' => $deplacement->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
 
             return $this->redirectToRoute('deplacement_affcher', array('id' => $deplacement->getId()));
 

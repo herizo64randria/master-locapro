@@ -6,6 +6,7 @@ use FournisseurBundle\Entity\Fournisseur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Fournisseur controller.
@@ -45,6 +46,18 @@ class FournisseurController extends Controller
             $em->persist($fournisseur);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Nouveau fournisseur créé '.$fournisseur->getNom());
+            $historiqueGlobal->setLien($this->generateUrl('fournisseur_show', array('id' => $fournisseur->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('fournisseur_index');
         }
 
@@ -79,9 +92,22 @@ class FournisseurController extends Controller
         $deleteForm = $this->createDeleteForm($fournisseur);
         $editForm = $this->createForm('FournisseurBundle\Form\FournisseurType', $fournisseur);
         $editForm->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du fournisseur  '.$fournisseur->getNom().' modifié');
+            $historiqueGlobal->setLien($this->generateUrl('fournisseur_show', array('id' => $fournisseur->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('fournisseur_edit', array('id' => $fournisseur->getId()));
         }

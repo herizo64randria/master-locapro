@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use UserBundle\Entity\HistoriqueGlobal;
 
 
 /**
@@ -166,6 +167,18 @@ class EntreController extends Controller
             $em->persist($entre);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Entré en stock n° '.$entre->getNumero().' créer');
+            $historiqueGlobal->setLien($this->generateUrl('entre_affcher', array('id' => $entre->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('entre_affcher', array('id' => $entre->getId()));
             
             
@@ -247,6 +260,7 @@ class EntreController extends Controller
         ));
 
     }
+
     /**
      * nouveau entity.
      *
@@ -499,6 +513,18 @@ class EntreController extends Controller
             $em->persist($entre);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Entré en stock n° '.$entre->getNumero().' refusé');
+            $historiqueGlobal->setLien($this->generateUrl('entre_affcher', array('id' => $entre->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('entre_affcher', array('id' => $entre->getId()));
 
         }
@@ -531,81 +557,25 @@ class EntreController extends Controller
             $em->persist($entre);
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Entré en stock n° '.$entre->getNumero().' clôturé');
+            $historiqueGlobal->setLien($this->generateUrl('entre_affcher', array('id' => $entre->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+
             return $this->redirectToRoute('entre_affcher', array('id' => $entre->getId()));
 
         }
 
         return $this->redirectToRoute('entre_affcher', array('id' => $entre->getId()));
 
-    }
-    /**
-     * nouveau entity.
-     *
-     * @Route("/{id}2L55/enregistrer1-entrer", name="entre1_enregistrer")
-     */
-    public function enregistrer1Action(Request $request, Entre $entre){
-        if(! $entre->getModifiable())
-            throw new Exception('Erreur! Ce document est déjà enregistré');
-
-        //Initialisation
-        $em = $this->getDoctrine()->getManager();
-        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
-
-        $serviceProduit = new ProduitService($em);
-
-        foreach ($entre->getLigneEntres() as $ligneEntre){
-
-            //--------HISTORIQUE DU PRODUIT------------
-            $historiqueProduit = new HistoriqueProduit();
-
-            $historiqueProduit->setType('credit');
-            $historiqueProduit->setProduit($ligneEntre->getProduit());
-            $historiqueProduit->setEntre($entre);
-            $historiqueProduit->setDepot($entre->getDepot());
-            $historiqueProduit->setDate($entre->getDate());
-            $historiqueProduit->setQuantite($ligneEntre->getQuantite());
-
-            $em->persist($historiqueProduit);
-
-            //--------------------------------------------
-
-            //-----------------ENTREE DANS LE STOCK-----------------
-
-            $stock = $repositoryStock->findOneBy(array(
-                'produit' => $historiqueProduit->getProduit(),
-                'depot' => $historiqueProduit->getDepot()
-            ));
-
-            if(!$stock){
-                $stock = new Stock_();
-                $stock->setDepot($historiqueProduit->getDepot());
-                $stock->setProduit($historiqueProduit->getProduit());
-                $stock->setQuantite(0);
-            }
-
-            $quantite = $stock->getQuantite() + $historiqueProduit->getQuantite();
-            $stock->setQuantite($quantite);
-
-            $em->persist($stock);
-            $em->flush();
-            //------------------------------------------------
-
-            //--------UPDATE STOCK TOTAL-----------------
-            $produit = $historiqueProduit->getProduit();
-            $serviceProduit->updateStockTotal($produit);
-            $em->flush();
-
-        }
-
-//        MODIFICATION DU ENTRE
-        $entre->setEtat(self::ETAT_ENREGISTRER);
-        $entre->setModifiable(false);
-        $em->persist($entre);
-
-        $em->flush();
-
-
-        return $this->redirectToRoute('entre_affcher', array('id' => $entre->getId()));
     }
 
 

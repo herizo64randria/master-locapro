@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Services\GroupeService;
-
+use UserBundle\Entity\HistoriqueGlobal;
 
 
 /**
@@ -164,6 +164,18 @@ class GroupeController extends Controller
 
             $em->persist($groupe);
             $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Nouveau groupe créé: '.$groupe->getNumero());
+            $historiqueGlobal->setLien($this->generateUrl('groupe_show', array('id' => $groupe->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('groupe_show', array('id' => $groupe->getId()));
         }
