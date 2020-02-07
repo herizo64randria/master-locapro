@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Services\UploadService;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Catalogue controller.
@@ -35,6 +36,18 @@ class CatalogueController extends Controller
 
             $em->persist($catalogue);
             $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Ajout d\'un nouveau catalogue'.$catalogue->getTitre());
+            $historiqueGlobal->setLien($this->generateUrl('catalogue_show', array('id' => $catalogue->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('catalogue_edit', array('id' =>  $catalogue->getId()));
         }
@@ -102,10 +115,33 @@ class CatalogueController extends Controller
                     $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
                     $pjcatalogue->setExt(strtolower($ext));
                     $em->merge($pjcatalogue);
+
+                    // ------------------- HISTORIQUE GLOBAL ---------------------
+
+                    $historiqueGlobal = new HistoriqueGlobal();
+                    $historiqueGlobal->setUserHistorique($this->getUser());
+                    $historiqueGlobal->setLibelle('Ajout d\'un nouveau catalogue'.$pjcatalogue->getNom());
+                    $historiqueGlobal->setLien($this->generateUrl('catalogue_show', array('id' => $pjcatalogue->getCatalogue()->getId())));
+
+                    $em->persist($historiqueGlobal);
+
+
+                    // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
                     $em->flush();
                 }
             }
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du pièce jointe catalogue'.$pjcatalogue->getNom().modifié);
+            $historiqueGlobal->setLien($this->generateUrl('catalogue_show', array('id' => $pjcatalogue->getCatalogue()->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             return $this->redirectToRoute('catalogue_show',array('id'=>$pjcatalogue->getCatalogue()->getId()));
 
         }
@@ -139,6 +175,18 @@ class CatalogueController extends Controller
                     $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
                     $pjcatalogue->setExt(strtolower($ext));
                     $pjcatalogue->setCatalogue($catalogue);
+
+                    // ------------------- HISTORIQUE GLOBAL ---------------------
+
+                    $historiqueGlobal = new HistoriqueGlobal();
+                    $historiqueGlobal->setUserHistorique($this->getUser());
+                    $historiqueGlobal->setLibelle('Ajout d\'un nouveau catalogue'.$pjcatalogue->getNom());
+                    $historiqueGlobal->setLien($this->generateUrl('catalogue_show', array('id' => $pjcatalogue->getCatalogue()->getId())));
+
+                    $em->persist($historiqueGlobal);
+
+
+                    // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
                     $em->persist($pjcatalogue);
 
                 }
@@ -146,6 +194,17 @@ class CatalogueController extends Controller
             }
 
             $em->flush();
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du catalogue'.$catalogue->getTitre().modifié);
+            $historiqueGlobal->setLien($this->generateUrl('catalogue_show', array('id' => $catalogue->getCatalogue()->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             return $this->redirectToRoute('catalogue_show', array('id' => $catalogue->getId()));
         }
 
@@ -165,6 +224,18 @@ class CatalogueController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($pjcatalogue);
+
+        // ------------------- HISTORIQUE GLOBAL ---------------------
+
+        $historiqueGlobal = new HistoriqueGlobal();
+        $historiqueGlobal->setUserHistorique($this->getUser());
+        $historiqueGlobal->setLibelle('Supprimer le piece joint catalogue'.$pjcatalogue->getNom());
+        $historiqueGlobal->setLien($this->generateUrl('catalogue_show', array('id' => $pjcatalogue->getCatalogue()->getId())));
+
+        $em->persist($historiqueGlobal);
+
+
+        // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
         $em->flush();
         return $this->redirectToRoute('catalogue_show',array('id'=>$pjcatalogue->getCatalogue()->getId()));
 

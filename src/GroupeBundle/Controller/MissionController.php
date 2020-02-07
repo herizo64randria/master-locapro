@@ -14,6 +14,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Site controller.
@@ -38,13 +39,24 @@ class MissionController extends Controller
             $mission->setDateFin(\DateTime::createFromFormat('d/m/Y', $_POST['dateFinMission']));
 
             if (isset($_POST['descriptionMission']))
-                $mission->setDescription($_POST['descriptionMission'])
-            ;
+                $mission->setDescription($_POST['descriptionMission']);
 
             $mission->setSite($probleme->getGroupe()->getSite());
             $mission->setProbleme($probleme);
 
             $em->persist($mission);
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Ajout du mission'.$mission->getNoteFin());
+            $historiqueGlobal->setLien($this->generateUrl('mission_show', array('id' => $mission->getId())));
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             $em->flush();
 
             return $this->redirectToRoute('mission_show', array('id' => $mission->getId()));
