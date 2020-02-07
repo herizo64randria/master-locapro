@@ -36,7 +36,7 @@
     <favorites_list name="stock" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -432,11 +432,12 @@
       <workItem from="1580452238709" duration="13031000" />
       <workItem from="1580706873843" duration="15683000" />
       <workItem from="1580792853121" duration="1170000" />
+      <workItem from="1580795637533" duration="6000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="598498000" />
+    <option name="totallyTimeSpent" value="598504000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -450,7 +451,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.23154363" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.23489933" />
       <window_info id="Structure" order="1" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
       <window_info id="Favorites" order="2" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
       <window_info anchor="bottom" id="Message" order="0" />
