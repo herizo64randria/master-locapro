@@ -108,6 +108,11 @@ class Probleme
      */
     private $depenses; // Notez le « s », un stocks est liée à plusieurs ligne
 
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\solutionProbleme", mappedBy="probleme")
+     */
+    private $ligneSolutions; // Notez le « s », un stocks est liée à plusieurs ligne
+
     //---------------------------------------------------------
 
 

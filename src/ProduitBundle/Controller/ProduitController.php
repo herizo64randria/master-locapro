@@ -113,7 +113,7 @@ class ProduitController extends Controller
 
             $historiqueGlobal = new HistoriqueGlobal();
             $historiqueGlobal->setUserHistorique($this->getUser());
-            $historiqueGlobal->setLibelle('Information du fournisseur  '.$produit->getDesignation().' modifié');
+            $historiqueGlobal->setLibelle('Information sur le produit '.$produit->getDesignation().' modifié');
             $historiqueGlobal->setLien($this->generateUrl('produit_show', array('id' => $produit->getId())));
 
             $em->persist($historiqueGlobal);

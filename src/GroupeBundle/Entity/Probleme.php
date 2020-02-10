@@ -108,6 +108,11 @@ class Probleme
      */
     private $depenses; // Notez le « s », un stocks est liée à plusieurs ligne
 
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\solutionProbleme", mappedBy="probleme")
+     */
+    private $ligneSolutions; // Notez le « s », un stocks est liée à plusieurs ligne
+
     //---------------------------------------------------------
 
 
@@ -449,5 +454,39 @@ class Probleme
     public function getDepenses()
     {
         return $this->depenses;
+    }
+
+    /**
+     * Add ligneSolution
+     *
+     * @param \GroupeBundle\Entity\solutionProbleme $ligneSolution
+     *
+     * @return Probleme
+     */
+    public function addLigneSolution(\GroupeBundle\Entity\solutionProbleme $ligneSolution)
+    {
+        $this->ligneSolutions[] = $ligneSolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove ligneSolution
+     *
+     * @param \GroupeBundle\Entity\solutionProbleme $ligneSolution
+     */
+    public function removeLigneSolution(\GroupeBundle\Entity\solutionProbleme $ligneSolution)
+    {
+        $this->ligneSolutions->removeElement($ligneSolution);
+    }
+
+    /**
+     * Get ligneSolutions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLigneSolutions()
+    {
+        return $this->ligneSolutions;
     }
 }

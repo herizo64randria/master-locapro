@@ -133,6 +133,8 @@ class ProblemeController extends Controller
             //NEXT NUMERO
             $this->nextNumero($em);
 
+            $em->flush();
+
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             $historiqueGlobal = new HistoriqueGlobal();
@@ -141,7 +143,6 @@ class ProblemeController extends Controller
             $historiqueGlobal->setLien($this->generateUrl('probleme_show', array('id' => $probleme->getId())));
 
             $em->persist($historiqueGlobal);
-
 
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             $em->flush();
