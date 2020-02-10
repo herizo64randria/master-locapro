@@ -12,6 +12,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use UserBundle\Entity\HistoriqueGlobal;
 
 
 /**
@@ -132,6 +133,17 @@ class ProblemeController extends Controller
             //NEXT NUMERO
             $this->nextNumero($em);
 
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Ajout du problème'.$probleme->getNumero());
+            $historiqueGlobal->setLien($this->generateUrl('probleme_show', array('id' => $probleme->getId())));
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             $em->flush();
 
             return $this->redirectToRoute('probleme_show', array('id' => $probleme->getId()));
@@ -197,6 +209,19 @@ class ProblemeController extends Controller
             $probleme->setUserSolution($this->getUser());
 
             $em->persist($probleme);
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Ajout solution du problème:'.$probleme->getSolution() );
+            $historiqueGlobal->setLien($this->generateUrl('probleme_show', array('id' => $probleme->getId())));
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             $em->flush();
 
             return $this->redirectToRoute('probleme_show', array('id' => $probleme->getId()));
@@ -230,6 +255,17 @@ class ProblemeController extends Controller
             }
 
             $em->persist($probleme);
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Changer l\'etat problème:'.$probleme->getEtat() );
+            $historiqueGlobal->setLien($this->generateUrl('probleme_show', array('id' => $probleme->getId())));
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             $em->flush();
 
             return $this->redirectToRoute('probleme_show', array('id' => $probleme->getId()));

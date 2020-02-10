@@ -1,191 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" line="58" />
-    <bookmark url="file://$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login_content.html.twig" line="120" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="090ea0a2-f651-45aa-b533-231de4716d4d" name="Default Changelist" comment="" />
+    <list default="true" id="99f2bbc0-d5ce-4396-83ca-3c417a396fd5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueGlobalRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_13_08_19_11_14_s.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/stock.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/CatalogueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/CatalogueController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/DepenseHissabController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/DepenseHissabController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/DeplacementGroupeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/DeplacementGroupeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/ListePieceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/ListePieceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/MissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/MissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/SuiviPieceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/SuiviPieceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/VidangeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/VidangeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/HistoriqueGlobal.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/HistoriqueGlobal.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
     </execution>
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="stock" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>entre.</find>
-      <find>bon de</find>
-      <find>sortiee</find>
-      <find>numeral</find>
-      <find>selected</find>
-      <find>GESTION_GRP</find>
-      <find>GRP</find>
-      <find>'required'</find>
-      <find>moteur_</find>
-      <find>m</find>
-      <find>moteur</find>
-      <find>signaler</find>
-      <find>signalerA</find>
-      <find>modal</find>
-      <find>modalRefuserentre</find>
-      <find>danger</find>
-      <find>Refuser</find>
-      <find>modalClotureEntre</find>
-      <find>modalCloturerEntre</find>
-      <find>text</find>
-      <find>warnig</find>
-      <find>modalCloturerTransfertt</find>
-      <find>sorti</find>
-      <find>/FATEMI/web</find>
-      <find>ROLE_PROD</find>
-      <find>const</find>
-      <find>$historiqueGlobal-&gt;setlib</find>
-      <find>entre1_enre</find>
-      <find>entre1</find>
-      <find>entre</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>text</replace>
-      <replace>ROLE_SORTIE</replace>
-      <replace>ROLE_RESP_GRP</replace>
-      <replace>ROLE_PIECE</replace>
-      <replace>ROLE_ETAT_GRP</replace>
-      <replace>name=&quot;roles[]&quot; value=</replace>
-      <replace>&lt;input</replace>
-      <replace>&lt;input class=&quot;inputChk&quot;</replace>
-      <replace>$dateFin</replace>
-      <replace>sortie.</replace>
-      <replace>alternateur_</replace>
-      <replace>alternateur</replace>
-      <replace>Cloturer</replace>
-      <replace>textRefuser</replace>
-      <replace>warning</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>C:\xampp\htdocs\stock\src\GroupeBundle\Resources</dir>
-      <dir>C:\xampp\htdocs\stock\src</dir>
-      <dir>C:\xampp\htdocs\stock\src\GestionBundle</dir>
-      <dir>C:\xampp\htdocs\stock\src\GestionBundle\Resources\views</dir>
-    </dirStrings>
-  </component>
-  <component name="FrameworkCommandLineHistory">
-    <commandsHistory>
-      <command text="s doctrine:database:create" />
-      <command text="s doctrine:schema:update --dump-sql --force " />
-      <command text="s fos:user:promote " />
-      <command text="s debug:router " />
-      <command text="s doctrine:database:create" />
-      <command text="s doctrine:generate:entities GestionBundle" />
-      <command text="s doctrine:schema:update --dump-sql --force " />
-      <command text="s doctrine:generate:entities GestionBundle" />
-      <command text="s doctrine:schema:update --dump-sql --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:database:create" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities DocumentBundle" />
-      <command text="s doctrine:generate:entities GestionBundle" />
-      <command text="s doctrine:schema:update --dump-sql --force " />
-      <command text="s doctrine:generate:entities UserBundle" />
-    </commandsHistory>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureAll.html.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission/modalPersonne.html.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalDepense.html.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/imprimer.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/ListeEtatGroupe.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Vidange.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/vidange/modalVidange.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/VidangeController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/vidange/modalVidangeModifier.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/vidange/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/index.html.twig" />
-        <option value="$USER_HOME$/Desktop/Temp/mada/mg.svg" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" />
-        <option value="$USER_HOME$/Desktop/Temp/mada/index.html" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Form/GroupeType.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Alternateur.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Moteur.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php" />
-        <option value="$USER_HOME$/AppData/Roaming/Output Messenger/DGAAA/Received Files/pointColor.html" />
-        <option value="$PROJECT_DIR$/web/d3/d3.v3.min.js" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalEnCour.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalChangerEtat.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" />
-        <option value="$PROJECT_DIR$/src/UserBundle/Entity/HistoriqueGlobal.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" />
-        <option value="$PROJECT_DIR$/src/FournisseurBundle/Controller/FournisseurController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php" />
-      </list>
-    </option>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -243,59 +95,21 @@
     <option name="width" value="1280" />
     <option name="height" value="550" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stock" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stock" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stock" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\heureMarche" />
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\addHeureSolo.html.twig" />
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\vidange" />
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views" />
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\historiqueEtatGroupe" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\probleme" />
-      <recent name="C:\xampp\htdocs\stock\web" />
-      <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Resources\views\Sortie" />
-      <recent name="C:\xampp\htdocs\stock\web\images" />
-      <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Resources\views\Entre" />
-    </key>
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -314,532 +128,43 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="090ea0a2-f651-45aa-b533-231de4716d4d" name="Default Changelist" comment="" />
-      <created>1565684008755</created>
+      <changelist id="99f2bbc0-d5ce-4396-83ca-3c417a396fd5" name="Default Changelist" comment="" />
+      <created>1581319688607</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1565684008755</updated>
-      <workItem from="1565684010153" duration="11121000" />
-      <workItem from="1565760601193" duration="8291000" />
-      <workItem from="1565770273091" duration="44000" />
-      <workItem from="1565770358637" duration="4090000" />
-      <workItem from="1565780687658" duration="1438000" />
-      <workItem from="1565782446754" duration="8406000" />
-      <workItem from="1565932659724" duration="23490000" />
-      <workItem from="1566191137040" duration="10206000" />
-      <workItem from="1566213332864" duration="1703000" />
-      <workItem from="1566215666237" duration="2334000" />
-      <workItem from="1566277261683" duration="6875000" />
-      <workItem from="1566290159382" duration="1244000" />
-      <workItem from="1566297937448" duration="34000" />
-      <workItem from="1566365263302" duration="16870000" />
-      <workItem from="1566395616368" duration="642000" />
-      <workItem from="1566453991764" duration="603000" />
-      <workItem from="1566460126668" duration="11109000" />
-      <workItem from="1566537362708" duration="208000" />
-      <workItem from="1566542557941" duration="12941000" />
-      <workItem from="1566796004433" duration="644000" />
-      <workItem from="1566814512744" duration="3349000" />
-      <workItem from="1566881970648" duration="8186000" />
-      <workItem from="1566901364372" duration="8314000" />
-      <workItem from="1566996398835" duration="139000" />
-      <workItem from="1567056334289" duration="12501000" />
-      <workItem from="1567141590459" duration="9303000" />
-      <workItem from="1567171454009" duration="598000" />
-      <workItem from="1567403106292" duration="33000" />
-      <workItem from="1567403161937" duration="729000" />
-      <workItem from="1567409898575" duration="4979000" />
-      <workItem from="1567491446257" duration="1201000" />
-      <workItem from="1567574231973" duration="8960000" />
-      <workItem from="1567662116061" duration="1201000" />
-      <workItem from="1567665279951" duration="598000" />
-      <workItem from="1567679046105" duration="4433000" />
-      <workItem from="1567690749982" duration="69000" />
-      <workItem from="1568704574483" duration="1168000" />
-      <workItem from="1568706253784" duration="9254000" />
-      <workItem from="1568783623622" duration="18567000" />
-      <workItem from="1568870382522" duration="626000" />
-      <workItem from="1568871507191" duration="1700000" />
-      <workItem from="1568875931471" duration="13745000" />
-      <workItem from="1568956316461" duration="17945000" />
-      <workItem from="1569216735745" duration="8894000" />
-      <workItem from="1569244608801" duration="441000" />
-      <workItem from="1569302012828" duration="1615000" />
-      <workItem from="1569388782846" duration="14572000" />
-      <workItem from="1569477175819" duration="12631000" />
-      <workItem from="1569565829068" duration="2064000" />
-      <workItem from="1569572425354" duration="3324000" />
-      <workItem from="1569580333550" duration="285000" />
-      <workItem from="1571051367748" duration="4943000" />
-      <workItem from="1571118419442" duration="3396000" />
-      <workItem from="1571202929645" duration="12091000" />
-      <workItem from="1571291018910" duration="9324000" />
-      <workItem from="1571376609288" duration="3223000" />
-      <workItem from="1571380759281" duration="401000" />
-      <workItem from="1571381345647" duration="169000" />
-      <workItem from="1571383168915" duration="16304000" />
-      <workItem from="1571635711183" duration="14547000" />
-      <workItem from="1571661198579" duration="2792000" />
-      <workItem from="1571721145139" duration="1072000" />
-      <workItem from="1571729109428" duration="9039000" />
-      <workItem from="1571808262326" duration="4575000" />
-      <workItem from="1571895025528" duration="8432000" />
-      <workItem from="1572248486882" duration="179000" />
-      <workItem from="1572249013701" duration="3516000" />
-      <workItem from="1572265097539" duration="1597000" />
-      <workItem from="1572509438474" duration="3124000" />
-      <workItem from="1572847694560" duration="1598000" />
-      <workItem from="1572858050351" duration="3824000" />
-      <workItem from="1572931432510" duration="1797000" />
-      <workItem from="1572938797945" duration="10921000" />
-      <workItem from="1573022178488" duration="6629000" />
-      <workItem from="1573037733216" duration="3533000" />
-      <workItem from="1573104717017" duration="10747000" />
-      <workItem from="1573193610935" duration="10550000" />
-      <workItem from="1573538927096" duration="436000" />
-      <workItem from="1573539381679" duration="13280000" />
-      <workItem from="1573623584953" duration="1196000" />
-      <workItem from="1573630966316" duration="599000" />
-      <workItem from="1573642272600" duration="3332000" />
-      <workItem from="1573712337534" duration="5418000" />
-      <workItem from="1573794699798" duration="17832000" />
-      <workItem from="1574053868829" duration="591000" />
-      <workItem from="1574058353494" duration="13567000" />
-      <workItem from="1574140193374" duration="11126000" />
-      <workItem from="1574230868290" duration="9309000" />
-      <workItem from="1574257765563" duration="592000" />
-      <workItem from="1574316641633" duration="1327000" />
-      <workItem from="1574321700917" duration="1110000" />
-      <workItem from="1574331200166" duration="2331000" />
-      <workItem from="1574337908805" duration="4600000" />
-      <workItem from="1574399845501" duration="10493000" />
-      <workItem from="1574668661035" duration="2827000" />
-      <workItem from="1574682175436" duration="55000" />
-      <workItem from="1574684460331" duration="2875000" />
-      <workItem from="1575639498624" duration="1468000" />
-      <workItem from="1575868749195" duration="758000" />
-      <workItem from="1575870509478" duration="1177000" />
-      <workItem from="1575877258354" duration="11269000" />
-      <workItem from="1575978004610" duration="2173000" />
-      <workItem from="1576485340105" duration="1905000" />
-      <workItem from="1576667823137" duration="182000" />
-      <workItem from="1576829021454" duration="11000" />
-      <workItem from="1578551762230" duration="538000" />
-      <workItem from="1578565749659" duration="2667000" />
-      <workItem from="1578902859787" duration="68000" />
-      <workItem from="1579852160611" duration="964000" />
-      <workItem from="1579864396627" duration="498000" />
-      <workItem from="1580452238709" duration="13031000" />
-      <workItem from="1580706873843" duration="15683000" />
-      <workItem from="1580792853121" duration="1170000" />
-      <workItem from="1580795637533" duration="6000" />
+      <updated>1581319688607</updated>
+      <workItem from="1581319696058" duration="127000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="598504000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="127000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989858" visible="true" weight="0.23489933" />
-      <window_info id="Structure" order="1" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
-      <window_info id="Favorites" order="2" sideWeight="0.5010142" side_tool="true" weight="0.29597315" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32833788" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32833788" />
-      <window_info anchor="bottom" id="Command Line Tools Console" order="11" weight="0.4945504" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32833788" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Form/GroupeType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission/modalMission.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="40" selection-start-line="40" selection-end-line="46" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Entity/Alternateur.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Entity/Moteur.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2533">
-          <caret line="149" selection-start-line="149" selection-end-line="167" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="56" column="54" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="108" column="64" selection-start-line="108" selection-start-column="64" selection-end-line="108" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Entity/ListeEtatGroupe.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret column="5" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Output Messenger/DGAAA/Received Files/pointColor.html" />
-    <entry file="file://$PROJECT_DIR$/web/d3/d3.v3.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="23554" selection-start-line="4" selection-start-column="23554" selection-end-line="4" selection-end-column="23554" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalSolution.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3723">
-          <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalChangerEtat.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
-          <caret line="28" column="77" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
-          <caret line="3" column="77" selection-start-line="3" selection-start-column="77" selection-end-line="3" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show1.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3978">
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6035">
-          <caret line="355" selection-start-line="355" selection-end-line="355" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="163" column="22" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/js/bootstrap-datetimepicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="143" column="47" selection-start-line="143" selection-start-column="47" selection-end-line="143" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/js/moment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="358" column="11" selection-start-line="358" selection-start-column="11" selection-end-line="358" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/d3/d3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="5816" column="5" selection-start-line="5816" selection-start-column="5" selection-end-line="5816" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="72" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitAPIController.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2414">
-          <caret line="142" column="104" selection-start-line="142" selection-start-column="104" selection-end-line="142" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3570">
-          <caret line="210" column="27" lean-forward="true" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-          <caret line="27" column="61" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/user/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="86" column="54" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
-          <folding>
-            <element signature="n#style#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GestionUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="67" column="56" selection-start-line="67" selection-start-column="56" selection-end-line="67" selection-end-column="56" />
-          <folding>
-            <element signature="e#1911#1938#0#PHP" expanded="true" />
-            <element signature="e#3861#3887#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="106" selection-start-line="106" selection-end-line="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="114" column="47" selection-start-line="114" selection-start-column="47" selection-end-line="114" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="113" column="47" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="128" column="47" selection-start-line="128" selection-start-column="47" selection-end-line="128" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="539" column="20" selection-start-line="539" selection-start-column="20" selection-end-line="539" selection-end-column="20" />
-          <folding>
-            <element signature="e#7534#7565#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="631" column="20" selection-start-line="631" selection-start-column="20" selection-end-line="631" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Entity/HistoriqueGlobal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="588" column="88" lean-forward="true" selection-start-line="578" selection-start-column="11" selection-end-line="588" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FournisseurBundle/Controller/FournisseurController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="109" column="88" lean-forward="true" selection-start-line="99" selection-start-column="12" selection-end-line="109" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="890">
-          <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
-          <folding>
-            <element signature="e#679#709#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="6" lean-forward="true" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-          <folding>
-            <element signature="e#43#79#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

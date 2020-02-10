@@ -3,12 +3,13 @@
 namespace ProduitBundle\Controller;
 
 use AppBundle\Services\ProduitService;
+use HistoriqueGlobalBundle\Entity\Historique_Global;
 use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
+use UserBundle\Entity\HistoriqueGlobal;
 /**
  * Produit controller.
  *
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ProduitController extends Controller
 {
+
+   
     /**
      * Lists all produit entities.
      *
@@ -51,6 +54,18 @@ class ProduitController extends Controller
             $em->persist($produit);
             $em->flush();
 
+           // ---HISTORIQUE GLOBAL-----
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setLibelle('Ajout d\'un nouveau produit '.$produit->getDesignation());
+            $historiqueGlobal->setDate(new \DateTime());
+            $historiqueGlobal->setLien($this->generateUrl('produit_show', array('id' =>$produit->getId() )));
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            //---HISTORIQUE GLOBAL-----
+
             return $this->redirectToRoute('produit_show', array('id' => $produit->getId()));
         }
 
@@ -58,6 +73,7 @@ class ProduitController extends Controller
             'produit' => $produit,
             'form' => $form->createView(),
         ));
+
     }
 
     /**
@@ -88,9 +104,22 @@ class ProduitController extends Controller
         $deleteForm = $this->createDeleteForm($produit);
         $editForm = $this->createForm('ProduitBundle\Form\ProduitType', $produit);
         $editForm->handleRequest($request);
+        $em=$this->getDoctrine()->getManager();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du fournisseur  '.$produit->getDesignation().' modifié');
+            $historiqueGlobal->setLien($this->generateUrl('produit_show', array('id' => $produit->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
         }

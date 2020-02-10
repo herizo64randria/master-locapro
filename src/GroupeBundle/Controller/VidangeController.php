@@ -12,6 +12,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Site controller.
@@ -51,6 +52,17 @@ class VidangeController extends Controller
             $em->persist($vidange);
             $em->persist($historiqueGroupe);
             $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Nouveau viange: '. $vidange->getType());
+            $historiqueGlobal->setLien($this->generateUrl('vidange_show',array('id'=>$vidange->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('groupe_show', array('id' => $groupe->getId()));
 
@@ -116,6 +128,18 @@ class VidangeController extends Controller
             $em->persist($historiqueGroupe);
             $em->flush();
 
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du vidange: '. $vidange->getType().'modifié');
+            $historiqueGlobal->setLien($this->generateUrl('vidange_show',array('id'=>$vidange->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('vidange_show', array('id' => $vidange->getId()));
         }
 
@@ -143,6 +167,7 @@ class VidangeController extends Controller
             $suivi->setDate($vidange->getDate());
 
             //---------SET VIDANGE---------
+
             $suivi->setVidange($vidange);
 
             $typePiece = $em->getRepository('GroupeBundle:ListePiece')->findOneBy(
@@ -152,8 +177,7 @@ class VidangeController extends Controller
             $suivi->setTypePiece($typePiece);
 
             if (isset($_POST['descriptionSuivi']))
-                $suivi->setDescription($_POST['descriptionSuivi'])
-                ;
+                $suivi->setDescription($_POST['descriptionSuivi']);
 
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setDate($suivi->getDate());
@@ -170,7 +194,4 @@ class VidangeController extends Controller
 
         throw new Exception('Erreur! 404 NOT-FOUND');
     }
-
-
-
 }

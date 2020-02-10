@@ -6,6 +6,7 @@ use GroupeBundle\Entity\ListePiece;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Listepiece controller.
@@ -47,7 +48,17 @@ class ListePieceController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($listePiece);
             $em->flush();
+            // ------------------- HISTORIQUE GLOBAL ---------------------
 
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Ajout d\'un nouveau piece'.$listePiece->getNom());
+            $historiqueGlobal->setLien($this->generateUrl('listepiece_show', array('id' => $listePiece->getId())));
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             return $this->redirectToRoute('listepiece_index');
         }
 
@@ -87,7 +98,19 @@ class ListePieceController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
 
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du pièce'.$listePiece->getNom().' modifié');
+            $historiqueGlobal->setLien($this->generateUrl('listepiece_show', array('id' => $listePiece->getId())));
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             return $this->redirectToRoute('listepiece_index');
         }
 
@@ -112,6 +135,17 @@ class ListePieceController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($listePiece);
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Supprimer pièce'.$listePiece->getNom());
+
+            $em->persist($historiqueGlobal);
+
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             $em->flush();
         }
 

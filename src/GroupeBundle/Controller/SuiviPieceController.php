@@ -10,6 +10,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\HistoriqueGlobal;
 
 /**
  * Site controller.
@@ -54,6 +55,17 @@ class SuiviPieceController extends Controller
             $em->persist($historiqueGroupe);
 
             $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Suivi du pièce: '. $suivi->getLibelle());
+            $historiqueGlobal->setLien($this->generateUrl('suivi_piece_show',array('id'=>$suivi->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('groupe_show', array('id' => $groupe->getId()));
 
@@ -120,6 +132,16 @@ class SuiviPieceController extends Controller
             $em->persist($historiqueGroupe);
 
             $em->flush();
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().'modifié');
+            $historiqueGlobal->setLien($this->generateUrl('suivi_piece_show',array('id'=>$suivi->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('suivi_piece_show', array('id' => $suivi->getId()));
         }
@@ -148,6 +170,15 @@ class SuiviPieceController extends Controller
         $em->remove($historiqueGroupe);
 
         $em->flush();
+        // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+        $historiqueGlobal = new HistoriqueGlobal();
+        $historiqueGlobal->setUserHistorique($this->getUser());
+        $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().'supprimé');
+
+        $em->persist($historiqueGlobal);
+        $em->flush();
+
+        // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
         return $this->redirectToRoute('groupe_show', array('id' => $groupe->getId()));
     }

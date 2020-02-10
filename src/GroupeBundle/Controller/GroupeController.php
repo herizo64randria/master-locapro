@@ -260,6 +260,18 @@ class GroupeController extends Controller
 
             $em->flush();
 
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information du groupe  '.$groupe->getNumero().' modifié');
+            $historiqueGlobal->setLien($this->generateUrl('groupe_show', array('id' => $groupe->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
             return $this->redirectToRoute('groupe_show', array('id' => $groupe->getId()));
         }
 
