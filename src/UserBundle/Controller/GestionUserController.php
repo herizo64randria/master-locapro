@@ -2,7 +2,9 @@
 
 namespace UserBundle\Controller;
 
+use AppBundle\Services\UploadService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,7 +48,7 @@ class GestionUserController extends Controller
      *
      * @Route("/modifier-users/FCA25{id}32", name="utilisateur_edit")
      */
-    public function editAction(Request $request,User $user)
+    public function editAction(Request $request, User $user)
     {
 
         if($request->getMethod()=='POST')
@@ -63,13 +65,27 @@ class GestionUserController extends Controller
                 $user->setRoles(array($_POST['role']));
             }
 
-
             $user->setNom($_POST['nom']);
             if (!$_POST['passeword']=='•••••••••••••••')
                 $user->setPlainPassword($_POST['passeword']);
 
             $user->setEmail($_POST['email']);
             $user->setEnabled(true);
+
+
+            if($_FILES['image']['size'] > 0){
+
+                $uploadService = new UploadService();
+
+                if($image = $uploadService->uploadSimpleFichier('UserImage', 'UserImage', 'image')){
+                    $user->setUrlImg($image);
+
+
+                }else{
+                    return new Response('Erreur! Erreur dans le téléchargement de l\'images..');
+                }
+            }
+
             $userManager->updateUser($user);
         }
         return $this->render('@User/user/edit.html.twig', array(
@@ -83,8 +99,6 @@ class GestionUserController extends Controller
      */
     public function desactiverAction(Request $request,User $user)
     {
-
-
             $userManager = $this->get('fos_user.user_manager');
 
             $user->setEnabled(false);

@@ -113,9 +113,12 @@ class Probleme
      */
     private $ligneSolutions; // Notez le « s », un stocks est liée à plusieurs ligne
 
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\problemePhoto", mappedBy="probleme")
+     */
+    private $problemePhotos; // Notez le « s », un stocks est liée à plusieurs ligne
+
     //---------------------------------------------------------
-
-
 
     /**
      * Get id
@@ -488,5 +491,39 @@ class Probleme
     public function getLigneSolutions()
     {
         return $this->ligneSolutions;
+    }
+
+    /**
+     * Add problemePhoto
+     *
+     * @param \GroupeBundle\Entity\problemePhoto $problemePhoto
+     *
+     * @return Probleme
+     */
+    public function addProblemePhoto(\GroupeBundle\Entity\problemePhoto $problemePhoto)
+    {
+        $this->problemePhotos[] = $problemePhoto;
+
+        return $this;
+    }
+
+    /**
+     * Remove problemePhoto
+     *
+     * @param \GroupeBundle\Entity\problemePhoto $problemePhoto
+     */
+    public function removeProblemePhoto(\GroupeBundle\Entity\problemePhoto $problemePhoto)
+    {
+        $this->problemePhotos->removeElement($problemePhoto);
+    }
+
+    /**
+     * Get problemePhotos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProblemePhotos()
+    {
+        return $this->problemePhotos;
     }
 }

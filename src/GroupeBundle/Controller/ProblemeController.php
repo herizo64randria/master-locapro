@@ -2,17 +2,23 @@
 
 namespace GroupeBundle\Controller;
 
+use AppBundle\Services\UploadService;
 use Doctrine\Common\Persistence\ObjectManager;
 use GestionBundle\Entity\NumDoc;
 use GroupeBundle\Entity\HistoriqueEtat;
 use GroupeBundle\Entity\HistoriqueGroupe;
 use GroupeBundle\Entity\Probleme;
+use GroupeBundle\Entity\problemePhoto;
+use GroupeBundle\Entity\solutionProbleme;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use UserBundle\Entity\HistoriqueGlobal;
+
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 /**
@@ -190,6 +196,7 @@ class ProblemeController extends Controller
             'probleme' => $probleme,
             'missions' => $missions,
         ));
+
     }
 
 
@@ -206,8 +213,24 @@ class ProblemeController extends Controller
         if($request->getMethod() == 'POST'){
 
             $probleme->setEtat(self::ETAT_PROPOSER);
-            $probleme->setSolution($_POST['solution']);
-            $probleme->setUserSolution($this->getUser());
+
+            $solution = new solutionProbleme();
+            $solution->setUserSolution($this->getUser());
+            $solution->setProbleme($probleme);
+            $solution->setSolution($_POST['solutionText']);
+
+            if($_FILES['solutionFile']['size'] > 0){
+
+                $uploadService = new UploadService();
+
+                if($pj = $uploadService->uploadSimpleFichier('CommSolution', 'solution', 'solutionFile')){
+                    $solution->setPieceJointe($pj);
+                }else{
+                    throw new Exception('Erreur! Erreur dans le téléchargement du fichier..');
+                }
+            }
+
+            $em->persist($solution);
 
             $em->persist($probleme);
 
@@ -215,15 +238,35 @@ class ProblemeController extends Controller
 
             $historiqueGlobal = new HistoriqueGlobal();
             $historiqueGlobal->setUserHistorique($this->getUser());
-            $historiqueGlobal->setLibelle('Ajout solution du problème:'.$probleme->getSolution() );
+            $historiqueGlobal->setLibelle('Ajout d\'un solution dans : '.$probleme->getNumero() );
             $historiqueGlobal->setLien($this->generateUrl('probleme_show', array('id' => $probleme->getId())));
 
-            $em->persist($historiqueGlobal);
 
+            $em->persist($historiqueGlobal);
 
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             $em->flush();
+            
+           // ------------------- AJOUTER ID PHOTO ---------------------
+
+            if($solution->getPieceJointe()){
+                $file = new Filesystem();
+                $nomDuFichier = str_replace('CommSolution\\', "", $solution->getPieceJointe());
+                try {
+                    $file->rename('document/'.$solution->getPieceJointe() , 'document/CommSolution/'.$solution->getId().'-'.$nomDuFichier);
+
+                } catch (IOExceptionInterface $exception) {
+                    echo "Hey Allin An error occurred while creating your directory at ".$exception->getPath();
+                }
+                $solution->setPieceJointe('CommSolution/'.$solution->getId().'-'.$nomDuFichier);
+
+                $em->persist($solution);
+                $em->flush();
+            }
+           
+           // ------------------- ////// AJOUTER ID PHOTO ////// ---------------------
+            
 
             return $this->redirectToRoute('probleme_show', array('id' => $probleme->getId()));
 
@@ -273,6 +316,66 @@ class ProblemeController extends Controller
         }
         throw new Exception("Erreur 404");
 
+    }
+
+    /**
+     * Finds and displays a probleme entity.
+     *
+     * @Route("ajouter{id}1320/pbm/photo-autre", name="probleme_newPhoto")
+     *
+     */
+    public function newPhotoProblemeAction(Request $request, Probleme $probleme)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->getMethod() == 'POST'){
+
+            $photo = new problemePhoto();
+            $photo->setProbleme($probleme);
+            $photo->setNom($_POST['nomProblemePhoto']);
+
+            if($_FILES['fileProblemePhoto']['size'] > 0){
+
+                $uploadService = new UploadService();
+
+                if($pj = $uploadService->uploadSimpleFichier('Probleme', 'photoProb', 'fileProblemePhoto')){
+                    $photo->setUrl($pj);
+                }else{
+                    throw new Exception('Erreur! Erreur dans le téléchargement du fichier..');
+                }
+            }
+
+            $em->persist($photo);
+
+            $em->flush();
+
+            // ------------------- AJOUTER ID PHOTO ---------------------
+
+
+            $file = new Filesystem();
+            $nomDuFichier = str_replace('Probleme\\', "",$photo->getUrl());
+            try {
+                $file->rename('document/'.$photo->getUrl() , 'document/Probleme/'.$probleme->getId().'-'.$nomDuFichier);
+
+            } catch (IOExceptionInterface $exception) {
+                echo "Hey Allin An error occurred while creating your directory at ".$exception->getPath();
+            }
+            $photo->setUrl('Probleme/'.$probleme->getId().'-'.$nomDuFichier);
+
+            $em->persist($photo);
+            $em->flush();
+
+
+            // ------------------- ////// AJOUTER ID PHOTO ////// ---------------------
+
+
+            return $this->redirectToRoute('probleme_show', array('id' => $probleme->getId()));
+
+        }
+
+        throw new Exception("Erreur 404");
+        
+        
     }
 
 

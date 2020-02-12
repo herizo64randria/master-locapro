@@ -38,14 +38,12 @@ class User extends BaseUser
      */
     private $nom;
 
-//    //--------------------------------------------------------------------
-//
-//    /**
-//     * @ORM\ManyToMany(targetEntity="ProduitBundle\Entity\Depot", cascade={"persist"})
-//     */
-//    private $depots;
-//
-//    //--------------------------------------------------------------------
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url_img", type="string", length=200, nullable=true)
+     */
+    private $urlImg;
 
 
     /**
@@ -73,4 +71,28 @@ class User extends BaseUser
     }
 
 
+
+    /**
+     * Set urlImg
+     *
+     * @param string $urlImg
+     *
+     * @return User
+     */
+    public function setUrlImg($urlImg)
+    {
+        $this->urlImg = $urlImg;
+
+        return $this;
+    }
+
+    /**
+     * Get urlImg
+     *
+     * @return string
+     */
+    public function getUrlImg()
+    {
+        return $this->urlImg;
+    }
 }

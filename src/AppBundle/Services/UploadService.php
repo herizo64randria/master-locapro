@@ -44,6 +44,7 @@ class UploadService
           return $nom_bd;
 
     }
+
     public function uploadSimpleFichier($dossier,$type,$nom) {
         $rand = $this->randomLettre(7);
 

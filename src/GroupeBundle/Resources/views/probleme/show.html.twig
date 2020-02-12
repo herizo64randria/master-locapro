@@ -39,6 +39,39 @@
     <div class="row">
         <div class="col-md-8">
             <h3 class="text-center text-{{ couleur }}"><b>Etat:</b> <strong>{{ probleme.etat }}</strong></h3>
+            {% if probleme.problemePhotos %}
+                <div class="row box" id="boxPieceProbleme">
+                    <div class="col-md-10">
+                        <h4>Image & Autre:</h4>
+                        <div class="row">
+                            {% for fichier in probleme.problemePhotos %}
+                                <div class="col-md-2">
+                                    {% if fichier.url|typeFile == 'image' %}
+                                        <a href="{{ asset('document/'~fichier.url) }}" target="_blank">
+                                            <img src="{{ asset('document/'~fichier.url) }}" alt="" class="img-thumbnail" >
+                                        </a>
+
+                                    {% elseif fichier.url|typeFile == 'video' %}
+                                        <video controls>
+                                            <source src="{{ asset('document/'~fichier.url) }}" >
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    {% else %}
+                                        <a href="{{ asset('document/'~fichier.url) }}" target="_blank" >
+                                            <img src="{{ asset('images/file.png') }}" alt="" class="img-thumbnail" >
+                                            <br>
+                                            <strong class="text-center">{{ fichier.nom }}</strong>
+
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+            {% endif %}
         </div>
         <div class="col-md-4">
             <div class="box">
@@ -57,8 +90,10 @@
         </div>
     </div>
 
+    <br>
+
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title text-danger">Problème signaler</h3>
@@ -82,7 +117,16 @@
                             <td>{{ probleme.cause }}</td>
                         </tr>
                         <tr>
-                            <td>Total dépense: </td>
+                            <th>Signaler par:</th>
+                            <td>
+                                {% if probleme.userCreer.urlImg %}
+                                    <img src="{{ asset('document/'~probleme.userCreer.urlImg) }}" class="img-circle img-thumbnail" alt="Image {{ probleme.userCreer.nom }}" width="35" height="35">
+                                {% endif %}
+                                {{ probleme.userCreer.nom }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Total dépense: </th>
                             <td class=""><b>{{ totalDepense|number_format(2, ',', ' ') }}</b></td>
                         </tr>
                         <tr>
@@ -93,35 +137,105 @@
                         </tr>
                         </tbody>
                     </table>
+                    <hr>
+                    <div>
+                        {% if app.user == probleme.userCreer %}
+                            <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#modalProblemePhoto"><i class="fa fa-plus"></i> Ajouter une pièce jointe</button>
+                        {% endif %}
+                    </div>
+
+
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title text-primary">Solution proposées</h3>
+
+        <div class="col-md-7">
+            <!-- Chat box -->
+            <div class="box box-success">
+                <div class="box-header">
+                    <i class="fa fa-comments-o"></i>
+
+                    <h3 class="box-title text-primary">Solution proposé</h3>
+
+                    <div class="box-footer">
+                        {% if app.user|ifRole('ROLE_AJOUT_PBM') %}
+                            <form action="{{ path('probleme_ajouterSolution', {"id" : probleme.id}) }}" method="post" enctype="multipart/form-data">
+                                <div class="input-group">
+                                    <textarea class="form-control" name="solutionText" placeholder="Votre Solution..."></textarea>
+                                    Pièce jointe (photo, vidéo, ...)
+                                    <input type="file" name="solutionFile" class="form-control">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> Envoyer</button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </form>
+                        {% endif %}
+                    </div>
 
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body chat" id="chat-box">
+                    <!-- chat item -->
+                    {% if not probleme.ligneSolutions %}
+                        <h4 class="text-warning">Aucune solution proposé..</h4>
+                    {% else %}
+                        {% for solution in probleme.ligneSolutions|reverse %}
+                            <div class="item">
+                                {% if not solution.userSolution.urlImg %}
+                                    <img src="{{ asset('images/user.svg') }}" alt="user image" class="online">
+                                {% else %}
+                                    <img src="{{ asset('document/'~solution.userSolution.urlImg) }}" >
 
-                    <ul class="list-inline">
-                        {% if app.user|ifRole('ROLE_AJOUT_PBM') %}
-                            <li>
-                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalSolution"><i class="fa fa-edit"></i> Proposer une solution</button>
-                            </li>
-                        {% endif %}
+                                {% endif %}
 
-                    </ul>
-                    <hr>
-                    {% if probleme.userSolution %}
-                        <h4>Solution ajoutée par: <strong class="text-primary">{{ probleme.userSolution.nom }}</strong></h4>
-                        <p>{{ probleme.solution|nl2br }}</p>
+                                <p class="message">
+                                    <a href="#" class="name">
+                                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{ solution.date|date('d/m/Y à H:i') }}</small>
+                                        {{ solution.userSolution.nom }}
+                                    </a>
+                                    {{ solution.solution|nl2br }}
+                                </p>
+                                {% if solution.pieceJointe %}
+                                    <div class="attachment">
+                                        <h4 class="text-info">Attachments:</h4>
+
+                                        <p class="filename">
+                                            {% if solution.pieceJointe|typeFile == 'image' %}
+                                                <a href="{{ asset('document/'~solution.pieceJointe) }}" target="_blank">
+                                                    <img src="{{ asset('document/'~solution.pieceJointe) }}" alt="" class="img-thumbnail" width="100">
+                                                </a>
+
+                                            {% elseif solution.pieceJointe|typeFile == 'video' %}
+                                                <video width="300" height="200" controls>
+                                                    <source src="{{ asset('document/'~solution.pieceJointe) }}" >
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            {% else %}
+                                                <a href="{{ asset('document/'~solution.pieceJointe) }}" class="btn btn-default btn-facebook"><i class="fa fa-download"></i> Télécharger</a>
+                                            {% endif %}
+
+
+
+                                        </p>
+
+                                    </div>
+                                {% endif %}
+                                <hr>
+                                <!-- /.attachment -->
+                            </div>
+                            <!-- /.item -->
+                        {% endfor %}
                     {% endif %}
 
+                    <!-- /.item -->
                 </div>
+                <!-- /.chat -->
+
             </div>
+            <!-- /.box (chat box) -->
         </div>
+
 
     </div>
 
@@ -210,7 +324,7 @@
         </div>
     </div>
 
-    {% include '@Groupe/probleme/modalSolution.html.twig' %}
+    {% include '@Groupe/probleme/modalProblemePhoto.html.twig' %}
 
     {% include '@Groupe/mission/modalMission.html.twig' %}
 
@@ -218,5 +332,16 @@
 
     {% include '@Groupe/probleme/modalChangerEtat.html.twig' %}
 
+    <script>
+        // SLIMSCROLL FOR CHAT WIDGET
+        $('#chat-box').slimScroll({
+            height: '250px'
+        });
+
+        // SLIMSCROLL FOR CHAT WIDGET
+        $('#boxPieceProbleme').slimScroll({
+            height: '200px'
+        });
+    </script>
 
 {% endblock %}

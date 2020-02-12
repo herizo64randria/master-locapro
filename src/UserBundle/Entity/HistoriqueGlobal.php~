@@ -31,14 +31,14 @@ class HistoriqueGlobal
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="text")
+     * @ORM\Column(name="libelle", type="text", nullable=true)
      */
     private $libelle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lien", type="text")
+     * @ORM\Column(name="lien", type="text", nullable=true)
      */
     private $lien;
 
@@ -48,6 +48,8 @@ class HistoriqueGlobal
      * @ORM\Column(name="modification", type="array", nullable=true)
      */
     private $modification;
+
+
 
     //-------------
 
@@ -59,6 +61,14 @@ class HistoriqueGlobal
 
     //--------------
 
+    // ------------------- CONTRUCTOR ---------------------
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    // ------------------- ////// CONTRUCTOR ////// ---------------------
 
     /**
      * Get id
@@ -69,5 +79,124 @@ class HistoriqueGlobal
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return HistoriqueGlobal
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return HistoriqueGlobal
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set lien
+     *
+     * @param string $lien
+     *
+     * @return HistoriqueGlobal
+     */
+    public function setLien($lien)
+    {
+        $this->lien = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Get lien
+     *
+     * @return string
+     */
+    public function getLien()
+    {
+        return $this->lien;
+    }
+
+    /**
+     * Set modification
+     *
+     * @param array $modification
+     *
+     * @return HistoriqueGlobal
+     */
+    public function setModification($modification)
+    {
+        $this->modification = $modification;
+
+        return $this;
+    }
+
+    /**
+     * Get modification
+     *
+     * @return array
+     */
+    public function getModification()
+    {
+        return $this->modification;
+    }
+
+    /**
+     * Set userHistorique
+     *
+     * @param \UserBundle\Entity\User $userHistorique
+     *
+     * @return HistoriqueGlobal
+     */
+    public function setUserHistorique(\UserBundle\Entity\User $userHistorique)
+    {
+        $this->userHistorique = $userHistorique;
+
+        return $this;
+    }
+
+    /**
+     * Get userHistorique
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserHistorique()
+    {
+        return $this->userHistorique;
+    }
+}

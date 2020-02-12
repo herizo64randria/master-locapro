@@ -26,6 +26,7 @@ class GroupeExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('listeEtatGrp', array($this, 'listeEtatFunction')),
             new \Twig_SimpleFilter('heureMarcheDate', array($this, 'heureMarcheDateFunction')),
+            new \Twig_SimpleFilter('typeFile', array($this, 'getTypeFile')),
         );
     }
 
@@ -89,6 +90,33 @@ class GroupeExtension extends \Twig_Extension
         ;
 
         return $h;
+    }
+
+    function getTypeFile($nom){
+        $type = 'file';
+
+        $excel = array('xls' ,'xls','xlsx','xls','xlsm','xlt','xltx','xlt','xltm','xla','xlam');
+        $audio = array('mp3', 'wma', 'ogg', 'aac');
+        $video = array('avi','mp4','mov','flv','mpg');
+        $image = array('tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png');
+
+        $ext = substr(strrchr($nom,'.'),1);
+        $ext = strtolower($ext);
+
+        if ($ext == 'doc' or $ext == 'docx') $type = 'word';
+
+        if(in_array($ext, $excel)) $type = 'excel';
+
+        if ($ext == 'pdf') $type = 'pdf';
+
+        if(in_array($ext, $audio)) $type = 'audio';
+
+        if(in_array($ext, $video)) $type = 'video';
+
+        if(in_array($ext, $image)) $type = 'image';
+
+        return $type;
+
     }
 
 

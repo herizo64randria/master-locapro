@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <form action="#" method="post">
+                <form action="#" method="post" autocomplete="off" enctype="multipart/form-data">
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire modification utilisateur</h3>
                     </div>
@@ -33,22 +33,26 @@
                                 <div class="btn-group  btn-group-toggle" data-toggle="buttons">
 
                                     {% set roleAdmin='' %}
+                                    {% set checkedAdmin = '' %}
                                     {% for role in user.roles %}
                                         {% if role=='ROLE_ADMIN' %}
                                             {% set roleAdmin='active' %}
+                                            {% set checkedAdmin = 'checked' %}
                                         {% endif %}
                                     {% endfor %}
                                     <label class="btn btn-secondary {{ roleAdmin }}">
-                                        <input type="radio" name="role" class="role" value="ROLE_ADMIN" id="roleAdmin" autocomplete="off" > Administrateur
+                                        <input type="radio" name="role" class="userRole" value="ROLE_ADMIN" id="roleAdmin" autocomplete="off" {{ checkedAdmin }}> Administrateur
                                     </label>
 
                                     {% set roleUser = '' %}
+                                    {% set checkedUser = '' %}
                                     {% if roleAdmin == '' %}
                                         {% set roleUser = "active" %}
+                                        {% set checkedUser = 'checked' %}
                                     {% endif %}
                                     
                                     <label class="btn btn-secondary {{ roleUser }}">
-                                        <input type="radio" name="role"  class="role" value="ROLE_USER"  id="roleUser" autocomplete="off"> Simple utilisateur
+                                        <input type="radio" name="role"  class="userRole" value="ROLE_USER"  id="roleUser" autocomplete="off" {{ checkedUser }}> Simple utilisateur
                                     </label>
 
                                 </div>
@@ -64,6 +68,14 @@
                                 <div class="form-group">
                                     <label for="passeword">Passeword  <b class="text-danger" id="err_passeword"></b></label>
                                     <input required type="text" class="form-control" value="•••••••••••••••" name="passeword" id="passeword"   />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image">Image de profil <b class="text-danger" id="err_image"></b></label>
+                                    {% if user.urlImg != "images/user.svg" %}
+                                        <img src="{{ asset('document/'~user.urlImg) }}" class="img-thumbnail" alt="Image {{ user.nom }}" width="45" height="34">
+                                    {% endif %}
+                                    <input type="file" class="form-control" name="image" id="image"  />
                                 </div>
 
                             </div>
@@ -209,7 +221,7 @@
                 myInput.attr('checked', 'checked');
             }
 
-        })
+        });
 
         $('.role').each(function (index) {
             myInput1 = $(this);
@@ -219,7 +231,7 @@
                 myInput1.attr('checked', 'checked');
             }
 
-        })
+        });
     </script>
 
 {% endblock %}

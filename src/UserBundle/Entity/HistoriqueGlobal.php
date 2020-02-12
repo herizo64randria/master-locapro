@@ -49,6 +49,8 @@ class HistoriqueGlobal
      */
     private $modification;
 
+
+
     //-------------
 
     /**

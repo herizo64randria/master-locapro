@@ -35,6 +35,15 @@ class solutionProbleme
      */
     private $solution;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="piece_jointe", type="string", length=255, nullable=true)
+     */
+    private $pieceJointe;
+
+
+
     // ------------------- RELATION ---------------------
 
     /**
@@ -49,9 +58,13 @@ class solutionProbleme
      */
     private $probleme;
 
-
-
     // ------------------- ////// RELATION ////// ---------------------
+
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
 
     /**
@@ -158,5 +171,31 @@ class solutionProbleme
     public function getProbleme()
     {
         return $this->probleme;
+    }
+
+
+
+    /**
+     * Set pieceJointe
+     *
+     * @param string $pieceJointe
+     *
+     * @return solutionProbleme
+     */
+    public function setPieceJointe($pieceJointe)
+    {
+        $this->pieceJointe = $pieceJointe;
+
+        return $this;
+    }
+
+    /**
+     * Get pieceJointe
+     *
+     * @return string
+     */
+    public function getPieceJointe()
+    {
+        return $this->pieceJointe;
     }
 }
