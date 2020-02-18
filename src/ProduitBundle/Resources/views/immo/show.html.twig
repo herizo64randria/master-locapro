@@ -24,7 +24,6 @@
                                         <a href="#" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#modalDeplacement"><i class="fa fa-arrow-circle-o-up"></i> Déplacer</a>
                                     </li>
                                 {% endif %}
-
                             </ul>
                         </div>
 
@@ -93,7 +92,7 @@
                             <td>{{ historique.date|date('d/m/Y') }}</td>
                             <td>{{ historique.motif }}
                                 {% if historique.description %}
-                                    <a href="#"  data-toggle="tooltip" title="Hooray!"></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true" title="{{ historique.description }}"><i class="fa fa-info-circle"></i> </a>
                                 {% endif %}
                             </td>
                             <td>
@@ -116,6 +115,6 @@
     </div>
 </div>
 
-    {% include '@Produit/immo/modalDeplacement.html.twig' %}
+{% include '@Produit/immo/modalDeplacement.html.twig' %}
 
 {% endblock %}

@@ -44,7 +44,9 @@
                                             <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>
                                             <select required  class="form-control" name="depot" id="depot" >
                                                 {% for key, depot in depots %}
-                                                    <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                    {% if depot != immo.depot %}
+                                                        <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -68,7 +70,9 @@
                                                 <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
                                                 <select required class="form-control" name="site" id="site">
                                                     {% for key, site in sites %}
-                                                        <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                        {% if site != immo.site %}
+                                                            <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 </select>
                                             </div>
