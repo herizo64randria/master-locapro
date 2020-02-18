@@ -90,7 +90,7 @@
         $(document).ready(function() {
             $('#tableProduit').DataTable({
                 scrollX: true,
-                pageLength: 25,
+                pageLength: 100,
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",
@@ -114,7 +114,6 @@
                     }
                 },
                 scrollCollapse: true,
-                paging:         false,
                 fixedColumns:   {
                     leftColumns: 1,
                     rightColumns: 1
