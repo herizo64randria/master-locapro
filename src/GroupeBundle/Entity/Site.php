@@ -49,6 +49,16 @@ class Site
      */
     private $groupes; // Notez le « s », un stocks est liée à plusieurs ligne
 
+    /**
+     * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\HistoriqueImmo", mappedBy="site")
+     */
+    private $historiqueImmos; // Notez le « s », il y a plusieur historique
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\Immo", mappedBy="site")
+     */
+    private $immos; // Notez le « s », il y a plusieur historique
+
 //------------------------------------------
 
     /**
@@ -172,5 +182,73 @@ class Site
     public function getCouleur()
     {
         return $this->couleur;
+    }
+
+    /**
+     * Add historiqueImmo
+     *
+     * @param \ProduitBundle\Entity\HistoriqueImmo $historiqueImmo
+     *
+     * @return Site
+     */
+    public function addHistoriqueImmo(\ProduitBundle\Entity\HistoriqueImmo $historiqueImmo)
+    {
+        $this->historiqueImmos[] = $historiqueImmo;
+
+        return $this;
+    }
+
+    /**
+     * Remove historiqueImmo
+     *
+     * @param \ProduitBundle\Entity\HistoriqueImmo $historiqueImmo
+     */
+    public function removeHistoriqueImmo(\ProduitBundle\Entity\HistoriqueImmo $historiqueImmo)
+    {
+        $this->historiqueImmos->removeElement($historiqueImmo);
+    }
+
+    /**
+     * Get historiqueImmos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHistoriqueImmos()
+    {
+        return $this->historiqueImmos;
+    }
+
+    /**
+     * Add immo
+     *
+     * @param \ProduitBundle\Entity\Immo $immo
+     *
+     * @return Site
+     */
+    public function addImmo(\ProduitBundle\Entity\Immo $immo)
+    {
+        $this->immos[] = $immo;
+
+        return $this;
+    }
+
+    /**
+     * Remove immo
+     *
+     * @param \ProduitBundle\Entity\Immo $immo
+     */
+    public function removeImmo(\ProduitBundle\Entity\Immo $immo)
+    {
+        $this->immos->removeElement($immo);
+    }
+
+    /**
+     * Get immos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImmos()
+    {
+        return $this->immos;
     }
 }

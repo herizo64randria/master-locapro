@@ -1,0 +1,119 @@
+<div class="modal fade" id="modalDeplacement">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('immo_deplacer', {'id' : immo.id}) }}" method="post" autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-warning"><i class="fa fa-plus"></i> Déplacer</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="dateDeplacement">Date du déplacement: <b class="text-danger" id="err_dateDeplacement"></b></label>
+                        <input required type="text" class="form-control" name="dateDeplacement" id="dateDeplacement"  />
+                    </div>
+                    <div class="form-group">
+                        <label for="motifDeplacement">Motif: <b class="text-danger" id="err_motifDeplacement"></b></label>
+                        <input required type="text" class="form-control" name="motifDeplacement" id="motifDeplacement"  />
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionDeplacement">Description <b class="text-danger" id="err_descriptionDeplacement"></b></label>
+                        <textarea rows="4" class="form-control" name="descriptionDeplacement" id="descriptionDeplacement" placeholder="Facultatif" ></textarea>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4 class="box-title text-primary"> Emplacement actuel</h4>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-primary">
+                                            <input type="radio" name="emplacement" id="emplacementDepot" value="depot" checked/>
+                                            <label for="emplacementDepot">Dépot</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="emplacementDepot">
+                                        <div class="form-group">
+                                            <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>
+                                            <select required  class="form-control" name="depot" id="depot" >
+                                                {% for key, depot in depots %}
+                                                    <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-info">
+                                            <input type="radio" name="emplacement" id="emplacementSite" value="site" />
+                                            <label for="emplacementSite">Site</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="emplacementSite">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
+                                                <select required class="form-control" name="site" id="site">
+                                                    {% for key, site in sites %}
+                                                        <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" > Confirmer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    //Date picker
+    $('#dateDeplacement').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    });
+</script>
+
+{#    SCRIPT CHOIX EMPLACEMENT#}
+<script>
+    $('#site').prop('disabled', true);
+    $('#depot').prop('disabled', false);
+
+    $('#emplacementDepot').click(function () {
+        $('#site').prop('disabled', true);
+        $('#depot').prop('disabled', false);
+    });
+
+    $('#emplacementSite').click(function () {
+        $('#site').prop('disabled', false);
+        $('#depot').prop('disabled', true);
+    });
+
+</script>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Modification Immo{% endblock %}
+{% block titre_page %}Modification sur le bien immobilier{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title text-primary"><i class="fa fa-plus-circle"></i> Formulaire Immo</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <form action="#" method="post">
+                        {{ form_widget(edit_form) }}
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-primary btn-lg btn-block"><i class="fa fa-save"></i> Enregistrer</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('immo_index') }}" class="btn btn-default btn-lg btn-block"> Annuler</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

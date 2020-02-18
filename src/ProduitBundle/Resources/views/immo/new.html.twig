@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Création Immo{% endblock %}
+{% block titre_page %}Création de bien immobilier{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title text-success"><i class="fa fa-plus-circle"></i> Formulaire Immo</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <form action="#" method="post">
+                        {{ form_widget(form) }}
+
+                        <br>
+
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title text-primary"> Emplacement actuel</h4>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-primary">
+                                                <input type="radio" name="emplacement" id="emplacementDepot" value="depot" checked/>
+                                                <label for="emplacementDepot">Dépot</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementDepot">
+                                            <div class="form-group">
+                                                <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>
+                                                <select required  class="form-control" name="depot" id="depot" >
+                                                    {% for key, depot in depots %}
+                                                        <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-info">
+                                                <input type="radio" name="emplacement" id="emplacementSite" value="site" />
+                                                <label for="emplacementSite">Site</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementSite">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
+                                                    <select required class="form-control" name="site" id="site">
+                                                        {% for key, site in sites %}
+                                                            <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-success btn-lg btn-block"><i class="fa fa-save"></i> Enregistrer</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('immo_index') }}" class="btn btn-default btn-lg btn-block"> Annuler</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#site').select2();
+        $('#depot').select2();
+    </script>
+
+{#    SCRIPT CHOIX EMPLACEMENT#}
+    <script>
+        $('#site').prop('disabled', true);
+        $('#depot').prop('disabled', false);
+
+        $('#emplacementDepot').click(function () {
+            $('#site').prop('disabled', true);
+            $('#depot').prop('disabled', false);
+        });
+
+        $('#emplacementSite').click(function () {
+            $('#site').prop('disabled', false);
+            $('#depot').prop('disabled', true);
+        });
+
+    </script>
+
+
+
+
+{% endblock %}

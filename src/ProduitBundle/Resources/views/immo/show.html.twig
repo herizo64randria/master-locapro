@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-primary">Fiche Immo - {{ immo.code }}</strong> {% endblock %}
+{% block titre_description %}Information sur le bien immobilier{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-slack"></i> Fiche Immo</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-inline">
+                                {% if app.user|ifRole('ROLE_GESTION_IMMO') %}
+                                    <li>
+                                        <a href="{{ path('immo_edit', {'id' : immo.id}) }}" class="btn btn-info btn-lg"><i class="fa fa-edit"></i> Modifier</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#modalDeplacement"><i class="fa fa-arrow-circle-o-up"></i> Déplacer</a>
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>Désignation</th>
+                            <td>{{ immo.designation }}</td>
+                        </tr>
+                        <tr>
+                            <th>Code interne</th>
+                            <td>{{ immo.code }}</td>
+                        </tr>
+                        <tr>
+                            <th>Réference</th>
+                            <td>{{ immo.reference }}</td>
+                        </tr>
+                        <tr>
+                            <th>Emplacement actuel</th>
+                            {% set emplacement = '' %}
+                            {% if immo.site %}
+                                {% set emplacement = 'Site - '~immo.site.emplacement %}
+                            {% endif %}
+                            {% if immo.depot %}
+                                {% set emplacement = 'Dépot - '~immo.depot.nom %}
+                            {% endif %}
+                            <td><b class="text-primary">{{ emplacement }}</b></td>
+                        </tr>
+                        {% if immo.note %}
+                            <tr>
+                                <td colspan="2"><b>Note:</b> <strong style="white-space: pre;">                 </strong> {{ immo.note|nl2br }}</td>
+                            </tr>
+                        {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="box">
+
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-list-ol"></i> Historique de déplacement de l'immo</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-striped">
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Libellé</th>
+                        <th>Dépôt</th>
+                        <th>Site</th>
+                    </tr>
+
+
+                    {% for historique in immo.historiqueImmos %}
+                        <tr>
+                            <td>{{ historique.date|date('d/m/Y') }}</td>
+                            <td>{{ historique.motif }}
+                                {% if historique.description %}
+                                    <a href="#"  data-toggle="tooltip" title="Hooray!"></a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if historique.depot %}
+                                    {{ historique.depot.abrv }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if historique.site %}
+                                    {{ historique.site.emplacement }}
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% include '@Produit/immo/modalDeplacement.html.twig' %}
+
+{% endblock %}

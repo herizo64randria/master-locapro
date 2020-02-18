@@ -25,23 +25,21 @@ class FournisseurType extends AbstractType
                     'class'=>'form-control text-primary',
 
                 ),
-                 'required'=>true,
             ))
             ->add('adresse', TextType::class,array(
             'label' => 'Adresse',
             'attr' => array(
                 'class' => 'form-control text-primary'
                  ),
-                'required' => false,
 
              ))
             ->add('contact', TextType::class,array(
                 'label' => 'Contact',
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control text-primary',
 
                 ),
-                'required' => false,
 
             ))
 
@@ -59,6 +57,9 @@ class FournisseurType extends AbstractType
                 ),
                 'required' => false,
             ));
+
+
+
 
     }
     /**

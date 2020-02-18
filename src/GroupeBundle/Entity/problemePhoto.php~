@@ -104,5 +104,28 @@ class problemePhoto
     {
         return $this->url;
     }
-}
 
+    /**
+     * Set probleme
+     *
+     * @param \GroupeBundle\Entity\Probleme $probleme
+     *
+     * @return problemePhoto
+     */
+    public function setProbleme(\GroupeBundle\Entity\Probleme $probleme)
+    {
+        $this->probleme = $probleme;
+
+        return $this;
+    }
+
+    /**
+     * Get probleme
+     *
+     * @return \GroupeBundle\Entity\Probleme
+     */
+    public function getProbleme()
+    {
+        return $this->probleme;
+    }
+}

@@ -492,4 +492,38 @@ class Probleme
     {
         return $this->ligneSolutions;
     }
+
+    /**
+     * Add problemePhoto
+     *
+     * @param \GroupeBundle\Entity\problemePhoto $problemePhoto
+     *
+     * @return Probleme
+     */
+    public function addProblemePhoto(\GroupeBundle\Entity\problemePhoto $problemePhoto)
+    {
+        $this->problemePhotos[] = $problemePhoto;
+
+        return $this;
+    }
+
+    /**
+     * Remove problemePhoto
+     *
+     * @param \GroupeBundle\Entity\problemePhoto $problemePhoto
+     */
+    public function removeProblemePhoto(\GroupeBundle\Entity\problemePhoto $problemePhoto)
+    {
+        $this->problemePhotos->removeElement($problemePhoto);
+    }
+
+    /**
+     * Get problemePhotos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProblemePhotos()
+    {
+        return $this->problemePhotos;
+    }
 }

@@ -54,6 +54,27 @@ class Depot
      */
     private $sorties; // Notez le « s », un stocks est liée à plusieurs entrées
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="sourcedepot")
+     */
+    private $sourcedeplacements; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="destinationdepot")
+     */
+    private $destinationdeplacements; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\HistoriqueImmo", mappedBy="depot")
+     */
+    private $historiqueImmos; // Notez le « s », il y a plusieur historique
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\Immo", mappedBy="depot")
+     */
+    private $immos; // Notez le « s », il y a plusieur historique
+
+
 //------------------------------------------------
 
 
@@ -154,5 +175,165 @@ class Depot
     public function getEntres()
     {
         return $this->Entres;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param boolean $etat
+     *
+     * @return Depot
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return boolean
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Add sorty
+     *
+     * @param \GestionBundle\Entity\Sortie $sorty
+     *
+     * @return Depot
+     */
+    public function addSorty(\GestionBundle\Entity\Sortie $sorty)
+    {
+        $this->sorties[] = $sorty;
+
+        return $this;
+    }
+
+    /**
+     * Remove sorty
+     *
+     * @param \GestionBundle\Entity\Sortie $sorty
+     */
+    public function removeSorty(\GestionBundle\Entity\Sortie $sorty)
+    {
+        $this->sorties->removeElement($sorty);
+    }
+
+    /**
+     * Get sorties
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSorties()
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * Add sourcedeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $sourcedeplacement
+     *
+     * @return Depot
+     */
+    public function addSourcedeplacement(\GestionBundle\Entity\Deplacement $sourcedeplacement)
+    {
+        $this->sourcedeplacements[] = $sourcedeplacement;
+
+        return $this;
+    }
+
+    /**
+     * Remove sourcedeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $sourcedeplacement
+     */
+    public function removeSourcedeplacement(\GestionBundle\Entity\Deplacement $sourcedeplacement)
+    {
+        $this->sourcedeplacements->removeElement($sourcedeplacement);
+    }
+
+    /**
+     * Get sourcedeplacements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSourcedeplacements()
+    {
+        return $this->sourcedeplacements;
+    }
+
+    /**
+     * Add destinationdeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $destinationdeplacement
+     *
+     * @return Depot
+     */
+    public function addDestinationdeplacement(\GestionBundle\Entity\Deplacement $destinationdeplacement)
+    {
+        $this->destinationdeplacements[] = $destinationdeplacement;
+
+        return $this;
+    }
+
+    /**
+     * Remove destinationdeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $destinationdeplacement
+     */
+    public function removeDestinationdeplacement(\GestionBundle\Entity\Deplacement $destinationdeplacement)
+    {
+        $this->destinationdeplacements->removeElement($destinationdeplacement);
+    }
+
+    /**
+     * Get destinationdeplacements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDestinationdeplacements()
+    {
+        return $this->destinationdeplacements;
+    }
+
+    /**
+     * Add historiqueImmo
+     *
+     * @param \ProduitBundle\Entity\HistoriqueImmo $historiqueImmo
+     *
+     * @return Depot
+     */
+    public function addHistoriqueImmo(\ProduitBundle\Entity\HistoriqueImmo $historiqueImmo)
+    {
+        $this->historiqueImmos[] = $historiqueImmo;
+
+        return $this;
+    }
+
+    /**
+     * Remove historiqueImmo
+     *
+     * @param \ProduitBundle\Entity\HistoriqueImmo $historiqueImmo
+     */
+    public function removeHistoriqueImmo(\ProduitBundle\Entity\HistoriqueImmo $historiqueImmo)
+    {
+        $this->historiqueImmos->removeElement($historiqueImmo);
+    }
+
+    /**
+     * Get historiqueImmos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHistoriqueImmos()
+    {
+        return $this->historiqueImmos;
     }
 }

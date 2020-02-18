@@ -255,4 +255,28 @@ class HistoriqueProduit
     {
         return $this->sortie;
     }
+
+    /**
+     * Set deplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $deplacement
+     *
+     * @return HistoriqueProduit
+     */
+    public function setDeplacement(\GestionBundle\Entity\Deplacement $deplacement = null)
+    {
+        $this->deplacement = $deplacement;
+
+        return $this;
+    }
+
+    /**
+     * Get deplacement
+     *
+     * @return \GestionBundle\Entity\Deplacement
+     */
+    public function getDeplacement()
+    {
+        return $this->deplacement;
+    }
 }
