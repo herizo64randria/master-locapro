@@ -45,11 +45,20 @@ class HeureMarche
     /**
      * @var float
      *
-     * @ORM\Column(name="puissance", type="float")
+     * @ORM\Column(name="puissance", type="float", nullable=true)
      */
     private $puissance;
 
-    /*RELATION */
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="note", type="text", nullable=true)
+     */
+    private $note;
+
+
+
+   // ------------------- RELATION ---------------------
 
     /**
      * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Groupe")
@@ -57,7 +66,14 @@ class HeureMarche
      */
     private $groupe;
 
-    /*FIN RELATION */
+    /**
+     * @ORM\OneToMany(targetEntity="GroupeBundle\Entity\SousHeureMarche", mappedBy="heureMarche")
+     */
+    private $sousHeures; // Notez le « s », il peu y avoir bcp
+
+   // ------------------- ////// RELATION ////// ---------------------
+
+
     /**
      * Get id
      *
@@ -186,5 +202,70 @@ class HeureMarche
     public function getPuissance()
     {
         return $this->puissance;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     *
+     * @return HeureMarche
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sousHeures = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add sousHeure
+     *
+     * @param \GroupeBundle\Entity\SousHeureMarche $sousHeure
+     *
+     * @return HeureMarche
+     */
+    public function addSousHeure(\GroupeBundle\Entity\SousHeureMarche $sousHeure)
+    {
+        $this->sousHeures[] = $sousHeure;
+
+        return $this;
+    }
+
+    /**
+     * Remove sousHeure
+     *
+     * @param \GroupeBundle\Entity\SousHeureMarche $sousHeure
+     */
+    public function removeSousHeure(\GroupeBundle\Entity\SousHeureMarche $sousHeure)
+    {
+        $this->sousHeures->removeElement($sousHeure);
+    }
+
+    /**
+     * Get sousHeures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSousHeures()
+    {
+        return $this->sousHeures;
     }
 }

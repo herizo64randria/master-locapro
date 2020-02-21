@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Heure de marche{% endblock %}
+{% block titre_page %} <b class="text-primary">Détail des heures de marche du groupe</b>  {% endblock %}
+{% block body %}
+
+    <div class="col-md-6">
+        <div class="box">
+
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-slack"></i> Fiche Information groupe</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th>Numero:</th>
+                                <td><a href="{{ path('groupe_show', {"id" : groupe.id}) }}" class=""><b>{{ groupe.numero }}</b></a></td>
+                            </tr>
+                            <tr>
+                                <th>Site:</th>
+                                <td>{{ groupe.site.emplacement}}</td>
+                            </tr>
+                            <tr>
+                                <th>Marque:</th>
+                                <td>{{ groupe.marque }}</td>
+                            </tr>
+                            <tr>
+                                <th>Statut:</th>
+                                <td class="{{ 'text-'~groupe.etatGroupe.couleur }}"><i class="fa fa-circle"></i> {{ groupe.etatGroupe.etat }}</td>
+                            </tr>
+                            <tr>
+                                <th>Catalogue</th>
+                                <td>
+                                    {% if groupe.catalogue %}
+                                        <a href="{{ path('catalogue_show', {"id" : groupe.catalogue.id}) }}" target="_blank">{{ groupe.catalogue.titre }}</a>
+                                    {% else %}
+                                        <a href="{{ path('groupe_edit', {'id' : groupe.id}) }}" class="text-danger">>> Veuillez ajouter le catalogue</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Heure de marche:</th>
+                                <td>{{ groupe.heureMarche|number_format(0, ' ', ' ') }}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des heures de marches du groupe N°
+                        <a class="text-primary" href="{{ path('groupe_show', {'id' : groupe.id}) }}"><b>{{ groupe.numero }}</b></a>
+                    </h3>
+                    <hr>
+                    <ul class="list-inline">
+                        {% if app.user|ifRole('ROLE_HEURE_GROUPE') %}
+                            <li>
+                                <a href="{{ path('GroupeHeureMarche_addHeureByGroupe',{'id':groupe.id}) }}" class="btn btn-info" ><i class="fa fa-clock-o" ></i> Ajouter heure
+                                    <br> de marche global</a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalHeureMarcheDetail" ><i class="fa fa-clock-o" ></i> Heure de marche détaillé </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped table-bordered" id="tableGroupe">
+                        <thead>
+                        <tr>
+                            <th>Date de début </th>
+                            <th>Date fin</th>
+                            <th>Heure(s) de marche</th>
+                            <th>Puissance moyenne ~</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for heureMarche in heureMarches %}
+
+                            <tr>
+                                <td>{{ heureMarche.datedebut|date('d/m/Y') }}</td>
+                                <td>{{ heureMarche.dateFin|date('d/m/Y') }}</td>
+                                <td >
+
+                                    {{ heureMarche.heure}}
+                                </td>
+                                <td >
+                                    {{ heureMarche.puissance}}
+                                </td>
+                                <td>
+                                    <a href="{{ path('GroupeHeureMarche_detailHeureMarche', {"id" : heureMarche.id}) }}" class="btn btn-default"><i class="fa fa-info-circle"></i></a>
+                                    <a href="{{ path('GroupeHeureMarche_supprimerHeureMarche', {"id" : heureMarche.id}) }}" class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer?')"><i class="fa fa-minus-circle"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {% include '@Groupe/GroupeHeureMarche/modalHeureMarcheDetail.twig' %}
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+
+    <script>
+        $(document).ready(function() {
+            $('#tableGroupe').DataTable({
+                pageLength: 25,
+                order: [[ 0, "asc" ]],
+                paginate:false,
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        } );
+    </script>
+
+
+
+{% endblock %}

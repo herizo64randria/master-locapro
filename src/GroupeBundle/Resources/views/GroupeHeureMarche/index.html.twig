@@ -7,11 +7,7 @@
 
     <div class="">
         <ul class="list-inline">
-            <li><a href="{{ path('heureMarche_plusieurAjout') }}" class="btn btn-lg btn-success"> <i class="fa fa-plus"></i> Ajouter heure des groupes actifs</a></li>
-            <li><a href="{{ path('heureMarche_simpleAjout') }}" class="btn btn-lg btn-primary"> <i class="fa fa-plus"></i> Ajouter heure d'une seule groupe</a></li>
-            <li>
-                <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalByHeure"><i class="fa fa-clock-o"></i> Heure de marche précise</button>
-            </li>
+
         </ul>
     </div>
 
@@ -19,7 +15,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title"></h3>
+                    <h3 class="box-title text-primary">Liste des groupes</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -37,9 +33,8 @@
                         <tbody>
                         {% for groupe in groupes %}
                             <tr>
-
                                 <td>
-                                    <a  href="{{ path('heureMarche_show',{'id':groupe.id}) }}" class="{{ groupe.id }}" onclick="modal({{ groupe.id }})" href="#">{{ groupe.numero }}</a>
+                                    <a  href="{{ path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id}) }}" class="{{ groupe.id }}" onclick="modal({{ groupe.id }})" href="#">{{ groupe.numero }}</a>
                                 </td>
                                 <td>{{ groupe.marque }}</td>
                                 <td>{{ groupe.site.emplacement }}</td>
@@ -49,7 +44,7 @@
                                 <td >
                                     {{ groupe.puissanceConsommer }}
                                 </td>
-                                <td><a class="btn btn-default" href="{{  path('heureMarche_show',{'id':groupe.id})  }}">
+                                <td><a class="btn btn-default" href="{{  path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id})  }}">
                                         <i class="fa fa-info-circle"></i> Détails
                                     </a>
                                 </td>
@@ -102,27 +97,7 @@
                 }
             });
         } );
-
-
-        numeralFormat('#produitbundle_produit_prixAchat');
-        numeralFormat('#produitbundle_produit_prixVente');
     </script>
 
-    {#DATEPICKER#}
-    <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('DatePicker1/js/locales/bootstrap-datetimepicker.fr.js') }}" charset="UTF-8"></script>
-    <script>
-        $('.form_date').datetimepicker({
-            format: 'dd/mm/yyyy',
-            language:  'fr',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-    </script>
 
 {% endblock %}

@@ -84,8 +84,8 @@
                     <hr>
                     <ul class="list-inline">
                         <li>
-                            {% if app.user|ifRole('ROLE_ETAT_GRP') %}
-                                <a href="{{ path('heureMarche_simpleAjoutByGroupe',{'id':groupe.id}) }}" class="btn btn-info" ><i class="fa fa-clock-o" ></i> Ajouter heure(s) marche</a>
+                            {% if app.user|ifRole('ROLE_HEURE_GROUPE') %}
+                                <a href="{{ path('GroupeHeureMarche_addHeureByGroupe',{'id':groupe.id}) }}" class="btn btn-info" ><i class="fa fa-clock-o" ></i> Ajouter heure de marche global</a>
                             {% endif %}
                             {% if app.user|ifRole('ROLE_PIECE') %}
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modalSuiviPiece"><i class="fa fa-puzzle-piece"></i> Remplacement pièce</button>

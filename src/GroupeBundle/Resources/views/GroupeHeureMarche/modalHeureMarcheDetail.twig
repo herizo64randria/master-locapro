@@ -1,0 +1,43 @@
+<div class="modal fade" id="modalHeureMarcheDetail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ path('GroupeHeureMarche_addHeureDetail', {"id" : groupe.id}) }}" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-warning">Formulaire heure de marche détaillé</h4>
+                </div>
+                <div class="modal-body">
+
+                   <div class="form-group">
+                       <label for="dateHeureMarche">Date: <b class="text-danger" id="err_dateHeureMarche"></b></label>
+                       <input required type="text" class="form-control" name="dateHeureMarche" id="dateHeureMarche"  />
+                   </div>
+
+                    <div class="form-group">
+                        <label for="noteHeureMarche">Note: <b class="text-danger" id="err_noteHeureMarche"></b></label>
+                        <textarea class="form-control" rows="4" name="noteHeureMarche" id="noteHeureMarche" placeholder="Facultatif"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning" > Confirmer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    //Date picker
+    $('#dateHeureMarche').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+    });
+    $('#dateHeureMarche').datepicker('update', new Date());
+</script>
+<!-- /.modal -->
