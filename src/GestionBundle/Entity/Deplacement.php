@@ -87,11 +87,13 @@ class Deplacement
      * @ORM\JoinColumn(nullable=false)
      */
     private $sourcedepot;
+
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot", inversedBy="destinationdeplacements")
      * @ORM\JoinColumn(nullable=false)
      */
     private $destinationdepot;
+
     /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
      */

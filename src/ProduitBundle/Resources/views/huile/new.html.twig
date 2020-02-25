@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-success">Créer Huile</strong> {% endblock %}
+{% block titre_description %}Création d'une nouvelle référence d'huile{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire Huile</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="submit" value="Créer" class="btn btn-success btn-block" />
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{ path('huile_index') }}" class="btn btn-default btn-block">Annuler</a>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br><br><br><br><br><br>
+
+
+{#NUMERAL FORMAT#}
+<script>
+    numeralFormat('#produitbundle_huile_prixAchat');
+
+    $('#produitbundle_huile_prixAchat').addClass('only_float');
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-primary">Fiche Huile</strong> {% endblock %}
+{% block titre_description %}Information sur la référence d'huile{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-slack"></i> Fiche Information Produit</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-inline">
+                                {% if is_granted('ROLE_HUILE') %}
+                                    <li>
+                                        <a href="{{ path('huile_edit', {'id' : huile.id}) }}" class="btn btn-info btn-lg"><i class="fa fa-edit"></i> Modifier</a>
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div >
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th>Designation</th>
+                                <td>{{ huile.designation }}</td>
+                            </tr>
+                            <tr>
+                                <th>Code</th>
+                                <td>{{ huile.code }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prixachat</th>
+                                <td>{{ huile.prixAchat }}</td>
+                            </tr>
+                            <tr>
+                                <th>Stocktotal</th>
+                                <td>{{ huile.stockTotal }}</td>
+                            </tr>
+                            <tr>
+                                <th>Alert</th>
+                                <td>{{ huile.alert }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><b>Note: </b> <strong style="white-space: pre">                </strong>{{ huile.note|nl2br }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,52 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}Liste des heures de marches{% endblock %}
-{% block titre_page %}Liste des heures de marches{% endblock %}
-{% block titre_description %}<br>Liste des heures de marches</br>{% endblock %}
+{% block titre %}Liste de vos huiles{% endblock %}
+{% block titre_page %}Huile{% endblock %}
+{% block titre_description %}<br>Liste dee vos références d'huile disponibles{% endblock %}
 {% block body %}
 
-    <div class="">
-        <ul class="list-inline">
-
-        </ul>
-    </div>
-
+    <ul class="list-inline">
+        {% if is_granted('ROLE_HUILE') %}
+            <li><a href="{{ path('huile_new') }}" class="btn btn-lg btn-success"><i class="fa fa-plus-circle"></i> Nouveau Huile</a></li>
+        {% endif %}
+    </ul>
     <div class="row">
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title text-primary">Liste des groupes</h3>
+                    <h3 class="box-title">Table liste produit</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-striped table-bordered" id="tableGroupe">
+                    <table class="table table-striped table-bordered" id="tableHuile">
                         <thead>
                         <tr>
-                            <th>Numero</th>
-                            <th>Marque</th>
-                            <th>Site</th>
-                            <th>Heure(s) de marche</th>
-                            <th>Puissance consommer</th>
-                            <th></th>
+                            <th>Code</th>
+                            <th>Designation</th>
+                            <th>Prixachat</th>
+                            <th>Stocktotal</th>
+                            <th>Alert</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for groupe in groupes %}
+                        {% for huile in huiles %}
                             <tr>
+                                <td><a href="{{ path('huile_show', { 'id': huile.id }) }}">{{ huile.code }}</a></td>
+                                <td>{{ huile.designation }}</td>
+                                <td>{{ huile.prixAchat }}</td>
+                                <td>{{ huile.stockTotal }}</td>
+                                <td>{{ huile.alert }}</td>
                                 <td>
-                                    <a  href="{{ path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id}) }}" class="{{ groupe.id }}" onclick="modal({{ groupe.id }})" href="#">{{ groupe.numero }}</a>
-                                </td>
-                                <td>{{ groupe.marque }}</td>
-                                <td>{{ groupe.site.emplacement }}</td>
-                                <td >
-                                    {{ groupe.heureMarche }}
-                                </td>
-                                <td >
-                                    {{ groupe.puissanceConsommer }}
-                                </td>
-                                <td><a class="btn btn-default" href="{{  path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id})  }}">
-                                        <i class="fa fa-info-circle"></i> Détails
-                                    </a>
+                                    <a href="{{ path('huile_show', { 'id': huile.id }) }}" class="btn btn-xs btn-default"> Info</a>
+                                    {% if is_granted('ROLE_HUILE') %}
+                                        <a href="{{ path('huile_edit', { 'id': huile.id }) }}" class="btn btn-xs btn-primary"> Modifier</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -66,10 +61,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#tableGroupe').DataTable({
-                pageLength: 25,
-                order: [[ 0, "asc" ]],
-                paginate:false,
+            $('#tableHuile').DataTable({
+                scrollX: true,
+                pageLength: 100,
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",
@@ -91,6 +85,11 @@
                         sortAscending:  ": activer pour trier la colonne par ordre croissant",
                         sortDescending: ": activer pour trier la colonne par ordre décroissant"
                     }
+                },
+                scrollCollapse: true,
+                fixedColumns:   {
+                    leftColumns: 1,
+                    rightColumns: 1
                 }
             });
         } );

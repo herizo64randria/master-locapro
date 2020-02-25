@@ -1,10 +1,7 @@
 
 
-#-------------MES ROUTES-------------
 
-immo:
-  resource: "@ProduitBundle/Controller/ImmoController.php"
-  type:     annotation
+#-------------MES ROUTES-------------
 
 groupe:
     resource: "@GroupeBundle/Controller/"

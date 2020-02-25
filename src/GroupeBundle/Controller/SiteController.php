@@ -85,14 +85,14 @@ class SiteController extends Controller
     /**
      * Finds and displays a site entity.
      *
-     * @Route("/{id}/sh/ow", name="site_show")
+     * @Route("/{id}/information", name="site_show")
      *
      */
     public function showAction(Site $site)
     {
         $deleteForm = $this->createDeleteForm($site);
 
-        return $this->render('site/show.html.twig', array(
+        return $this->render('@Groupe/site/show.html.twig', array(
             'site' => $site,
             'delete_form' => $deleteForm->createView(),
         ));

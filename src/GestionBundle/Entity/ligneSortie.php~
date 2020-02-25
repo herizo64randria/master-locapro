@@ -46,9 +46,15 @@ class ligneSortie
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $produit;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Huile")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $huile;
 
     /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Sortie", inversedBy="ligneSorties")

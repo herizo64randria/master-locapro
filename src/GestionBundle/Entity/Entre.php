@@ -87,11 +87,13 @@ class Entre
      * @ORM\JoinColumn(nullable=false)
      */
     private $depot;
+
     /**
      * @ORM\ManyToOne(targetEntity="FournisseurBundle\Entity\Fournisseur")
      * @ORM\JoinColumn(nullable=true)
      */
     private $fournisseur;
+
     /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
      */

@@ -53,9 +53,15 @@ class ligneEntre
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $produit;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Huile")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $huile;
 
     /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Entre", inversedBy="ligneEntres")
@@ -218,5 +224,29 @@ class ligneEntre
     public function getUtilite()
     {
         return $this->utilite;
+    }
+
+    /**
+     * Set huile
+     *
+     * @param \ProduitBundle\Entity\Huile $huile
+     *
+     * @return ligneEntre
+     */
+    public function setHuile(\ProduitBundle\Entity\Huile $huile = null)
+    {
+        $this->huile = $huile;
+
+        return $this;
+    }
+
+    /**
+     * Get huile
+     *
+     * @return \ProduitBundle\Entity\Huile
+     */
+    public function getHuile()
+    {
+        return $this->huile;
     }
 }

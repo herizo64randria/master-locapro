@@ -219,4 +219,52 @@ class Immo
     {
         return $this->note;
     }
+
+    /**
+     * Set depot
+     *
+     * @param \ProduitBundle\Entity\Depot $depot
+     *
+     * @return Immo
+     */
+    public function setDepot(\ProduitBundle\Entity\Depot $depot = null)
+    {
+        $this->depot = $depot;
+
+        return $this;
+    }
+
+    /**
+     * Get depot
+     *
+     * @return \ProduitBundle\Entity\Depot
+     */
+    public function getDepot()
+    {
+        return $this->depot;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return Immo
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site = null)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
 }

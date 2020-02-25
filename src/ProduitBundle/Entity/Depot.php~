@@ -336,4 +336,38 @@ class Depot
     {
         return $this->historiqueImmos;
     }
+
+    /**
+     * Add immo
+     *
+     * @param \ProduitBundle\Entity\Immo $immo
+     *
+     * @return Depot
+     */
+    public function addImmo(\ProduitBundle\Entity\Immo $immo)
+    {
+        $this->immos[] = $immo;
+
+        return $this;
+    }
+
+    /**
+     * Remove immo
+     *
+     * @param \ProduitBundle\Entity\Immo $immo
+     */
+    public function removeImmo(\ProduitBundle\Entity\Immo $immo)
+    {
+        $this->immos->removeElement($immo);
+    }
+
+    /**
+     * Get immos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImmos()
+    {
+        return $this->immos;
+    }
 }

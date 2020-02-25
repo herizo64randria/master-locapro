@@ -87,6 +87,9 @@ class ImmoController extends Controller
             
             $em->flush();
 
+            $produitSercice = new ProduitService($em);
+            $produitSercice->emplacementImmo($immo);
+
             // ------------------- HISTORIQUE GLOBAL ---------------------
 
             $historiqueGlobal = new HistoriqueGlobal();
@@ -259,6 +262,7 @@ class ImmoController extends Controller
             }
 
             $em->persist($historiqueImmo);
+            $em->persist($immo);
             $em->flush();
 
             // ------------------- HISTORIQUE GLOBAL ---------------------

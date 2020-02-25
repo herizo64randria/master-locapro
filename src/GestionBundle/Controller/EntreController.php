@@ -113,18 +113,6 @@ class EntreController extends Controller
         ));
 
     }
-    /**
-     * test.
-     *
-     * @Route("/test", name="test")
-     *
-     */
-    public function testAction()
-    {
-        $data = array('12','24','23');
-        $json= json_encode($data);
-        return new Response($json);
-    }
 
     /**
      * nouveau entity.
@@ -241,14 +229,10 @@ class EntreController extends Controller
                 $entre->setDepot($depot);
             }
 
-
-
             $em->persist($entre);
             $em->flush();
 
             return $this->redirectToRoute('entre_affcher', array('id' => $entre->getId()));
-
-
         }
 
         return $this->render('@Gestion/Entre/edit.html.twig', array(

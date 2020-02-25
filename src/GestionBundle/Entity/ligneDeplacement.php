@@ -44,6 +44,12 @@ class ligneDeplacement
     private $produit;
 
     /**
+     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Huile")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $huile;
+
+    /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Deplacement", inversedBy="lignedeplacement")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -157,5 +163,29 @@ class ligneDeplacement
     public function getDeplacement()
     {
         return $this->deplacement;
+    }
+
+    /**
+     * Set huile
+     *
+     * @param \ProduitBundle\Entity\Huile $huile
+     *
+     * @return ligneDeplacement
+     */
+    public function setHuile(\ProduitBundle\Entity\Huile $huile = null)
+    {
+        $this->huile = $huile;
+
+        return $this;
+    }
+
+    /**
+     * Get huile
+     *
+     * @return \ProduitBundle\Entity\Huile
+     */
+    public function getHuile()
+    {
+        return $this->huile;
     }
 }

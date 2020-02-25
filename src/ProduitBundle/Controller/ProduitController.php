@@ -3,7 +3,6 @@
 namespace ProduitBundle\Controller;
 
 use AppBundle\Services\ProduitService;
-use HistoriqueGlobalBundle\Entity\Historique_Global;
 use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +17,6 @@ use UserBundle\Entity\HistoriqueGlobal;
 class ProduitController extends Controller
 {
 
-   
     /**
      * Lists all produit entities.
      *
