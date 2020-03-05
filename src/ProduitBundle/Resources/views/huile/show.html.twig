@@ -50,9 +50,12 @@
                                 <th>Alert</th>
                                 <td>{{ huile.alert }}</td>
                             </tr>
-                            <tr>
-                                <td colspan="2"><b>Note: </b> <strong style="white-space: pre">                </strong>{{ huile.note|nl2br }}</td>
-                            </tr>
+                            {% if huile.note %}
+                                <tr>
+                                    <td colspan="2"><b>Note: </b> <strong style="white-space: pre">                </strong>{{ huile.note|nl2br }}</td>
+                                </tr>
+                            {% endif %}
+
                             </tbody>
                         </table>
                     </div>

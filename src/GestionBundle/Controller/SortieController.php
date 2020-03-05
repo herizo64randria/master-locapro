@@ -95,6 +95,12 @@ class SortieController extends Controller
 
         $serviceProduit = new ProduitService($em);
 
+        $serviceGestion = new GestionService($em);
+        if($serviceGestion->testErreurLigneSortie($sortie) > 0){
+            throw new Exception('Erreur! Les lignes de ce document possède des erreurs');
+
+        }
+
         foreach ($sortie->getLigneSorties() as $ligneSortie){
 
             //--------HISTORIQUE DU PRODUIT------------
@@ -103,7 +109,6 @@ class SortieController extends Controller
             $historiqueProduit->setType('debit');
             $historiqueProduit->setProduit($ligneSortie->getProduit());
             $historiqueProduit->setSortie($sortie);
-            $historiqueProduit->setDepot($sortie->getDepot());
             $historiqueProduit->setDate($sortie->getDate());
             $historiqueProduit->setQuantite($ligneSortie->getQuantite());
 
@@ -111,32 +116,54 @@ class SortieController extends Controller
 
             //--------------------------------------------
 
-            //-----------------ENTREE DANS LE STOCK-----------------
+            //-----------------SORTIE DANS LE STOCK-----------------
 
-            $stock = $repositoryStock->findOneBy(array(
-                'produit' => $historiqueProduit->getProduit(),
-                'depot' => $historiqueProduit->getDepot()
-            ));
 
-            if(!$stock){
-                $stock = new Stock_();
-                $stock->setDepot($historiqueProduit->getDepot());
-                $stock->setProduit($historiqueProduit->getProduit());
-                $stock->setQuantite(0);
+            if ($sortie->getDepot()){
+                $historiqueProduit->setDepot($sortie->getDepot());
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'depot' => $historiqueProduit->getDepot()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le dépôt: '.$historiqueProduit->getProduit()->getReference());
+                }
+            }
+
+            if ($sortie->getSite()){
+                $historiqueProduit->setSite($sortie->getSite());
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'site' => $historiqueProduit->getSite()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le site: '.$historiqueProduit->getProduit()->getReference());
+                }
             }
 
             $quantite = $stock->getQuantite() - $historiqueProduit->getQuantite();
+
+            if($quantite < 0){
+                throw new Exception('Erreur! La quantité est supérieur par rapport au stock: '.$historiqueProduit->getProduit()->getReference());
+            }
+
             $stock->setQuantite($quantite);
 
             $em->persist($stock);
-            $em->flush();
-            //------------------------------------------------
 
-            //--------UPDATE STOCK TOTAL-----------------
-            $produit = $historiqueProduit->getProduit();
-            $serviceProduit->updateStockTotal($produit);
-            $em->flush();
+            //------------------------------------------------
         }
+
+        $em->flush();
+
+        //--------UPDATE STOCK TOTAL-----------------
+        foreach ($sortie->getLigneSorties() as $ligneSortie){
+            $produit = $ligneSortie->getProduit();
+            $serviceProduit->updateStockTotal($produit);
+        }
+
 
         $sortie->setEtat(self::DEMANDE_CONFIRME);
 
@@ -157,6 +184,13 @@ class SortieController extends Controller
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array('etat'=>true));
         $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
+
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
         
         if($request->getMethod() == 'POST'){
             $sortie = new Sortie();
@@ -177,10 +211,19 @@ class SortieController extends Controller
             if (isset($_POST['destination']))
                 $sortie->setDestination($_POST['destination']);
 
-            $depot = $repositoryDepot->findOneBy(array(
-                'id' => $_POST['depot']
-            ));
-            $sortie->setDepot($depot);
+            // ------------------- EMPLACEMEMNT ---------------------
+
+            if($_POST['emplacement'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['site']));
+                $sortie->setSite($site);
+            }
+
+            if ($_POST['emplacement'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depot']));
+                $sortie->setDepot($depot);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT ////// ---------------------
 
             //NEXT NUMERO
             $this->nextNumero($em);
@@ -207,6 +250,7 @@ class SortieController extends Controller
             'numero' => $this->recupereNumeroSortie($em),
             'depots' => $depots,
             'groupes'=> $groupes,
+            'sites' => $sites,
 
         ));
 
@@ -224,6 +268,13 @@ class SortieController extends Controller
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array('etat'=>true));
         $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
+
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
 
 
         if($request->getMethod() == 'POST'){
@@ -247,14 +298,21 @@ class SortieController extends Controller
                 $sortie->setGroupe(null);
             }
 
-            if (isset($_POST['depot']) and $_POST['depot'])
-            {
-                $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
-                $depot = $repositoryDepot->findOneBy(array(
-                    'id' => $_POST['depot']
-                ));
-                $sortie->setDepot($depot);
+            // ------------------- EMPLACEMEMNT ---------------------
+
+            if($_POST['emplacement'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['site']));
+                $sortie->setSite($site);
+                $sortie->setDepot(null);
             }
+
+            if ($_POST['emplacement'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depot']));
+                $sortie->setDepot($depot);
+                $sortie->setSite(null);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT ////// ---------------------
 
             if (isset($_POST['motif']))
                 $sortie->setMotif($_POST['motif']);
@@ -271,6 +329,7 @@ class SortieController extends Controller
             'sortie' => $sortie,
             'depots' => $depots,
             'groupes'=> $groupes,
+            'sites' => $sites,
 
         ));
 
@@ -280,7 +339,7 @@ class SortieController extends Controller
     /**
      * nouveau entity.
      *
-     * @Route("/AF4{id}", name="sortie_afficher")
+     * @Route("/AF4{id}462", name="sortie_afficher")
      */
     public function afficherAction(Request $request, Sortie $sortie){
         $em = $this->getDoctrine()->getManager();
@@ -296,20 +355,20 @@ class SortieController extends Controller
     /**
      * INDEX
      *
-     * @Route("/l", name="sortie_index")
+     * @Route("/liste", name="sortie_index")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sorties = $em->getRepository('GestionBundle:Sortie')
-            ->findAll()
-        ;
-        $produits = $em->getRepository('ProduitBundle:Produit')->findAll();
+        $repositorySorties = $em->getRepository('GestionBundle:Sortie');
+
+        $sorties = $repositorySorties->findAll();
+
 
         return $this->render('@Gestion/Sortie/index.html.twig', array(
             'sorties' => $sorties,
-            'produits' => $produits,
+
         ));
 
     }
@@ -326,7 +385,11 @@ class SortieController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+
         if($request->getMethod() == 'POST'){
+            $repositoryStock = $em->getRepository(Stock_::class);
+
+
             $lignes = $sortie->getLigneSorties();
 
             $idProduit = $_POST['produit'];
@@ -360,11 +423,42 @@ class SortieController extends Controller
             $repositoryProduit = $em->getRepository('ProduitBundle:Produit');
             $produit = $repositoryProduit->findOneBy(array('id' => $idProduit));
 
-            //TEST DU QUANTITE
-            $serviceProduit = new ProduitService($em);
-            if($ligne->getQuantite() > $serviceProduit->getStock($produit, $sortie->getDepot()))
-                throw new Exception('Erreur! La quantité est supérieur que le stock dans le dépot');
-            //-----------------------
+
+
+            // ------------------- TEST DU STOCK ---------------------
+            $stock = null;
+            if ($sortie->getDepot()){
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $produit,
+                    'depot' => $sortie->getDepot()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le dépôt: '.$produit->getReference());
+                }
+            }
+
+            if ($sortie->getSite()){
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $produit,
+                    'site' => $sortie->getSite()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le site: '.$produit->getReference());
+                }
+            }
+
+            $quantiteEnStock = $stock->getQuantite();
+
+            if($quantiteEnStock < 0){
+                throw new Exception('Erreur! La quantité est supérieur par rapport au stock: '.$produit->getReference());
+            }
+
+            if($ligne->getQuantite() > $quantiteEnStock)
+                throw new Exception('Erreur! La quantité est supérieur que le stock dans le stock');
+
+            // ------------------- ////// TEST DU STOCK ////// ---------------------
 
             $ligne->setProduit($produit);
 
@@ -438,7 +532,7 @@ class SortieController extends Controller
             throw new Exception('Erreur! Ce document est déjà enregistré');
 
         $serviceGestion = new GestionService($em);
-        if($serviceGestion->testErreurLigne($sortie) > 0){
+        if($serviceGestion->testErreurLigneSortie($sortie) > 0){
             throw new Exception('Erreur! Les lignes de ce document possède des erreurs');
 
         }

@@ -5,10 +5,12 @@
 {% block titre_description %}<br>Liste transfert de produit(s){% endblock %}
 {% block body %}
     {%  set TRANSFERT_CONFIRME = 'Transfert confirmée'%}
-   {% set TRANSFERT_ATTENTE = 'Transfert en attente'%}
-   {% set TRANSFERT_REFUSER = 'Transfert refusée'%}
-   {% set TRANSFERT_CLOTURE = 'Transfert clôturée'%}
-   {% set TRANSFERT_ATTENTE_REC = 'Transfert en attente de reconfirmation'%}
+    {% set TRANSFERT_ATTENTE = 'Transfert en attente'%}
+    {% set TRANSFERT_REFUSER = 'Transfert refusée'%}
+    {% set TRANSFERT_CLOTURE = 'Transfert clôturée'%}
+    {% set TRANSFERT_ATTENTE_REC = 'Transfert en attente de reconfirmation'%}
+    {% set TRANSFERT_CREATION = 'En cour de création'%}
+
 
 
     <ul class="list-inline">
@@ -37,11 +39,10 @@
 
                         </tr>
                         </thead>
-                        {% set couleurEtat = '' %}
+
                         <tbody>
                         {% for deplacement in deplacements %}
-                            
-
+                            {% set couleurEtat = '' %}
 
                             {#                            COULEUR ETAT#}
                             {% if deplacement.etat == TRANSFERT_ATTENTE or deplacement.etat == TRANSFERT_ATTENTE_REC %}
@@ -57,10 +58,15 @@
                                 <td><a href="{{ path('deplacement_affcher', {'id' : deplacement.id}) }}">{{ deplacement.numero }}</a></td>
                                 <td>{{ deplacement.date|date('d/m/Y') }}</td>
                                 <td>{{ deplacement.userCreer.nom }}</td>
-                                <td>{{ deplacement.sourcedepot.nom }}</td>
-                                <td>{{ deplacement.destinationdepot.nom }}</td>
+                                <td>
+{#                                    {{ deplacement.sourcedepot.nom }}#}
+                                </td>
+                                <td>
+{#                                    {{ deplacement.destinationdepot.nom }}#}
+                                </td>
                                 <td class="{{ couleurEtat }}">{{ deplacement.etat }}</td>
                             </tr>
+
                         {% endfor %}
                         </tbody>
                     </table>

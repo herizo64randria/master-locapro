@@ -40,8 +40,13 @@
                             <td>{{ entre.date|date('d/m/Y') }}</td>
                         </tr>
                         <tr>
-                            <td>Dépôt:</td>
-                            <td>{{ entre.depot.nom }} ({{ entre.depot.abrv }})</td>
+                            <td>Emplacement:</td>
+                            {% if entre.depot %}
+                                <td><i>Dépôt</i> {{ entre.depot.nom }}</td>
+                            {% endif %}
+                            {% if entre.site %}
+                                <td><i>Site</i> {{ entre.site.emplacement }} </td>
+                            {% endif %}
                         </tr>
                         {% if entre.fournisseur %}
                         <tr>
@@ -200,7 +205,21 @@
                             <tbody>
                             {% for ligneEntre in entre.ligneEntres %}
                                 <tr>
-                                    <td  class="class_produit" idProduit="{{ ligneEntre.produit.id }}" >{{ ligneEntre.produit.code }}</td>
+                                    <td  class="class_produit " idProduit="{{ ligneEntre.produit.id }}" >
+
+                                        {% set ligneCode = '<i class="">Non-codé</i>' %}
+                                        {% set pathProduit = path('produit_show', {'id' : ligneEntre.produit.id}) %}
+                                        {% if ligneEntre.produit.code %}
+                                            {% set ligneCode = ligneEntre.produit.code %}
+                                        {% endif %}
+
+                                        {% if ligneEntre.produit.siHuile %}
+                                            {% set pathProduit = path('huile_show', {'id' : ligneEntre.produit.id}) %}
+                                            {% set ligneCode = '<b class="text-warning">(H)</b> '~ligneCode %}
+                                        {% endif %}
+
+                                        <a href="{{ pathProduit }}" target="_blank">{{ ligneCode|raw }}</a>
+                                    </td>
                                     <td>
                                         {{ ligneEntre.designation }}
                                         {% if ligneEntre.utilite %}
@@ -218,12 +237,10 @@
 
                                     <td class="text-right">{{ prixAchat }}</td>
                                     {% if entre.modifiable and entre.userCreer == app.user %}
-                                    <td class="action">
-                                        <a href="{{ path('entre_modifierLigne', {'id' : ligneEntre.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                                        <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('entre_supprimerLigne', { 'id' : ligneEntre.id }) }}"><i class="fa fa-minus-circle "></i></button>
-                                    </td>
+                                        <td class="action">
+                                            <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('entre_supprimerLigne', { 'id' : ligneEntre.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                        </td>
                                     {% endif %}
-
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -237,7 +254,22 @@
                                                 <option value=" ">
                                                 </option>
                                                 {% for produit in produits %}
-                                                    <option value="{{ produit.id }}">{{ produit.designation }} - {{ produit.code }} | {{ produit.reference }} <b>({{ entre.depot|stock(produit) }})</b></option>
+                                                    {% set qttProduit = '-' %}
+                                                    {% if entre.site %}
+                                                        {% set qttProduit = entre.site|stockBySite(produit) %}
+                                                    {% endif %}
+
+                                                    {% if entre.depot %}
+                                                        {% set qttProduit = entre.depot|stockByDepot(produit) %}
+                                                    {% endif %}
+
+                                                    <option value="{{ produit.id }}">
+                                                        {% if produit.siHuile %}
+                                                            (H)
+                                                        {% endif %}
+
+                                                        {{ produit.designation }} - {{ produit.code }} | {{ produit.reference }} <b>({{ qttProduit }})</b>
+                                                    </option>
                                                 {% endfor %}
                                             </select>
                                         </div>

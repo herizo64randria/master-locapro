@@ -59,6 +59,27 @@ class Site
      */
     private $immos; // Notez le « s », il y a plusieur historique
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Entre", mappedBy="site")
+     */
+    private $Entres; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Sortie", mappedBy="site")
+     */
+    private $sorties; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="sourcesite")
+     */
+    private $sourcedeplacements; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="destinationsite")
+     */
+    private $destinationdeplacements; // Notez le « s », un stocks est liée à plusieurs entrées
+
+
 //------------------------------------------
 
     /**

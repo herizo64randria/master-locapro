@@ -3,6 +3,7 @@
 namespace ProduitBundle\Controller;
 
 use ProduitBundle\Entity\Huile;
+use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,9 @@ class HuileController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $huiles = $em->getRepository('ProduitBundle:Huile')->findAll();
+        $huiles = $em->getRepository('ProduitBundle:Produit')->findBy(array(
+            'siHuile' => true
+        ));
 
         return $this->render('@Produit/huile/index.html.twig', array(
             'huiles' => $huiles,
@@ -40,12 +43,15 @@ class HuileController extends Controller
      */
     public function newAction(Request $request)
     {
-        $huile = new Huile();
-        $form = $this->createForm('ProduitBundle\Form\HuileType', $huile);
+        $huile = new Produit();
+        $form = $this->createForm('ProduitBundle\Form\ProduitType', $huile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $huile->setSiHuile(true);
+
             $em->persist($huile);
             $em->flush();
             // ---HISTORIQUE GLOBAL-----
@@ -76,7 +82,7 @@ class HuileController extends Controller
      * @Route("/{id}", name="huile_show")
      *
      */
-    public function showAction(Huile $huile)
+    public function showAction(Produit $huile)
     {
 
 
@@ -91,10 +97,10 @@ class HuileController extends Controller
      * @Route("/modifier/500{id}500", name="huile_edit")
      *
      */
-    public function editAction(Request $request, Huile $huile)
+    public function editAction(Request $request, Produit $huile)
     {
 
-        $editForm = $this->createForm('ProduitBundle\Form\HuileType', $huile);
+        $editForm = $this->createForm('ProduitBundle\Form\ProduitType', $huile);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -128,7 +134,7 @@ class HuileController extends Controller
 
      *
      */
-    public function deleteAction(Request $request, Huile $huile)
+    public function deleteAction(Request $request, Produit $huile)
     {
         $form = $this->createDeleteForm($huile);
         $form->handleRequest($request);

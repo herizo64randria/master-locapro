@@ -196,4 +196,28 @@ class SousHeureMarche
     {
         return $this->heureMarche;
     }
+
+    /**
+     * Set heure
+     *
+     * @param float $heure
+     *
+     * @return SousHeureMarche
+     */
+    public function setHeure($heure)
+    {
+        $this->heure = $heure;
+
+        return $this;
+    }
+
+    /**
+     * Get heure
+     *
+     * @return float
+     */
+    public function getHeure()
+    {
+        return $this->heure;
+    }
 }

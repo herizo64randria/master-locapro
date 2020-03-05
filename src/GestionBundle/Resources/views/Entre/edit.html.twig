@@ -32,31 +32,31 @@
                             <input type="hidden" id="dtp_input2" value="" /><br/>
                         </div>
 
-                        <div class="form-group">
-                            <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>
-                            <select required  class="form-control" name="depot" id="depot"
+{#                        <div class="form-group">#}
+{#                            <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>#}
+{#                            <select required  class="form-control" name="depot" id="depot"#}
 
-                                    {% if i>0  %}
-                                        disabled
-                                    {% endif %}
-                            >
+{#                                    {% if i>0  %}#}
+{#                                        disabled#}
+{#                                    {% endif %}#}
+{#                            >#}
 
-                                    <option value="">
+{#                                    <option value="">#}
 
-                                    </option>
-                                    {% for depot in depots %}
+{#                                    </option>#}
+{#                                    {% for depot in depots %}#}
 
-                                        <option value="{{ depot.id }}"
-                                        {% if entre.depot and depot.nom==entre.depot.nom   %}
-                                            selected
-                                        {% endif %}
-                                        >{{ depot.nom }}- - {{ entre.depot.abrv }} </option>
+{#                                        <option value="{{ depot.id }}"#}
+{#                                        {% if entre.depot and depot.nom==entre.depot.nom   %}#}
+{#                                            selected#}
+{#                                        {% endif %}#}
+{#                                        >{{ depot.nom }}- - {{ entre.depot.abrv }} </option>#}
 
-                                    {% endfor %}
+{#                                    {% endfor %}#}
 
 
-                            </select>
-                        </div>
+{#                            </select>#}
+{#                        </div>#}
 
                             <div class="form-group">
                                 <label for="fournisseur">Fournisseur <b class="text-danger" id="err_fournisseur"></b></label>
@@ -64,7 +64,7 @@
                                         {% if  j>0 %}
                                             disabled
                                         {% endif %}
-                                        required  class="form-control" name="fournisseur" id="fournisseur" >
+                                          class="form-control" name="fournisseur" id="fournisseur" >
 
                                         <option value="">
 
@@ -80,20 +80,84 @@
                                             >{{ fournisseur.nom }} </option>
 
                                         {% endfor %}
-
-                                    
                                 </select>
                             </div>
 
 
                         <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
-                            <textarea
-                                    {% if  j>0 %}
-                                         disabled
-                                    {% endif %}
-                                    rows="3" class="form-control" name="motif" id="motif" ></textarea>
+                            <textarea rows="3" class="form-control" name="motif" id="motif" ></textarea>
                         </div>
+
+                        <!-- ----------------  DEPOT OU SITE ------------------ -->
+
+                        <div class="box" id="choixEmplacement">
+                            <div class="box-header with-border">
+                                <h4 class="box-title text-primary"> Emplacement d'entré</h4>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-primary">
+                                                <input type="radio" name="emplacement" id="emplacementDepot" value="depot"
+                                                        {% if entre.depot %}
+                                                            checked
+                                                        {% endif %}
+                                                />
+                                                <label for="emplacementDepot">Dépôt</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementDepot">
+                                            <div class="form-group">
+                                                <label for="depot">Dépôt de stockage <b class="text-danger" id="err_depot"></b></label>
+                                                <select required  class="form-control" name="depot" id="depot">
+
+                                                    {% for key, depot in depots %}
+                                                        <option value="{{ depot.id }}" {% if entre.depot == depot %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-info">
+                                                <input type="radio" name="emplacement" id="emplacementSite" value="site"
+                                                        {% if entre.site %}
+                                                            checked
+                                                        {% endif %}
+                                                />
+                                                <label for="emplacementSite">Site</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementSite">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
+                                                    <select required class="form-control" name="site" id="site">
+                                                        {% for key, site in sites %}
+                                                            <option value="{{ site.id }}" {% if entre.site == site %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ----------------  ///// DEPOT OU SITE ///// ------------------ -->
 
                         <div class="row">
                             <div class="col-md-6">
@@ -114,15 +178,11 @@
     <br><br><br><br><br><br>
 
 
-    </script>
-
     {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
 
     {#NUMERAL FORMAT#}
     <script>
         $('#fournisseur').select2();
-        numeralFormat('#produitbundle_produit_prixAchat');
-        numeralFormat('#produitbundle_produit_prixVente');
     </script>
     {#DATEPICKER#}
     <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
@@ -140,4 +200,45 @@
             forceParse: 0
         });
     </script>
+
+    <script>
+        $('#site').select2();
+        $('#depot').select2();
+    </script>
+
+    {#    SCRIPT CHOIX EMPLACEMENT#}
+    <script>
+        $('#site').prop('disabled', true);
+        $('#depot').prop('disabled', false);
+
+        $('#emplacementDepot').click(function () {
+            $('#site').prop('disabled', true);
+            $('#depot').prop('disabled', false);
+        });
+
+        $('#emplacementSite').click(function () {
+            $('#site').prop('disabled', false);
+            $('#depot').prop('disabled', true);
+        });
+
+    </script>
+
+    {% if entre.site %}
+        <script>
+            $('#site').prop('disabled', false);
+            $('#depot').prop('disabled', true);
+        </script>
+    {% endif %}
+    {% if entre.depot %}
+        <script>
+            $('#site').prop('disabled', true);
+            $('#depot').prop('disabled', false);
+        </script>
+    {% endif %}
+
+    {% if  j>0 %}
+        <script>
+            $('#choixEmplacement').hide();
+        </script>
+    {% endif %}
 {% endblock %}

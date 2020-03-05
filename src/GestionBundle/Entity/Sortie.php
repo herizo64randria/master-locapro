@@ -92,9 +92,15 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot", inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $depot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $site;
 
     /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
@@ -140,6 +146,8 @@ class Sortie
         return $this->id;
     }
 
+
+
     /**
      * Set date
      *
@@ -162,6 +170,30 @@ class Sortie
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set dateOperation
+     *
+     * @param \DateTime $dateOperation
+     *
+     * @return Sortie
+     */
+    public function setDateOperation($dateOperation)
+    {
+        $this->dateOperation = $dateOperation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOperation
+     *
+     * @return \DateTime
+     */
+    public function getDateOperation()
+    {
+        return $this->dateOperation;
     }
 
     /**
@@ -237,6 +269,30 @@ class Sortie
     }
 
     /**
+     * Set destination
+     *
+     * @param string $destination
+     *
+     * @return Sortie
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
+
+        return $this;
+    }
+
+    /**
+     * Get destination
+     *
+     * @return string
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
      * Set motif
      *
      * @param string $motif
@@ -258,6 +314,30 @@ class Sortie
     public function getMotif()
     {
         return $this->motif;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param string $texte
+     *
+     * @return Sortie
+     */
+    public function setTexte($texte)
+    {
+        $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return string
+     */
+    public function getTexte()
+    {
+        return $this->texte;
     }
 
     /**
@@ -325,7 +405,7 @@ class Sortie
      *
      * @return Sortie
      */
-    public function setDepot(\ProduitBundle\Entity\Depot $depot)
+    public function setDepot(\ProduitBundle\Entity\Depot $depot = null)
     {
         $this->depot = $depot;
 
@@ -342,31 +422,29 @@ class Sortie
         return $this->depot;
     }
 
-
     /**
-     * Set destination
+     * Set site
      *
-     * @param string $destination
+     * @param \GroupeBundle\Entity\Site $site
      *
      * @return Sortie
      */
-    public function setDestination($destination)
+    public function setSite(\GroupeBundle\Entity\Site $site = null)
     {
-        $this->destination = $destination;
+        $this->site = $site;
 
         return $this;
     }
 
     /**
-     * Get destination
+     * Get site
      *
-     * @return string
+     * @return \GroupeBundle\Entity\Site
      */
-    public function getDestination()
+    public function getSite()
     {
-        return $this->destination;
+        return $this->site;
     }
-
 
     /**
      * Add userConfirme
@@ -400,30 +478,6 @@ class Sortie
     public function getUserConfirmes()
     {
         return $this->userConfirmes;
-    }
-
-    /**
-     * Set texte
-     *
-     * @param string $texte
-     *
-     * @return Sortie
-     */
-    public function setTexte($texte)
-    {
-        $this->texte = $texte;
-
-        return $this;
-    }
-
-    /**
-     * Get texte
-     *
-     * @return string
-     */
-    public function getTexte()
-    {
-        return $this->texte;
     }
 
     /**
@@ -472,29 +526,5 @@ class Sortie
     public function getGroupe()
     {
         return $this->groupe;
-    }
-
-    /**
-     * Set dateOperation
-     *
-     * @param \DateTime $dateOperation
-     *
-     * @return Sortie
-     */
-    public function setDateOperation($dateOperation)
-    {
-        $this->dateOperation = $dateOperation;
-
-        return $this;
-    }
-
-    /**
-     * Get dateOperation
-     *
-     * @return \DateTime
-     */
-    public function getDateOperation()
-    {
-        return $this->dateOperation;
     }
 }

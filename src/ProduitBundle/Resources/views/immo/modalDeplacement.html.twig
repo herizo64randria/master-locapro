@@ -34,14 +34,14 @@
                                     <div class="funkyradio">
                                         <div class="funkyradio-primary">
                                             <input type="radio" name="emplacement" id="emplacementDepot" value="depot" checked/>
-                                            <label for="emplacementDepot">Dépot</label>
+                                            <label for="emplacementDepot">Dépôt</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="emplacementDepot">
                                         <div class="form-group">
-                                            <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>
+                                            <label for="depot">Dépôt de stockage <b class="text-danger" id="err_depot"></b></label>
                                             <select required  class="form-control" name="depot" id="depot" >
                                                 {% for key, depot in depots %}
                                                     {% if depot != immo.depot %}

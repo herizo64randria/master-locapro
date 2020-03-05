@@ -48,6 +48,11 @@
                                     <th>Réf equi.</th>
                                     <td>{{ produit.refEqui }}</td>
                                 </tr>
+                                {% if produit.note %}
+                                    <tr>
+                                        <td colspan="2"><b>Note: </b> <strong style="white-space: pre">                </strong>{{ produit.note|nl2br }}</td>
+                                    </tr>
+                                {% endif %}
                                 </tbody>
                             </table>
                         </div>
@@ -88,6 +93,7 @@
                                     <th><i class="fa fa-warning"></i> Alert de stock</th>
                                     <td class="text-right">{{ produit.alert }}</td>
                                 </tr>
+
                                 </tbody>
                             </table>
                         </div>

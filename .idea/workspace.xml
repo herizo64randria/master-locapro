@@ -1,27 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99f2bbc0-d5ce-4396-83ca-3c417a396fd5" name="Default Changelist" comment="">
+    <list default="true" id="9b95e914-50fb-4996-bf27-6fd954615408" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_02_03_20_11_43_s.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_10_02_20_11_04_s.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/security.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/security.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Services/ProduitService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Services/ProduitService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Twig/Extension/ProduitExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Twig/Extension/ProduitExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneDeplacement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneDeplacement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/editLigneDeplacement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/editLigneDeplacement.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/imprimer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show1.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/modalByHeure.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/HuileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/HuileController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/ImmoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/ImmoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Huile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Stock_.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Stock_.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/HuileType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/HuileRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/modalDeplacement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/modalDeplacement.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,124 +67,121 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-      </list>
-    </option>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="121" column="12" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="499">
+              <caret line="134" column="54" selection-start-line="134" selection-start-column="54" selection-end-line="134" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4811">
+              <caret line="298" column="19" selection-start-line="298" selection-start-column="19" selection-end-line="298" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Services/GestionService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="833">
+              <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/new.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="166" column="13" selection-start-line="151" selection-start-column="4" selection-end-line="166" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="226" column="47" selection-start-line="226" selection-start-column="47" selection-end-line="226" selection-end-column="47" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="130" column="68" selection-start-line="130" selection-start-column="68" selection-end-line="130" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>thr</find>
-      <find>tr</find>
-      <find>groupe</find>
-      <find>format</find>
-      <find>form</find>
-      <find>max</find>
-      <find>huile_</find>
+      <find>sets</find>
+      <find>class_pro</find>
+      <find>Erreur! La quantité est supérieur par rapport au stock source dans le Dépôt</find>
+      <find>Source</find>
+      <find>id=&quot;siteSource&quot;</find>
+      <find>id=&quot;siteDestination&quot;</find>
+      <find>en cou</find>
+      <find>siteDestination</find>
+      <find>emplacementSource</find>
+      <find>depot</find>
+      <find>$sortie</find>
+      <find>$stock_destination</find>
     </findStrings>
     <replaceStrings>
-      <replace>td</replace>
-      <replace>heureMarche</replace>
+      <replace>Destination</replace>
+      <replace>emplacementDestination</replace>
+      <replace>$deplacement</replace>
+      <replace>$stockDestination</replace>
     </replaceStrings>
-    <dirStrings>
-      <dir>C:\xampp\htdocs\stock\src</dir>
-    </dirStrings>
-  </component>
-  <component name="FrameworkCommandLineHistory">
-    <commandsHistory>
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities ProduitBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities ProduitBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:generate:entities ProduitBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:generate:entities ProduitBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GroupeBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities ProduitBundle" />
-      <command text="s doctrine:generate:crud ProduitBundle:Huile" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-      <command text="s doctrine:generate:entities GestionBundle" />
-      <command text="s doctrine:schema:update --dump-sql  --f" />
-      <command text="s doctrine:schema:update --dump-sql  --force " />
-    </commandsHistory>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/modalHeureMarcheDetail.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Entity/Immo.php" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Twig/Extension/ProduitExtension.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Services/ProduitService.php" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/modalDeplacement.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/imprimer.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/new.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/indexHeureMarches.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/indexHeureMarches.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/modalHeureMarcheDetail.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/HeureMarche.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/SousHeureMarche.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/modalSousHeure.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/detailHeureMarche.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/HeureMarcheController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Services/GroupeService.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeHeureMarcheController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/detailHeureGroupe.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/modalByHeure.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Controller/ImmoController.php" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Entity/Huile.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Form/HuileType.php" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Controller/HuileController.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" />
-        <option value="$PROJECT_DIR$/src/GestionHuileBundle/Entity/EntreHuile.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" />
-        <option value="$PROJECT_DIR$/src/GestionHuileBundle/Entity/SortieHuile.php" />
-        <option value="$PROJECT_DIR$/src/GestionHuileBundle/Entity/DeplacementHuile.php" />
-        <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Entity/ligneDeplacement.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" />
-        <option value="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" />
+        <option value="$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php" />
       </list>
     </option>
   </component>
@@ -213,9 +241,6 @@
     <option name="width" value="1280" />
     <option name="height" value="550" />
   </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -246,6 +271,39 @@
               <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="Deplacement" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stock" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GestionBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="Sortie" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -256,24 +314,9 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\stock\src\ProduitBundle\Resources\views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\GroupeHeureMarche" />
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views" />
-      <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Controller" />
-      <recent name="C:\xampp\htdocs\stock\src\ProduitBundle\Resources\views\immo" />
-      <recent name="C:\xampp\htdocs\stock\web\images" />
-    </key>
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -292,35 +335,22 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="99f2bbc0-d5ce-4396-83ca-3c417a396fd5" name="Default Changelist" comment="" />
-      <created>1581319688607</created>
+      <changelist id="9b95e914-50fb-4996-bf27-6fd954615408" name="Default Changelist" comment="" />
+      <created>1583138540105</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1581319688607</updated>
-      <workItem from="1581319696058" duration="2448000" />
-      <workItem from="1581329380707" duration="10366000" />
-      <workItem from="1581401239474" duration="4151000" />
-      <workItem from="1581408723771" duration="10946000" />
-      <workItem from="1581485533453" duration="16028000" />
-      <workItem from="1581510831038" duration="45000" />
-      <workItem from="1581511528801" duration="1588000" />
-      <workItem from="1581570924379" duration="16868000" />
-      <workItem from="1581657493972" duration="5444000" />
-      <workItem from="1581667996045" duration="245000" />
-      <workItem from="1581926635922" duration="11749000" />
-      <workItem from="1582002679887" duration="15583000" />
-      <workItem from="1582094967230" duration="6291000" />
-      <workItem from="1582175533980" duration="12697000" />
-      <workItem from="1582196958331" duration="7157000" />
-      <workItem from="1582262063934" duration="12908000" />
-      <workItem from="1582521634880" duration="6912000" />
-      <workItem from="1582531844206" duration="7800000" />
-      <workItem from="1582607573249" duration="14809000" />
+      <updated>1583138540105</updated>
+      <workItem from="1583138546742" duration="3342000" />
+      <workItem from="1583153878553" duration="791000" />
+      <workItem from="1583212411109" duration="15614000" />
+      <workItem from="1583303186562" duration="17553000" />
+      <workItem from="1583385084476" duration="3747000" />
+      <workItem from="1583393006881" duration="6593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164035000" />
+    <option name="totallyTimeSpent" value="47640000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -333,8 +363,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2872483" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26510066" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -343,428 +374,183 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32970026" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32833788" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.33787465" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Command Line Tools Console" order="11" weight="0.4945504" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32833788" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.36239782" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32970026" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="3" side_tool="true" weight="0.3295302" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/modalByHeure.twig" />
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/detailHeureGroupe.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="20" column="123" selection-start-line="20" selection-start-column="123" selection-end-line="20" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/indexHeureMarches.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+        <state>
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeHeureMarcheController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="96" column="13" selection-start-line="59" selection-start-column="4" selection-end-line="96" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" column="10" selection-start-line="6" selection-start-column="4" selection-end-line="75" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="144" column="40" selection-start-line="142" selection-start-column="38" selection-end-line="144" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="69" column="12" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+        <state relative-caret-position="330">
+          <caret line="48" column="39" selection-start-line="43" selection-start-column="28" selection-end-line="48" selection-end-column="39" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeController.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="94" column="50" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
+        <state relative-caret-position="482">
+          <caret line="638" column="53" selection-start-line="638" selection-start-column="53" selection-end-line="638" selection-end-column="53" />
           <folding>
-            <element signature="e#719#749#0#PHP" expanded="true" />
+            <element signature="e#8981#9012#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/Immo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ImmoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="90" column="52" selection-start-line="90" selection-start-column="52" selection-end-line="90" selection-end-column="52" />
-          <folding>
-            <element signature="e#44#82#0#PHP" expanded="true" />
-            <element signature="e#797#828#0#PHP" expanded="true" />
-            <element signature="e#3920#3950#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/imprimer.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
-          <caret line="43" column="28" selection-start-line="22" selection-start-column="20" selection-end-line="43" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2142">
-          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/Stock_.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/Huile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="276" column="77" selection-start-line="276" selection-start-column="77" selection-end-line="276" selection-end-column="77" />
+          <caret line="147" column="24" lean-forward="true" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="24" />
           <folding>
-            <element signature="e#14176#14187#0#Twig" expanded="true" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitAPIController.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/imprimer.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+        <state relative-caret-position="415">
+          <caret line="150" column="17" selection-start-line="140" selection-start-column="12" selection-end-line="150" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Services/ProduitService.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Twig/Extension/ProduitExtension.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+        <state relative-caret-position="347">
+          <caret line="29" column="89" selection-start-line="29" selection-start-column="89" selection-end-line="29" selection-end-column="89" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="87" column="84" selection-start-line="87" selection-start-column="84" selection-end-line="87" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4682">
+          <caret line="289" column="63" selection-start-line="282" selection-start-column="52" selection-end-line="289" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="86" selection-start-line="81" selection-start-column="3" selection-end-line="86" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="4" selection-end-column="16" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Form/HuileType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="70" column="7" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
-          <folding>
-            <element signature="e#38#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="91" column="36" selection-start-line="91" selection-start-column="36" selection-end-line="91" selection-end-column="36" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="14" selection-start-line="1" selection-end-line="46" selection-end-column="14" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="43" column="47" selection-start-line="41" selection-start-column="36" selection-end-line="43" selection-end-column="47" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="39" column="49" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="49" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="92" selection-start-line="11" selection-start-column="92" selection-end-line="11" selection-end-column="92" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="42" column="7" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
-          <folding>
-            <element signature="e#44#82#0#PHP" expanded="true" />
-            <element signature="e#962#996#0#PHP" expanded="true" />
-            <element signature="e#2261#2293#0#PHP" expanded="true" />
-            <element signature="e#2801#2834#0#PHP" expanded="true" />
-            <element signature="e#4216#4249#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Controller/HuileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="106" column="83" selection-start-line="106" selection-start-column="83" selection-end-line="106" selection-end-column="83" />
-          <folding>
-            <element signature="e#44#75#0#PHP" expanded="true" />
-            <element signature="e#559#580#1#PHP" expanded="true" />
-            <element signature="e#625#657#0#PHP" expanded="true" />
-            <element signature="e#1895#1925#0#PHP" expanded="true" />
-            <element signature="e#2223#2254#0#PHP" expanded="true" />
-            <element signature="e#3398#3429#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="116" column="5" lean-forward="true" selection-start-line="109" selection-start-column="4" selection-end-line="116" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionHuileBundle/Entity/EntreHuile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="91" column="37" lean-forward="true" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="130" column="5" lean-forward="true" selection-start-line="119" selection-start-column="3" selection-end-line="130" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionHuileBundle/Entity/SortieHuile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="105" column="25" lean-forward="true" selection-start-line="73" selection-start-column="4" selection-end-line="105" selection-end-column="25" />
+        <state relative-caret-position="202">
+          <caret line="386" column="39" lean-forward="true" selection-start-line="386" selection-start-column="39" selection-end-line="386" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionHuileBundle/Entity/DeplacementHuile.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="101" column="25" lean-forward="true" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
+        <state relative-caret-position="748">
+          <caret line="44" column="54" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="63" column="19" lean-forward="true" selection-start-line="59" selection-start-column="4" selection-end-line="63" selection-end-column="19" />
+        <state relative-caret-position="876">
+          <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="54" column="37" lean-forward="true" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
+        <state relative-caret-position="140">
+          <caret line="130" column="68" selection-start-line="130" selection-start-column="68" selection-end-line="130" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Entity/ligneDeplacement.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+        <state relative-caret-position="247">
+          <caret line="166" column="13" selection-start-line="151" selection-start-column="4" selection-end-line="166" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+        <state relative-caret-position="364">
+          <caret line="226" column="47" selection-start-line="226" selection-start-column="47" selection-end-line="226" selection-end-column="47" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="499">
+          <caret line="134" column="54" selection-start-line="134" selection-start-column="54" selection-end-line="134" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Services/ProduitService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="236">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+          <folding>
+            <element signature="e#38#67#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Services/GestionService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="833">
+          <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+        <state relative-caret-position="119">
+          <caret line="121" column="12" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/DeplacementController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionBundle/Controller/EntreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+        <state relative-caret-position="4811">
+          <caret line="298" column="19" selection-start-line="298" selection-start-column="19" selection-end-line="298" selection-end-column="19" />
         </state>
       </provider>
     </entry>

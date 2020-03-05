@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="box">
                 <form action="#" method="post">
                     <div class="box-header with-border">
@@ -27,35 +27,84 @@
                             <label for="numero">Numero transfert <b class="text-danger" id="err_numero"></b></label>
                             <input required type="text" class="form-control" name="numero" id="numero" value="{{ numero }}" readonly  />
                         </div>
-                    <div class="row">
-                        <div class="form-group col-md-5">
-                            <label for="source_depot">Dépot de stockage source <b class="text-danger" id="err_source_depot"></b></label>
-                            <select required  class="form-control" name="source_depot" id="source_depot" >
-                                {% for depot in depots %}
-                                    <option value="{{ depot.id }}">{{ depot.nom }} - {{ depot.abrv }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <br>
-                            <div class="text-center">
-                               <i class="fa fa-chevron-right fa-2x "></i><i class="fa fa-chevron-right fa-2x"></i>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label for="destination_depot">Dépot de stockage déstination <b class="text-danger" id="err_destination_depot"></b></label>
-                            <select required  class="form-control" name="destination_depot" id="destination_depot" >
-                                {% for depot in depots %}
-                                    <option value="{{ depot.id }}">{{ depot.nom }} - {{ depot.abrv }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-
 
                         <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
                             <textarea rows="3" class="form-control" name="motif" id="motif" ></textarea>
+                        </div>
+
+                        <div class="row">
+                            <!-- ----------------  EMPLACEMENT SOURCE ------------------ -->
+                            <div class="col-md-5">
+
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title text-primary"> Emplacement source</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementSource" id="emplacementSourceDepot" value="depot" checked/>
+                                            <label for="emplacementSourceDepot">Dépôt source  <b class="text-danger" id="err_depotSource"></b></label>
+                                            <select required  class="form-control" name="depotSource" id="depotSource" >
+                                                {% for key, depot in depots %}
+                                                    <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementSource" id="emplacementSourceSite" value="site" />
+                                            <label for="emplacementSourceSite">Site source  <b class="text-danger" ></b></label>
+                                            <select required class="form-control" name="siteSource" id="siteSource">
+                                                {% for key, site in sites %}
+                                                    <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ----------------  ///// EMPLACEMENT SOURCE ///// ------------------ -->
+                            <div class="form-group col-md-1">
+                                <br><br><br><br><br>
+                                <div class="text-center">
+                                    <i class="fa fa-chevron-right fa-2x "></i><i class="fa fa-chevron-right fa-2x"></i>
+                                </div>
+                            </div>
+
+                            <!-- ----------------  EMPLACEMENT DESTINATION ------------------ -->
+                            <div class="col-md-5">
+
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title text-primary"> Emplacement de destination</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementDestination" id="emplacementDestinationDepot" value="depot" checked/>
+                                            <label for="emplacementDestinationDepot">Dépôt de destination  <b class="text-danger" id="err_depotDestination"></b></label>
+                                            <select required  class="form-control" name="depotDestination" id="depotDestination" >
+                                                {% for key, depot in depots %}
+                                                    <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementDestination" id="emplacementDestinationSite" value="site"/>
+                                            <label for="emplacementDestinationSite">Site de destination  <b class="text-danger"></b></label>
+                                            <select required class="form-control" name="siteDestination" id="siteDestination">
+                                                {% for key, site in sites %}
+                                                    <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ----------------  ///// EMPLACEMENT SOURCE ///// ------------------ -->
                         </div>
 
                         <div class="row">
@@ -81,15 +130,6 @@
     <script>
         numeralFormat('#produitbundle_produit_prixAchat');
         numeralFormat('#produitbundle_produit_prixVente');
-
-        $('#btn').click(function () {
-            if($('#source_depot').val()== $('#destination_depot').val())
-            {
-                $('#textModalDanger').text('Il faut changé la valeur du dépot déstination ');
-                $('#modalDanger').modal();
-                return false;
-            }
-        })
     </script>
 
     {#DATEPICKER#}
@@ -107,5 +147,39 @@
             minView: 2,
             forceParse: 0
         });
+    </script>
+
+    {#    SCRIPT CHOIX EMPLACEMENT SOURCE #}
+    <script>
+        $('#siteSource').prop('disabled', true);
+        $('#depotSource').prop('disabled', false);
+
+        $('#emplacementSourceDepot').click(function () {
+            $('#siteSource').prop('disabled', true);
+            $('#depotSource').prop('disabled', false);
+        });
+
+        $('#emplacementSourceSite').click(function () {
+            $('#siteSource').prop('disabled', false);
+            $('#depotSource').prop('disabled', true);
+        });
+
+    </script>
+
+    {#    SCRIPT CHOIX EMPLACEMENT Destination #}
+    <script>
+        $('#siteDestination').prop('disabled', true);
+        $('#depotDestination').prop('disabled', false);
+
+        $('#emplacementDestinationDepot').click(function () {
+            $('#siteDestination').prop('disabled', true);
+            $('#depotDestination').prop('disabled', false);
+        });
+
+        $('#emplacementDestinationSite').click(function () {
+            $('#siteDestination').prop('disabled', false);
+            $('#depotDestination').prop('disabled', true);
+        });
+
     </script>
 {% endblock %}

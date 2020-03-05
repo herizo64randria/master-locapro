@@ -43,11 +43,7 @@ class ligneDeplacement
      */
     private $produit;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Huile")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $huile;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Deplacement", inversedBy="lignedeplacement")
@@ -164,4 +160,5 @@ class ligneDeplacement
     {
         return $this->deplacement;
     }
+
 }

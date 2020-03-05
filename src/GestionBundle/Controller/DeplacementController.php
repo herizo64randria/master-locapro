@@ -92,7 +92,7 @@ class DeplacementController extends Controller
     /**
      *test
      *
-     * @Route("/test", name="test")
+     * Route("/test", name="test")
      */
     public function testAction()
     {
@@ -183,6 +183,144 @@ class DeplacementController extends Controller
        return $res;
     }
 
+    private function transfertConfirme(ObjectManager $em , Deplacement $deplacement){
+
+        $repositoryStock = $em->getRepository(Stock_::class);
+
+        $serviceProduit = new ProduitService($em);
+
+        $serviceGestion = new GestionService($em);
+        if($serviceGestion->testErreurLigneDeplacement($deplacement) > 0){
+            throw new Exception('Erreur! Les lignes de ce document possède des erreurs');
+
+        }
+
+        foreach ($deplacement->getLignedeplacement() as $ligneDeplacement){
+
+            //--------HISTORIQUE DU PRODUIT------------
+            $historiqueProduit = new HistoriqueProduit();
+
+            $historiqueProduit->setType('debit');
+            $historiqueProduit->setProduit($ligneDeplacement->getProduit());
+            $historiqueProduit->setDeplacement($deplacement);
+            $historiqueProduit->setDate($deplacement->getDate());
+            $historiqueProduit->setQuantite($ligneDeplacement->getQuantite());
+
+            //SOURCE
+            if ($deplacement->getSourcesite()){
+                $historiqueProduit->setSite($deplacement->getSourcesite());
+            }
+            if ($deplacement->getSourcedepot()){
+                $historiqueProduit->setDepot($deplacement->getSourcedepot());
+            }
+
+            $em->persist($historiqueProduit);
+            $historiqueProduit1 = new HistoriqueProduit();
+
+            $historiqueProduit1->setType('credit');
+            $historiqueProduit1->setProduit($ligneDeplacement->getProduit());
+            $historiqueProduit1->setDeplacement($deplacement);
+            $historiqueProduit1->setDate($deplacement->getDate());
+            $historiqueProduit1->setQuantite($ligneDeplacement->getQuantite());
+
+            //DESTINATION
+            if ($deplacement->getDestinationsite()){
+                $historiqueProduit->setSite($deplacement->getDestinationsite());
+            }
+            if ($deplacement->getDestinationdepot()){
+                $historiqueProduit->setDepot($deplacement->getDestinationdepot());
+            }
+
+            $em->persist($historiqueProduit1);
+            //--------------------------------------------
+
+            // ------------------- SORTIE ---------------------
+            
+            $stockSource = null;
+            //SOURCE
+            if ($deplacement->getSourcesite()){
+                $stockSource = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'site' => $deplacement->getSourcesite()
+                )); 
+                
+                if (!$stockSource){
+                    throw new Exception('Erreur dans le système');    
+                }
+            }
+            if ($deplacement->getSourcedepot()){
+                $stockSource = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'depot' => $deplacement->getSourcedepot()
+                ));
+
+                if (!$stockSource){
+                    throw new Exception('Erreur dans le système');
+                }
+            }
+            
+            $quantite = $stockSource->getQuantite() - $historiqueProduit->getQuantite();
+            $stockSource->setQuantite($quantite);
+            $em->persist($stockSource);
+            
+            // ------------------- ////// SORTIE ////// ---------------------
+
+            //----------------- DANS LE STOCK DESTINATION-----------------
+
+            //DESTINATION
+            $stockDestination = null;
+            if ($deplacement->getDestinationsite()){
+                $stockDestination = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'depot' => $deplacement->getDestinationsite()
+                ));
+
+                if (!$stockDestination){
+                    $stockDestination = new Stock_();
+                    $stockDestination->setQuantite(0);
+                    $stockDestination->setProduit($historiqueProduit->getProduit());
+                    $stockDestination->setSite($deplacement->getDestinationsite());
+                }
+            }
+            if ($deplacement->getDestinationdepot()){
+                $stockDestination = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'depot' => $deplacement->getDestinationdepot()
+                ));
+
+                if (!$stockDestination){
+                    $stockDestination = new Stock_();
+                    $stockDestination->setQuantite(0);
+                    $stockDestination->setProduit($historiqueProduit->getProduit());
+                    $stockDestination->setDepot($deplacement->getDestinationdepot());
+                }
+            }
+
+            $quantite1 = $stockDestination->getQuantite() + $historiqueProduit1->getQuantite();
+            $stockDestination->setQuantite($quantite1);
+
+            $em->persist($stockDestination);
+            $em->flush();
+            //------------------------------------------------
+
+
+            //--------UPDATE STOCK TOTAL-----------------
+            $produit = $historiqueProduit->getProduit();
+            $serviceProduit->updateStockTotal($produit);
+            $em->flush();
+
+        }
+
+//        MODIFICATION DU ENTRE
+        $deplacement->setEtat(self::TRANSFERT_CONFIRME);
+        $deplacement->setModifiable(false);
+        $em->persist($deplacement);
+
+        $em->flush();
+
+
+    }
+
 
     /**
      * INDEX
@@ -216,6 +354,13 @@ class DeplacementController extends Controller
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array('etat'=>true));
 
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
+
         if($request->getMethod() == 'POST'){
             $deplacement = new Deplacement();
             $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
@@ -227,14 +372,66 @@ class DeplacementController extends Controller
             if (isset($_POST['motif']))
                 $deplacement->setMotif($_POST['motif']);
 
-            $sourcedepot = $repositoryDepot->findOneBy(array(
-                'id' => $_POST['source_depot']
-            ));
-            $deplacement->setSourcedepot($sourcedepot);
-            $destinationdepot = $repositoryDepot->findOneBy(array(
-                'id' => $_POST['destination_depot']
-            ));
-            $deplacement->setDestinationdepot($destinationdepot);
+            // ------------------- EMPLACEMEMNT SOURCE ---------------------
+
+            if($_POST['emplacementSource'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['siteSource']));
+                if (! $site){
+                    throw new Exception('Site source non-trouvé');
+                }
+                $deplacement->setSourcesite($site);
+            }
+
+            if ($_POST['emplacementSource'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depotSource']));
+                if (! $depot){
+                    throw new Exception('Dépôt source non-trouvé');
+                }
+                $deplacement->setSourcedepot($depot);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT SOURCE ////// ---------------------
+
+            // ------------------- EMPLACEMEMNT DESTINATION ---------------------
+
+            if($_POST['emplacementDestination'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['siteDestination']));
+                if (! $site){
+                    throw new Exception('Site de destination non-trouvé');
+                }
+                $deplacement->setDestinationsite($site);
+            }
+
+            if ($_POST['emplacementDestination'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depotDestination']));
+                if (! $depot){
+                    throw new Exception('Dépôt source non-trouvé');
+                }
+                $deplacement->setDestinationdepot($depot);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT DESTINATION ////// ---------------------
+
+            // ------------------- TEST SOURCE - DESTINATION ---------------------
+
+
+            if ($deplacement->getSourcedepot() and $deplacement->getDestinationdepot()){
+                $depotSource = $deplacement->getSourcedepot();
+                $depotDestination = $deplacement->getDestinationdepot();
+
+                if ($depotSource->getId() == $depotDestination->getId()){
+                    throw new Exception("Vérifier les dépots source et de destination");
+                }
+            }
+
+            if ($deplacement->getSourcesite() and $deplacement->getDestinationsite()){
+//                throw new Exception('EXP')
+                if ($deplacement->getSourcesite()->getId() == $deplacement->getDestinationsite()->getId()){
+                    throw new Exception("Vérifier les dépots source et de destination");
+                }
+            }
+
+            // ------------------- ////// TEST SOURCE - DESTINATION ////// ---------------------
 
             //NEXT NUMERO
             $this->nextNumero($em);
@@ -261,7 +458,7 @@ class DeplacementController extends Controller
         return $this->render('@Gestion/Deplacement/new.html.twig', array(
             'numero' => $this->recupereNumeroEntre($em),
             'depots' => $depots,
-
+            'sites' => $sites
         ));
 
     }
@@ -276,8 +473,14 @@ class DeplacementController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
-        $depots = $repositoryDepot->findBy(array('etat'=>true));
+        $depots = $repositoryDepot->findAll();
 
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
 
         if($request->getMethod() == 'POST'){
 
@@ -293,31 +496,71 @@ class DeplacementController extends Controller
             if (isset($_POST['motif']))
                 $deplacement->setMotif($_POST['motif']);
 
-            $sourcedepot = $repositoryDepot->findOneBy(array(
-                'id' => $_POST['source_depot']
-            ));
-            $deplacement->setSourcedepot($sourcedepot);
-            $destinationdepot = $repositoryDepot->findOneBy(array(
-                'id' => $_POST['destination_depot']
-            ));
-            $deplacement->setDestinationdepot($destinationdepot);
+            $deplacement->setSourcesite();
+            $deplacement->setSourcedepot();
+            $deplacement->setDestinationdepot();
+            $deplacement->setDestinationsite();
 
-            if (isset($_POST['source_depot']) and $_POST['source_depot'])
-            {
-                $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
-                $depot = $repositoryDepot->findOneBy(array(
-                    'id' => $_POST['source_depot']
-                ));
+            // ------------------- EMPLACEMEMNT SOURCE ---------------------
+
+            if($_POST['emplacementSource'] == 'site'){
+//                throw new Exception('Source site');
+                $site = $repositorySite->findOneBy(array('id' => $_POST['siteSource']));
+                if (! $site){
+                    throw new Exception('Site source non-trouvé');
+                }
+                $deplacement->setSourcesite($site);
+            }
+
+            if ($_POST['emplacementSource'] == "depot"){$depot = $repositoryDepot->findOneBy(array('id' => $_POST['depotSource']));
+                if (! $depot){
+                    throw new Exception('Dépôt source non-trouvé');
+                }
                 $deplacement->setSourcedepot($depot);
             }
-            if (isset($_POST['destination_depot']) and $_POST['destination_depot'])
-            {
-                $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
-                $depot = $repositoryDepot->findOneBy(array(
-                    'id' => $_POST['destination_depot']
-                ));
+
+            // ------------------- ////// EMPLACEMEMNT SOURCE ////// ---------------------
+
+            // ------------------- EMPLACEMEMNT DESTINATION ---------------------
+
+            if($_POST['emplacementDestination'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['siteDestination']));
+                if (! $site){
+                    throw new Exception('Site de destination non-trouvé');
+                }
+                $deplacement->setDestinationsite($site);
+            }
+
+            if ($_POST['emplacementDestination'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depotDestination']));
+                if (! $depot){
+                    throw new Exception('Dépôt source non-trouvé');
+                }
                 $deplacement->setDestinationdepot($depot);
             }
+
+            // ------------------- ////// EMPLACEMEMNT DESTINATION ////// ---------------------
+
+            // ------------------- TEST SOURCE - DESTINATION ---------------------
+
+
+            if ($deplacement->getSourcedepot() and $deplacement->getDestinationdepot()){
+                $depotSource = $deplacement->getSourcedepot();
+                $depotDestination = $deplacement->getDestinationdepot();
+
+                if ($depotSource->getId() == $depotDestination->getId()){
+                    throw new Exception("Vérifier les dépots source et de destination");
+                }
+            }
+
+            if ($deplacement->getSourcesite() and $deplacement->getDestinationsite()){
+//                throw new Exception('EXP')
+                if ($deplacement->getSourcesite()->getId() == $deplacement->getDestinationsite()->getId()){
+                    throw new Exception("Vérifier les dépots source et de destination");
+                }
+            }
+
+            // ------------------- ////// TEST SOURCE - DESTINATION ////// ---------------------
 
             $em->persist($deplacement);
             $em->flush();
@@ -330,7 +573,7 @@ class DeplacementController extends Controller
             'numero' => $this->recupereNumeroEntre($em),
             'depots' => $depots,
             'deplacement' => $deplacement,
-
+            'sites' => $sites,
         ));
 
     }
@@ -347,7 +590,7 @@ class DeplacementController extends Controller
             throw new Exception('Erreur! Ce document est déjà enregistré');
 
         $serviceGestion = new GestionService($em);
-        if($serviceGestion->testErreurLigne1($deplacement) > 0){
+        if($serviceGestion->testErreurLigneDeplacement($deplacement) > 0){
             throw new Exception('Erreur! Les lignes de ce document possède des erreurs');
 
         }
@@ -417,7 +660,7 @@ class DeplacementController extends Controller
     /**
      * nouveau entity.
      *
-     * @Route("/afficher-deplacement/AD15{id}E35", name="deplacement_affcher")
+     * @Route("/afficher-deplacement/AD{id}E35", name="deplacement_affcher")
      */
     public function afficherAction(Request $request, Deplacement $deplacement){
 
@@ -444,9 +687,7 @@ class DeplacementController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if($request->getMethod() == 'POST'){
-
-
-
+            $repositoryStock = $em->getRepository(Stock_::class);
             $idProduit = $_POST['produit'];
 
             //--------- --- TEST TEST TEST ---------------------
@@ -470,11 +711,40 @@ class DeplacementController extends Controller
             $repositoryProduit = $em->getRepository('ProduitBundle:Produit');
             $produit = $repositoryProduit->findOneBy(array('id' => $idProduit));
 
-            //TEST DU QUANTITE
-            $serviceProduit = new ProduitService($em);
-            if($ligne->getQuantite() > $serviceProduit->getStock($produit, $deplacement->getSourcedepot()))
-                throw new Exception('Erreur! La quantité est supérieur que le stock dans le dépot');
-            //-----------------------
+            // ------------------- TEST DU STOCK ---------------------
+            $stock = null;
+            if ($deplacement->getSourcedepot()){
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $produit,
+                    'depot' => $deplacement->getSourcedepot()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le dépôt: '.$produit->getReference());
+                }
+            }
+
+            if ($deplacement->getSourcesite()){
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $produit,
+                    'site' => $deplacement->getSourcesite()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le site: '.$produit->getReference());
+                }
+            }
+
+            $quantiteEnStock = $stock->getQuantite();
+
+            if($quantiteEnStock < 0){
+                throw new Exception('Erreur! La quantité est supérieur par rapport au stock: '.$produit->getReference());
+            }
+
+            if($ligne->getQuantite() > $quantiteEnStock)
+                throw new Exception('Erreur! La quantité est supérieur que le stock dans le stock');
+
+            // ------------------- ////// TEST DU STOCK ////// ---------------------
 
             $ligne->setProduit($produit);
 
@@ -488,96 +758,7 @@ class DeplacementController extends Controller
 
     }
 
-    public function transfertConfirme(ObjectManager $em , Deplacement $deplacement){
 
-        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
-
-        $serviceProduit = new ProduitService($em);
-
-        foreach ($deplacement->getLignedeplacement() as $ligneDeplacement){
-
-            //--------HISTORIQUE DU PRODUIT------------
-            $historiqueProduit = new HistoriqueProduit();
-
-            $historiqueProduit->setType('debit');
-            $historiqueProduit->setProduit($ligneDeplacement->getProduit());
-            $historiqueProduit->setDeplacement($deplacement);
-            $historiqueProduit->setDepot($deplacement->getSourcedepot());
-            $historiqueProduit->setDate($deplacement->getDate());
-            $historiqueProduit->setQuantite($ligneDeplacement->getQuantite());
-
-            $em->persist($historiqueProduit);
-            $historiqueProduit1 = new HistoriqueProduit();
-
-            $historiqueProduit1->setType('credit');
-            $historiqueProduit1->setProduit($ligneDeplacement->getProduit());
-            $historiqueProduit1->setDeplacement($deplacement);
-            $historiqueProduit1->setDepot($deplacement->getDestinationdepot());
-            $historiqueProduit1->setDate($deplacement->getDate());
-            $historiqueProduit1->setQuantite($ligneDeplacement->getQuantite());
-
-            $em->persist($historiqueProduit1);
-            //--------------------------------------------
-
-            //----------------- DANS LE STOCK SOURCE-----------------
-
-            $stock_source = $repositoryStock->findOneBy(array(
-                'produit' => $historiqueProduit->getProduit(),
-                'depot' => $historiqueProduit->getDepot()
-            ));
-
-           /* if(!$stock_source){
-                $stock = new Stock_();
-                $stock->setDepot($historiqueProduit->getDepot());
-                $stock->setProduit($historiqueProduit->getProduit());
-                $stock->setQuantite(0);
-            }*/
-
-            $quantite = $stock_source->getQuantite() - $historiqueProduit->getQuantite();
-            $stock_source->setQuantite($quantite);
-
-            $em->persist($stock_source);
-            $em->flush();
-            //------------------------------------------------
-
-            //----------------- DANS LE STOCK DESTINATION-----------------
-
-            $stock_destination = $repositoryStock->findOneBy(array(
-                'produit' => $historiqueProduit1->getProduit(),
-                'depot' => $historiqueProduit1->getDepot()
-            ));
-
-             if(!$stock_destination){
-                 $stock_destination = new Stock_();
-                 $stock_destination->setDepot($historiqueProduit1->getDepot());
-                 $stock_destination->setProduit($historiqueProduit1->getProduit());
-                 $stock_destination->setQuantite(0);
-             }
-
-            $quantite1 = $stock_destination->getQuantite() + $historiqueProduit1->getQuantite();
-            $stock_destination->setQuantite($quantite1);
-
-            $em->persist($stock_destination);
-            $em->flush();
-            //------------------------------------------------
-
-
-            //--------UPDATE STOCK TOTAL-----------------
-            $produit = $historiqueProduit->getProduit();
-            $serviceProduit->updateStockTotal($produit);
-            $em->flush();
-
-        }
-
-//        MODIFICATION DU ENTRE
-        $deplacement->setEtat(self::TRANSFERT_CONFIRME);
-        $deplacement->setModifiable(false);
-        $em->persist($deplacement);
-
-        $em->flush();
-
-
-    }
 
     /**
      * Deplacement entity.

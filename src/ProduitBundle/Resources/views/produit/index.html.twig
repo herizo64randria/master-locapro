@@ -63,9 +63,17 @@
                                 {% endfor %}
                                 <td class="text-center">{{ produit.alert }}</td>
                                 <td>
-                                    <a href="{{ path('produit_show', {'id' : produit.id}) }}" class="btn btn-xs btn-default" title="Afficher les informations et journal du produit"><i class="fa fa-info-circle"></i> Afficher</a>
+                                    {% set pathInfo = path('produit_show', {'id' : produit.id}) %}
+                                    {% set pathEdit = path('produit_edit', {'id' : produit.id}) %}
+
+                                    {% if produit.siHuile %}
+                                        {% set pathInfo = path('huile_show', {'id' : produit.id}) %}
+                                        {% set pathEdit = path('huile_edit', {'id' : produit.id}) %}
+                                    {% endif %}
+
+                                    <a href="{{ pathInfo }}" class="btn btn-xs btn-default" title="Afficher les informations et journal du produit"><i class="fa fa-info-circle"></i> Afficher</a>
                                     {% if app.user|ifRole('ROLE_PRODUIT') %}
-                                        <a href="{{ path('produit_edit', {'id' : produit.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                                        <a href="{{ pathEdit }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -90,7 +98,7 @@
         $(document).ready(function() {
             $('#tableProduit').DataTable({
                 scrollX: true,
-                pageLength: 100,
+                pageLength: 50,
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",

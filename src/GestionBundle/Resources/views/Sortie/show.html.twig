@@ -27,8 +27,6 @@
     {% endif %}
 
 
-    <input type="hidden" id="hiddenIdDepot" value="{{ sortie.depot.id }}">
-    
     <div class="row">
         <div class="col-md-3">
             <div class="box">
@@ -48,7 +46,12 @@
                         </tr>
                         <tr>
                             <td>Dépôt:</td>
-                            <td>{{ sortie.depot.nom }} ({{ sortie.depot.abrv }})</td>
+                            {% if sortie.depot %}
+                                <td><i>Dépôt</i> {{ sortie.depot.nom }}</td>
+                            {% endif %}
+                            {% if sortie.site %}
+                                <td><i>Site</i> {{ sortie.site.emplacement }} </td>
+                            {% endif %}
                         </tr>
                         {% if sortie.destination %}
                         <tr>
@@ -56,16 +59,13 @@
                             <td>{{ sortie.destination }}</td>
                         </tr>
                         {% endif %}
-                            {% if sortie.groupe %}
-                                <tr>
-                                    <td>Groupe de destination :</td>
+                        {% if sortie.groupe %}
+                            <tr>
+                                <td>Groupe de destination :</td>
 
-                                    <td><a href="{{ path('groupe_show',{'id':sortie.groupe.id}) }}">{{ sortie.groupe.numero }}</a></td>
-                                </tr>
-                            {% endif %}
-
-
-
+                                <td><a href="{{ path('groupe_show',{'id':sortie.groupe.id}) }}">{{ sortie.groupe.numero }}</a></td>
+                            </tr>
+                        {% endif %}
 
                     </table>
                 </div>
@@ -214,7 +214,17 @@
                             {% for ligneSortie in sortie.ligneSorties %}
                                 {% set couleurLigne = '' %}
                                 {% set couleurQuantite = '' %}
-                                {% if ligneSortie.quantite > ligneSortie.sortie.depot|stock(ligneSortie.produit) and sortie.etat != 'Demande confirmée' %}
+
+                                {% set qttProduit = -1 %}
+                                {% if sortie.site %}
+                                    {% set qttProduit = sortie.site|stockBySite(ligneSortie.produit) %}
+                                {% endif %}
+
+                                {% if sortie.depot %}
+                                    {% set qttProduit = sortie.depot|stockByDepot(ligneSortie.produit) %}
+                                {% endif %}
+
+                                {% if ligneSortie.quantite > qttProduit and sortie.etat != 'Demande confirmée' %}
                                     {% set couleurLigne = 'danger' %}
                                     {% set couleurQuantite = 'text-danger' %}
 
@@ -223,7 +233,18 @@
 
                                 <tr class="{{ couleurLigne }} ">
                                     <td  class="class_produit" idProduit="{{ ligneSortie.produit.id }}" >
-                                        <a href="{{ path('produit_show', { 'id' : ligneSortie.produit.id }) }}" target="_blank">{{ ligneSortie.produit.code }}</a>
+                                        {% set ligneCode = '<i class="">Non-codé</i>' %}
+                                        {% set pathProduit = path('produit_show', {'id' : ligneSortie.produit.id}) %}
+                                        {% if ligneSortie.produit.code %}
+                                            {% set ligneCode = ligneSortie.produit.code %}
+                                        {% endif %}
+
+                                        {% if ligneSortie.produit.siHuile %}
+                                            {% set pathProduit = path('huile_show', {'id' : ligneSortie.produit.id}) %}
+                                            {% set ligneCode = '<b class="text-warning">(H)</b> '~ligneCode %}
+                                        {% endif %}
+
+                                        <a href="{{ pathProduit }}" target="_blank">{{ ligneCode|raw }}</a>
                                     </td>
                                     <td>
                                         {{ ligneSortie.designation }}
@@ -242,7 +263,6 @@
                                     </td>
                                     {% if sortie.modifiable and sortie.userCreer == app.user %}
                                         <td class="action">
-                                            <a href="{{ path('sortie_modifierLigne', {'id' : ligneSortie.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
                                             <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('sortie_supprimerLigne', { 'id' : ligneSortie.id }) }}"><i class="fa fa-minus-circle "></i></button>
                                         </td>
                                     {% endif %}
@@ -259,7 +279,21 @@
                                             <select required  class="form-control" name="produit" id="produit" >
                                                 <option value=" "></option>
                                                 {% for produit in produits %}
-                                                    <option value="{{ produit.id }}"  quantite="{{ sortie.depot|stock(produit) }}">{{ produit.designation }} - {{ produit.code }} | {{ produit.reference }} <b>({{ sortie.depot|stock(produit) }})</b></option>
+                                                    {% set qttProduit = '-' %}
+                                                    {% if sortie.site %}
+                                                        {% set qttProduit = sortie.site|stockBySite(produit) %}
+                                                    {% endif %}
+
+                                                    {% if sortie.depot %}
+                                                        {% set qttProduit = sortie.depot|stockByDepot(produit) %}
+                                                    {% endif %}
+
+                                                    <option value="{{ produit.id }}"  quantite="{{ qttProduit }}">
+                                                        {% if produit.siHuile %}
+                                                            (H)
+                                                        {% endif %}
+                                                        {{ produit.designation }} - {{ produit.code }} | {{ produit.reference }} <b>({{ qttProduit }})</b>
+                                                    </option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -278,7 +312,7 @@
                                     <td>
                                         <div class="form-group text-center">
                                             <input required type="text" class="form-control only_float" name="quantite" id="quantite" placeholder="Quantité"  />
-                                            <button class="btn btn-success" id="btnAjouterProduit"><i class="fa fa-plus-circle"></i> Ajouter la ligne</button>
+                                            <button class="btn btn-success" type="submit" id="btnAjouterProduit"><i class="fa fa-plus-circle"></i> Ajouter la ligne</button>
                                             <button class="btn btn-default" id="btnAnnulerProduit" type="button">Annuler</button>
                                         </div>
                                     </td>
@@ -410,7 +444,6 @@
 
 {#    #}
     <script>
-        idDepot = $('#hiddenIdDepot').val();
         produits = [];
     </script>
 
@@ -431,8 +464,6 @@
 
         $('#produit').select2();
     </script>
-
-
 
 
     {#    ----------------- SCRIPT SELECTION DU PRODUIT ----------------- #}
@@ -460,7 +491,7 @@
         $('#btnAnnulerProduit').click(function () {
             $('#designation').val('');
             $('#reference').val('');
-            $('#produit').val('');
+            $('#produit').val(" ");
         });
     </script>
 
@@ -499,12 +530,20 @@
 {#    TEST SI QUANTITE INSUFFISANTE#}
     <script>
         $('#btnAjouterProduit').click(function () {
-            stockProduit =  + $('#produit').children("option:selected").attr('quantite');
 
-             inputQuantite = + $('#quantite').val();
+            stockProduit =  + $('#produit').children("option:selected").attr('quantite');;
+
+            inputQuantite = + $('#quantite').val();
+
+            if (Number.isNaN(stockProduit)) {
+                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock dans le Dépôt');
+                $('#modalDanger').modal();
+
+                return false;
+            }
 
             if (inputQuantite > stockProduit) {
-                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock dans le dépot');
+                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock dans le Dépôt');
                 $('#modalDanger').modal();
 
                 return false;

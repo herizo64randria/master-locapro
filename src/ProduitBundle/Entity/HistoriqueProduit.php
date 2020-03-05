@@ -69,9 +69,15 @@ class HistoriqueProduit
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $depot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $site;
 
 
 
@@ -100,6 +106,7 @@ class HistoriqueProduit
 
         return $this;
     }
+
 
     /**
      * Get date
@@ -136,6 +143,30 @@ class HistoriqueProduit
     }
 
     /**
+     * Set quantite
+     *
+     * @param float $quantite
+     *
+     * @return HistoriqueProduit
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return float
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
      * Set produit
      *
      * @param \ProduitBundle\Entity\Produit $produit
@@ -148,7 +179,6 @@ class HistoriqueProduit
 
         return $this;
     }
-
 
     /**
      * Get produit
@@ -182,54 +212,6 @@ class HistoriqueProduit
     public function getEntre()
     {
         return $this->entre;
-    }
-
-    /**
-     * Set depot
-     *
-     * @param \ProduitBundle\Entity\Depot $depot
-     *
-     * @return HistoriqueProduit
-     */
-    public function setDepot(\ProduitBundle\Entity\Depot $depot)
-    {
-        $this->depot = $depot;
-
-        return $this;
-    }
-
-    /**
-     * Get depot
-     *
-     * @return \ProduitBundle\Entity\Depot
-     */
-    public function getDepot()
-    {
-        return $this->depot;
-    }
-
-    /**
-     * Set quantite
-     *
-     * @param float $quantite
-     *
-     * @return HistoriqueProduit
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    /**
-     * Get quantite
-     *
-     * @return float
-     */
-    public function getQuantite()
-    {
-        return $this->quantite;
     }
 
     /**
@@ -278,5 +260,53 @@ class HistoriqueProduit
     public function getDeplacement()
     {
         return $this->deplacement;
+    }
+
+    /**
+     * Set depot
+     *
+     * @param \ProduitBundle\Entity\Depot $depot
+     *
+     * @return HistoriqueProduit
+     */
+    public function setDepot(\ProduitBundle\Entity\Depot $depot = null)
+    {
+        $this->depot = $depot;
+
+        return $this;
+    }
+
+    /**
+     * Get depot
+     *
+     * @return \ProduitBundle\Entity\Depot
+     */
+    public function getDepot()
+    {
+        return $this->depot;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return HistoriqueProduit
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site = null)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

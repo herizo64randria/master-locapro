@@ -49,10 +49,12 @@ class Depot
      */
     private $Entres; // Notez le « s », un stocks est liée à plusieurs entrées
 
+
     /**
      * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Sortie", mappedBy="depot")
      */
     private $sorties; // Notez le « s », un stocks est liée à plusieurs entrées
+
 
     /**
      * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="sourcedepot")

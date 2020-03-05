@@ -84,15 +84,27 @@ class Deplacement
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot", inversedBy="sourcedeplacements")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $sourcedepot;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot", inversedBy="destinationdeplacements")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $destinationdepot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site", inversedBy="sourcedeplacements")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $sourcesite;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site", inversedBy="destinationdeplacements")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $destinationsite;
 
     /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
@@ -306,6 +318,55 @@ class Deplacement
         return $this->userCreer;
     }
 
+
+    /**
+     * Set dateOperation
+     *
+     * @param \DateTime $dateOperation
+     *
+     * @return Deplacement
+     */
+    public function setDateOperation($dateOperation)
+    {
+        $this->dateOperation = $dateOperation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOperation
+     *
+     * @return \DateTime
+     */
+    public function getDateOperation()
+    {
+        return $this->dateOperation;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param string $texte
+     *
+     * @return Deplacement
+     */
+    public function setTexte($texte)
+    {
+        $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return string
+     */
+    public function getTexte()
+    {
+        return $this->texte;
+    }
+
     /**
      * Set sourcedepot
      *
@@ -313,7 +374,7 @@ class Deplacement
      *
      * @return Deplacement
      */
-    public function setSourcedepot(\ProduitBundle\Entity\Depot $sourcedepot)
+    public function setSourcedepot(\ProduitBundle\Entity\Depot $sourcedepot = null)
     {
         $this->sourcedepot = $sourcedepot;
 
@@ -337,7 +398,7 @@ class Deplacement
      *
      * @return Deplacement
      */
-    public function setDestinationdepot(\ProduitBundle\Entity\Depot $destinationdepot)
+    public function setDestinationdepot(\ProduitBundle\Entity\Depot $destinationdepot = null)
     {
         $this->destinationdepot = $destinationdepot;
 
@@ -352,6 +413,54 @@ class Deplacement
     public function getDestinationdepot()
     {
         return $this->destinationdepot;
+    }
+
+    /**
+     * Set sourcesite
+     *
+     * @param \GroupeBundle\Entity\Site $sourcesite
+     *
+     * @return Deplacement
+     */
+    public function setSourcesite(\GroupeBundle\Entity\Site $sourcesite = null)
+    {
+        $this->sourcesite = $sourcesite;
+
+        return $this;
+    }
+
+    /**
+     * Get sourcesite
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSourcesite()
+    {
+        return $this->sourcesite;
+    }
+
+    /**
+     * Set destinationsite
+     *
+     * @param \GroupeBundle\Entity\Site $destinationsite
+     *
+     * @return Deplacement
+     */
+    public function setDestinationsite(\GroupeBundle\Entity\Site $destinationsite = null)
+    {
+        $this->destinationsite = $destinationsite;
+
+        return $this;
+    }
+
+    /**
+     * Get destinationsite
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getDestinationsite()
+    {
+        return $this->destinationsite;
     }
 
     /**
@@ -410,53 +519,5 @@ class Deplacement
     public function getUserRefuser()
     {
         return $this->userRefuser;
-    }
-
-    /**
-     * Set texte
-     *
-     * @param string $texte
-     *
-     * @return Deplacement
-     */
-    public function setTexte($texte)
-    {
-        $this->texte = $texte;
-
-        return $this;
-    }
-
-    /**
-     * Get texte
-     *
-     * @return string
-     */
-    public function getTexte()
-    {
-        return $this->texte;
-    }
-
-    /**
-     * Set dateOperation
-     *
-     * @param \DateTime $dateOperation
-     *
-     * @return Deplacement
-     */
-    public function setDateOperation($dateOperation)
-    {
-        $this->dateOperation = $dateOperation;
-
-        return $this;
-    }
-
-    /**
-     * Get dateOperation
-     *
-     * @return \DateTime
-     */
-    public function getDateOperation()
-    {
-        return $this->dateOperation;
     }
 }

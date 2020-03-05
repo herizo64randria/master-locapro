@@ -10,47 +10,47 @@
             <li><a href="{{ path('huile_new') }}" class="btn btn-lg btn-success"><i class="fa fa-plus-circle"></i> Nouveau Huile</a></li>
         {% endif %}
     </ul>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Table liste produit</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <table class="table table-striped table-bordered" id="tableHuile">
-                        <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Designation</th>
-                            <th>Prixachat</th>
-                            <th>Stocktotal</th>
-                            <th>Alert</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for huile in huiles %}
-                            <tr>
-                                <td><a href="{{ path('huile_show', { 'id': huile.id }) }}">{{ huile.code }}</a></td>
-                                <td>{{ huile.designation }}</td>
-                                <td>{{ huile.prixAchat }}</td>
-                                <td>{{ huile.stockTotal }}</td>
-                                <td>{{ huile.alert }}</td>
-                                <td>
-                                    <a href="{{ path('huile_show', { 'id': huile.id }) }}" class="btn btn-xs btn-default"> Info</a>
-                                    {% if is_granted('ROLE_HUILE') %}
-                                        <a href="{{ path('huile_edit', { 'id': huile.id }) }}" class="btn btn-xs btn-primary"> Modifier</a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Table liste stock d'huile</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table class="table table-striped table-bordered" id="tableHuile">
+                <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Designation</th>
+                    <th>Prixachat</th>
+                    <th>Stocktotal</th>
+                    <th>Alert</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for huile in huiles %}
+                    <tr>
+                        <td><a href="{{ path('huile_show', { 'id': huile.id }) }}">{{ huile.code }}</a></td>
+                        <td>{{ huile.designation }}</td>
+                        <td>{{ huile.prixAchat }}</td>
+                        <td>{{ huile.stockTotal }}</td>
+                        <td>{{ huile.alert }}</td>
+                        <td>
+                            <a href="{{ path('huile_show', { 'id': huile.id }) }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle"></i> Info</a>
+                            {% if is_granted('ROLE_HUILE') %}
+                                <a href="{{ path('huile_edit', { 'id': huile.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
+
+
 
     <!-- DataTables JS -->
     <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -62,7 +62,6 @@
     <script>
         $(document).ready(function() {
             $('#tableHuile').DataTable({
-                scrollX: true,
                 pageLength: 100,
                 language: {
                     processing:     "Traitement en cours...",

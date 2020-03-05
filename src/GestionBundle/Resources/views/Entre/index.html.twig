@@ -67,7 +67,17 @@
                                 {% endif %}
                                 </td>
 
-                                <td>{{ entre.depot.nom }}</td>
+                                <td>
+                                    {% if entre.depot %}
+                                        {% set entreEmplacement = 'Dépôt- '~entre.depot.nom %}
+                                    {% endif %}
+                                    {% if entre.site %}
+                                        {% set entreEmplacement = 'Site- '~entre.site.emplacement %}
+                                    {% endif %}
+
+                                    {{ entreEmplacement }}
+                                </td>
+
                                 <td class="{{ couleurEtat }}">{{ entre.etat }}</td>
 
                             </tr>

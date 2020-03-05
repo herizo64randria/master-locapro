@@ -71,7 +71,18 @@
                                     {% set destination = sortie.destination %}
                                 {% endif %}
                                 <td>{{ destination }}</td>
-                                <td>{{ sortie.depot.nom }}</td>
+
+                                <td>
+                                    {% if sortie.depot %}
+                                        {% set sortieEmplacement = 'Dépôt- '~sortie.depot.nom %}
+                                    {% endif %}
+                                    {% if sortie.site %}
+                                        {% set sortieEmplacement = 'Site- '~sortie.site.emplacement %}
+                                    {% endif %}
+
+                                    {{ sortieEmplacement }}
+                                </td>
+
                                 <td class="{{ couleurEtat }} text-center">
                                     {{ sortie.etat }}
                                     {% if sortie.userConfirmes|length > 0 and (sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC) %}

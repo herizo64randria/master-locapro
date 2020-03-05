@@ -33,9 +33,15 @@ class Stock_
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $depot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $site;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit", inversedBy="stocks")
@@ -127,5 +133,29 @@ class Stock_
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return Stock_
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site = null)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

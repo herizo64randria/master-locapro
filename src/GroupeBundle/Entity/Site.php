@@ -59,6 +59,26 @@ class Site
      */
     private $immos; // Notez le « s », il y a plusieur historique
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Entre", mappedBy="site")
+     */
+    private $Entres; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Sortie", mappedBy="site")
+     */
+    private $sorties; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="sourcesite")
+     */
+    private $sourcedeplacements; // Notez le « s », un stocks est liée à plusieurs entrées
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\Deplacement", mappedBy="destinationsite")
+     */
+    private $destinationdeplacements; // Notez le « s », un stocks est liée à plusieurs entrées
+
 
 //------------------------------------------
 
@@ -251,5 +271,141 @@ class Site
     public function getImmos()
     {
         return $this->immos;
+    }
+
+    /**
+     * Add entre
+     *
+     * @param \GestionBundle\Entity\Entre $entre
+     *
+     * @return Site
+     */
+    public function addEntre(\GestionBundle\Entity\Entre $entre)
+    {
+        $this->Entres[] = $entre;
+
+        return $this;
+    }
+
+    /**
+     * Remove entre
+     *
+     * @param \GestionBundle\Entity\Entre $entre
+     */
+    public function removeEntre(\GestionBundle\Entity\Entre $entre)
+    {
+        $this->Entres->removeElement($entre);
+    }
+
+    /**
+     * Get entres
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEntres()
+    {
+        return $this->Entres;
+    }
+
+    /**
+     * Add sorty
+     *
+     * @param \GestionBundle\Entity\Sortie $sorty
+     *
+     * @return Site
+     */
+    public function addSorty(\GestionBundle\Entity\Sortie $sorty)
+    {
+        $this->sorties[] = $sorty;
+
+        return $this;
+    }
+
+    /**
+     * Remove sorty
+     *
+     * @param \GestionBundle\Entity\Sortie $sorty
+     */
+    public function removeSorty(\GestionBundle\Entity\Sortie $sorty)
+    {
+        $this->sorties->removeElement($sorty);
+    }
+
+    /**
+     * Get sorties
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSorties()
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * Add sourcedeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $sourcedeplacement
+     *
+     * @return Site
+     */
+    public function addSourcedeplacement(\GestionBundle\Entity\Deplacement $sourcedeplacement)
+    {
+        $this->sourcedeplacements[] = $sourcedeplacement;
+
+        return $this;
+    }
+
+    /**
+     * Remove sourcedeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $sourcedeplacement
+     */
+    public function removeSourcedeplacement(\GestionBundle\Entity\Deplacement $sourcedeplacement)
+    {
+        $this->sourcedeplacements->removeElement($sourcedeplacement);
+    }
+
+    /**
+     * Get sourcedeplacements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSourcedeplacements()
+    {
+        return $this->sourcedeplacements;
+    }
+
+    /**
+     * Add destinationdeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $destinationdeplacement
+     *
+     * @return Site
+     */
+    public function addDestinationdeplacement(\GestionBundle\Entity\Deplacement $destinationdeplacement)
+    {
+        $this->destinationdeplacements[] = $destinationdeplacement;
+
+        return $this;
+    }
+
+    /**
+     * Remove destinationdeplacement
+     *
+     * @param \GestionBundle\Entity\Deplacement $destinationdeplacement
+     */
+    public function removeDestinationdeplacement(\GestionBundle\Entity\Deplacement $destinationdeplacement)
+    {
+        $this->destinationdeplacements->removeElement($destinationdeplacement);
+    }
+
+    /**
+     * Get destinationdeplacements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDestinationdeplacements()
+    {
+        return $this->destinationdeplacements;
     }
 }

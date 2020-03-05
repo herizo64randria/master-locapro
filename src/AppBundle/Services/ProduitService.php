@@ -2,6 +2,7 @@
 
 namespace AppBundle\Services;
 
+use GroupeBundle\Entity\Site;
 use ProduitBundle\Entity\Depot;
 use ProduitBundle\Entity\Immo;
 use ProduitBundle\Entity\Produit;
@@ -34,10 +35,20 @@ class ProduitService
 
     }
 
-    public function getStock(Produit $produit, Depot $depot){
+    public function getStockByDepot(Produit $produit, Depot $depot){
         $stock = $this->em->getRepository('ProduitBundle:Stock_')
             ->findOneBy(array(
                 'depot' => $depot,
+                'produit' => $produit
+            ));
+
+        return $stock->getQuantite();
+    }
+
+    public function getStockBySite(Produit $produit, Site $site){
+        $stock = $this->em->getRepository('ProduitBundle:Stock_')
+            ->findOneBy(array(
+                'site' => $site,
                 'produit' => $produit
             ));
 

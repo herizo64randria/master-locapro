@@ -103,9 +103,7 @@ class EntreController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entres = $em->getRepository('GestionBundle:Entre')
-            ->findAll()
-        ;
+        $entres = $em->getRepository('GestionBundle:Entre')->findAll();
 
         return $this->render('@Gestion/Entre/index.html.twig', array(
             'entres' => $entres,
@@ -126,6 +124,13 @@ class EntreController extends Controller
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array('etat'=>true));
         $fournisseurs =  $em->getRepository('FournisseurBundle:Fournisseur')->findAll();
+
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
         if($request->getMethod() == 'POST'){
             $entre = new Entre();
 
@@ -144,10 +149,19 @@ class EntreController extends Controller
             if (isset($_POST['motif']))
                 $entre->setMotif($_POST['motif']);
 
-            $depot = $repositoryDepot->findOneBy(array(
-                'id' => $_POST['depot']
-            ));
-            $entre->setDepot($depot);
+            // ------------------- EMPLACEMEMNT ---------------------
+
+            if($_POST['emplacement'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['site']));
+                $entre->setSite($site);
+            }
+
+            if ($_POST['emplacement'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depot']));
+                $entre->setDepot($depot);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT ////// ---------------------
 
             //NEXT NUMERO
             $this->nextNumero($em);
@@ -176,6 +190,7 @@ class EntreController extends Controller
             'numero' => $this->recupereNumeroEntre($em),
             'depots' => $depots,
             'fournisseurs'=>$fournisseurs,
+            'sites' => $sites,
 
         ));
 
@@ -192,6 +207,13 @@ class EntreController extends Controller
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array('etat'=>true));
         $fournisseurs =  $em->getRepository('FournisseurBundle:Fournisseur')->findAll();
+
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
 
         if($request->getMethod() == 'POST'){
 
@@ -219,15 +241,21 @@ class EntreController extends Controller
                 $entre->setMotif($_POST['motif']);
 
 
+            // ------------------- EMPLACEMEMNT ---------------------
 
-            if (isset($_POST['depot']) and $_POST['depot'])
-            {
-                $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
-                $depot = $repositoryDepot->findOneBy(array(
-                    'id' => $_POST['depot']
-                ));
-                $entre->setDepot($depot);
+            if($_POST['emplacement'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['site']));
+                $entre->setSite($site);
+                $entre->setDepot(null);
             }
+
+            if ($_POST['emplacement'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depot']));
+                $entre->setDepot($depot);
+                $entre->setSite(null);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT ////// ---------------------
 
             $em->persist($entre);
             $em->flush();
@@ -240,6 +268,7 @@ class EntreController extends Controller
             'depots' => $depots,
             'entre'=>$entre,
             'fournisseurs'=>$fournisseurs,
+            'sites' => $sites,
 
         ));
 
@@ -428,9 +457,10 @@ class EntreController extends Controller
             $historiqueProduit->setType('credit');
             $historiqueProduit->setProduit($ligneEntre->getProduit());
             $historiqueProduit->setEntre($entre);
-            $historiqueProduit->setDepot($entre->getDepot());
             $historiqueProduit->setDate($entre->getDate());
             $historiqueProduit->setQuantite($ligneEntre->getQuantite());
+
+
 
             $em->persist($historiqueProduit);
 
@@ -438,16 +468,35 @@ class EntreController extends Controller
 
             //-----------------ENTREE DANS LE STOCK-----------------
 
-            $stock = $repositoryStock->findOneBy(array(
-                'produit' => $historiqueProduit->getProduit(),
-                'depot' => $historiqueProduit->getDepot()
-            ));
 
-            if(!$stock){
-                $stock = new Stock_();
-                $stock->setDepot($historiqueProduit->getDepot());
-                $stock->setProduit($historiqueProduit->getProduit());
-                $stock->setQuantite(0);
+            if ($entre->getDepot()){
+                $historiqueProduit->setDepot($entre->getDepot());
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'depot' => $historiqueProduit->getDepot()
+                ));
+
+                if(!$stock){
+                    $stock = new Stock_();
+                    $stock->setDepot($historiqueProduit->getDepot());
+                    $stock->setProduit($historiqueProduit->getProduit());
+                    $stock->setQuantite(0);
+                }
+            }
+
+            if ($entre->getSite()){
+                $historiqueProduit->setSite($entre->getSite());
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $historiqueProduit->getProduit(),
+                    'site' => $historiqueProduit->getSite()
+                ));
+
+                if(!$stock){
+                    $stock = new Stock_();
+                    $stock->setSite($historiqueProduit->getSite());
+                    $stock->setProduit($historiqueProduit->getProduit());
+                    $stock->setQuantite(0);
+                }
             }
 
             $quantite = $stock->getQuantite() + $historiqueProduit->getQuantite();

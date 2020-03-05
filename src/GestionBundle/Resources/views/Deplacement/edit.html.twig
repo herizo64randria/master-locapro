@@ -21,62 +21,15 @@
                     <!-- /.box-header -->
                     <div class="box-body">
 
-                            <div class="form-group">
-                                <label for="date" class=" control-label">Date :</label>
-                                <div class="input-group date form_date " data-date="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input required class="form-control"  type="text" value="{{ deplacement.date|date('d/m/Y') }}"  name="date">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                                <input type="hidden" id="dtp_input2" value="" /><br/>
+                        <div class="form-group">
+                            <label for="date" class=" control-label">Date :</label>
+                            <div class="input-group date form_date " data-date="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input required class="form-control"  type="text" value="{{ deplacement.date|date('d/m/Y') }}"  name="date">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-
-
-                            <div class="form-group col-md-5">
-                                <label for="source_depot">Dépot de stockage source <b class="text-danger" id="err_source_depot"></b></label>
-                                <select required  class="form-control" name="source_depot" id="source_depot"
-                                        {% if i>0  %}
-                                            disabled
-                                        {% endif %}
-
-                                >
-
-                                    {% for depot in depots %}
-                                        <option value="{{ depot.id }}"
-
-                                                {% if depot.nom == deplacement.sourcedepot.nom %}
-                                                     selected
-                                                {% endif %}
-                                        >{{ depot.nom }} - {{ depot.abrv }}</option>
-                                    {% endfor %}
-
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <br>
-                                <div class="text-center">
-                                    <i class="fa fa-chevron-right fa-2x "></i><i class="fa fa-chevron-right fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-5">
-                                <label for="destination_depot">Dépot de stockage déstination <b class="text-danger" id="err_destination_depot"></b></label>
-                                <select required  class="form-control" name="destination_depot" id="destination_depot"
-                                        {% if i>0  %}
-                                             disabled
-                                        {% endif %}>
-
-                                    {% for depot in depots %}
-                                        <option value="{{ depot.id }}"
-
-                                                {% if depot.nom == deplacement.destinationdepot.nom %}
-                                                    selected
-                                                {% endif %}
-                                        >{{ depot.nom }} - {{ depot.abrv }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-
+                            <input type="hidden" id="dtp_input2" value="" />
+                        </div>
                         <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
                             <textarea
@@ -87,11 +40,103 @@
                         </div>
 
                         <div class="row">
+                            <!-- ----------------  EMPLACEMENT SOURCE ------------------ -->
+                            <div class="col-md-5">
+
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title text-primary"> Emplacement source</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementSource" id="emplacementSourceDepot" value="depot"
+                                                    {% if deplacement.sourcedepot %}
+                                                        checked
+                                                    {% endif %}
+                                            />
+                                            <label for="emplacementSourceDepot">Dépôt source  <b class="text-danger" id="err_depotSource"></b></label>
+                                            <select required  class="form-control" name="depotSource" id="depotSource" >
+                                                {% for key, depot in depots %}
+                                                    <option value="{{ depot.id }}" {% if deplacement.sourcedepot == depot %}selected {% endif %}>
+                                                        {{ depot.nom }} - {{ depot.abrv }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementSource" id="emplacementSourceSite" value="site"
+                                                    {% if deplacement.sourcesite %}
+                                                        checked
+                                                    {% endif %}
+                                            />
+                                            <label for="emplacementSourceSite">Site source  <b class="text-danger" ></b></label>
+                                            <select required class="form-control" name="siteSource" id="siteSource">
+                                                {% for key, site in sites %}
+                                                    <option value="{{ site.id }}" {% if deplacement.sourcesite == site %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ----------------  ///// EMPLACEMENT SOURCE ///// ------------------ -->
+                            <div class="form-group col-md-1">
+                                <br><br><br><br><br>
+                                <div class="text-center">
+                                    <i class="fa fa-chevron-right fa-2x "></i><i class="fa fa-chevron-right fa-2x"></i>
+                                </div>
+                            </div>
+
+                            <!-- ----------------  EMPLACEMENT DESTINATION ------------------ -->
+                            <div class="col-md-5">
+
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title text-primary"> Emplacement de destination</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementDestination" id="emplacementDestinationDepot" value="depot"
+                                                    {% if deplacement.destinationdepot %}
+                                                        checked
+                                                    {% endif %}
+                                            />
+                                            <label for="emplacementDestinationDepot">Dépôt de destination  <b class="text-danger" id="err_depotDestination"></b></label>
+                                            <select required  class="form-control" name="depotDestination" id="depotDestination" >
+                                                {% for key, depot in depots %}
+                                                    <option value="{{ depot.id }}" {% if depot == deplacement.destinationdepot %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="radio" name="emplacementDestination" id="emplacementDestinationSite" value="site"
+                                                    {% if deplacement.destinationsite %}
+                                                        checked
+                                                    {% endif %}
+                                            />
+                                            <label for="emplacementDestinationSite">Site de destination  <b class="text-danger"></b></label>
+                                            <select required class="form-control" name="siteDestination" id="siteDestination">
+                                                {% for key, site in sites %}
+                                                    <option value="{{ site.id }}" {% if site == deplacement.destinationsite %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ----------------  ///// EMPLACEMENT SOURCE ///// ------------------ -->
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <input type="submit"  id="btn" value="Modifier" class="btn btn-success btn-block" />
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ path('deplacement_index') }}" class="btn btn-default btn-block">Annuler</a>
+                                <a href="{{ path('deplacement_affcher', {'id' : deplacement.id}) }}" class="btn btn-default btn-block">Annuler</a>
                             </div>
                         </div>
                     </div>
@@ -105,20 +150,6 @@
     <br><br><br><br><br><br>
 
 
-    {#NUMERAL FORMAT#}
-    <script>
-        numeralFormat('#produitbundle_produit_prixAchat');
-        numeralFormat('#produitbundle_produit_prixVente');
-
-        $('#btn').click(function () {
-            if($('#source_depot').val()== $('#destination_depot').val())
-            {
-                $('#textModalDanger').text('Il faut changé la valeur du dépot déstination ');
-                $('#modalDanger').modal();
-                return false;
-            }
-        })
-    </script>
     {#DATEPICKER#}
     <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('DatePicker1/js/locales/bootstrap-datetimepicker.fr.js') }}" charset="UTF-8"></script>
@@ -135,4 +166,59 @@
             forceParse: 0
         });
     </script>
+
+    {#    SCRIPT CHOIX EMPLACEMENT SOURCE #}
+    {% if deplacement.sourcedepot %}
+        <script>
+            $('#siteSource').prop('disabled', true);
+            $('#depotSource').prop('disabled', false);
+        </script>
+    {% endif %}
+    {% if deplacement.sourcesite %}
+        <script>
+            $('#siteSource').prop('disabled', false);
+            $('#depotSource').prop('disabled', true);
+        </script>
+    {% endif %}
+    <script>
+        $('#emplacementSourceDepot').click(function () {
+            $('#siteSource').prop('disabled', true);
+            $('#depotSource').prop('disabled', false);
+        });
+
+        $('#emplacementSourceSite').click(function () {
+            $('#siteSource').prop('disabled', false);
+            $('#depotSource').prop('disabled', true);
+        });
+    </script>
+
+
+    {#    SCRIPT CHOIX EMPLACEMENT Destination #}
+    {% if deplacement.destinationdepot %}
+        <script>
+            $('#siteDestination').prop('disabled', true);
+            $('#depotDestination').prop('disabled', false);
+        </script>
+    {% endif %}
+    {% if deplacement.destinationsite %}
+        <script>
+            $('#siteDestination').prop('disabled', false);
+            $('#depotDestination').prop('disabled', true);
+        </script>
+    {% endif %}
+    <script>
+
+        $('#emplacementDestinationDepot').click(function () {
+            $('#siteDestination').prop('disabled', true);
+            $('#depotDestination').prop('disabled', false);
+        });
+
+        $('#emplacementDestinationSite').click(function () {
+            $('#siteDestination').prop('disabled', false);
+            $('#depotDestination').prop('disabled', true);
+        });
+
+    </script>
+
+
 {% endblock %}

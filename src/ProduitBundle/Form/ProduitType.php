@@ -3,6 +3,7 @@
 namespace ProduitBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -61,6 +62,14 @@ class ProduitType extends AbstractType
                 'label' => 'Alert de stock',
                 'attr' => array(
                     'class' => 'form-control text-primary',
+                ),
+                'required' => false,
+            ))
+            ->add('note', TextareaType::class,array(
+                'label' => 'Note',
+                'attr' => array(
+                    'class' => 'form-control text-primary',
+                    'placeolder' => 'Facultatif'
                 ),
                 'required' => false,
             ))

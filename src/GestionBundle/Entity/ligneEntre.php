@@ -58,12 +58,6 @@ class ligneEntre
     private $produit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Huile")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $huile;
-
-    /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Entre", inversedBy="ligneEntres")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -130,6 +124,7 @@ class ligneEntre
         return $this->designation;
     }
 
+
     /**
      * Set prixAchat
      *
@@ -155,13 +150,37 @@ class ligneEntre
     }
 
     /**
+     * Set utilite
+     *
+     * @param string $utilite
+     *
+     * @return ligneEntre
+     */
+    public function setUtilite($utilite)
+    {
+        $this->utilite = $utilite;
+
+        return $this;
+    }
+
+    /**
+     * Get utilite
+     *
+     * @return string
+     */
+    public function getUtilite()
+    {
+        return $this->utilite;
+    }
+
+    /**
      * Set produit
      *
      * @param \ProduitBundle\Entity\Produit $produit
      *
      * @return ligneEntre
      */
-    public function setProduit(\ProduitBundle\Entity\Produit $produit)
+    public function setProduit(\ProduitBundle\Entity\Produit $produit = null)
     {
         $this->produit = $produit;
 
@@ -200,53 +219,5 @@ class ligneEntre
     public function getEntre()
     {
         return $this->entre;
-    }
-
-    /**
-     * Set utilite
-     *
-     * @param string $utilite
-     *
-     * @return ligneEntre
-     */
-    public function setUtilite($utilite)
-    {
-        $this->utilite = $utilite;
-
-        return $this;
-    }
-
-    /**
-     * Get utilite
-     *
-     * @return string
-     */
-    public function getUtilite()
-    {
-        return $this->utilite;
-    }
-
-    /**
-     * Set huile
-     *
-     * @param \ProduitBundle\Entity\Huile $huile
-     *
-     * @return ligneEntre
-     */
-    public function setHuile(\ProduitBundle\Entity\Huile $huile = null)
-    {
-        $this->huile = $huile;
-
-        return $this;
-    }
-
-    /**
-     * Get huile
-     *
-     * @return \ProduitBundle\Entity\Huile
-     */
-    public function getHuile()
-    {
-        return $this->huile;
     }
 }

@@ -30,14 +30,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="depot">Dépot de stockage <b class="text-danger" id="err_depot"></b></label>
-                            <select required  class="form-control" name="depot" id="depot" >
-                                {% for depot in depots %}
-                                    <option value="{{ depot.id }}">{{ depot.nom }} - {{ depot.abrv }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="fournisseur">Fournisseur <b class="text-danger" id="err_fournisseur"></b></label>
                             <select required  class="form-control" name="fournisseur" id="fournisseur" >
                                 <option value=" ">
@@ -51,6 +43,68 @@
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
                             <textarea rows="3" class="form-control" name="motif" id="motif" ></textarea>
                         </div>
+
+                        <!-- ----------------  DEPOT OU SITE ------------------ -->
+
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title text-primary"> Emplacement d'entré</h4>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-primary">
+                                                <input type="radio" name="emplacement" id="emplacementDepot" value="depot" checked/>
+                                                <label for="emplacementDepot">Dépôt</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementDepot">
+                                            <div class="form-group">
+                                                <label for="depot">Dépôt de stockage <b class="text-danger" id="err_depot"></b></label>
+                                                <select required  class="form-control" name="depot" id="depot" >
+                                                    {% for key, depot in depots %}
+                                                        <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-info">
+                                                <input type="radio" name="emplacement" id="emplacementSite" value="site" />
+                                                <label for="emplacementSite">Site</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementSite">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
+                                                    <select required class="form-control" name="site" id="site">
+                                                        {% for key, site in sites %}
+                                                            <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ----------------  ///// DEPOT OU SITE ///// ------------------ -->
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -95,5 +149,27 @@
             minView: 2,
             forceParse: 0
         });
+    </script>
+
+    <script>
+        $('#site').select2();
+        $('#depot').select2();
+    </script>
+
+    {#    SCRIPT CHOIX EMPLACEMENT#}
+    <script>
+        $('#site').prop('disabled', true);
+        $('#depot').prop('disabled', false);
+
+        $('#emplacementDepot').click(function () {
+            $('#site').prop('disabled', true);
+            $('#depot').prop('disabled', false);
+        });
+
+        $('#emplacementSite').click(function () {
+            $('#site').prop('disabled', false);
+            $('#depot').prop('disabled', true);
+        });
+
     </script>
 {% endblock %}

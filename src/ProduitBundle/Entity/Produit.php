@@ -77,6 +77,21 @@ class Produit
      */
     private $alert;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="si_huile", type="boolean", nullable=true)
+     */
+    private $siHuile;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="note", type="text", nullable=true)
+     */
+    private $note;
+
+
 //------------\\\\\\\////////////-----------
 
     /**
@@ -371,5 +386,53 @@ class Produit
     public function getHistoriqueProduits()
     {
         return $this->historiqueProduits;
+    }
+
+    /**
+     * Set siHuile
+     *
+     * @param boolean $siHuile
+     *
+     * @return Produit
+     */
+    public function setSiHuile($siHuile)
+    {
+        $this->siHuile = $siHuile;
+
+        return $this;
+    }
+
+    /**
+     * Get siHuile
+     *
+     * @return boolean
+     */
+    public function getSiHuile()
+    {
+        return $this->siHuile;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     *
+     * @return Produit
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

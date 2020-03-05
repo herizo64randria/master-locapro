@@ -84,9 +84,15 @@ class Entre
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Depot", inversedBy="Entres")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $depot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site", inversedBy="Entres")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $site;
 
     /**
      * @ORM\ManyToOne(targetEntity="FournisseurBundle\Entity\Fournisseur")
@@ -305,31 +311,6 @@ class Entre
         return $this->userCreer;
     }
 
-    /**
-     * Set depot
-     *
-     * @param \ProduitBundle\Entity\Depot $depot
-     *
-     * @return Entre
-     */
-    public function setDepot(\ProduitBundle\Entity\Depot $depot)
-    {
-        $this->depot = $depot;
-
-        return $this;
-    }
-
-    /**
-     * Get depot
-     *
-     * @return \ProduitBundle\Entity\Depot
-     */
-    public function getDepot()
-    {
-        return $this->depot;
-    }
-
-
 
     /**
      * Set fournisseur
@@ -459,5 +440,53 @@ class Entre
     public function getDateOperation()
     {
         return $this->dateOperation;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return Entre
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site = null)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set depot
+     *
+     * @param \ProduitBundle\Entity\Depot $depot
+     *
+     * @return Entre
+     */
+    public function setDepot(\ProduitBundle\Entity\Depot $depot = null)
+    {
+        $this->depot = $depot;
+
+        return $this;
+    }
+
+    /**
+     * Get depot
+     *
+     * @return \ProduitBundle\Entity\Depot
+     */
+    public function getDepot()
+    {
+        return $this->depot;
     }
 }

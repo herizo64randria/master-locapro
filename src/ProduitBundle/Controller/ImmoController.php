@@ -65,8 +65,6 @@ class ImmoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
-
             $historiqueImmo = new HistoriqueImmo();
             $historiqueImmo->setImmo($immo);
             $historiqueImmo->setDate(new \DateTime());

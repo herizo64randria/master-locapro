@@ -137,7 +137,15 @@
     </div>
     <div id="droit">
         <div id="sdroit">
-            <h2 ><br>DEPOT {{ sortie.depot.nom|upper }} <br><br>
+            <h2 >
+                <br>
+                {% if sortie.depot %}
+                    DEPOT {{ sortie.depot.nom }}
+                {% endif %}
+                {% if sortie.site %}
+                    SITE {{ sortie.site.emplacement }}
+                {% endif %}
+                <br><br>
 
             </h2>
         </div>

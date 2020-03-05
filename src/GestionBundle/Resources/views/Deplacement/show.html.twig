@@ -46,10 +46,30 @@
                             <td></td><td></td>
                         </tr>
                         <tr>
-                            <td style="width: 250px">Dépôt de stockage:</td>
-                            <td style="width: 150px">{{ deplacement.sourcedepot.nom }} ({{ deplacement.sourcedepot.abrv }})</td>
+                            <td >Dépôt de stockage:</td>
+                            <td >
+                                {% set emplacementSource = "" %}
+                                {% if deplacement.sourcesite %}
+                                    {% set emplacementSource = deplacement.sourcesite.emplacement %}
+                                {% endif %}
+
+                                {% if deplacement.sourcedepot %}
+                                    {% set emplacementSource = deplacement.sourcedepot.nom %}
+                                {% endif %}
+                                <b>{{ emplacementSource }}</b>
+                            </td>
                             <td >vers</td>
-                            <td class="text-right" style="width: 150px">{{ deplacement.destinationdepot.nom }} ({{ deplacement.destinationdepot.abrv }})</td>
+                            <td class="text-right" >
+                                {% set emplacementDestination = "" %}
+                                {% if deplacement.destinationsite %}
+                                    {% set emplacementDestination = deplacement.destinationsite.emplacement %}
+                                {% endif %}
+
+                                {% if deplacement.destinationdepot %}
+                                    {% set emplacementDestination = deplacement.destinationdepot.nom %}
+                                {% endif %}
+                                <b>{{ emplacementDestination }}</b>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -65,7 +85,7 @@
                     {% if deplacement.motif %}
                         <div>
                             <p ><b>Motif:</b></p>
-                            <p>{{ sortie.motif|nl2br }})</p>
+                            <p>{{ deplacement.motif|nl2br }})</p>
                         </div>
                     {% endif %}
                 </li>
@@ -196,20 +216,43 @@
                                 {% for lignedeplacement in deplacement.lignedeplacement%}
                                     {% set couleurLigne = '' %}
                                     {% set couleurQuantite = '' %}
-                                    {% if lignedeplacement.quantite > lignedeplacement.deplacement.sourcedepot |stock(lignedeplacement.produit) and deplacement.etat != 'Transfert confirmée' %}
+
+                                    {% set qttProduit = -1 %}
+                                    {% if deplacement.sourcesite %}
+                                        {% set qttProduit = deplacement.sourcesite|stockBySite(lignedeplacement.produit) %}
+                                    {% endif %}
+
+                                    {% if deplacement.sourcedepot %}
+                                        {% set qttProduit = deplacement.sourcedepot|stockByDepot(lignedeplacement.produit) %}
+                                    {% endif %}
+
+                                    {% if lignedeplacement.quantite > qttProduit and deplacement.etat != 'Transfert confirmée' %}
                                         {% set couleurLigne = 'danger' %}
                                         {% set couleurQuantite = 'text-danger' %}
 
                                         {% set erreurLigne = erreurLigne + 1 %}
                                     {% endif %}
+
                                     <tr class="couleurLigne">
-                                        <td  class="class_produit" idProduit="{{ lignedeplacement.produit.id }}" >{{ lignedeplacement.produit.code }}</td>
+                                        <td  class="class_produit" idProduit="{{ lignedeplacement.produit.id }}" >
+                                            {% set ligneCode = '<i class="">Non-codé</i>' %}
+                                            {% set pathProduit = path('produit_show', {'id' : lignedeplacement.produit.id}) %}
+                                            {% if lignedeplacement.produit.code %}
+                                                {% set ligneCode = lignedeplacement.produit.code %}
+                                            {% endif %}
+
+                                            {% if lignedeplacement.produit.siHuile %}
+                                                {% set pathProduit = path('huile_show', {'id' : lignedeplacement.produit.id}) %}
+                                                {% set ligneCode = '<b class="text-warning">(H)</b> '~ligneCode %}
+                                            {% endif %}
+
+                                            <a href="{{ pathProduit }}" target="_blank">{{ ligneCode|raw }}</a>
+                                        </td>
                                         <td>{{ lignedeplacement.designation }}</td>
                                         <td>{{ lignedeplacement.produit.reference }}</td>
                                         <td>{{ lignedeplacement.quantite }}</td>
                                         {% if deplacement.modifiable and deplacement.userCreer == app.user %}
                                             <td class="action">
-                                                <a href="{{ path('deplacement_modifierLigne',{'id':lignedeplacement.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
                                                 <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('deplacement_supprimerLigne',{'id':lignedeplacement.id}) }}"><i class="fa fa-minus-circle "></i></button>
                                             </td>
                                         {% endif %}
@@ -229,7 +272,22 @@
                                                 <option value=" ">
                                                 </option>
                                                 {% for produit in produits %}
-                                                    <option value="{{ produit.id }}" quantite="{{ deplacement.sourcedepot|stock(produit) }}">{{ produit.designation }} - {{ produit.code }} | {{ produit.reference }}<b>({{ deplacement.sourcedepot|stock(produit) }})</b></option>
+
+                                                    {% set qttProduit = '-' %}
+                                                    {% if deplacement.sourcesite %}
+                                                        {% set qttProduit = deplacement.sourcesite|stockBySite(produit) %}
+                                                    {% endif %}
+
+                                                    {% if deplacement.sourcedepot %}
+                                                        {% set qttProduit = deplacement.sourcedepot|stockByDepot(produit) %}
+                                                    {% endif %}
+
+                                                    <option value="{{ produit.id }}" quantite="{{ qttProduit }}">
+                                                        {% if produit.siHuile %}
+                                                            (H)
+                                                        {% endif %}
+                                                        {{ produit.designation }} - {{ produit.code }} | {{ produit.reference }}<b>({{ qttProduit }})</b>
+                                                    </option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -412,8 +470,15 @@
 
             inputQuantite = + $('#quantite').val();
 
+            if (Number.isNaN(stockProduit)) {
+                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock dans le Dépôt');
+                $('#modalDanger').modal();
+
+                return false;
+            }
+
             if (inputQuantite > stockProduit) {
-                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock source dans le dépot');
+                $('#textModalDanger').text('Erreur! La quantité est supérieur par rapport au stock source dans le Dépôt');
                 $('#modalDanger').modal();
 
                 return false;
