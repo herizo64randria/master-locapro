@@ -6,6 +6,7 @@ use GroupeBundle\Entity\Alternateur;
 use GroupeBundle\Entity\Groupe;
 use GroupeBundle\Entity\HeureMarche;
 use GroupeBundle\Entity\Moteur;
+use ProduitBundle\Entity\Stock_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -214,12 +215,33 @@ class GroupeController extends Controller
             array('date' => 'desc')
         );
 
+        // ------------------- STOCK D'HUILE ---------------------
+        $stockHuile = 0;
+        $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
+           'huileParDefaut' => true,
+           'siHuile' => true
+        ));
+        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+        $stcHuile = $repositoryStock->findOneBy(array(
+            'produit' => $huile,
+            'site' => $groupe->getSite()
+        ));
+
+        if ($stcHuile){
+            $stockHuile = $stcHuile->getQuantite();
+        }
+
+
+        // ------------------- ////// STOCK D'HUILE ////// ---------------------
+
         return $this->render('@Groupe/groupe/show.html.twig', array(
             'groupe' => $groupe,
             'delete_form' => $deleteForm->createView(),
             'sites' => $sites,
             'historiqueGroupes' => $historiqueGroupes,
             'listePieces' => $listePieces,
+            'stockHuile' => $stockHuile,
+
         ));
     }
 

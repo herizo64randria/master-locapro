@@ -7,6 +7,7 @@ use GroupeBundle\Entity\Groupe;
 use GroupeBundle\Entity\HistoriqueGroupe;
 use GroupeBundle\Entity\SuiviPiece;
 use GroupeBundle\Entity\Vidange;
+use ProduitBundle\Entity\HistoriqueProduit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,11 +44,52 @@ class VidangeController extends Controller
                 $vidange->setDescription($_POST['descriptionVidange'])
             ;
 
+            // ------------------- HUILE UTILISE ---------------------
+
+            if (isset($_POST['huileUtilise'])){
+                $qttUtilise = $_POST['huileUtilise'];
+                if ($qttUtilise < 0)
+                    throw new Exception('Erreur! Valeur de huile utilisé négatif');
+
+                $stockHuile = 0;
+                $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
+                    'huileParDefaut' => true,
+                    'siHuile' => true
+                ));
+                $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+                $stcHuile = $repositoryStock->findOneBy(array(
+                    'produit' => $huile,
+                    'site' => $groupe->getSite()
+                ));
+
+                if ($stcHuile){
+                    $stockHuile = $stcHuile->getQuantite();
+                }
+
+                if ($stockHuile < $qttUtilise){
+                    throw new Exception('Erreur! Stock d\'huile insufisante');
+                }
+
+                //--------HISTORIQUE DU PRODUIT------------
+                $historiqueProduit = new HistoriqueProduit();
+
+                $historiqueProduit->setType('debit');
+                $historiqueProduit->setProduit($huile);
+                $historiqueProduit->setVidange($vidange);
+                $historiqueProduit->setDate($vidange->getDate());
+                $historiqueProduit->setQuantite($qttUtilise);
+
+                $em->persist($historiqueProduit);
+
+                $vidange->setHuileUtilise($qttUtilise);
+
+            }
+            // ------------------- ////// HUILE UTILISE ////// ---------------------
+
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setVidange($vidange);
             $historiqueGroupe->setDate($vidange->getDate());
             $historiqueGroupe->setGroupe($groupe);
-
 
             $em->persist($vidange);
             $em->persist($historiqueGroupe);

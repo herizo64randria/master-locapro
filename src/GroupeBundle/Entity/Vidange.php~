@@ -49,6 +49,13 @@ class Vidange
      */
     private $heureMarche;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="huile_utilise", type="float", nullable=true)
+     */
+    private $huileUtilise;
+
 
 //------------\\\\\\\////////////-----------
 

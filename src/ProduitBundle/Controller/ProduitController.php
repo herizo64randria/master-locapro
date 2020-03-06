@@ -86,9 +86,27 @@ class ProduitController extends Controller
         $repositoryDepot =  $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array(),array('id' => 'asc'));
 
+        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+
+        $listeSiteStockages = array();
+
+        $qb = $repositoryStock->createQueryBuilder('s');
+        $stockSites = $qb
+            ->where($qb->expr()->isNotNull('s.site'))
+            ->getQuery()
+            ->getResult()
+        ;
+
+        foreach ($stockSites as $stockSite){
+            if (! in_array($stockSite->getSite(), $listeSiteStockages)){
+                array_push($listeSiteStockages, $stockSite->getSite());
+            }
+        }
+
         return $this->render('@Produit/produit/show.html.twig', array(
             'produit' => $produit,
             'depots' => $depots,
+            'listeSiteStockages' => $listeSiteStockages
         ));
     }
 

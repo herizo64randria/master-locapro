@@ -6,6 +6,7 @@ use AppBundle\Services\UserService;
 use Doctrine\Common\Persistence\ObjectManager;
 use GroupeBundle\Entity\Site;
 use ProduitBundle\Entity\Depot;
+use ProduitBundle\Entity\HistoriqueProduit;
 use ProduitBundle\Entity\Produit;
 use UserBundle\Entity\User;
 
@@ -28,6 +29,7 @@ class ProduitExtension extends \Twig_Extension
             new \Twig_SimpleFilter('ifRole', array($this, 'ifRoleUser')),
             new \Twig_SimpleFilter('stockBySite', array($this, 'stockBySiteFunction')),
             new \Twig_SimpleFilter('stockByDepot', array($this, 'stockByDepotFunction')),
+            new \Twig_SimpleFilter('emplacementHist', array($this, 'historiqueProduitEmplacement')),
         );
     }
 
@@ -69,6 +71,19 @@ class ProduitExtension extends \Twig_Extension
         }
 
         return false;
+    }
+
+    public function historiqueProduitEmplacement(HistoriqueProduit $historiqueProduit){
+        $emplacement = '';
+
+        if ($historiqueProduit->getSite()){
+            $emplacement = '(S)'.$historiqueProduit->getSite()->getEmplacement();
+        }
+        if ($historiqueProduit->getDepot()){
+            $emplacement = '(D)'.$historiqueProduit->getDepot()->getNom();
+        }
+
+        return $emplacement;
     }
 
 

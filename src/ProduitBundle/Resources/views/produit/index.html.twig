@@ -59,7 +59,7 @@
                                 </td>
                                 <td class="text-center">{{ produit.stockTotal }}</td>
                                 {% for depot in depots %}
-                                    <td class="text-right">{{ depot|stock(produit) }}</td>
+                                    <td class="text-right">{{ depot|stockByDepot(produit) }}</td>
                                 {% endfor %}
                                 <td class="text-center">{{ produit.alert }}</td>
                                 <td>

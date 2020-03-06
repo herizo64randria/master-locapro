@@ -79,12 +79,7 @@
                                         {% endif %}
                                     </td>
                                 </tr>
-                                {% for depot in depots %}
-                                    <tr>
-                                        <th>{{ depot.abrv }}</th>
-                                        <td class="text-right">{{ depot|stock(produit) }}</td>
-                                    </tr>
-                                {% endfor %}
+
                                 <tr>
                                     <th><i class="fa fa-exchange"></i> Stock total</th>
                                     <td class="text-right"><b>{{ produit.stockTotal }}</b></td>
@@ -99,6 +94,41 @@
                         </div>
                     </div>
 
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-slack"></i> Répartition du stock du produit</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <h4 class="text-primary">Répartition dans les dépôts:</h4>
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for depot in depots %}
+                            <tr>
+                                <th>{{ depot.abrv }}</th>
+                                <td class="text-right">{{ depot|stockByDepot(produit) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <hr>
+                    <h4 class="text-primary">Répartition sur les sites:</h4>
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for listeSite in listeSiteStockages %}
+                            <tr>
+                                <th>{{ listeSite.emplacement }}</th>
+                                <td class="text-right">{{ listeSite|stockBySite(produit) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
@@ -120,7 +150,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Libellé</th>
-                                <th>Dépôt</th>
+                                <th>Emplacement</th>
                                 <th>Entrée</th>
                                 <th>Sortie</th>
                             </tr>
@@ -140,7 +170,7 @@
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>Bon d'entrée: N° {{ historiqueProduit.entre.numero }}</td>
-                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="text-center success" >{{ historiqueProduit.quantite }}</td>
                                         <td class="success"></td>
                                     </tr>
@@ -150,7 +180,7 @@
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
                                             Transfert de produit(s): N° {{ historiqueProduit.deplacement.numero }}</td>
-                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="text-center success">{{ historiqueProduit.quantite }}</td>
                                         <td class="success"></td>
                                     </tr>
@@ -168,7 +198,7 @@
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
                                             Bon de sortie: N° {{ historiqueProduit.sortie.numero }}</td>
-                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
                                     </tr>
@@ -178,7 +208,17 @@
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
                                             Transfert de produit(s): N° {{ historiqueProduit.deplacement.numero }}</td>
-                                        <td>{{ historiqueProduit.depot.abrv }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                    </tr>
+                                {% endif %}
+                                {% if historiqueProduit.vidange %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Vigange du groupe {{ historiqueProduit.vidange.groupe.numero }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
                                     </tr>

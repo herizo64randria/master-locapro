@@ -79,6 +79,12 @@ class HistoriqueProduit
      */
     private $site;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Vidange")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $vidange;
+
 
 
 //------------\\\\\\\////////////-----------
@@ -308,5 +314,29 @@ class HistoriqueProduit
     public function getSite()
     {
         return $this->site;
+    }
+
+    /**
+     * Set vidange
+     *
+     * @param \GroupeBundle\Entity\Vidange $vidange
+     *
+     * @return HistoriqueProduit
+     */
+    public function setVidange(\GroupeBundle\Entity\Vidange $vidange = null)
+    {
+        $this->vidange = $vidange;
+
+        return $this;
+    }
+
+    /**
+     * Get vidange
+     *
+     * @return \GroupeBundle\Entity\Vidange
+     */
+    public function getVidange()
+    {
+        return $this->vidange;
     }
 }

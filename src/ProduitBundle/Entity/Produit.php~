@@ -87,6 +87,13 @@ class Produit
     /**
      * @var bool
      *
+     * @ORM\Column(name="huile_par_defaut", type="boolean", nullable=true)
+     */
+    private $huileParDefaut;
+
+    /**
+     * @var bool
+     *
      * @ORM\Column(name="note", type="text", nullable=true)
      */
     private $note;
@@ -434,5 +441,29 @@ class Produit
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * Set huileParDefaut
+     *
+     * @param boolean $huileParDefaut
+     *
+     * @return Produit
+     */
+    public function setHuileParDefaut($huileParDefaut)
+    {
+        $this->huileParDefaut = $huileParDefaut;
+
+        return $this;
+    }
+
+    /**
+     * Get huileParDefaut
+     *
+     * @return boolean
+     */
+    public function getHuileParDefaut()
+    {
+        return $this->huileParDefaut;
     }
 }

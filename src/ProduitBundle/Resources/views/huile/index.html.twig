@@ -32,7 +32,12 @@
                 <tbody>
                 {% for huile in huiles %}
                     <tr>
-                        <td><a href="{{ path('huile_show', { 'id': huile.id }) }}">{{ huile.code }}</a></td>
+                        <td><a href="{{ path('huile_show', { 'id': huile.id }) }}">
+                                {% if huile.huileParDefaut %}
+                                    <i class="fa fa-check-circle text-warning" data-toggle="tooltip" title="Huile par défaut."></i>
+                                {% endif %}
+                                {{ huile.code }}
+                                {% if not huile.code %}- {% endif %}</a></td>
                         <td>{{ huile.designation }}</td>
                         <td>{{ huile.prixAchat }}</td>
                         <td>{{ huile.stockTotal }}</td>

@@ -90,11 +90,31 @@ class SiteController extends Controller
      */
     public function showAction(Site $site)
     {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($site);
+
+        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+        $stockSites = $repositoryStock->findBy(array(
+            'site' => $site
+        ));
+
+        $stockProduits = array();
+        $stockHuiles = array();
+
+        foreach ($stockSites as $stock){
+            if($stock->getProduit()->getSiHuile()){
+                array_push($stockHuiles, $stock);
+            }else
+                array_push($stockProduits, $stock)
+            ;
+        }
+
 
         return $this->render('@Groupe/site/show.html.twig', array(
             'site' => $site,
             'delete_form' => $deleteForm->createView(),
+            'stockHuiles' => $stockHuiles,
+            'stockProduits' => $stockProduits,
         ));
     }
 

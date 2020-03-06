@@ -49,6 +49,13 @@ class Vidange
      */
     private $heureMarche;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="huile_utilise", type="float", nullable=true)
+     */
+    private $huileUtilise;
+
 
 //------------\\\\\\\////////////-----------
 
@@ -237,5 +244,29 @@ class Vidange
     public function getHeureMarche()
     {
         return $this->heureMarche;
+    }
+
+    /**
+     * Set huileUtilise
+     *
+     * @param float $huileUtilise
+     *
+     * @return Vidange
+     */
+    public function setHuileUtilise($huileUtilise)
+    {
+        $this->huileUtilise = $huileUtilise;
+
+        return $this;
+    }
+
+    /**
+     * Get huileUtilise
+     *
+     * @return float
+     */
+    public function getHuileUtilise()
+    {
+        return $this->huileUtilise;
     }
 }

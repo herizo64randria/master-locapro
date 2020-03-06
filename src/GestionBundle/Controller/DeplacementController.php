@@ -225,10 +225,10 @@ class DeplacementController extends Controller
 
             //DESTINATION
             if ($deplacement->getDestinationsite()){
-                $historiqueProduit->setSite($deplacement->getDestinationsite());
+                $historiqueProduit1->setSite($deplacement->getDestinationsite());
             }
             if ($deplacement->getDestinationdepot()){
-                $historiqueProduit->setDepot($deplacement->getDestinationdepot());
+                $historiqueProduit1->setDepot($deplacement->getDestinationdepot());
             }
 
             $em->persist($historiqueProduit1);

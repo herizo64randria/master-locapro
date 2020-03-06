@@ -84,10 +84,32 @@ class HuileController extends Controller
      */
     public function showAction(Produit $huile)
     {
+        $em = $this->getDoctrine()->getManager();
 
+        $repositoryDepot =  $em->getRepository('ProduitBundle:Depot');
+        $depots = $repositoryDepot->findBy(array(),array('id' => 'asc'));
+
+        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+
+        $listeSiteStockages = array();
+
+        $qb = $repositoryStock->createQueryBuilder('s');
+        $stockSites = $qb
+            ->where($qb->expr()->isNotNull('s.site'))
+            ->getQuery()
+            ->getResult()
+        ;
+
+        foreach ($stockSites as $stockSite){
+            if (! in_array($stockSite->getSite(), $listeSiteStockages)){
+                array_push($listeSiteStockages, $stockSite->getSite());
+            }
+        }
 
         return $this->render('@Produit/huile/show.html.twig', array(
             'huile' => $huile,
+            'depots' => $depots,
+            'listeSiteStockages' => $listeSiteStockages
         ));
     }
 
@@ -162,5 +184,32 @@ class HuileController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Finds and displays a huile entity.
+     *
+     * @Route("/huile/par-defaut/{id}", name="huile_parDefaut")
+     *
+     */
+    public function huileParDefautAction(Produit $huile)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositoryHuile = $em->getRepository(Produit::class);
+        $huiles = $repositoryHuile->findBy(array(
+            'siHuile' => true
+        ));
+
+        foreach ($huiles as $huile_){
+            $huile_ ->setHuileParDefaut(null);
+            $em->persist($huile_);
+        }
+
+        $huile->setHuileParDefaut(true);
+        $em->persist($huile);
+
+        $em->flush();
+
+        return $this->redirectToRoute('huile_show', array('id' => $huile->getId()));
     }
 }
