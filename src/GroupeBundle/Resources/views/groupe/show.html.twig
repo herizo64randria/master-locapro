@@ -70,8 +70,10 @@
                         </div>
                     </div>
                 </div>
+                 <a href="#" class="text-right" data-toggle="modal" data-target="#modalDetailGroupe">Plus d'information >></a>
             </div>
         </div>
+
 
     </div>
 
@@ -226,6 +228,157 @@
 {#    HISTORIQUE ETAT#}
     {% include '@Groupe/historiqueEtatGroupe/modalEtatGroupe.html.twig' %}
 
+
+{#    MODAL PLUS D'INFORMATION GROUPE#}
+    <div class="modal fade" id="modalDetailGroupe">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-primary"><i class="fa fa-power-off"></i> Information groupe</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title text-primary"><i class="fa fa-gg"></i> {{ groupe.numero }}</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Numero</th>
+                                            <td>{{ groupe.numero }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Marque</th>
+                                            <td>{{ groupe.marque }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Modèle</th>
+                                            <td>{{ groupe.modele }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Numéro de série</th>
+                                            <td>{{ groupe.numeroSerie }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Année</th>
+                                            <td>{{ groupe.annee }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Puissance</th>
+                                            <td>{{ groupe.puissance }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date début de service:</th>
+                                            <td>{{ groupe.dateDebutService|date('d/m/Y') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Statut actuel du groupe</th>
+                                            <td>{{ groupe.etatGroupe.etat }}</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="infoScroll">
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title text-primary"><i class="fa fa-gg"></i> Information moteur</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <th>Marque</th>
+                                                <td>{{ groupe.moteur.marque }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Modèle</th>
+                                                <td>{{ groupe.moteur.modele }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Numero de série</th>
+                                                <td>{{ groupe.moteur.numeroSerie }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Année</th>
+                                                <td>{{ groupe.moteur.annee }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Puissance</th>
+                                                <td>{{ groupe.moteur.puissance }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Date de mis en service</th>
+                                                <td>{{ groupe.moteur.dateDebutService|date('d/m/Y') }}</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title text-primary"><i class="fa fa-gg"></i> Information alternateur</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <th>Marque</th>
+                                                <td>{{ groupe.alternateur.marque }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Modèle</th>
+                                                <td>{{ groupe.alternateur.modele }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Numero de série</th>
+                                                <td>{{ groupe.alternateur.numeroSerie }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Année</th>
+                                                <td>{{ groupe.alternateur.annee }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Puissance</th>
+                                                <td>{{ groupe.alternateur.puissance }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Date de mis en service</th>
+                                                <td>{{ groupe.alternateur.dateDebutService|date('d/m/Y') }}</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                </div>
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
 {#    //-----------------------------////////  MODAL  ////////-----------------------------#}
 
     <!-- DataTables JS -->
@@ -261,6 +414,10 @@
                         sortDescending: ": activer pour trier la colonne par ordre décroissant"
                     }
                 }
+            });
+
+            $('#infoScroll').slimScroll({
+                height: '350px'
             });
         } );
     </script>
