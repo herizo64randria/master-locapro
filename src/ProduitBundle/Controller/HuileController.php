@@ -212,4 +212,6 @@ class HuileController extends Controller
 
         return $this->redirectToRoute('huile_show', array('id' => $huile->getId()));
     }
+
+
 }

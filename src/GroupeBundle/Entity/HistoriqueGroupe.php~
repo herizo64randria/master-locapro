@@ -85,7 +85,12 @@ class HistoriqueGroupe
      */
     private $heureMarche;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Appoint",
+    cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    private $appoint;
 
 //------------\\\\\\\////////////-----------
 

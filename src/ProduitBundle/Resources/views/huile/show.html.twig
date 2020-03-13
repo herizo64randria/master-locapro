@@ -88,7 +88,7 @@
                         <tbody>
                         {% for depot in depots %}
                             <tr>
-                                <th>{{ depot.abrv }}</th>
+                                <th><a href="{{ path('produit_historiqueParDepot', {'id' : huile.id, 'id3' : depot.id}) }}"><i class="fa fa-info-circle"></i> {{ depot.abrv }}</a></th>
                                 <td class="text-right">{{ depot|stockByDepot(huile) }}</td>
                             </tr>
                         {% endfor %}
@@ -100,7 +100,8 @@
                         <tbody>
                         {% for listeSite in listeSiteStockages %}
                             <tr>
-                                <th>{{ listeSite.emplacement }}</th>
+                                <th>
+                                    <a href="{{ path('produit_historiqueParSite', {'id' : huile.id, 'id2' : listeSite.id}) }}">{{ listeSite.emplacement }} <i class="fa fa-info-circle"></i></a></th>
                                 <td class="text-right">{{ listeSite|stockBySite(huile) }}</td>
                             </tr>
                         {% endfor %}
@@ -193,6 +194,16 @@
                                             <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                             <td>
                                                 Vigange du groupe {{ historiqueProduit.vidange.groupe.numero }}</td>
+                                            <td>{{ historiqueProduit|emplacementHist }}</td>
+                                            <td class="danger"></td>
+                                            <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if historiqueProduit.appoint %}
+                                        <tr>
+                                            <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                            <td>
+                                                Appoint d'huile du groupe {{ historiqueProduit.appoint.groupe.numero }}</td>
                                             <td>{{ historiqueProduit|emplacementHist }}</td>
                                             <td class="danger"></td>
                                             <td class="danger text-center">{{ historiqueProduit.quantite }}</td>

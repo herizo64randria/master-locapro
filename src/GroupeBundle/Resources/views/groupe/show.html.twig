@@ -95,6 +95,9 @@
                             {% if app.user|ifRole('ROLE_VIDANGE') %}
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalVidange"><i class="fa fa-support"></i> Vidange</button>
                             {% endif %}
+                            {% if app.user|ifRole('ROLE_VIDANGE') %}
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAppoint"><i class="fa fa-tint"></i> Appoint Huile</button>
+                            {% endif %}
                         </li>
                     </ul>
 
@@ -194,6 +197,21 @@
 
                             {% endif %}
 
+{#                            ---------------- VIDANGE -------------#}
+                            {% if historiqueGroupe.appoint %}
+                                <tr>
+                                    <td>
+                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                    </td>
+                                    <td>
+                                        Appoint d'huile - <b>{{ historiqueGroupe.appoint.huileUtilise }} L</b>
+                                    </td>
+                                    <td>
+{#                                        <a href="{{ path('vidange_show', {'id' : historiqueGroupe.vidange.id }) }}" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>#}
+                                    </td>
+                                </tr>
+                            {% endif %}
+
                         {% endfor %}
 
                         </tbody>
@@ -228,6 +246,8 @@
 {#    HISTORIQUE ETAT#}
     {% include '@Groupe/historiqueEtatGroupe/modalEtatGroupe.html.twig' %}
 
+{#    APPOINT MODAL#}
+    {% include '@Groupe/appoint/modalAppoint.html.twig' %}
 
 {#    MODAL PLUS D'INFORMATION GROUPE#}
     <div class="modal fade" id="modalDetailGroupe">

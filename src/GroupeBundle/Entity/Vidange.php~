@@ -245,4 +245,28 @@ class Vidange
     {
         return $this->heureMarche;
     }
+
+    /**
+     * Set huileUtilise
+     *
+     * @param float $huileUtilise
+     *
+     * @return Vidange
+     */
+    public function setHuileUtilise($huileUtilise)
+    {
+        $this->huileUtilise = $huileUtilise;
+
+        return $this;
+    }
+
+    /**
+     * Get huileUtilise
+     *
+     * @return float
+     */
+    public function getHuileUtilise()
+    {
+        return $this->huileUtilise;
+    }
 }

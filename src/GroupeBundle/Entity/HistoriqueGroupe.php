@@ -85,7 +85,12 @@ class HistoriqueGroupe
      */
     private $heureMarche;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Appoint",
+    cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    private $appoint;
 
 //------------\\\\\\\////////////-----------
 
@@ -315,5 +320,29 @@ class HistoriqueGroupe
     public function getHeureMarche()
     {
         return $this->heureMarche;
+    }
+
+    /**
+     * Set appoint
+     *
+     * @param \GroupeBundle\Entity\Appoint $appoint
+     *
+     * @return HistoriqueGroupe
+     */
+    public function setAppoint(\GroupeBundle\Entity\Appoint $appoint = null)
+    {
+        $this->appoint = $appoint;
+
+        return $this;
+    }
+
+    /**
+     * Get appoint
+     *
+     * @return \GroupeBundle\Entity\Appoint
+     */
+    public function getAppoint()
+    {
+        return $this->appoint;
     }
 }

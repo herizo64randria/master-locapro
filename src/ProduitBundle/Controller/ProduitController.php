@@ -5,6 +5,7 @@ namespace ProduitBundle\Controller;
 use AppBundle\Services\ProduitService;
 use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,6 +94,8 @@ class ProduitController extends Controller
         $qb = $repositoryStock->createQueryBuilder('s');
         $stockSites = $qb
             ->where($qb->expr()->isNotNull('s.site'))
+            ->andWhere('s.produit = :produit')
+            ->setParameter('produit', $produit)
             ->getQuery()
             ->getResult()
         ;
@@ -204,5 +207,71 @@ class ProduitController extends Controller
         return new Response('Base de données produit mis-à-jour');
     }
 
+    /**
+     * Finds and displays a huile entity.
+     *
+     * @Route("/produit-historique/site/{id}", name="produit_historiqueParSite")
+     *
+     */
+    public function produitHistoriqueSiteAction(Produit $produit){
+        $em = $this->getDoctrine()->getManager();
+        $idSite = $_GET['id2'];
+
+        $site = $em->getRepository('GroupeBundle:Site')->findOneBy(array(
+            'id' => $idSite
+        ));
+
+        $repositoryHistProduit = $em->getRepository('ProduitBundle:HistoriqueProduit');
+        $historiques = $repositoryHistProduit->findBy(array(
+            'site' => $site,
+            'produit' => $produit
+        ));
+
+        if (! $historiques){
+            throw new Exception('Erreur! 404 Not-Found');
+        }
+
+//        throw new Exception(count($historiques));
+
+        return $this->render('@Produit/produit/showHistoriqueSite.html.twig', array(
+            'produit' => $produit,
+            'site' => $site,
+            'historiques' => $historiques,
+        ));
+    }
+
+
+    /**
+     * Finds and displays a huile entity.
+     *
+     * @Route("/produit-historique/Depot/local/{id}", name="produit_historiqueParDepot")
+     *
+     */
+    public function produitHistoriqueDepotAction(Produit $produit){
+        $em = $this->getDoctrine()->getManager();
+        $idDepot = $_GET['id3'];
+
+        $depot = $em->getRepository('ProduitBundle:Depot')->findOneBy(array(
+            'id' => $idDepot
+        ));
+
+        $repositoryHistProduit = $em->getRepository('ProduitBundle:HistoriqueProduit');
+        $historiques = $repositoryHistProduit->findBy(array(
+            'depot' => $depot,
+            'produit' => $produit
+        ));
+
+        if (! $historiques){
+            throw new Exception('Erreur! 404 Not-Found');
+        }
+
+//        throw new Exception(count($historiques));
+
+        return $this->render('@Produit/produit/showHistoriqueDepot.html.twig', array(
+            'produit' => $produit,
+            'depot' => $depot,
+            'historiques' => $historiques,
+        ));
+    }
 
 }

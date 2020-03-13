@@ -3,6 +3,7 @@
 namespace GroupeBundle\Controller;
 
 
+use AppBundle\Services\ProduitService;
 use GroupeBundle\Entity\Groupe;
 use GroupeBundle\Entity\HistoriqueGroupe;
 use GroupeBundle\Entity\SuiviPiece;
@@ -46,16 +47,24 @@ class VidangeController extends Controller
 
             // ------------------- HUILE UTILISE ---------------------
 
+            $huile = null;
             if (isset($_POST['huileUtilise'])){
                 $qttUtilise = $_POST['huileUtilise'];
                 if ($qttUtilise < 0)
                     throw new Exception('Erreur! Valeur de huile utilisé négatif');
+
+                // ------------------- STOCK HUILE ---------------------
 
                 $stockHuile = 0;
                 $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
                     'huileParDefaut' => true,
                     'siHuile' => true
                 ));
+
+                if (!$huile){
+                    throw new Exception('Erreur! Huile par défaut non-défini.');
+                }
+
                 $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
                 $stcHuile = $repositoryStock->findOneBy(array(
                     'produit' => $huile,
@@ -70,6 +79,12 @@ class VidangeController extends Controller
                     throw new Exception('Erreur! Stock d\'huile insufisante');
                 }
 
+                $huileRestant = $stockHuile - $qttUtilise;
+                $stcHuile->setQuantite($huileRestant);
+                $em->persist($stcHuile);
+
+                // ------------------- ////// STOCK HUILE ////// ---------------------
+
                 //--------HISTORIQUE DU PRODUIT------------
                 $historiqueProduit = new HistoriqueProduit();
 
@@ -78,6 +93,7 @@ class VidangeController extends Controller
                 $historiqueProduit->setVidange($vidange);
                 $historiqueProduit->setDate($vidange->getDate());
                 $historiqueProduit->setQuantite($qttUtilise);
+                $historiqueProduit->setSite($groupe->getSite());
 
                 $em->persist($historiqueProduit);
 
@@ -95,10 +111,18 @@ class VidangeController extends Controller
             $em->persist($historiqueGroupe);
             $em->flush();
 
+            // ------------------- Mis A Jour du stock d'huile ---------------------
+            if ($huile){
+                $serviceProduit = new ProduitService($em);
+                $serviceProduit->updateStockTotal($huile);
+            }
+
+            // ------------------- ////// Mis A Jour du stock d'huile ////// ---------------------
+
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             $historiqueGlobal = new HistoriqueGlobal();
             $historiqueGlobal->setUserHistorique($this->getUser());
-            $historiqueGlobal->setLibelle('Nouveau viange: '. $vidange->getType());
+            $historiqueGlobal->setLibelle("Vidange du groupe: {$groupe->getNumero()} - Type {$vidange->getType()}");
             $historiqueGlobal->setLien($this->generateUrl('vidange_show',array('id'=>$vidange->getId())));
 
             $em->persist($historiqueGlobal);
