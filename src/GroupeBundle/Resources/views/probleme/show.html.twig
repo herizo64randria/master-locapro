@@ -37,18 +37,102 @@
     {% endfor %}
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h3 class="text-center text-{{ couleur }}"><b>Etat:</b> <strong>{{ probleme.etat }}</strong></h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-danger">Information du problème</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    {#                    <ul class="list-inline">#}
+                    {#                        <li>#}
+                    {#                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalDeplacementModifier"><i class="fa fa-edit"></i> Modifier</button>#}
+                    {#                        </li>#}
+                    {#                    </ul>#}
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>Date de signalement:</th>
+                            <td>{% if probleme.dateSignalement %}{{ probleme.dateSignalement|date('d/m/Y') }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Cause:</th>
+                            <td>{{ probleme.cause }}</td>
+                        </tr>
+                        <tr>
+                            <th>Signaler par:</th>
+                            <td>
+                                {% if probleme.userCreer.urlImg %}
+                                    <img src="{{ asset('document/'~probleme.userCreer.urlImg) }}" class="img-circle img-thumbnail" alt="Image {{ probleme.userCreer.nom }}" width="35" height="35">
+                                {% endif %}
+                                {{ probleme.userCreer.nom }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Total dépense: </th>
+                            <td class="">
+                                <a href="#divDepense"><b>{{ totalDepense|number_format(2, ',', ' ') }}</b></a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Description: </b>
+                                {{ probleme.description|nl2br }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div>
+                        {% if app.user == probleme.userCreer %}
+                            <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#modalProblemePhoto"><i class="fa fa-plus"></i> Ajouter une pièce jointe</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-danger">Changement d'état</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul style="list-style: none" >
+                        <li><button class="btn-info btn btn-lg btn-block" data-toggle="modal" data-target="#modalEnCour"> En cour de résolution</button></li>
+                        <li><button class="btn-success btn btn-lg btn-block" data-toggle="modal" data-target="#modalResolu"> Problème résolu</button></li>
+                        <li><button class="btn-danger btn btn-lg btn-block" data-toggle="modal" data-target="#modalNonResolu"> Problème non-résolu</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
             {% if probleme.problemePhotos %}
                 <div class="row box" id="boxPieceProbleme">
                     <div class="col-md-10">
                         <h4>Image & Autre:</h4>
                         <div class="row">
                             {% for fichier in probleme.problemePhotos %}
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     {% if fichier.url|typeFile == 'image' %}
                                         <a href="{{ asset('document/'~fichier.url) }}" target="_blank">
                                             <img src="{{ asset('document/'~fichier.url) }}" alt="" class="img-thumbnail" >
+                                            <br>
+                                            <strong class="text-center">{{ fichier.nom }}</strong>
                                         </a>
 
                                     {% elseif fichier.url|typeFile == 'video' %}
@@ -73,83 +157,8 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-md-4">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title text-danger">Etat du problème</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <ul style="list-style: none" >
-                        <li><button class="btn-info btn btn-lg btn-block" data-toggle="modal" data-target="#modalEnCour"> En cour de résolution</button></li>
-                        <li><button class="btn-success btn btn-lg btn-block" data-toggle="modal" data-target="#modalResolu"> Problème résolu</button></li>
-                        <li><button class="btn-danger btn btn-lg btn-block" data-toggle="modal" data-target="#modalNonResolu"> Problème non-résolu</button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <br>
-
-    <div class="row">
-        <div class="col-md-5">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title text-danger">Problème signaler</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-
-{#                    <ul class="list-inline">#}
-{#                        <li>#}
-{#                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalDeplacementModifier"><i class="fa fa-edit"></i> Modifier</button>#}
-{#                        </li>#}
-{#                    </ul>#}
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr>
-                            <th>Date de signalement:</th>
-                            <td>{% if probleme.dateSignalement %}{{ probleme.dateSignalement|date('d/m/Y') }}{% endif %}</td>
-                        </tr>
-                        <tr>
-                            <th>Cause:</th>
-                            <td>{{ probleme.cause }}</td>
-                        </tr>
-                        <tr>
-                            <th>Signaler par:</th>
-                            <td>
-                                {% if probleme.userCreer.urlImg %}
-                                    <img src="{{ asset('document/'~probleme.userCreer.urlImg) }}" class="img-circle img-thumbnail" alt="Image {{ probleme.userCreer.nom }}" width="35" height="35">
-                                {% endif %}
-                                {{ probleme.userCreer.nom }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Total dépense: </th>
-                            <td class=""><b>{{ totalDepense|number_format(2, ',', ' ') }}</b></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <b>Description: </b>
-                                {{ probleme.description|nl2br }}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <hr>
-                    <div>
-                        {% if app.user == probleme.userCreer %}
-                            <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#modalProblemePhoto"><i class="fa fa-plus"></i> Ajouter une pièce jointe</button>
-                        {% endif %}
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-7">
+        <div class="col-md-6">
             <!-- Chat box -->
             <div class="box box-success">
                 <div class="box-header">
@@ -240,7 +249,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" id="divDepense">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title text-danger">Comptabilité</h3>

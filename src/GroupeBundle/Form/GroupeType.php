@@ -62,6 +62,14 @@ class GroupeType extends AbstractType
 
                 )
             ))
+            ->add('premierDemarrage', TextType::class,array(
+                'label' => 'Heure du premier démarrage',
+                'attr' => array(
+                    'class' => 'form-control only_float',
+                    'required',
+
+                )
+            ))
         ;
     }/**
      * {@inheritdoc}

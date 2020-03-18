@@ -46,6 +46,7 @@
                                     <th>Marque:</th>
                                     <td>{{ groupe.marque }}</td>
                                 </tr>
+
                                 <tr>
                                     <th>Statut:</th>
                                     <td class="{{ 'text-'~groupe.etatGroupe.couleur }}"><i class="fa fa-circle"></i> {{ groupe.etatGroupe.etat }}</td>
@@ -301,6 +302,15 @@
                                             <th>Statut actuel du groupe</th>
                                             <td>{{ groupe.etatGroupe.etat }}</td>
                                         </tr>
+                                        <tr>
+                                            <th>Heure du premier démarrage</th>
+                                            <td>{{ groupe.premierDemarrage }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Heure de marche</th>
+                                            <td>{{ groupe.heureMarche }}</td>
+                                        </tr>
+
                                     </table>
 
                                 </div>
@@ -437,7 +447,7 @@
             });
 
             $('#infoScroll').slimScroll({
-                height: '350px'
+                height: '400px'
             });
         } );
     </script>

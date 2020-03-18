@@ -94,6 +94,13 @@ class Groupe
      */
     private $dateDebutService;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="premier_demarrage", type="float", nullable=true)
+     */
+    private $premierDemarrage;
+
 
     //---------------------------
 

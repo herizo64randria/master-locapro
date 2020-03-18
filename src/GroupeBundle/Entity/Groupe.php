@@ -94,6 +94,13 @@ class Groupe
      */
     private $dateDebutService;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="premier_demarrage", type="float", nullable=true)
+     */
+    private $premierDemarrage;
+
 
     //---------------------------
 
@@ -545,5 +552,29 @@ class Groupe
     public function getAlternateur()
     {
         return $this->alternateur;
+    }
+
+    /**
+     * Set premierDemarrage
+     *
+     * @param float $premierDemarrage
+     *
+     * @return Groupe
+     */
+    public function setPremierDemarrage($premierDemarrage)
+    {
+        $this->premierDemarrage = $premierDemarrage;
+
+        return $this;
+    }
+
+    /**
+     * Get premierDemarrage
+     *
+     * @return float
+     */
+    public function getPremierDemarrage()
+    {
+        return $this->premierDemarrage;
     }
 }

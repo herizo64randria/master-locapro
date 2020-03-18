@@ -26,6 +26,10 @@ class GroupeService
 
         }
 
+        if ($groupe->getPremierDemarrage()){
+            $heures += $groupe->getPremierDemarrage();
+        }
+
         $groupe->setHeureMarche($heures);
         $em->persist($groupe);
 
