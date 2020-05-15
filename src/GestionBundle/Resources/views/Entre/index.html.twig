@@ -58,7 +58,7 @@
                             {% endif %}
 
                             <tr>
-                                <td><a href="{{ path('entre_affcher', {'id' : entre.id}) }}">{{ entre.numero }}</a></td>
+                                <td><strong class="hide">{{ entre.numero|origineNum }}</strong><a href="{{ path('entre_affcher', {'id' : entre.id}) }}">{{ entre.numero }}</a></td>
                                 <td>{{ entre.date|date('d/m/Y') }}</td>
                                 <td>{{ entre.userCreer.nom }}</td>
                                 <td>

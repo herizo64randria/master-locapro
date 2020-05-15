@@ -75,7 +75,7 @@ class EntreController extends Controller
         $numeroPrec = $entityNumero->getNumero();
 
         $intNextNum = intval($numeroPrec) + 1;
-        $nextNum = $intNextNum + 1;
+        $nextNum = intval($numeroPrec) + 1;
 
         if(strlen($intNextNum) == 1){
             $nextNum = '00'.$intNextNum;

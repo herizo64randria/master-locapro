@@ -11,8 +11,6 @@
     {% set TRANSFERT_ATTENTE_REC = 'Transfert en attente de reconfirmation'%}
     {% set TRANSFERT_CREATION = 'En cour de création'%}
 
-
-
     <ul class="list-inline">
         {% if app.user|ifRole('ROLE_GESTION_DEPLACEMENT') %}
             <li><a href="{{ path('transfert_creer') }}" class="btn btn-lg btn-success"><i class="fa fa-mail-forward"></i> Nouvelle Transfert</a></li>
@@ -55,7 +53,7 @@
                                 {% set couleurEtat = 'danger' %}
                             {% endif %}
                             <tr>
-                                <td><a href="{{ path('deplacement_affcher', {'id' : deplacement.id}) }}">{{ deplacement.numero }}</a></td>
+                                <td><strong class="hide">{{ deplacement.numero|origineNum }}</strong><a href="{{ path('deplacement_affcher', {'id' : deplacement.id}) }}">{{ deplacement.numero }}</a></td>
                                 <td>{{ deplacement.date|date('d/m/Y') }}</td>
                                 <td>{{ deplacement.userCreer.nom }}</td>
                                 <td>

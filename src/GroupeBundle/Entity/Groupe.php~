@@ -553,4 +553,28 @@ class Groupe
     {
         return $this->alternateur;
     }
+
+    /**
+     * Set premierDemarrage
+     *
+     * @param float $premierDemarrage
+     *
+     * @return Groupe
+     */
+    public function setPremierDemarrage($premierDemarrage)
+    {
+        $this->premierDemarrage = $premierDemarrage;
+
+        return $this;
+    }
+
+    /**
+     * Get premierDemarrage
+     *
+     * @return float
+     */
+    public function getPremierDemarrage()
+    {
+        return $this->premierDemarrage;
+    }
 }

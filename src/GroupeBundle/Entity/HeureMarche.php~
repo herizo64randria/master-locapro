@@ -56,6 +56,26 @@ class HeureMarche
      */
     private $note;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="production", type="float", nullable=true)
+     */
+    private $production;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="consomation", type="float", nullable=true)
+     */
+    private $consomation;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="csp", type="float", nullable=true)
+     */
+    private $csp;
 
 
    // ------------------- RELATION ---------------------

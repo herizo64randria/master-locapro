@@ -53,9 +53,8 @@
                                 {% set couleurEtat = 'danger' %}
                             {% endif %}
 
-
                             <tr>
-                                <td><a href="{{ path('sortie_afficher', {'id' : sortie.id}) }}">{{ sortie.numero }}</a></td>
+                                <td><strong class="hide">{{ sortie.numero|origineNum }}</strong><a href="{{ path('sortie_afficher', {'id' : sortie.id}) }}">{{ sortie.numero }}</a></td>
                                 <td>{{ sortie.userCreer.nom }}</td>
                                 <td>{{ sortie.date|date('d/m/Y') }}</td>
 

@@ -56,6 +56,26 @@ class HeureMarche
      */
     private $note;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="production", type="float", nullable=true)
+     */
+    private $production;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="consomation", type="float", nullable=true)
+     */
+    private $consomation;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="csp", type="float", nullable=true)
+     */
+    private $csp;
 
 
    // ------------------- RELATION ---------------------
@@ -267,5 +287,77 @@ class HeureMarche
     public function getSousHeures()
     {
         return $this->sousHeures;
+    }
+
+    /**
+     * Set production
+     *
+     * @param float $production
+     *
+     * @return HeureMarche
+     */
+    public function setProduction($production)
+    {
+        $this->production = $production;
+
+        return $this;
+    }
+
+    /**
+     * Get production
+     *
+     * @return float
+     */
+    public function getProduction()
+    {
+        return $this->production;
+    }
+
+    /**
+     * Set consomation
+     *
+     * @param float $consomation
+     *
+     * @return HeureMarche
+     */
+    public function setConsomation($consomation)
+    {
+        $this->consomation = $consomation;
+
+        return $this;
+    }
+
+    /**
+     * Get consomation
+     *
+     * @return float
+     */
+    public function getConsomation()
+    {
+        return $this->consomation;
+    }
+
+    /**
+     * Set csp
+     *
+     * @param float $csp
+     *
+     * @return HeureMarche
+     */
+    public function setCsp($csp)
+    {
+        $this->csp = $csp;
+
+        return $this;
+    }
+
+    /**
+     * Get csp
+     *
+     * @return float
+     */
+    public function getCsp()
+    {
+        return $this->csp;
     }
 }

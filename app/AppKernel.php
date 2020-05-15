@@ -10,8 +10,6 @@ class AppKernel extends Kernel
     {
         date_default_timezone_set('Indian/Antananarivo');
         parent::__construct($environment, $debug);
-
-
     }
 
     public function registerBundles()

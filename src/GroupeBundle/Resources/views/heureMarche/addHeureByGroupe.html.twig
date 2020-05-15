@@ -19,46 +19,59 @@
                                     <option value="{{ groupe.id }}">{{ groupe.numero }} </option>
                             </select>
                         </div>
-                        <div class="form-group">
 
+                        <div class="form-group">
                             <div class="input-group date form_date" data-date="" data-link-field="DateDebut" data-link-format="dd/mm/yyyy">
                                 <label for="date" class="input-group-addon control-label">Date Début :</label>
                                 <input  class="form-control "   type="text"  id="DateDebut" name="datedebut">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-
                         </div>
-                        <div class="form-group">
 
+                        <div class="form-group">
                             <div class="input-group date form_date" data-date="" data-link-field="DateFin" data-link-format="dd/mm/yyyy">
                                 <label for="date" class="input-group-addon control-label">Date Fin:</label>
                                 <input class="form-control"  type="text" id="DateFin"  name="datefin">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-
                         </div>
-                        <div class="form-group">
 
+                        <div class="form-group">
                             <div class="input-group " >
-                                <label for="date" class="input-group-addon control-label">Heure de marche:</label>
-                                <input class="form-control"  type="text" id="heure"  name="heure">
-
+                                <label for="heure" class="input-group-addon control-label">Heure de marche:</label>
+                                <input class="form-control only_float"  type="text" id="heure"  name="heure">
                             </div>
-
                         </div>
 
                         <div class="form-group">
-
                             <div class="input-group " >
                                 <label for="puissance" class="input-group-addon control-label">Puissance consommer:</label>
-                                <input type="text" name="puissance" class="form-control">
-
+                                <input type="text" name="puissance" id="puissance" class="form-control only_float">
                             </div>
-
                         </div>
 
+                        <div class="form-group">
+                            <div class="input-group " >
+                                <label for="production" class="input-group-addon control-label">Production: <b class="text-danger" id="err_production"></b></label>
+                                <input type="text" class="form-control only_float" name="production" id="production"  />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-group " >
+                                <label for="consomation" class="input-group-addon control-label">Consomation: <b class="text-danger" id="err_consomation"></b></label>
+                                <input  type="text" class="form-control only_float" name="consomation" id="consomation"  />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group " >
+                                <label for="csp" class="input-group-addon control-label">Consomation specifique (CSP) <b class="text-danger" id="err_csp"></b></label>
+                                <input type="text" class="form-control only_float" name="csp" id="csp"  />
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
@@ -77,10 +90,6 @@
     </div>
 
     <br><br><br><br><br><br>
-
-
-
-
 
     {#   --------------------- SCRIPT SELECT 2 ---------------------  #}
 

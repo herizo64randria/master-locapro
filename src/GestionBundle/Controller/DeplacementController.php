@@ -68,7 +68,7 @@ class DeplacementController extends Controller
         $numeroPrec = $entityNumero->getNumero();
 
         $intNextNum = intval($numeroPrec) + 1;
-        $nextNum = $intNextNum + 1;
+        $nextNum = intval($numeroPrec) + 1;
 
         if(strlen($intNextNum) == 1){
             $nextNum = '00'.$intNextNum;
@@ -84,7 +84,6 @@ class DeplacementController extends Controller
         ;
         $numero->setNumero($nextNum);
         $em->persist($numero);
-
     }
 
     // FIN ----- FONCTION recupereNumero et next numero -----
@@ -175,7 +174,6 @@ class DeplacementController extends Controller
 
     private function diffDate($date_petit,$date_grand)
     {
-
         $interval = $date_grand->diff($date_petit);
 
         $res= $interval->format('%a');

@@ -70,7 +70,6 @@ class GroupeHeureMarcheController extends Controller
 
         if($request->getMethod()=='POST')
         {
-
             $dated = \DateTime::createFromFormat('d/m/Y',$_POST['datedebut']);
             $datef = \DateTime::createFromFormat('d/m/Y',$_POST['datefin']);
             $date = new \DateTime();
@@ -84,11 +83,23 @@ class GroupeHeureMarcheController extends Controller
             $heuremarche->setDatedebut($dated);
             $heuremarche->setDatefin($datef);
             $heuremarche->setHeure($_POST['heure']);
-            $heuremarche->setPuissance($_POST['puissance']);
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setDate($date);
             $historiqueGroupe->setHeureMarche($heuremarche);
             $historiqueGroupe->setGroupe($groupe);
+
+            if (isset($_POST['puissance'])){
+                $heuremarche->setPuissance($_POST['puissance']);
+            }
+            if (isset($_POST['production'])){
+                $heuremarche->setProduction($_POST['production']);
+            }
+            if (isset($_POST['consomation'])){
+                $heuremarche->setConsomation($_POST['consomation']);
+            }
+            if (isset($_POST['csp'])){
+                $heuremarche->setCsp($_POST['csp']);
+            }
 
             $em->persist($heuremarche);
             $em->persist($historiqueGroupe);
@@ -100,7 +111,6 @@ class GroupeHeureMarcheController extends Controller
             return $this->redirectToRoute('GroupeHeureMarche_detailHeureGroupe', array('id' => $groupe->getId()));
         }
         return $this->render('@Groupe/heureMarche/addHeureByGroupe.html.twig',array('groupe'=>$groupe));
-
     }
 
 

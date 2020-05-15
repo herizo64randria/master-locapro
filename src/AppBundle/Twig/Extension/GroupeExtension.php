@@ -27,6 +27,7 @@ class GroupeExtension extends \Twig_Extension
             new \Twig_SimpleFilter('listeEtatGrp', array($this, 'listeEtatFunction')),
             new \Twig_SimpleFilter('heureMarcheDate', array($this, 'heureMarcheDateFunction')),
             new \Twig_SimpleFilter('typeFile', array($this, 'getTypeFile')),
+            new \Twig_SimpleFilter('origineNum', array($this, 'getOrigineNum')),
         );
     }
 
@@ -119,6 +120,10 @@ class GroupeExtension extends \Twig_Extension
 
     }
 
+     public function getOrigineNum($numero){
+        $num = "$numero[10]$numero[11]$numero[4]$numero[5]$numero[6]";
+        return $num;
+    }
 
     /**
      * {@inheritdoc}

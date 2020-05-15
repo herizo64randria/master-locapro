@@ -85,22 +85,38 @@
                             <th>Date fin</th>
                             <th>Heure(s) de marche</th>
                             <th>Puissance moyenne ~</th>
+                            <th>Production</th>
+                            <th>Consomation</th>
+                            <th>CSP</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
 
                         {% for heureMarche in heureMarches %}
-
                             <tr>
-                                <td>{{ heureMarche.datedebut|date('d/m/Y') }}</td>
-                                <td>{{ heureMarche.dateFin|date('d/m/Y') }}</td>
-                                <td >
+                                {% if heureMarche.datedebut|date('Ymd') == heureMarche.dateFin|date('Ymd') %}
+                                    <td colspan="2" class="text-center"><strong class="hide">{{ heureMarche.datedebut|date('Ymd') }}</strong>{{ heureMarche.datedebut|date('d/m/Y') }}</td>
+                                {% else %}
+                                    <td><strong class="hide">{{ heureMarche.datedebut|date('Ymd') }}</strong>{{ heureMarche.datedebut|date('d/m/Y') }}</td>
+                                    <td class="text-center">{{ heureMarche.dateFin|date('d/m/Y') }}</td>
+                                {% endif %}
+
+                                <td class="text-center" >
 
                                     {{ heureMarche.heure}}
                                 </td>
-                                <td >
+                                <td class="text-center" >
                                     {{ heureMarche.puissance}}
+                                </td>
+                                <td class="text-center">
+                                    {{ heureMarche.production }}
+                                </td>
+                                <td class="text-center">
+                                    {{ heureMarche.consomation }}
+                                </td>
+                                <td class="text-center">
+                                    {{ heureMarche.csp }}
                                 </td>
                                 <td>
                                     <a href="{{ path('GroupeHeureMarche_detailHeureMarche', {"id" : heureMarche.id}) }}" class="btn btn-default"><i class="fa fa-info-circle"></i></a>
