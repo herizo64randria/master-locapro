@@ -27,7 +27,22 @@ class ListePiece
      * @ORM\Column(name="nom", type="string", length=100)
      */
     private $nom;
-
+//--------------------Relation-------------------
+    /**
+     * @ORM\OneToOne(targetEntity="ProduitBundle\Entity\Produit")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $produit;
+    /**
+     * @ORM\ManyToMany(targetEntity="GroupeBundle\Entity\Groupe", mappedBy="listepieces")
+     */
+    private $groupes;
+    /**
+     * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\Produit",mappedBy="reflistepiece")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $produits;
+//--------------------Fin relation---------------
 
     /**
      * Get id
@@ -61,5 +76,70 @@ class ListePiece
     public function getNom()
     {
         return $this->nom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     *
+     * @return ListePiece
+     */
+    public function setProduit(\ProduitBundle\Entity\Produit $produit)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \ProduitBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Add groupe
+     *
+     * @param \GroupeBundle\Entity\ListePiece $groupe
+     *
+     * @return ListePiece
+     */
+    public function addGroupe(\GroupeBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes[] = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Remove groupe
+     *
+     * @param \GroupeBundle\Entity\ListePiece $groupe
+     */
+    public function removeGroupe(\GroupeBundle\Entity\Groupe $groupe)
+    {
+        $this->groupes->removeElement($groupe);
+    }
+
+    /**
+     * Get groupes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroupes()
+    {
+        return $this->groupes;
     }
 }
