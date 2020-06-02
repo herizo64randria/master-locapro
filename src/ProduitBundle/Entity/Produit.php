@@ -110,7 +110,11 @@ class Produit
      * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\HistoriqueProduit", mappedBy="produit")
      */
     private $historiqueProduits; // Notez le « s », un stocks est liée à plusieurs historiques produits
-
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\ListePiece",inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reflistepiece;
 //------------\\\\\\\////////////-----------
 
 
@@ -465,5 +469,29 @@ class Produit
     public function getHuileParDefaut()
     {
         return $this->huileParDefaut;
+    }
+
+    /**
+     * Set reflistepiece
+     *
+     * @param \GroupeBundle\Entity\ListePiece $reflistepiece
+     *
+     * @return Produit
+     */
+    public function setReflistepiece(\GroupeBundle\Entity\ListePiece $reflistepiece = null)
+    {
+        $this->reflistepiece = $reflistepiece;
+
+        return $this;
+    }
+
+    /**
+     * Get reflistepiece
+     *
+     * @return \GroupeBundle\Entity\ListePiece
+     */
+    public function getReflistepiece()
+    {
+        return $this->reflistepiece;
     }
 }

@@ -138,6 +138,10 @@ class Groupe
      * @ORM\OneToOne(targetEntity="GroupeBundle\Entity\Alternateur", cascade={"persist", "remove"})
      */
     private $alternateur;
+    /**
+     * @ORM\ManyToMany(targetEntity="GroupeBundle\Entity\ListePiece", inversedBy="groupes")
+     */
+    private $listepieces;
 
 //-------------------------------------------
 
@@ -576,5 +580,39 @@ class Groupe
     public function getPremierDemarrage()
     {
         return $this->premierDemarrage;
+    }
+
+    /**
+     * Add listepiece
+     *
+     * @param \GroupeBundle\Entity\ListePiece $listepiece
+     *
+     * @return Groupe
+     */
+    public function addListepiece(\GroupeBundle\Entity\ListePiece $listepiece)
+    {
+        $this->listepieces[] = $listepiece;
+
+        return $this;
+    }
+
+    /**
+     * Remove listepiece
+     *
+     * @param \GroupeBundle\Entity\ListePiece $listepiece
+     */
+    public function removeListepiece(\GroupeBundle\Entity\ListePiece $listepiece)
+    {
+        $this->listepieces->removeElement($listepiece);
+    }
+
+    /**
+     * Get listepieces
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListepieces()
+    {
+        return $this->listepieces;
     }
 }

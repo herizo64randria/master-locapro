@@ -1,55 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %} Liste Pièce{% endblock %}
-{% block titre_page %}Liste Pièce{% endblock %}
-{% block titre_description %}<br>Liste des pièces détachés{% endblock %}
+{% block titre %} Liste référence equivalence{% endblock %}
+{% block titre_page %}Liste equivalence{% endblock %}
+{% block titre_description %}<br>Liste des référence equivalence(s) du  pièces détachés {{ listepiece.nom }}{% endblock %}
 {% block body %}
-    <ul class="list-inline">
-        <li><a href="{{ path('listepiece_new') }}" class="btn btn-lg btn-success"><i class="fa fa-plus-circle"></i> Nouvelle pièce détachée</a></li>
-    </ul>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Table liste pièce</h3>
+
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table class="table table-striped table-bordered" id="tablePiece">
                         <thead>
                         <tr>
-                            <th>Nom</th>
-                            <th>Pièce compatible</th>
-                            <th>Pièce équivalente</th>
-                            <th>Groupe</th>
-                            <th>Actions</th>
+                            <th>Désignation </th>
+                            <th>Référence</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for listePiece in listePieces %}
+                        {% for listeRef in listeRefs %}
                             <tr>
-                                <td>{{ listePiece.nom }}</td>
-                                <td>{{ listePiece.produit.designation }} - {{ listePiece.produit.reference }} </td>
-                                <td>
-                                    <ul style="list-style: none">
-                                        {% for refEqui in listePiece.produits  %}
-                                            <li >{{ refEqui.designation }} - {{ refEqui.reference }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul style="list-style: none">
-                                        {% for grpComp in listePiece.groupes  %}
-                                            <li >{{ grpComp.marque }} - {{ grpComp.numero}}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                                <td>
-                                    <a href="{{ path('listepiece_show', { 'id': listePiece.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i>Voir</a>
-
-                                    <a href="{{ path('listepiece_edit', { 'id': listePiece.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
-                                </td>
+                                <td>{{ listeRef.designation }}</td>
+                                <td>{{ listeRef.marque }}</td>
 
                             </tr>
                         {% endfor %}
