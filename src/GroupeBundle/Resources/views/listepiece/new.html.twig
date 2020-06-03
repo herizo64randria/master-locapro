@@ -14,10 +14,34 @@
                     <!-- /.box-header -->
                     <div class="box-body">
 
-                        {{ form_widget(form) }}
-                        <br>
+
 
                         <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="ref">Référence <b class="text-danger" id="err_ref"></b></label>
+                                    <select required  class="form-control ref" name="ref" id="ref" >
+
+                                        <option value=""></option>
+
+                                        {% for listepiece in listepieces  %}
+                                            {% for key, produit in produits %}
+                                                {% if listepiece.produit.id != produit.id  %}
+                                                    <option value="{{ produit.id }}" >{{ produit.designation }}-{{ produit.reference }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Nom du pièce <b class="text-danger" id="err_nom"></b></label>
+                                    <input type="text " name="nom" class="form-control" id="nom" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="row">
                             <div class="col-md-6">
                                 <input type="submit" value="Créer" class="btn btn-success btn-block" />
                             </div>
@@ -29,11 +53,24 @@
                     </div>
                 </form>
 
-                {{ form_end(form) }}
+
             </div>
         </div>
 
     </div>
 
+    <script>
+
+        $(document).ready(function() {
+
+                $(".ref").change(function(){
+                    var data = $(this).children("option:selected").text();
+                    $("#nom").val(data);
+                });
+
+            $('.ref').select2();
+        });
+
+    </script>
 
 {% endblock %}

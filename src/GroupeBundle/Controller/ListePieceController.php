@@ -3,7 +3,9 @@
 namespace GroupeBundle\Controller;
 
 use GroupeBundle\Entity\ListePiece;
+use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\HistoriqueGlobal;
@@ -27,8 +29,10 @@ class ListePieceController extends Controller
 
         $listePieces = $em->getRepository('GroupeBundle:ListePiece')->findAll();
 
+
         return $this->render('@Groupe/listepiece/index.html.twig', array(
             'listePieces' => $listePieces,
+
         ));
     }
 
@@ -40,12 +44,15 @@ class ListePieceController extends Controller
      */
     public function newAction(Request $request)
     {
-        $listePiece = new Listepiece();
-        $form = $this->createForm('GroupeBundle\Form\ListePieceType', $listePiece);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $listePieces=$em->getRepository("GroupeBundle:ListePiece")->findAll();
+        $produits= $em->getRepository('ProduitBundle:Produit')->findAll();
+        if ($request->getMethod()=="POST") {
+            $listePiece = new Listepiece();
+            $produit=$em->getRepository('ProduitBundle:Produit')->findOneBy(array('id'=>$_POST['ref']));
             $em = $this->getDoctrine()->getManager();
+            $listePiece->setNom($_POST['nom']);
+            $listePiece->setProduit($produit);
             $em->persist($listePiece);
             $em->flush();
             // ------------------- HISTORIQUE GLOBAL ---------------------
@@ -63,8 +70,10 @@ class ListePieceController extends Controller
         }
 
         return $this->render('@Groupe/listepiece/new.html.twig', array(
-            'listePiece' => $listePiece,
-            'form' => $form->createView(),
+
+            'produits'=>$produits,
+            'listepieces'=>$listePieces,
+
         ));
     }
 
@@ -76,11 +85,15 @@ class ListePieceController extends Controller
      */
     public function showAction(ListePiece $listePiece)
     {
+        $em=$this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($listePiece);
-
-        return $this->render('listepiece/show.html.twig', array(
+        $groupes= $em->getRepository("GroupeBundle:Groupe")->findAll();
+        $produits=$em->getRepository("ProduitBundle:Produit")->findAll();
+        return $this->render('@Groupe/listepiece/show.html.twig', array(
             'listePiece' => $listePiece,
             'delete_form' => $deleteForm->createView(),
+            'groupes'=>$groupes,
+            'produits'=>$produits,
         ));
     }
 
@@ -92,25 +105,75 @@ class ListePieceController extends Controller
      */
     public function editAction(Request $request, ListePiece $listePiece)
     {
+        $em=$this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($listePiece);
         $editForm = $this->createForm('GroupeBundle\Form\ListePieceType', $listePiece);
         $editForm->handleRequest($request);
-
+        $groupes= $em->getRepository("GroupeBundle:Groupe")->findAll();
+        $produits=$em->getRepository("ProduitBundle:Produit")->findAll();
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            $em = $this->getDoctrine()->getManager();
 
-            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            if(isset($_POST['groupe'])&& !empty($_POST['groupe'])){
 
-            $historiqueGlobal = new HistoriqueGlobal();
-            $historiqueGlobal->setUserHistorique($this->getUser());
-            $historiqueGlobal->setLibelle('Information du pièce'.$listePiece->getNom().' modifié');
-            $historiqueGlobal->setLien($this->generateUrl('listepiece_show', array('id' => $listePiece->getId())));
+                foreach ($_POST['groupe'] as $val){
 
-            $em->persist($historiqueGlobal);
+                    $groupe= $em->getRepository("GroupeBundle:Groupe")->findOneBy(array('id'=>$val));
+                    $groupe->addListepiece($listePiece);
+                    // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+                    $historiqueGlobal = new HistoriqueGlobal();
+                    $historiqueGlobal->setUserHistorique($this->getUser());
+                    $historiqueGlobal->setLibelle('Groupe '.$groupe->getMarque().'-'.$groupe->getNumero().'compatible au pièce '.$listePiece->getNom().' ajouté');
+                    $historiqueGlobal->setLien($this->generateUrl('listepiece_show', array('id' => $listePiece->getId())));
+
+                    $em->persist($historiqueGlobal);
 
 
-            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+                    // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+                    $em->flush();
+
+                }
+               
+            }
+            if(isset($_POST['produit'])&& !empty($_POST['produit'])){
+
+                foreach ($_POST['produit'] as $val){
+
+                    $produit= $em->getRepository("ProduitBundle:Produit")->findOneBy(array('id'=>$val));
+
+                    $produit->setReflistepiece($listePiece);
+                    // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+                    $historiqueGlobal = new HistoriqueGlobal();
+                    $historiqueGlobal->setUserHistorique($this->getUser());
+                    $historiqueGlobal->setLibelle('Référence équivalence'.$produit->getReference().' du pièce '.$listePiece->getNom().' ajouté');
+                    $historiqueGlobal->setLien($this->generateUrl('listepiece_show', array('id' => $listePiece->getId())));
+
+                    $em->persist($historiqueGlobal);
+
+
+                    // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+                    $em->flush();
+
+                }
+
+            }
+            else
+            {
+                // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+                $historiqueGlobal = new HistoriqueGlobal();
+                $historiqueGlobal->setUserHistorique($this->getUser());
+                $historiqueGlobal->setLibelle('Information du pièce '.$listePiece->getNom().' modifié');
+                $historiqueGlobal->setLien($this->generateUrl('listepiece_show', array('id' => $listePiece->getId())));
+
+                $em->persist($historiqueGlobal);
+
+
+                // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            }
+
+
             return $this->redirectToRoute('listepiece_index');
         }
 
@@ -118,6 +181,8 @@ class ListePieceController extends Controller
             'listePiece' => $listePiece,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'groupes'=>$groupes,
+            'produits'=>$produits,
         ));
     }
 
@@ -166,5 +231,32 @@ class ListePieceController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    /**
+     * Deletes  entity.
+     *
+     * @Route("ty/{id}", name="compatible_delete")
+     *
+     */
+    public function compatbleAction(Request $request,ListePiece $listePiece)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $groupe=$em->getRepository("GroupeBundle:Groupe")->findOneBy(array('id'=>$_GET['idGroupe']));
+        $groupe->removeListepiece($listePiece);
+        $em->flush();
+        return $this->redirectToRoute('listepiece_edit',array('id'=>$listePiece->getId()));
+    }
+    /**
+     * Deletes  entity.
+     *
+     * @Route("ref/{id}", name="ref_delete")
+     *
+     */
+    public function refAction(Request $request,Produit $produit)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $produit->setReflistepiece(null);
+        $em->flush();
+        return $this->redirectToRoute('listepiece_edit',array('id'=>$_GET['idListPiece']));
     }
 }

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Piecerefeqivs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Designation</th>
+                <th>Marque</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pieceRefEqiv in pieceRefEqivs %}
+            <tr>
+                <td><a href="{{ path('piecerefeqiv_show', { 'id': pieceRefEqiv.id }) }}">{{ pieceRefEqiv.id }}</a></td>
+                <td>{{ pieceRefEqiv.designation }}</td>
+                <td>{{ pieceRefEqiv.marque }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('piecerefeqiv_show', { 'id': pieceRefEqiv.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('piecerefeqiv_edit', { 'id': pieceRefEqiv.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('piecerefeqiv_new') }}">Create a new pieceRefEqiv</a>
+        </li>
+    </ul>
+{% endblock %}
