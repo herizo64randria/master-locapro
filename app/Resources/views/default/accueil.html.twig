@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block titre_page %}
+    Bienvenue dans le logiciel LocaPro
+{% endblock %}
+
 {% block body %}
-   <h1>
-       Bienvenue dans le logiciel LocaPro
-   </h1>
+    <div class="row">
+        <div class="col-md-12">
+            <img src="{{ asset('images/LocaPro.png') }}" alt="" class="img-responsive">
+        </div>
+    </div>
 {% endblock %}

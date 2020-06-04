@@ -89,12 +89,12 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>Loca</b>Pro</a>
-    </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Page de connexion</p>
+        <img src="{{ asset('images/LocaPro.png') }}" alt="Locapro" class="img-thumbnail">
+        <br>
+        <br>
 
         <form action="{{ path("fos_user_security_check") }}" method="post">
 

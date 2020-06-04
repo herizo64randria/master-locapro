@@ -30,6 +30,7 @@ class ProduitExtension extends \Twig_Extension
             new \Twig_SimpleFilter('stockBySite', array($this, 'stockBySiteFunction')),
             new \Twig_SimpleFilter('stockByDepot', array($this, 'stockByDepotFunction')),
             new \Twig_SimpleFilter('emplacementHist', array($this, 'historiqueProduitEmplacement')),
+            new \Twig_SimpleFilter('ifProdInListePiece', array($this, 'ifProdInListePieceFunction')),
         );
     }
 
@@ -84,6 +85,20 @@ class ProduitExtension extends \Twig_Extension
         }
 
         return $emplacement;
+    }
+
+    public function ifProdInListePieceFunction(Produit $produit){
+        $repositoryListePiece = $this->em->getRepository('GroupeBundle:ListePiece');
+        $listePiece = $repositoryListePiece->findOneBy(array(
+            'produit' => $produit
+        ));
+
+        if($listePiece)
+            return true;
+        else
+            return false
+        ;
+
     }
 
 

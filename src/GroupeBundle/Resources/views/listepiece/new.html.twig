@@ -14,8 +14,11 @@
                     <!-- /.box-header -->
                     <div class="box-body">
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
                         <div class="row">
                             <div class="col-md-12">
 
@@ -24,6 +27,7 @@
                                     <select required  class="form-control ref" name="ref" id="ref" >
 
                                         <option value=""></option>
+<<<<<<< HEAD
 
                                         {% for listepiece in listepieces  %}
                                             {% for key, produit in produits %}
@@ -31,6 +35,14 @@
                                                     <option value="{{ produit.id }}" >{{ produit.designation }}-{{ produit.reference }}</option>
                                                 {% endif %}
                                             {% endfor %}
+=======
+                                        {% for produit in produits  %}
+                                            {% if not produit|ifProdInListePiece %}
+                                                <option value="{{ produit.id }}" >{{ produit.designation }} - {{ produit.reference }}</option>
+                                            {% else %}
+                                                <option value="{{ produit.id }}" disabled >{{ produit.designation }} - {{ produit.reference }}</option>
+                                            {% endif %}
+>>>>>>> master
                                         {% endfor %}
                                     </select>
                                 </div>
