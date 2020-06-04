@@ -20,24 +20,24 @@
                             <div class="col-md-6">
                                 
                                     <div class="form-group">
-                                        <label for="groupe">Choix groupe  <b class="text-danger" id="err_groupe"></b></label>
+                                        <label for="groupe">Choix des groupes  <b class="text-danger" id="err_groupe"></b></label>
                                         <select   class="form-control" name="groupe[]" id="groupe" multiple>
                                             {% for key, groupe in groupes %}
 
-                                                        <option value="{{ groupe.id }}"
-                                                              {% for val in listePiece.groupes  %}
-                                                              {% if val.id == groupe.id %}
-                                                               disabled
-                                                              {% endif %}
-                                                              {% endfor %}>
-                                                            {{ groupe.numero }} - {{ groupe.marque }}</option>
-
+                                                <option value="{{ groupe.id }}"
+                                                      {% for val in listePiece.groupes  %}
+                                                      {% if val.id == groupe.id %}
+                                                       disabled
+                                                      {% endif %}
+                                                      {% endfor %}>
+                                                    {{ groupe.numero }} - {{ groupe.marque }}
+                                                </option>
 
                                             {% endfor %}
                                         </select>
                                     </div>
                                 <div class="form-group">
-                                    <label for="produit">Choix produit   <b class="text-danger" id="err_produit"></b></label>
+                                    <label for="produit">Les produits compatibles:   <b class="text-danger" id="err_produit"></b></label>
                                     <select  class="form-control" name="produit[]" id="produit" multiple>
                                         {% for key, produit in produits %}
 
