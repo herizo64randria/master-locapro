@@ -249,11 +249,8 @@ desired effect
                 {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
                     <li><a href="{{ path('site_index') }}"><i class="fa fa-list"></i> Liste des sites</a></li>
                 {% endif %}
-<<<<<<< HEAD
-                <li><a href="{{ path('listepiece_index') }}"><i class="fa fa-steam-square"></i> Liste des pièces</a></li>
-=======
+
                 <li><a href="{{ path('listepiece_index') }}"><i class="fa fa-wrench"></i> Liste des pièces compatibles</a></li>
->>>>>>> master
 
                 <li><a href="{{ path('probleme_index') }}"><i class="fa fa-warning"></i> Liste problème</a></li>
                 <li><a href="{{ path('GroupeHeureMarche_index') }}"><i class="fa fa-clock-o"></i> Heure de marche</a></li>
