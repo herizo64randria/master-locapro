@@ -62,6 +62,11 @@ class HistoriqueProduit
      */
     private $sortie;
     /**
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Commande")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $commande;
+    /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Deplacement")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -344,5 +349,29 @@ class HistoriqueProduit
     public function getVidange()
     {
         return $this->vidange;
+    }
+
+    /**
+     * Set appoint
+     *
+     * @param \GroupeBundle\Entity\Appoint $appoint
+     *
+     * @return HistoriqueProduit
+     */
+    public function setAppoint(\GroupeBundle\Entity\Appoint $appoint = null)
+    {
+        $this->appoint = $appoint;
+
+        return $this;
+    }
+
+    /**
+     * Get appoint
+     *
+     * @return \GroupeBundle\Entity\Appoint
+     */
+    public function getAppoint()
+    {
+        return $this->appoint;
     }
 }

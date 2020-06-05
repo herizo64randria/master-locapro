@@ -110,6 +110,11 @@ class Entre
      * @ORM\JoinColumn(nullable=true)
      */
     private $userRefuser;
+       /**
+        * @ORM\OneToOne(targetEntity="GestionBundle\Entity\Commande")
+        * @ORM\JoinColumn(nullable=true)
+        */
+    private $commande;
 //------------------------------------------////////////////////
 
 

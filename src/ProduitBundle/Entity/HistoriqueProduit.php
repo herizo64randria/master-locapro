@@ -62,6 +62,11 @@ class HistoriqueProduit
      */
     private $sortie;
     /**
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Commande")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $commande;
+    /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Deplacement")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -368,5 +373,29 @@ class HistoriqueProduit
     public function getAppoint()
     {
         return $this->appoint;
+    }
+
+    /**
+     * Set commande
+     *
+     * @param \GestionBundle\Entity\Commande $commande
+     *
+     * @return HistoriqueProduit
+     */
+    public function setCommande(\GestionBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \GestionBundle\Entity\Commande
+     */
+    public function getCommande()
+    {
+        return $this->commande;
     }
 }

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}{{ entre.numero }}{% endblock %}
-{% block titre_page %} <strong class="text-primary"><i class="fa fa-plus-circle"></i>Bon d'Entrée</strong> {% endblock %}
-{% block titre_description %}Les informations sur le bon d'entrée{% endblock %}
+{% block titre %}{{ commande.numero }}{% endblock %}
+{% block titre_page %} <strong class="text-primary"><i class="fa fa-plus-circle"></i>Bon de Commande</strong> {% endblock %}
+{% block titre_description %}Les informations sur le bon decommande{% endblock %}
 {% block body %}
 
 
@@ -13,117 +13,113 @@
     {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
     {#COULEUR DE L'ETAT#}
     {% set couleurEtat = '' %}
-    {% if entre.etat == DEMANDE_ENATTENTE or entre.etat == DEMANDE_ENATTENTE_REC %}
+    {% if commande.etat == DEMANDE_ENATTENTE or commande.etat == DEMANDE_ENATTENTE_REC %}
         {% set couleurEtat = 'warning' %}
     {% endif %}
-    {% if entre.etat == DEMANDE_CONFIRME %}
+    {% if commande.etat == DEMANDE_CONFIRME %}
         {% set couleurEtat = 'success' %}
     {% endif %}
-    {% if entre.etat == DEMANDE_REFUSER or entre.etat == DEMANDE_CLOTURE %}
+    {% if commande.etat == DEMANDE_REFUSER or commande.etat == DEMANDE_CLOTURE %}
         {% set couleurEtat = 'danger' %}
     {% endif %}
     <div class="row">
         <div class="col-md-3">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Information du bon d'entrée</h3>
+                    <h3 class="box-title">Information du bon de commande</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table class="table table-striped">
                         <tr>
                             <td>Numero:</td>
-                            <td><b>{{ entre.numero }}</b></td>
+                            <td><b>{{ commande.numero }}</b></td>
                         </tr>
                         <tr>
                             <td>Date:</td>
-                            <td>{{ entre.date|date('d/m/Y') }}</td>
+                            <td>{{ commande.date|date('d/m/Y') }}</td>
                         </tr>
-                        <tr>
-                            <td>Emplacement:</td>
-                            {% if entre.depot %}
-                                <td><i>Dépôt</i> {{ entre.depot.nom }}</td>
-                            {% endif %}
-                            {% if entre.site %}
-                                <td><i>Site</i> {{ entre.site.emplacement }} </td>
-                            {% endif %}
-                        </tr>
-                        {% if entre.fournisseur %}
-                        <tr>
-                            <td>Fournisseur:</td>
-                            <td>{{ entre.fournisseur.nom }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if entre.commande %}
+                        {% if commande.fournisseur %}
                             <tr>
-                                <td>Selon B.C :</td>
-                                <td><a href="{{ path('commande_afficher',{id:entre.commande.id}) }}">{{ entre.commande.numero }}</a></td>
+                                <td>Fournisseur:</td>
+                                <td>{{ commande.fournisseur.nom }}</td>
                             </tr>
+                        {% endif %}
+
+                        {% if commande.motif %}
+
                         {% endif %}
                     </table>
                 </div>
             </div>
         </div>
         <div class="col-md-5">
-            <h3 class="text-center">Etat du B.E.: <i class="text-{{ couleurEtat }}">{{ entre.etat }} </i></h3>
+            <h3 class="text-center">Etat du Bon de Commande: <i class="text-{{ couleurEtat }}">{{ commande.etat }} </i></h3>
             <ul class="list-inline">
                 <li>
-                    {% if entre.modifiable and entre.userCreer == app.user %}
-                        <button class="btn btn-lg btn-warning" data-toggle="modal" data-target="#modalEnregistrerEntre"><i class="fa fa-save" ></i> Enregistrer</button>
+                    {% if commande.modifiable and commande.userCreer == app.user %}
+                        <button class="btn btn-lg btn-warning" data-toggle="modal" data-target="#modalEnregistrercommande"><i class="fa fa-save" ></i> Enregistrer</button>
                     {% endif %}
                 </li>
-                {% if entre.modifiable or (entre.etat == DEMANDE_ENATTENTE or entre.etat == DEMANDE_CONFIRME) and entre.userCreer == app.user %}
+                {% if commande.modifiable  or (commande.etat == DEMANDE_ENATTENTE or commande.etat == DEMANDE_CONFIRME) and commande.userCreer == app.user %}
                 <li>
-                    <a href="{{ path('entre_edit', {'id' : entre.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
+                    <a href="{{ path('commande_edit',{id:commande.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
 
                 </li>
                 {% endif %}
-                {% if entre.etat == DEMANDE_CONFIRME %}
+                {% if commande.etat == DEMANDE_CONFIRME %}
                 <li>
-                    <a href="{{ path('entre_imprimer', {'id' : entre.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
+                    <a href="{{ path('commande_imprimer',{id:commande.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
                 </li>
+                    {% if entre==null %}
+                        <li>
+                            <br>
+                            <a href="{{ path('commande_entre',{id:commande.id}) }}" class="btn btn-lg btn-success"><i class="fa fa-mail-forward"></i> Transformer en Bon d'entrée</a>
+                        </li>
+                    {% endif %}
+
                 {% endif %}
 
             </ul>
-            {% if entre.motif %}
+            {% if commande.motif %}
                 <div>
                     <p ><b>Motif:</b></p>
-                    <p>{{ entre.motif|nl2br }})</p>
+                    <p>{{ commande.motif|nl2br }})</p>
                 </div>
             {% endif %}
         </div>
 
 
-        {% if (entre.etat == DEMANDE_ENATTENTE or entre.etat == DEMANDE_ENATTENTE_REC ) and app.user|ifRole('ROLE_RESP') %}
+        {% if (commande.etat == DEMANDE_ENATTENTE or commande.etat == DEMANDE_ENATTENTE_REC ) and app.user|ifRole('ROLE_RESP') %}
             <div class="col-md-4">
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Menu confirmation</h3>
                     </div>
                     <!-- /.box-header -->
-                    {% if app.user in entre.userConfirmes %}
+                    {% if app.user in commande.userConfirmes %}
                         <div class="box-body">
                             <p class="text-success">Vous avez confirmer cette de demande</p>
                         </div>
                     {% else %}
                         <div class="box-body">
-                            {% if entre.userConfirmes|length > 0 %}
+                            {% if commande.userConfirmes|length > 0 %}
                                 <p>Demande confirmer par:</p>
                                 <ul>
-                                    {% for userConfirme in entre.userConfirmes %}
+                                    {% for userConfirme in commande.userConfirmes %}
                                         <li>{{ userConfirme.nom }}</li>
                                     {% endfor %}
                                 </ul>
 
                             {% endif %}
 
-                            <a href="{{ path('entre_confirme', {'id' : entre.id}) }}" id="btnConfirmerentre" class="btn btn-lg btn-block btn-success">
+                            <a href="{{ path('commande_confirme',{id:commande.id}) }}" id="btnConfirmercommande" class="btn btn-lg btn-block btn-success">
                                 <i class="fa fa-check-circle"></i> Accepter
                             </a>
-                            <button type="button" class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#modalRefuserEntre">
+                            <button type="button" class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#modalRefusercommande">
                                 <i class="fa fa-minus-circle"></i> Refuser
                             </button>
-                            <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerEntre">
+                            <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturercommande">
                                 <i class="fa fa-warning"></i> Clôturer
                             </button>
                         </div>
@@ -131,7 +127,7 @@
 
                 </div>
             </div>
-        {% elseif entre.etat == DEMANDE_REFUSER and app.user|ifRole('ROLE_RESP') %}
+        {% elseif commande.etat == DEMANDE_REFUSER and app.user|ifRole('ROLE_RESP') %}
             <div class="col-md-4">
                 <div class="box">
                     <div class="box-header with-border">
@@ -139,14 +135,14 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <p class="text-danger">Refusé par: <b>{{ entre.userRefuser.nom }}</b></p>
-                        <p><b class="text-danger">Motif:</b> {{ entre.texte }}</p>
+                        <p class="text-danger">Refusé par: <b>{{ commande.userRefuser.nom }}</b></p>
+                        <p><b class="text-danger">Motif:</b> {{ commande.texte }}</p>
 
-                        <a href="{{ path('entre_confirme', {'id' : entre.id}) }}" id="btnConfirmerentre" class="btn btn-lg btn-block btn-success">
+                        <a href="{{ path('commande_confirme',{id:commande.id}) }}" id="btnConfirmercommande" class="btn btn-lg btn-block btn-success">
                             <i class="fa fa-check-circle"></i> Reconfirmer
                         </a>
 
-                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturerEntre">
+                        <button type="button" class="btn btn-lg btn-block btn-warning" data-toggle="modal" data-target="#modalCloturercommande">
                             <i class="fa fa-warning"></i> Clôturer
                         </button>
 
@@ -161,21 +157,21 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        {% if entre.userConfirmes|length > 0 %}
+                        {% if commande.userConfirmes|length > 0 %}
                             <p>Demande confirmer par:</p>
                             <ul>
-                                {% for userConfirme in entre.userConfirmes %}
+                                {% for userConfirme in commande.userConfirmes %}
                                     <li>{{ userConfirme.nom }}</li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
-                        {% if entre.userRefuser and entre.etat == DEMANDE_REFUSER %}
-                            <p > <b class="text-danger">Refusé par: </b>{{ entre.userRefuser.nom }}</p>
-                            <p><b class="text-danger">Cause: </b> {{ entre.texte }}</p>
+                        {% if commande.userRefuser and commande.etat == DEMANDE_REFUSER %}
+                            <p > <b class="text-danger">Refusé par: </b>{{ commande.userRefuser.nom }}</p>
+                            <p><b class="text-danger">Cause: </b> {{ commande.texte }}</p>
                         {% endif %}
-                        {% if entre.userRefuser and entre.etat == DEMANDE_CLOTURE %}
-                            <p > <b class="text-danger">Demande clôturée par: </b>{{ entre.userRefuser.nom }}</p>
-                            <p><b class="text-danger">Cause: </b> {{ entre.texte }}</p>
+                        {% if commande.userRefuser and commande.etat == DEMANDE_CLOTURE %}
+                            <p > <b class="text-danger">Demande clôturée par: </b>{{ commande.userRefuser.nom }}</p>
+                            <p><b class="text-danger">Cause: </b> {{ commande.texte }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -186,15 +182,15 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Produit incluse dans la bon d'entrée</h3>
+                    <h3 class="box-title">Produit incluse dans la bon de commande</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="center-block text-center">
                         <img src="{{ asset('images/loading.gif') }}" alt="" id="imgLoading">
                     </div>
-                    <form action="{{ path('entre_ajouterLigne', {'id' : entre.id}) }}" method="post" id="formLigne" class="hide" autocomplete="off">
-                        <table class="table table-striped table-bordered" id="tableEntre">
+                    <form action="{{ path('commande_ajouterLigne',{id:commande.id}) }}" method="post" id="formLigne" class="hide" autocomplete="off">
+                        <table class="table table-striped table-bordered" id="tableCoommande">
                             <thead>
                             <tr>
                                 <th>Code Produit</th>
@@ -202,55 +198,55 @@
                                 <th>Réf. produit</th>
                                 <th>Quantité</th>
                                 <th>Prix d'achat - PU (Facultatif)</th>
-                                {% if entre.modifiable and entre.userCreer == app.user %}
+                                {% if commande.modifiable and commande.userCreer == app.user %}
                                 <th class="action">Action</th>
                                 {% endif %}
 
                             </tr>
                             </thead>
                             <tbody>
-                            {% for ligneEntre in entre.ligneEntres %}
+                            {% for lignecommande in commande.lignecommandes %}
                                 <tr>
-                                    <td  class="class_produit " idProduit="{{ ligneEntre.produit.id }}" >
+                                    <td  class="class_produit " idProduit="{{ lignecommande.produit.id }}" >
 
                                         {% set ligneCode = '<i class="">Non-codé</i>' %}
-                                        {% set pathProduit = path('produit_show', {'id' : ligneEntre.produit.id}) %}
-                                        {% if ligneEntre.produit.code %}
-                                            {% set ligneCode = ligneEntre.produit.code %}
+                                        {% set pathProduit = path('produit_show', {'id' : lignecommande.produit.id}) %}
+                                        {% if lignecommande.produit.code %}
+                                            {% set ligneCode = lignecommande.produit.code %}
                                         {% endif %}
 
-                                        {% if ligneEntre.produit.siHuile %}
-                                            {% set pathProduit = path('huile_show', {'id' : ligneEntre.produit.id}) %}
+                                        {% if lignecommande.produit.siHuile %}
+                                            {% set pathProduit = path('huile_show', {'id' : lignecommande.produit.id}) %}
                                             {% set ligneCode = '<b class="text-warning">(H)</b> '~ligneCode %}
                                         {% endif %}
 
                                         <a href="{{ pathProduit }}" target="_blank">{{ ligneCode|raw }}</a>
                                     </td>
                                     <td>
-                                        {{ ligneEntre.designation }}
-                                        {% if ligneEntre.utilite %}
+                                        {{ lignecommande.designation }}
+                                        {% if lignecommande.utilite %}
                                             <br>
-                                            {{ ligneEntre.utilite }}
+                                            {{ lignecommande.utilite }}
                                         {% endif %}
                                     </td>
-                                    <td>{{ ligneEntre.produit.reference }}</td>
-                                    <td>{{ ligneEntre.quantite }}</td>
+                                    <td>{{ lignecommande.produit.reference }}</td>
+                                    <td>{{ lignecommande.quantite }}</td>
 
-                                    {% set prixAchat = ligneEntre.prixAchat|number_format('2', ',', ' ') %}
-                                    {% if not ligneEntre.prixAchat %}
+                                    {% set prixAchat = lignecommande.prix|number_format('2', ',', ' ') %}
+                                    {% if not lignecommande.prix %}
                                         {% set prixAchat = '' %}
                                     {% endif %}
 
                                     <td class="text-right">{{ prixAchat }}</td>
-                                    {% if entre.modifiable and entre.userCreer == app.user %}
+                                    {% if commande.modifiable and commande.userCreer == app.user %}
                                         <td class="action">
-                                            <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('entre_supprimerLigne', { 'id' : ligneEntre.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                            <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('commande_supprimerLigne',{id:lignecommande.id}) }}"><i class="fa fa-minus-circle "></i></button>
                                         </td>
                                     {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>
-                            {% if entre.modifiable and entre.userCreer == app.user %}
+                            {% if commande.modifiable and commande.userCreer == app.user %}
                                 <tfoot>
 
                                 <tr>
@@ -260,21 +256,14 @@
                                                 <option value=" ">
                                                 </option>
                                                 {% for produit in produits %}
-                                                    {% set qttProduit = '-' %}
-                                                    {% if entre.site %}
-                                                        {% set qttProduit = entre.site|stockBySite(produit) %}
-                                                    {% endif %}
 
-                                                    {% if entre.depot %}
-                                                        {% set qttProduit = entre.depot|stockByDepot(produit) %}
-                                                    {% endif %}
 
                                                     <option value="{{ produit.id }}">
                                                         {% if produit.siHuile %}
                                                             (H)
                                                         {% endif %}
 
-                                                        {{ produit.designation }} - {{ produit.code }} | {{ produit.reference }} <b>({{ qttProduit }})</b>
+                                                        {{ produit.designation }} - {{ produit.code }} | {{ produit.reference }}
                                                     </option>
                                                 {% endfor %}
                                             </select>
@@ -316,8 +305,8 @@
     </div>
 
 
-{#    MODAL ENREGISTRER ENTRE#}
-    <div class="modal fade" id="modalEnregistrerEntre" role="dialog">
+{#    MODAL ENREGISTRER commande#}
+    <div class="modal fade" id="modalEnregistrercommande" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -327,10 +316,10 @@
                     <h4 class="modal-title text-warning">Confirmation</h4>
                 </div>
                 <div class="modal-body">
-                    <p><b class="text-danger">Attention!</b> Voulez-vous vraiment enregistrer le bon d'entrée? <br> <i>L'action est irréversible</i></p>
+                    <p><b class="text-danger">Attention!</b> Voulez-vous vraiment enregistrer le bon de commande? <br> <i>L'action est irréversible</i></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ path('entre_enregistrer', {'id' : entre.id}) }}" class="btn btn-warning ">Accepter</a>
+                    <a href="{{ path('commande_enregistrer', {'id' : commande.id}) }}" class="btn btn-warning ">Accepter</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
@@ -338,11 +327,11 @@
         </div>
     </div>
 
-    {#    MODAL REFUSER ENTRE#}
-    <div class="modal fade" id="modalRefuserEntre" role="dialog">
+    {#    MODAL REFUSER commande#}
+    <div class="modal fade" id="modalRefusercommande" role="dialog">
         <div class="modal-dialog">
 
-            <form action="{{ path('entre_refuser', {'id' : entre.id}) }}" method="post">
+            <form action="{{ path('commande_refuser',{id:commande.id}) }}" method="post">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -350,7 +339,7 @@
                         <h4 class="modal-title text-danger">Refuser</h4>
                     </div>
                     <div class="modal-body">
-                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande d'entrée?</p>
+                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser bon de commande</p>
                         <div class="form-group">
                             <label for="textRefuser">Motif: <b class="text-danger" id="err_textRefuser"></b></label>
                             <textarea required class="form-control" name="textRefuser" id="textRefuser" rows="6"></textarea>
@@ -367,11 +356,11 @@
         </div>
     </div>
 
-    {#    MODAL CLOTURER ENTRE#}
-    <div class="modal fade" id="modalCloturerEntre" role="dialog">
+    {#    MODAL CLOTURER commande#}
+    <div class="modal fade" id="modalCloturercommande" role="dialog">
         <div class="modal-dialog">
 
-            <form action="{{ path('entre_cloturer', {'id' : entre.id}) }}" method="post">
+            <form action="{{ path('commande_cloturer',{id:commande.id}) }}" method="post">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -379,7 +368,7 @@
                         <h4 class="modal-title text-warning">Cloturer</h4>
                     </div>
                     <div class="modal-body">
-                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande d'entrée?</p>
+                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer bon de commande</p>
                         <div class="form-group">
                             <label for="textCloturer">Motif: <b class="text-warning" id="err_textCloturer"></b></label>
                             <textarea required class="form-control" name="textCloturer" id="textCloturer" rows="6"></textarea>
