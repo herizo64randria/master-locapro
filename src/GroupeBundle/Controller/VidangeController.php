@@ -45,62 +45,71 @@ class VidangeController extends Controller
                 $vidange->setDescription($_POST['descriptionVidange'])
             ;
 
-            // ------------------- HUILE UTILISE ---------------------
-
-            $huile = null;
+            $qttUtilise = 0;
             if (isset($_POST['huileUtilise'])){
                 $qttUtilise = $_POST['huileUtilise'];
-                if ($qttUtilise < 0)
-                    throw new Exception('Erreur! Valeur de huile utilisé négatif');
-
-                // ------------------- STOCK HUILE ---------------------
-
-                $stockHuile = 0;
-                $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
-                    'huileParDefaut' => true,
-                    'siHuile' => true
-                ));
-
-                if (!$huile){
-                    throw new Exception('Erreur! Huile par défaut non-défini.');
-                }
-
-                $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
-                $stcHuile = $repositoryStock->findOneBy(array(
-                    'produit' => $huile,
-                    'site' => $groupe->getSite()
-                ));
-
-                if ($stcHuile){
-                    $stockHuile = $stcHuile->getQuantite();
-                }
-
-                if ($stockHuile < $qttUtilise){
-                    throw new Exception('Erreur! Stock d\'huile insufisante');
-                }
-
-                $huileRestant = $stockHuile - $qttUtilise;
-                $stcHuile->setQuantite($huileRestant);
-                $em->persist($stcHuile);
-
-                // ------------------- ////// STOCK HUILE ////// ---------------------
-
-                //--------HISTORIQUE DU PRODUIT------------
-                $historiqueProduit = new HistoriqueProduit();
-
-                $historiqueProduit->setType('debit');
-                $historiqueProduit->setProduit($huile);
-                $historiqueProduit->setVidange($vidange);
-                $historiqueProduit->setDate($vidange->getDate());
-                $historiqueProduit->setQuantite($qttUtilise);
-                $historiqueProduit->setSite($groupe->getSite());
-
-                $em->persist($historiqueProduit);
-
-                $vidange->setHuileUtilise($qttUtilise);
 
             }
-            // ------------------- ////// HUILE UTILISE ////// ---------------------
+
+            $vidange->setHuileUtilise($qttUtilise);
+
+            $huile = null;
+
+            if(isset($_POST['chkHuileVidange'])){
+                // ------------------- HUILE UTILISE ---------------------
+
+                if (isset($_POST['huileUtilise'])){
+                    if ($qttUtilise < 0)
+                        throw new Exception('Erreur! Valeur de huile utilisé négatif');
+
+                    // ------------------- STOCK HUILE ---------------------
+
+                    $stockHuile = 0;
+                    $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
+                        'huileParDefaut' => true,
+                        'siHuile' => true
+                    ));
+
+                    if (!$huile){
+                        throw new Exception('Erreur! Huile par défaut non-défini.');
+                    }
+
+                    $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+                    $stcHuile = $repositoryStock->findOneBy(array(
+                        'produit' => $huile,
+                        'site' => $groupe->getSite()
+                    ));
+
+                    if ($stcHuile){
+                        $stockHuile = $stcHuile->getQuantite();
+                    }
+
+                    if ($stockHuile < $qttUtilise){
+                        throw new Exception('Erreur! Stock d\'huile insufisante');
+                    }
+
+                    $huileRestant = $stockHuile - $qttUtilise;
+                    $stcHuile->setQuantite($huileRestant);
+                    $em->persist($stcHuile);
+
+                    // ------------------- ////// STOCK HUILE ////// ---------------------
+
+                    //--------HISTORIQUE DU PRODUIT------------
+                    $historiqueProduit = new HistoriqueProduit();
+
+                    $historiqueProduit->setType('debit');
+                    $historiqueProduit->setProduit($huile);
+                    $historiqueProduit->setVidange($vidange);
+                    $historiqueProduit->setDate($vidange->getDate());
+                    $historiqueProduit->setQuantite($qttUtilise);
+                    $historiqueProduit->setSite($groupe->getSite());
+
+                    $em->persist($historiqueProduit);
+                }
+                // ------------------- ////// HUILE UTILISE ////// ---------------------
+            }
+
+
 
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setVidange($vidange);

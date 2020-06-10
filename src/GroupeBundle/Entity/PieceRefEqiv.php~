@@ -99,5 +99,28 @@ class PieceRefEqiv
     {
         return $this->marque;
     }
-}
 
+    /**
+     * Set listepiece
+     *
+     * @param \GroupeBundle\Entity\ListePiece $listepiece
+     *
+     * @return PieceRefEqiv
+     */
+    public function setListepiece(\GroupeBundle\Entity\ListePiece $listepiece = null)
+    {
+        $this->listepiece = $listepiece;
+
+        return $this;
+    }
+
+    /**
+     * Get listepiece
+     *
+     * @return \GroupeBundle\Entity\ListePiece
+     */
+    public function getListepiece()
+    {
+        return $this->listepiece;
+    }
+}

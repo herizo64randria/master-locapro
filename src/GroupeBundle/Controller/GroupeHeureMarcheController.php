@@ -2,9 +2,15 @@
 
 namespace GroupeBundle\Controller;
 
+use AppBundle\Services\ProduitService;
+use Doctrine\Common\Persistence\ObjectManager;
+use GroupeBundle\Entity\Appoint;
 use GroupeBundle\Entity\Groupe;
 use GroupeBundle\Entity\HeureMarche;
 use GroupeBundle\Entity\SousHeureMarche;
+use GroupeBundle\Entity\Vidange;
+use ProduitBundle\Entity\HistoriqueProduit;
+use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +27,143 @@ use UserBundle\Entity\HistoriqueGlobal;
  */
 class GroupeHeureMarcheController extends Controller
 {
+
+    private function appointHeureMarche(HeureMarche $heureMarche, ObjectManager $em, $entreHuile, Produit $huile){
+        $groupe = $heureMarche->getGroupe();
+
+        $appoint = new Appoint();
+        $appoint->setGroupe($groupe);
+        $appoint->setDate($heureMarche->getDatedebut());
+        $appoint->setHuileUtilise($entreHuile);
+
+        // ------------------- HUILE UTILISE ---------------------
+        $qttUtilise = $entreHuile;
+        if ($qttUtilise < 0)
+            throw new Exception('Erreur! Valeur de huile utilisé négatif');
+
+        if(isset($_POST['appoint_chkHuile'])){
+            // ------------------- STOCK HUILE ---------------------
+            $stockHuile = 0;
+
+            $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+            $stcHuile = $repositoryStock->findOneBy(array(
+                'produit' => $huile,
+                'site' =>$groupe->getSite()
+            ));
+
+            if($stcHuile){
+                $stockHuile = $stcHuile->getQuantite();
+            }
+
+            if ($stockHuile < $qttUtilise){
+                throw new Exception('Erreur! Stock d\'huile insufisante');
+            }
+
+            $huileRestant = $stockHuile - $qttUtilise;
+            $stcHuile->setQuantite($huileRestant);
+            $em->persist($stcHuile);
+            // ------------------- ////// STOCK HUILE ////// ---------------------
+
+
+            //--------HISTORIQUE DU PRODUIT------------
+            $historiqueProduit = new HistoriqueProduit();
+
+            $historiqueProduit->setType('debit');
+            $historiqueProduit->setProduit($huile);
+            $historiqueProduit->setAppoint($appoint);
+            $historiqueProduit->setDate($appoint->getDate());
+            $historiqueProduit->setQuantite($qttUtilise);
+            $historiqueProduit->setSite($heureMarche->getGroupe()->getSite());
+
+
+            $em->persist($historiqueProduit);
+            // ------------------- ////// HUILE UTILISE ////// ---------------------
+        }
+
+
+        $historiqueGroupe = new HistoriqueGroupe();
+        $historiqueGroupe->setAppoint($appoint);
+        $historiqueGroupe->setDate($appoint->getDate());
+        $historiqueGroupe->setGroupe($heureMarche->getGroupe());
+
+        $em->persist($appoint);
+        $em->persist($historiqueGroupe);
+
+        return $appoint;
+    }
+
+    private function vidangeHeureMarche(HeureMarche $heureMarche, ObjectManager $em, $entreHuile, Produit $huile){
+        $groupe = $heureMarche->getGroupe();
+
+        $vidange = new Vidange();
+        $vidange->setGroupe($groupe);
+        $vidange->setDate($heureMarche->getDatedebut());
+        $vidange->setType($_POST['vidange_typeVidange']);
+        $vidange->setHeureMarche($_POST['vidange_heureMarche']);
+
+        $qttUtilise = $entreHuile;
+        $vidange->setHuileUtilise($qttUtilise);
+
+
+        // ------------------- HUILE UTILISE ---------------------
+
+        if (isset($_POST['huileUtilise']) and isset($_POST['vidange_chkHuile'])){
+
+            if ($qttUtilise < 0)
+                throw new Exception('Erreur! Valeur de huile utilisé négatif');
+
+            // ------------------- STOCK HUILE ---------------------
+
+            $stockHuile = 0;
+
+            if (!$huile){
+                throw new Exception('Erreur! Huile par défaut non-défini.');
+            }
+
+            $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+            $stcHuile = $repositoryStock->findOneBy(array(
+                'produit' => $huile,
+                'site' => $groupe->getSite()
+            ));
+
+            if ($stcHuile){
+                $stockHuile = $stcHuile->getQuantite();
+            }
+
+            if ($stockHuile < $qttUtilise){
+                throw new Exception('Erreur! Stock d\'huile insufisante');
+            }
+
+            $huileRestant = $stockHuile - $qttUtilise;
+            $stcHuile->setQuantite($huileRestant);
+            $em->persist($stcHuile);
+
+            // ------------------- ////// STOCK HUILE ////// ---------------------
+
+            //--------HISTORIQUE DU PRODUIT------------
+            $historiqueProduit = new HistoriqueProduit();
+
+            $historiqueProduit->setType('debit');
+            $historiqueProduit->setProduit($huile);
+            $historiqueProduit->setVidange($vidange);
+            $historiqueProduit->setDate($vidange->getDate());
+            $historiqueProduit->setQuantite($qttUtilise);
+            $historiqueProduit->setSite($groupe->getSite());
+
+            $em->persist($historiqueProduit);
+        }
+        // ------------------- ////// HUILE UTILISE ////// ---------------------
+
+        $historiqueGroupe = new HistoriqueGroupe();
+        $historiqueGroupe->setVidange($vidange);
+        $historiqueGroupe->setDate($vidange->getDate());
+        $historiqueGroupe->setGroupe($groupe);
+
+        $em->persist($vidange);
+        $em->persist($historiqueGroupe);
+
+        return $vidange;
+    }
 
     /**
      * Lists all groupe entities.
@@ -63,9 +206,27 @@ class GroupeHeureMarcheController extends Controller
      * @Route("/add-heure-groupe/45{id}5456", name="GroupeHeureMarche_addHeureByGroupe")
      *
      */
-    public function addHeureByGroupeAction(Request $request,Groupe $groupe)
+    public function addHeureByGroupeAction(Request $request, Groupe $groupe)
     {
         $em = $this->getDoctrine()->getManager();
+
+        // ------------------- STOCK D'HUILE ---------------------
+        $stockHuile = 0;
+        $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
+            'huileParDefaut' => true,
+            'siHuile' => true
+        ));
+        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+        $stcHuile = $repositoryStock->findOneBy(array(
+            'produit' => $huile,
+            'site' => $groupe->getSite()
+        ));
+
+        if ($stcHuile){
+            $stockHuile = $stcHuile->getQuantite();
+        }
+
+        // ------------------- ////// STOCK D'HUILE ////// ---------------------
 
 
         if($request->getMethod()=='POST')
@@ -88,6 +249,9 @@ class GroupeHeureMarcheController extends Controller
             $historiqueGroupe->setHeureMarche($heuremarche);
             $historiqueGroupe->setGroupe($groupe);
 
+            if(isset($_POST['note']))
+                $heuremarche->setNote($_POST['note']);
+
             if (isset($_POST['puissance'])){
                 $heuremarche->setPuissance($_POST['puissance']);
             }
@@ -101,16 +265,84 @@ class GroupeHeureMarcheController extends Controller
                 $heuremarche->setCsp($_POST['csp']);
             }
 
+
+            // ------------------ TEST HUILE UTILISE ------------------
+
+            $totalHuileUtilise = 0;
+            $appointHuileUtilise = 0;
+            $vidangeHuileUtilise = 0;
+
+            if(isset($_POST['appoint_huileUtilise']) ){
+                if($_POST['appoint_huileUtilise'] > 0)
+                    $appointHuileUtilise = $_POST['appoint_huileUtilise'];
+            }
+
+            if(isset($_POST['vidange_huileUtilise']) ){
+                if($_POST['vidange_huileUtilise'] > 0)
+                    $vidangeHuileUtilise = $_POST['vidange_huileUtilise'];
+            }
+
+            $totalHuileUtilise = $appointHuileUtilise + $vidangeHuileUtilise;
+
+            if (! isset($_POST['appoint_chkHuile']))
+                $totalHuileUtilise = $totalHuileUtilise - $appointHuileUtilise;
+
+            if (! isset($_POST['vidange_chkHuile']))
+                $totalHuileUtilise = $totalHuileUtilise - $vidangeHuileUtilise;
+
+            if($totalHuileUtilise > $stockHuile and (isset($_POST['appoint_chkHuile']) or isset($_POST['vidange_chkHuile'])))
+                return new Exception('Stock d\'huile insuffisante sur site' );
+
+            // ------------------///// TEST HUILE UTILISE /////------------------
+
+
+           // ------------------ APPOINT D'HUILE ------------------
+
+            if($appointHuileUtilise > 0){
+                $appoint = $this->appointHeureMarche($heuremarche, $em, $appointHuileUtilise, $huile);
+                $heuremarche->setAppoint($appoint);
+            }
+
+           // ------------------///// APPOINT D'HUILE /////------------------
+
+            // ------------------ VIDANGE HUILE ------------------
+
+            if ($_POST['vidange_typeVidange'] != '0'){
+                $vidange = $this->vidangeHeureMarche($heuremarche, $em, $vidangeHuileUtilise, $huile);
+                $heuremarche->setVidange($vidange);
+            }
+
+            // ------------------///// VIDANGE HUILE /////------------------
+
+
+
             $em->persist($heuremarche);
             $em->persist($historiqueGroupe);
             $em->flush();
+
+
+
+            // ------------------ MIS A JOUR HEURE DE MARCHE GROUPE ------------------
             $groupeService= new GroupeService();
             $groupeService->calculHeure($groupe,$em);
+            // ------------------///// MIS A JOUR HEURE DE MARCHE GROUPE /////------------------
+
+
+            // ------------------ MIS A JOUR STOCK HUILE ------------------
+            if ($huile){
+                $serviceProduit = new ProduitService($em);
+                $serviceProduit->updateStockTotal($huile);
+            }
+            // ------------------///// MIS A JOUR STOCK HUILE /////------------------
+
             $em->flush();
 
             return $this->redirectToRoute('GroupeHeureMarche_detailHeureGroupe', array('id' => $groupe->getId()));
         }
-        return $this->render('@Groupe/heureMarche/addHeureByGroupe.html.twig',array('groupe'=>$groupe));
+        return $this->render('@Groupe/heureMarche/addHeureByGroupe.html.twig',array(
+            'groupe'=>$groupe,
+            'stockHuile' => $stockHuile
+        ));
     }
 
 

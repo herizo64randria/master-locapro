@@ -34,6 +34,11 @@
                     </div>
 
                     <div class="form-group">
+                        <input type="checkbox"  name="chkHuileVidange" id="chkHuileVidange"  />
+                        <label for="chkHuileVidange" class="text-danger">Si huile en stock utilisé <b class="text-danger" id="err_chkHuileVidange"></b></label>
+                    </div>
+
+                    <div class="form-group">
                         <label for="huileUtilise">Huile utilisé: <b class="text-danger" id="err_huileUtilise">(Stock dispo: {{ stockHuile }})</b></label>
                         <input required type="text" class="form-control only_float" name="huileUtilise" id="huileUtilise" value="0" />
                     </div>
@@ -70,7 +75,7 @@
 <script>
 
     $('#btnConfirmerVidange').click(function () {
-        if (parseFloat($('#huileUtilise').val()) > parseFloat($(this).val()) ){
+        if (parseFloat($('#huileUtilise').val()) > parseFloat($(this).val()) && $('#chkHuileVidange').is(':checked') ){
             $('#textModalDanger').html('Vérifier la stock d\'huile disponible')
             $('#modalDanger').modal();
 

@@ -142,4 +142,38 @@ class ListePiece
     {
         return $this->groupes;
     }
+
+    /**
+     * Add produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     *
+     * @return ListePiece
+     */
+    public function addProduit(\ProduitBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\ProduitBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
+
+    /**
+     * Get produits
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
 }

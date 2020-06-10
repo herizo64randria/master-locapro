@@ -91,6 +91,18 @@ class HeureMarche
      */
     private $sousHeures; // Notez le « s », il peu y avoir bcp
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Appoint")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $appoint;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Vidange")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $vidange;
+
    // ------------------- ////// RELATION ////// ---------------------
 
 
@@ -359,5 +371,55 @@ class HeureMarche
     public function getCsp()
     {
         return $this->csp;
+    }
+
+    /**
+     * Set appoint
+     *
+     * @param \GroupeBundle\Entity\Appoint $appoint
+     *
+     * @return HeureMarche
+     */
+    public function setAppoint(\GroupeBundle\Entity\Appoint $appoint = null)
+    {
+        $this->appoint = $appoint;
+
+        return $this;
+    }
+
+    /**
+     * Get appoint
+     *
+     * @return \GroupeBundle\Entity\Appoint
+     */
+    public function getAppoint()
+    {
+        return $this->appoint;
+    }
+
+
+
+    /**
+     * Set vidange
+     *
+     * @param \GroupeBundle\Entity\Vidange $vidange
+     *
+     * @return HeureMarche
+     */
+    public function setVidange(\GroupeBundle\Entity\Vidange $vidange = null)
+    {
+        $this->vidange = $vidange;
+
+        return $this;
+    }
+
+    /**
+     * Get vidange
+     *
+     * @return \GroupeBundle\Entity\Vidange
+     */
+    public function getVidange()
+    {
+        return $this->vidange;
     }
 }

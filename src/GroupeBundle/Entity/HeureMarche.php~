@@ -91,6 +91,18 @@ class HeureMarche
      */
     private $sousHeures; // Notez le « s », il peu y avoir bcp
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Appoint")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $appoint;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Vidange")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $vidange;
+
    // ------------------- ////// RELATION ////// ---------------------
 
 
@@ -288,4 +300,102 @@ class HeureMarche
     {
         return $this->sousHeures;
     }
+
+    /**
+     * Set production
+     *
+     * @param float $production
+     *
+     * @return HeureMarche
+     */
+    public function setProduction($production)
+    {
+        $this->production = $production;
+
+        return $this;
+    }
+
+    /**
+     * Get production
+     *
+     * @return float
+     */
+    public function getProduction()
+    {
+        return $this->production;
+    }
+
+    /**
+     * Set consomation
+     *
+     * @param float $consomation
+     *
+     * @return HeureMarche
+     */
+    public function setConsomation($consomation)
+    {
+        $this->consomation = $consomation;
+
+        return $this;
+    }
+
+    /**
+     * Get consomation
+     *
+     * @return float
+     */
+    public function getConsomation()
+    {
+        return $this->consomation;
+    }
+
+    /**
+     * Set csp
+     *
+     * @param float $csp
+     *
+     * @return HeureMarche
+     */
+    public function setCsp($csp)
+    {
+        $this->csp = $csp;
+
+        return $this;
+    }
+
+    /**
+     * Get csp
+     *
+     * @return float
+     */
+    public function getCsp()
+    {
+        return $this->csp;
+    }
+
+    /**
+     * Set appoint
+     *
+     * @param \GroupeBundle\Entity\Appoint $appoint
+     *
+     * @return HeureMarche
+     */
+    public function setAppoint(\GroupeBundle\Entity\Appoint $appoint = null)
+    {
+        $this->appoint = $appoint;
+
+        return $this;
+    }
+
+    /**
+     * Get appoint
+     *
+     * @return \GroupeBundle\Entity\Appoint
+     */
+    public function getAppoint()
+    {
+        return $this->appoint;
+    }
+
+
 }
