@@ -22,12 +22,14 @@
                                     <select required  class="form-control ref" name="ref" id="ref" >
 
                                         <option value=""></option>
+
                                         {% for produit in produits  %}
                                             {% if not produit|ifProdInListePiece %}
                                                 <option value="{{ produit.id }}" >{{ produit.designation }} - {{ produit.reference }}</option>
                                             {% else %}
                                                 <option value="{{ produit.id }}" disabled >{{ produit.designation }} - {{ produit.reference }}</option>
                                             {% endif %}
+
                                         {% endfor %}
                                     </select>
                                 </div>

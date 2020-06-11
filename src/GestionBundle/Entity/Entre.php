@@ -110,6 +110,11 @@ class Entre
      * @ORM\JoinColumn(nullable=true)
      */
     private $userRefuser;
+       /**
+        * @ORM\OneToOne(targetEntity="GestionBundle\Entity\Commande")
+        * @ORM\JoinColumn(nullable=true)
+        */
+    private $commande;
 //------------------------------------------////////////////////
 
 
@@ -488,5 +493,29 @@ class Entre
     public function getDepot()
     {
         return $this->depot;
+    }
+
+    /**
+     * Set commande
+     *
+     * @param \GestionBundle\Entity\Commande $commande
+     *
+     * @return Entre
+     */
+    public function setCommande(\GestionBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \GestionBundle\Entity\Commande
+     */
+    public function getCommande()
+    {
+        return $this->commande;
     }
 }

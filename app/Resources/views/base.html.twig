@@ -249,6 +249,7 @@ desired effect
                 {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
                     <li><a href="{{ path('site_index') }}"><i class="fa fa-list"></i> Liste des sites</a></li>
                 {% endif %}
+
                 <li><a href="{{ path('listepiece_index') }}"><i class="fa fa-wrench"></i> Liste des pièces compatibles</a></li>
 
                 <li><a href="{{ path('probleme_index') }}"><i class="fa fa-warning"></i> Liste problème</a></li>
@@ -266,6 +267,7 @@ desired effect
                         </span>
                     </a>
                     <ul class="treeview-menu">
+                        <li><a href="{{ path('commande_index') }}"><i class="fa fa-list"></i> Bon de commande</a></li>
                         <li><a href="{{ path('entre_index') }}"><i class="fa fa-mail-forward"></i> Bon d'entrée</a></li>
                         <li><a href="{{ path('sortie_index') }}"><i class="fa fa-mail-reply"></i> Bon de sortie</a></li>
                         <li >

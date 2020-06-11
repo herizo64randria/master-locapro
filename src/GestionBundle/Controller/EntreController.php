@@ -331,7 +331,7 @@ class EntreController extends Controller
                 $ligne->setPrixAchat($_POST['prixAchat']);
 
             if (isset($_POST['utilite']))
-                $ligne->setPrixAchat($_POST['utilite']);
+                $ligne->setUtilite($_POST['utilite']);
 
             $repositoryProduit = $em->getRepository('ProduitBundle:Produit');
             $produit = $repositoryProduit->findOneBy(array('id' => $idProduit));
@@ -368,7 +368,7 @@ class EntreController extends Controller
                 $ligneEntre->setPrixAchat($_POST['prixAchat']);
 
             if (isset($_POST['utilite']))
-                $ligneEntre->setPrixAchat($_POST['utilite']);
+                $ligneEntre->setUtilite($_POST['utilite']);
 
             $em->persist($ligneEntre);
             $em->flush();

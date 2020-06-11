@@ -20,6 +20,7 @@
                             <div class="col-md-6">
                                 
                                     <div class="form-group">
+
                                         <label for="groupe">Choix des groupes  <b class="text-danger" id="err_groupe"></b></label>
                                         <select   class="form-control" name="groupe[]" id="groupe" multiple>
                                             {% for key, groupe in groupes %}
@@ -32,12 +33,13 @@
                                                       {% endfor %}>
                                                     {{ groupe.numero }} - {{ groupe.marque }}
                                                 </option>
-
                                             {% endfor %}
                                         </select>
                                     </div>
                                 <div class="form-group">
+
                                     <label for="produit">Les produits compatibles:   <b class="text-danger" id="err_produit"></b></label>
+
                                     <select  class="form-control" name="produit[]" id="produit" multiple>
                                         {% for key, produit in produits %}
 

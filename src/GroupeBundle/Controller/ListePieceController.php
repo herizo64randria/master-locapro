@@ -238,7 +238,9 @@ class ListePieceController extends Controller
      * @Route("ty/{id}", name="compatible_delete")
      *
      */
+
     public function compatbleAction(Request $request, ListePiece $listePiece)
+
     {
         $em=$this->getDoctrine()->getManager();
         $groupe=$em->getRepository("GroupeBundle:Groupe")->findOneBy(array('id'=>$_GET['idGroupe']));
