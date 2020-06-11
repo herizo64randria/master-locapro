@@ -45,10 +45,11 @@
                                 <td>{{ commande.fournisseur.nom }}</td>
                             </tr>
                         {% endif %}
+                        <tr>
+                            <td>TVA</td>
+                            <td>{{ commande.tva }}%</td>
+                        </tr>
 
-                        {% if commande.motif %}
-
-                        {% endif %}
                     </table>
                 </div>
             </div>
@@ -71,7 +72,7 @@
                 <li>
                     <a href="{{ path('commande_imprimer',{id:commande.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
                 </li>
-                    {% if entre==null %}
+                    {% if not entre %}
                         <li>
                             <br>
                             <a href="{{ path('commande_entre',{id:commande.id}) }}" class="btn btn-lg btn-success"><i class="fa fa-mail-forward"></i> Transformer en Bon d'entrée</a>
@@ -81,6 +82,12 @@
                 {% endif %}
 
             </ul>
+            {% if entre %}
+                <div>
+                    <h3>Transformer en B.E: <a href="{{ path('entre_affcher', {'id'  : entre.id}) }}" target="_blank">{{ entre.numero }}</a></h3>
+                </div>
+            {% endif %}
+
             {% if commande.motif %}
                 <div>
                     <p ><b>Motif:</b></p>
@@ -197,7 +204,8 @@
                                 <th>Libellé</th>
                                 <th>Réf. produit</th>
                                 <th>Quantité</th>
-                                <th>Prix d'achat - PU (Facultatif)</th>
+                                <th>PU HT</th>
+                                <th>Montant HT</th>
                                 {% if commande.modifiable and commande.userCreer == app.user %}
                                 <th class="action">Action</th>
                                 {% endif %}
@@ -205,6 +213,9 @@
                             </tr>
                             </thead>
                             <tbody>
+
+                            {% set montantTotalHT = 0 %}
+
                             {% for lignecommande in commande.lignecommandes %}
                                 <tr>
                                     <td  class="class_produit " idProduit="{{ lignecommande.produit.id }}" >
@@ -237,7 +248,18 @@
                                         {% set prixAchat = '' %}
                                     {% endif %}
 
-                                    <td class="text-right">{{ prixAchat }}</td>
+                                    <td class="text-right" style="white-space: nowrap">{{ prixAchat }}</td>
+
+                                    {# ------------- CALCUL MONTANT TOTAL ------------- #}
+
+                                    {% set montantLigne = 0 %}
+                                    {% set montantLigne = lignecommande.prix * lignecommande.quantite %}
+                                    {% set montantTotalHT = montantTotalHT + montantLigne %}
+
+                                    {# ------------- ////////// CALCUL MONTANT TOTAL//////////  ------------- #}
+
+                                    <td class="text-right" style="white-space: nowrap">{{ montantLigne|number_format(2, ',', ' ') }}</td>
+
                                     {% if commande.modifiable and commande.userCreer == app.user %}
                                         <td class="action">
                                             <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('commande_supprimerLigne',{id:lignecommande.id}) }}"><i class="fa fa-minus-circle "></i></button>
@@ -288,7 +310,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group text-center">
-                                            <input type="text" class="form-control only_float" name="prixAchat" id="prixAchat"  placeholder="Prix d'achat (PU)" />
+                                            <input required type="text" class="form-control only_float" name="prixAchat" id="prixAchat"  placeholder="Prix d'achat (PU)" />
                                             <button class="btn btn-success" id="btnAjouterProduit"><i class="fa fa-plus-circle"></i> Ajouter la ligne</button>
                                             <button class="btn btn-default" type="button">Annuler</button>
                                         </div>
@@ -296,8 +318,30 @@
                                 </tr>
                                 </tfoot>
                             {% endif %}
-
                         </table>
+                        <div class="row">
+                            <div class="col-md-offset-8 col-md-4">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table class="table table-striped table-bordered">
+                                        <tr>
+                                            <th>TOTAL HT</th>
+                                            <td class="text-right">{{ montantTotalHT|number_format(2, ',', ' ') }}</td>
+                                        </tr>
+                                        <tr>
+                                            {% set montantTVA = montantTotalHT * (commande.tva / 100) %}
+                                            <th>TVA {{ commande.tva }}%</th>
+                                            <td class="text-right">{{ montantTVA|number_format(2, ',', ' ') }}</td>
+                                        </tr>
+                                        <tr>
+                                            {% set montantTTC = montantTotalHT + montantTVA %}
+                                            <th>TOTAL TTC</th>
+                                            <td class="text-right"><b>{{ montantTTC|number_format(2, ',', ' ') }}</b></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

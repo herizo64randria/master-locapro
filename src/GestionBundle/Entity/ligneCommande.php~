@@ -169,5 +169,52 @@ class ligneCommande
     {
         return $this->utilite;
     }
-}
 
+    /**
+     * Set produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     *
+     * @return ligneCommande
+     */
+    public function setProduit(\ProduitBundle\Entity\Produit $produit = null)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \ProduitBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Set commande
+     *
+     * @param \GestionBundle\Entity\Commande $commande
+     *
+     * @return ligneCommande
+     */
+    public function setCommande(\GestionBundle\Entity\Commande $commande)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \GestionBundle\Entity\Commande
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+}

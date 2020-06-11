@@ -205,10 +205,7 @@ class GroupeController extends Controller
             array('emplacement' => 'asc'))
         ;
 
-        $listePieces = $em->getRepository('GroupeBundle:ListePiece')->findBy(
-            array(),
-            array('nom' => 'asc')
-        );
+        $listePieces = $groupe->getListepieces();
 
         $historiqueGroupes = $em->getRepository('GroupeBundle:HistoriqueGroupe')->findBy(
             array('groupe' => $groupe),
@@ -230,6 +227,8 @@ class GroupeController extends Controller
         if ($stcHuile){
             $stockHuile = $stcHuile->getQuantite();
         }
+
+
 
 
         // ------------------- ////// STOCK D'HUILE ////// ---------------------

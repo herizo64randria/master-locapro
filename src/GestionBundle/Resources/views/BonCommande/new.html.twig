@@ -32,12 +32,15 @@
                         <div class="form-group">
                             <label for="fournisseur">Fournisseur <b class="text-danger" id="err_fournisseur"></b></label>
                             <select required  class="form-control" name="fournisseur" id="fournisseur" >
-                                <option value=" ">
-                                </option>
+                                <option value=""></option>
                                 {% for fournisseur in fournisseurs %}
                                     <option value="{{ fournisseur.id }}">{{ fournisseur.nom }} </option>
                                 {% endfor %}
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tva">TVA (en %) <b class="text-danger" id="err_tva"></b></label>
+                            <input required type="number" value="20" class="form-control" name="tva" id="tva"  />
                         </div>
                         <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>

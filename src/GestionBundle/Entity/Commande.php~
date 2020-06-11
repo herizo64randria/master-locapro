@@ -51,7 +51,7 @@ class Commande
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=255,nullable=true)
      */
     private $texte;
     /**
@@ -60,6 +60,13 @@ class Commande
      * @ORM\Column(name="modifiable", type="boolean", nullable=true)
      */
     private $modifiable;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tva", type="integer", nullable=false)
+     */
+    private $tva;
 
 //------------------------------------------
 
@@ -368,5 +375,29 @@ class Commande
     public function getFournisseur()
     {
         return $this->fournisseur;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param string $texte
+     *
+     * @return Commande
+     */
+    public function setTexte($texte)
+    {
+        $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return string
+     */
+    public function getTexte()
+    {
+        return $this->texte;
     }
 }

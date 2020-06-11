@@ -53,7 +53,7 @@ class CommandeController extends Controller
             $entityNumero = $newNum;
         }
 
-        $numero = 'CMD-'.$entityNumero->getNumero().'/'.$date->format('Y');
+        $numero = 'BC-LP-'.$entityNumero->getNumero().'/'.$date->format('y');
 
         return $numero;
 
@@ -115,7 +115,6 @@ class CommandeController extends Controller
          $numero=$this->recupereNumeroCommande($em);
         $fournisseurs =  $em->getRepository('FournisseurBundle:Fournisseur')->findAll();
 
-
         if ($request->getMethod()=='POST'){
              $commande = new Commande();
              $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
@@ -124,12 +123,20 @@ class CommandeController extends Controller
              if(isset($_POST['motif']))
                 $commande->setMotif($_POST['motif']);
              $commande->setUserCreer($this->getUser());
+
+             $commande->setTva($_POST['tva']);
+
+            $fournisseur = null;
             if (isset($_POST['fournisseur']) and $_POST['fournisseur'])
             {
                 $fournisseur =  $em->getRepository('FournisseurBundle:Fournisseur')->findOneBy(array('id'=>$_POST['fournisseur']));
                 $commande->setFournisseur($fournisseur);
             }
-             $this->nextNumero($em);
+
+            if(! $fournisseur)
+                return new Exception('Veuillez choisir le fournisseur');
+
+            $this->nextNumero($em);
              $em->persist($commande);
              $em->flush();
 
@@ -142,7 +149,7 @@ class CommandeController extends Controller
 
              $em->persist($historiqueGlobal);
              $em->flush();
-            return $this->redirectToRoute('commande_index');
+            return $this->redirectToRoute('commande_afficher', array('id' => $commande->getId()));
              // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
          }
@@ -158,6 +165,8 @@ class CommandeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entre=$em->getRepository('GestionBundle:Entre')->findOneBy(array('commande'=>$commande));
         $produits = $em->getRepository('ProduitBundle:Produit')->findAll();
+
+
 
         return $this->render('@Gestion/BonCommande/show.html.twig', array(
             'commande' => $commande,

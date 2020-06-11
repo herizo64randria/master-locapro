@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ 'Bon de commande' }}</title>
     <style>
         body{
             font-size: 111%;
@@ -128,76 +128,99 @@
             <p>Plle 23/25 Atsinanana</p>
             <p>501 Toamasina</p>
             <p>Tél. : 034 59 109 62</p>
-			<U>
             <p>contact.locapro@groupe-ibc.com</p>
             <p>NIF 3003 300 382</p>
             <p>STAT 77100 31 2019 0 00212</p>
-			</U>
         </div>
     </div>
     <div id="droit">
         <div id="sdroit">
 
-                <h2>
-                    BON DE COMMANDE <br>N° : {{ commande.numero }}
+            <h2>
+                BON DE COMMANDE <br>N° {{ commande.numero }}
+            </h2>
 
-
-                </h2>
-
+            {% if commande.fournisseur %}
+                <div style="text-align: left;margin-left: 10px ">
+                    <h3><u>{{ commande.fournisseur.nom }}</u> <br> {{ commande.fournisseur.adresse }}</h3>
+                </div>
+            {% endif %}
+            
             <div id="stitre2">
                 <h2><b>Ce {{ commande.date|date('d/m/Y') }}</b></h2>
             </div></div>
-            <h2 >
-                <br>
-                {#{% if commande.depot %}
-                    DEPOT {{ commande.depot.nom }}
-                {% endif %}
-                {% if commande.site %}
-                    SITE {{ commande.site.emplacement }}
-                {% endif %}#}
-                 <br><br>
 
-            </h2>
         </div>
     </div>
-</div>
+
 <div id="contenu">
     <div id="Scontenu">
         <table border="1">
 
             <thead >
                 <tr>
+                    <th>REFERENCE</th>
                     <th>DESIGNATION</th>
-                    <th>QAUNTITE</th>
-                    <th>UTILITE</th>
+                    <th>QTE</th>
+                    <th>PU HT</th>
+                    <th>MONTANT HT</th>
                 </tr>
             </thead>
 
             <tbody>
 
             {% set nbrLigne = 0 %}
+            {% set montantTotalHT = 0 %}
             {% for ligne in commande.lignecommandes %}
                 {% set nbrLigne = nbrLigne + 1 %}
                 <tr>
-                    <td>{{ ligne.produit.designation }}</td>
+                    <td>{{ ligne.produit.reference }}</td>
+                    <td>{{ ligne.designation }}</td>
                     <td>{{ ligne.quantite }}</td>
-                    <td>{{ ligne.utilite }}</td>
+                    <td style="text-align: right; white-space: nowrap">{{ ligne.prix|number_format(2, ',', ' ') }}</td>
+
+                    {% set montantLigne = 0 %}
+                    {% set montantLigne = ligne.quantite * ligne.prix %}
+                    {% set montantTotalHT = montantTotalHT + montantLigne %}
+
+                    <td style="text-align: right; white-space: nowrap">{{ montantLigne|number_format(2, ',', ' ') }}</td>
                 </tr>
 
             {% endfor %}
 
-            {% for i in nbrLigne..32 %}
-                <tr> <td ><p></p></td><td ><p></p></td><td ><p></p></td></tr>
+            {% for i in nbrLigne..30 %}
+                <tr> <td ><p></p></td><td ><p></p></td><td ><p></p></td> <td><p></p></td> <td><p></p></td></tr>
             {% endfor %}
 
-            <tr> <td id="piedtr"><p></p></td><td id="piedtr"><p></p></td><td id="piedtr"><p></p></td></tr>
+            <tr> <td id="piedtr"><p></p></td><td id="piedtr"><p></p></td><td id="piedtr"><p><td id="piedtr"><p></p></td> <td id="piedtr"><p></p></td></tr>
 
             </tbody>
 
         </table>
+
         <br>
 
     </div>
+    <div style="margin-left: 520px">
+        {% set montantTVA = montantTotalHT * (commande.tva / 100) %}
+        {% set montantTTC = montantTotalHT + montantTVA %}
+
+        <table border="2" style="width: 380px; border-radius: 5px">
+            <tr>
+                <td id="piedtr" style="text-align: center"><b>TOTAL HT</b>
+                </td><td id="piedtr" style="text-align: right">{{ montantTotalHT|number_format(2, ',', ' ') }}</td>
+            </tr>
+            <tr>
+                <td  id="piedtr" style="text-align: center"><b>TVA {{ commande.tva }}%</b>
+                </td><td id="piedtr" style="text-align: right">{{ montantTVA|number_format(2, ',', ' ') }}</td>
+            </tr>
+            <tr>
+                <td  id="piedtr" style="text-align: center"><b>TOTAL TTC</b>
+                </td><td id="piedtr" style="text-align: right"><b>{{ montantTTC|number_format(2, ',', ' ') }}</b></td>
+            </tr>
+        </table>
+    </div>
+    <br><br>
 
 
 </div>
@@ -205,7 +228,7 @@
     <table id="footer">
         <thead>
         <tr >
-            <th>LE DEMANDEUR</th>
+
             <th>LE RESPONSABLE</th>
             <th >LA DIRECTION</th>
         </tr>
@@ -213,8 +236,8 @@
     </table>
 </div>
 
-{#<script>#}
-{#    window.print();#}
-{#</script>#}
+<script>
+    window.print();
+</script>
 </body>
 </html>

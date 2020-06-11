@@ -23,6 +23,8 @@ class DefaultController extends Controller
             $nombreConfirmationSortie = new NombreConfirmation();
             $nombreConfirmationSortie->setNombre(1);
             $nombreConfirmationSortie->setNomDemande('sortie');
+            $em->persist($nombreConfirmationSortie);
+
         }
 
         $nombreConfirmationTransfert = $em->getRepository('AdminBundle:NombreConfirmation')
@@ -35,6 +37,8 @@ class DefaultController extends Controller
             $nombreConfirmationTransfert = new NombreConfirmation();
             $nombreConfirmationTransfert->setNombre(1);
             $nombreConfirmationTransfert->setNomDemande('transfert');
+            $em->persist($nombreConfirmationTransfert);
+
         }
 
         $nombreConfirmationEntre = $em->getRepository('AdminBundle:NombreConfirmation')
@@ -47,11 +51,23 @@ class DefaultController extends Controller
             $nombreConfirmationEntre = new NombreConfirmation();
             $nombreConfirmationEntre->setNombre(1);
             $nombreConfirmationEntre->setNomDemande('entre');
+            $em->persist($nombreConfirmationEntre);
+
         }
 
-        $em->persist($nombreConfirmationEntre);
-        $em->persist($nombreConfirmationSortie);
-        $em->persist($nombreConfirmationTransfert);
+        $nombreConfirmationCommande = $em->getRepository('AdminBundle:NombreConfirmation')
+            ->findOneBy(array(
+                'nomDemande' => 'commande'
+            ))
+        ;
+
+        if(!$nombreConfirmationCommande){
+            $nombreConfirmationCommande = new NombreConfirmation();
+            $nombreConfirmationCommande->setNombre(1);
+            $nombreConfirmationCommande->setNomDemande('commande');
+            $em->persist($nombreConfirmationCommande);
+        }
+
 
         $em->flush();
 

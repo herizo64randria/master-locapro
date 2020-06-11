@@ -61,6 +61,13 @@ class Commande
      */
     private $modifiable;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tva", type="integer", nullable=false)
+     */
+    private $tva;
+
 //------------------------------------------
 
     /**
@@ -392,5 +399,29 @@ class Commande
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * Set tva
+     *
+     * @param integer $tva
+     *
+     * @return Commande
+     */
+    public function setTva($tva)
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    /**
+     * Get tva
+     *
+     * @return integer
+     */
+    public function getTva()
+    {
+        return $this->tva;
     }
 }

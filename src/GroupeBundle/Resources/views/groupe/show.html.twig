@@ -389,6 +389,37 @@
 
                                     </div>
                                 </div>
+                                
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title text-primary"><i class="fa fa-wrench"></i> Pièce compatible</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table table-striped">
+                                            {% for listePiece in listePieces %}
+                                                <tr>
+                                                    <td>
+                                                        <b>{{ listePiece.nom }}</b>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="{{ path('produit_show', {'id' : listePiece.produit.id}) }}">{{ listePiece.produit.designation }} - {{ listePiece.produit.reference }} {% if listePiece.produit.code %}({{ listePiece.produit.code }}){% endif %}</a>
+                                                            </li>
+                                                            {% for produitEqui in listePiece.produits %}
+                                                                <li>
+                                                                    Eq.: <a href="{{ path('produit_show', {'id' : produitEqui.id}) }}">{{ produitEqui.designation }} - {{ produitEqui.reference }} {% if produitEqui.code %}({{ produitEqui.code }}){% endif %}</a>
+                                                                </li>
+                                                            {% endfor %}
+
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+                                        </table>
+
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -398,7 +429,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuller</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                 </div>
 
 
