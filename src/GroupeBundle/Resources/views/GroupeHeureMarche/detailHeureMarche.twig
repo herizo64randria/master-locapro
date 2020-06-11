@@ -5,70 +5,182 @@
 {% block titre_description %}{% endblock %}
 {% block body %}
 
-    <ul class="list-inline">
-        <li><a href="#" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalHeureMarcheDetail"><i class="fa fa-clock-o"></i> Ajouter</a></li>
-    </ul>
-
 
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">
-                        <a href="{{ path('GroupeHeureMarche_detailHeureGroupe', {'id' : groupe.id}) }}"><i class="fa fa-arrow-circle-left"></i> </a> Historique
-                        <a class="text-primary" href="{{ path('groupe_show', {'id' : groupe.id}) }}"><b>{{ groupe.numero }}</b></a>
-                    </h3>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Détails sur l'heure de marche:
+                        </h3>
 
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <table class="table table-striped table-bordered" id="tableGroupe">
-                        <thead>
-                        <tr>
-                            <th>Heure de démarrage</th>
-                            <th>Heure d'arret</th>
-                            <th>Intervalle en heure</th>
-                            <th>Puissance consommer</th>
-                            <th>Note</th>
-                            <td></td>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    </div>
 
-                        {% for sousHeure in heureMarche.sousHeures %}
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-striped">
                             <tr>
-                                <td>{{ sousHeure.heureDemarrage|date('H:i') }}</td>
-                                <td>{{ sousHeure.heureArret|date('H:i') }}</td>
-                                <td>
-                                    {{ sousHeure.heure }}
-                                </td>
-                                <td>{{ sousHeure.puissance }}</td>
-                                <td>{{ sousHeure.observation|nl2br }}</td>
-                                <td><a href="{{ path('GroupeHeureMarche_supprimerSousHeure', {'id' : sousHeure.id}) }}" class="btn btn-xs btn-danger" onclick="return confirm('Voulez-vous supprimer?')"><i class="fa fa-warning"></i></a></td>
+                                <th>Heure(s) de marche: </th>
+                                <td>{{ heureMarche.heure }}</td>
                             </tr>
-                        {% endfor %}
+                            <tr>
+                                <th>Production: </th>
+                                <td>{{ heureMarche.production }}</td>
+                            </tr>
+                            <tr>
+                                <th>Consomation: </th>
+                                <td>{{ heureMarche.consomation }}</td>
+                            </tr>
+                            <tr>
+                                <th>CSP: </th>
+                                <td>{{ heureMarche.csp }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>Note/Autre: </b>
+                                    {% if not heureMarche.note or heureMarche.note == '' %}
+                                        ---
+                                    {% else %}
+                                        {{ heureMarche.note }}
+                                    {% endif %}
+                                </td>
+                            </tr>
 
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <th>
-                                {{ heureMarche.heure }}
-                            </th>
-                            <th>
-                                ~ {{ heureMarche.puissance }}
-                            </th>
-                            <td></td>
-                        </tr>
-                        </tfoot>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                Vidange
+                            </h3>
+
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            {% if heureMarche.vidange %}
+                                {% set vidange = heureMarche.vidange %}
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Groupe: </td>
+                                        <td>{{ vidange.groupe.numero }} / {{ vidange.groupe.site.emplacement }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Type:</td>
+                                        <td>{{ vidange.type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Heure de marche à la vidange:</td>
+                                        <td>{{ vidange.heureMarche|number_format(0, ',', ' ') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Huile utilisé:</td>
+                                        <td>{{ vidange.huileUtilise }} L</td>
+                                    </tr>
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                Appoint
+                            </h3>
+
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            {% if heureMarche.appoint %}
+                                {% set appoint = heureMarche.appoint %}
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Huile utilisé:</td>
+                                        <td>{{ appoint.huileUtilise }}</td>
+                                    </tr>
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    {% include '@Groupe/GroupeHeureMarche/modalSousHeure.twig' %}
+{#    <div class="row">#}
+{#        <div class="col-md-12">#}
+{#            <div class="box">#}
+{#                <div class="box-header with-border">#}
+{#                    <h3 class="box-title">#}
+{#                        <a href="{{ path('GroupeHeureMarche_detailHeureGroupe', {'id' : groupe.id}) }}"><i class="fa fa-arrow-circle-left"></i> </a> Historique#}
+{#                        <a class="text-primary" href="{{ path('groupe_show', {'id' : groupe.id}) }}"><b>{{ groupe.numero }}</b></a>#}
+{#                    </h3>#}
+
+{#                </div>#}
+
+{#                <h3>Si l'heure de marche est détaillés, veuillez remplir le tableau ci-dessous</h3>#}
+{#                <ul class="list-inline">#}
+{#                    <li><a href="#" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalHeureMarcheDetail"><i class="fa fa-clock-o"></i> Ajouter</a></li>#}
+{#                </ul>#}
+
+{#                <!-- /.box-header -->#}
+{#                <div class="box-body">#}
+{#                    <table class="table table-striped table-bordered" id="tableGroupe">#}
+{#                        <thead>#}
+{#                        <tr>#}
+{#                            <th>Heure de démarrage</th>#}
+{#                            <th>Heure d'arret</th>#}
+{#                            <th>Intervalle en heure</th>#}
+{#                            <th>Note</th>#}
+{#                            <td></td>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+
+{#                        {% for sousHeure in heureMarche.sousHeures %}#}
+{#                            <tr>#}
+{#                                <td>{{ sousHeure.heureDemarrage|date('H:i') }}</td>#}
+{#                                <td>{{ sousHeure.heureArret|date('H:i') }}</td>#}
+{#                                <td>#}
+{#                                    {{ sousHeure.heure }}#}
+{#                                </td>#}
+{#                                <td>{{ sousHeure.observation|nl2br }}</td>#}
+{#                                <td><a href="{{ path('GroupeHeureMarche_supprimerSousHeure', {'id' : sousHeure.id}) }}" class="btn btn-xs btn-danger" onclick="return confirm('Voulez-vous supprimer?')"><i class="fa fa-warning"></i></a></td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+
+{#                        </tbody>#}
+{#                        <tfoot>#}
+{#                        <tr>#}
+{#                            <td></td>#}
+{#                            <td></td>#}
+{#                            <th>#}
+{#                                {{ heureMarche.heure }}#}
+{#                            </th>#}
+{#                            <td></td>#}
+{#                        </tr>#}
+{#                        </tfoot>#}
+{#                    </table>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{#    {% include '@Groupe/GroupeHeureMarche/modalSousHeure.twig' %}#}
 
     <!-- DataTables JS -->
     <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>

@@ -39,61 +39,67 @@ class AppointController extends Controller
             $appoint = new Appoint();
             $appoint->setGroupe($groupe);
             $appoint->setDate(\DateTime::createFromFormat('d/m/Y', $_POST['dateAppoint']));
-            $appoint->setHuileUtilise($_POST['huileAppoint']);
 
+            $qttUtilise = $_POST['huileAppoint'];
+            if ($qttUtilise < 0)
+                throw new Exception('Erreur! Valeur de huile utilisé négatif');
+
+            $appoint->setHuileUtilise($qttUtilise);
 
             if (isset($_POST['descriptionAppoint']))
                 $appoint->setDescription($_POST['descriptionAppoint'])
             ;
 
-            // ------------------- HUILE UTILISE ---------------------
-            $qttUtilise = $_POST['huileAppoint'];
-            if ($qttUtilise < 0)
-                throw new Exception('Erreur! Valeur de huile utilisé négatif');
+            if (isset($_POST['chkHuileAppoint'])){
+                // ------------------- HUILE UTILISE ---------------------
 
-            // ------------------- STOCK HUILE ---------------------
-            $stockHuile = 0;
-            $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
-                'huileParDefaut' => true,
-                'siHuile' => true
-            ));
 
-            if (!$huile){
-                throw new Exception('Erreur! Huile par défaut non-défini.');
+                // ------------------- STOCK HUILE ---------------------
+                $stockHuile = 0;
+                $huile = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
+                    'huileParDefaut' => true,
+                    'siHuile' => true
+                ));
+
+                if (!$huile){
+                    throw new Exception('Erreur! Huile par défaut non-défini.');
+                }
+
+                $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+                $stcHuile = $repositoryStock->findOneBy(array(
+                    'produit' => $huile,
+                    'site' => $groupe->getSite()
+                ));
+
+                if ($stcHuile){
+                    $stockHuile = $stcHuile->getQuantite();
+                }
+
+                if ($stockHuile < $qttUtilise){
+                    throw new Exception('Erreur! Stock d\'huile insufisante');
+                }
+
+                $huileRestant = $stockHuile - $qttUtilise;
+                $stcHuile->setQuantite($huileRestant);
+                $em->persist($stcHuile);
+                // ------------------- ////// STOCK HUILE ////// ---------------------
+
+
+                //--------HISTORIQUE DU PRODUIT------------
+                $historiqueProduit = new HistoriqueProduit();
+
+                $historiqueProduit->setType('debit');
+                $historiqueProduit->setProduit($huile);
+                $historiqueProduit->setAppoint($appoint);
+                $historiqueProduit->setDate($appoint->getDate());
+                $historiqueProduit->setQuantite($qttUtilise);
+                $historiqueProduit->setSite($groupe->getSite());
+
+
+                $em->persist($historiqueProduit);
             }
 
-            $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
-            $stcHuile = $repositoryStock->findOneBy(array(
-                'produit' => $huile,
-                'site' => $groupe->getSite()
-            ));
 
-            if ($stcHuile){
-                $stockHuile = $stcHuile->getQuantite();
-            }
-
-            if ($stockHuile < $qttUtilise){
-                throw new Exception('Erreur! Stock d\'huile insufisante');
-            }
-
-            $huileRestant = $stockHuile - $qttUtilise;
-            $stcHuile->setQuantite($huileRestant);
-            $em->persist($stcHuile);
-            // ------------------- ////// STOCK HUILE ////// ---------------------
-
-
-            //--------HISTORIQUE DU PRODUIT------------
-            $historiqueProduit = new HistoriqueProduit();
-
-            $historiqueProduit->setType('debit');
-            $historiqueProduit->setProduit($huile);
-            $historiqueProduit->setAppoint($appoint);
-            $historiqueProduit->setDate($appoint->getDate());
-            $historiqueProduit->setQuantite($qttUtilise);
-            $historiqueProduit->setSite($groupe->getSite());
-
-
-            $em->persist($historiqueProduit);
             // ------------------- ////// HUILE UTILISE ////// ---------------------
 
             $historiqueGroupe = new HistoriqueGroupe();
@@ -105,10 +111,11 @@ class AppointController extends Controller
             $em->persist($historiqueGroupe);
             $em->flush();
 
-            // ------------------- Mis A Jour du stock d'huile ---------------------
-            $serviceProduit = new ProduitService($em);
-            $serviceProduit->updateStockTotal($huile);
-
+            if(isset($_POST['chkHuileAppoint'])){
+                // ------------------- Mis A Jour du stock d'huile ---------------------
+                $serviceProduit = new ProduitService($em);
+                $serviceProduit->updateStockTotal($huile);
+            }
 
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
             $historiqueGlobal = new HistoriqueGlobal();

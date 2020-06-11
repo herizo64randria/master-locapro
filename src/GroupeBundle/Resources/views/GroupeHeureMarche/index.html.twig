@@ -26,7 +26,6 @@
                             <th>Marque</th>
                             <th>Site</th>
                             <th>Heure(s) de marche</th>
-                            <th>Puissance consommer</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -41,10 +40,6 @@
                                 <td >
                                     {{ groupe.heureMarche }}
                                 </td>
-                                <td >
-                                    {{ groupe.puissanceConsommer }}
-                                </td>
-
                                 <td><a class="btn btn-default" href="{{  path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id})  }}">
                                         <i class="fa fa-info-circle"></i> Détails
                                     </a>

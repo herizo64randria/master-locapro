@@ -5,9 +5,9 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="box">
-                <form action="#" method="post">
+                <form action="#" method="post" autocomplete="off">
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire d'ajout  heure de marche global</h3>
                     </div>
@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label for="fournisseur">Groupe <b class="text-danger" id="err_groupe"></b></label>
                             <select required  class="form-control" name="groupe" id="groupe" >
-                                    <option value="{{ groupe.id }}">{{ groupe.numero }} </option>
+                                    <option value="{{ groupe.id }}">{{ groupe.numero }} - {{ groupe.site.emplacement }} </option>
                             </select>
                         </div>
 
@@ -45,12 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="input-group " >
-                                <label for="puissance" class="input-group-addon control-label">Puissance consommer:</label>
-                                <input type="text" name="puissance" id="puissance" class="form-control only_float">
-                            </div>
-                        </div>
+                        <input type="hidden" name="puissance" value="" id="puissance" class="form-control only_float">
 
                         <div class="form-group">
                             <div class="input-group " >
@@ -73,9 +68,68 @@
                             </div>
                         </div>
 
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <h3>Appoint d'huile</h3>
+                                    <div class="form-group">
+                                        <input type="checkbox"  name="appoint_chkHuile" id="appoint_chkHuile"  />
+                                        <label for="appoint_chkHuile" class="text-danger">Si huile en stock utilisé <b class="text-danger" id="err_appoint_chkHuile"></b></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="appoint_huileUtilise">Huile utilisé: <b class="text-danger" id="err_appoint_huileUtilise"></b></label>
+                                        <input type="text" class="form-control only_float" name="appoint_huileUtilise" id="appoint_huileUtilise"  />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Vidange</h3>
+                                    <div class="form-group">
+                                        <label for="vidange_typeVidange">Type du vidange: <b class="text-danger" id="err_vidange_typeVidange"></b></label>
+                                        <select required class="form-control" name="vidange_typeVidange" id="vidange_typeVidange" >
+                                            <option value="0" selected>Non-affecté</option>
+                                            <option value="Filtre huile">Filtre huile</option>
+                                            <option value="Filtre huile et filtre gasoil">Filtre huile et filtre gasoil</option>
+                                            <option value="Vidange complet">Vidange complet</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vidange_heureMarche">Heure de marche du groupe: <b class="text-danger" id="err_vidange_heureMarche"></b></label>
+                                        <input type="text" class="form-control" name="vidange_heureMarche" id="vidange_heureMarche"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox"  name="vidange_chkHuile" id="vidange_chkHuile"  />
+                                        <label for="vidange_chkHuile" class="text-danger">Si huile en stock utilisé <b class="text-danger" id="err_vidange_chkHuile"></b></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vidange_huileUtilise">Huile utilisé: <b class="text-danger" id="err_vidange_huileUtilise">(Stock dispo: {{ stockHuile }})</b></label>
+                                        <input required type="text" class="form-control only_float" name="vidange_huileUtilise" id="vidange_huileUtilise" value="0" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="text-danger">
+                                    <b>Stock dispo: {{ stockHuile }}</b>
+                                    <p class="text-danger">*NB: Les valeurs de "Huile utilisé" ne seront plus modifiables</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="note">Note / Autre: <b class="text-danger" id="err_note"></b></label>
+                            <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+                        </div>
+
+                        <hr>
+
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="submit" value="Créer" class="btn btn-success btn-block" />
+                                <button type="submit" class="btn btn-success btn-block">Enregistrer</button>
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ path('entre_index') }}" class="btn btn-default btn-block">Annuler</a>
@@ -115,4 +169,8 @@
             forceParse: 0
         });
     </script>
+
+
+
+
 {% endblock %}

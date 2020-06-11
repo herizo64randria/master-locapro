@@ -70,9 +70,9 @@
                                 <a href="{{ path('GroupeHeureMarche_addHeureByGroupe',{'id':groupe.id}) }}" class="btn btn-info" ><i class="fa fa-clock-o" ></i> Ajouter heure
                                     <br> de marche global</a>
                             </li>
-                            <li>
-                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalHeureMarcheDetail" ><i class="fa fa-clock-o" ></i> Heure de marche détaillé </a>
-                            </li>
+{#                            <li>#}
+{#                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalHeureMarcheDetail" ><i class="fa fa-clock-o" ></i> Heure de marche détaillé </a>#}
+{#                            </li>#}
                         {% endif %}
                     </ul>
                 </div>
@@ -84,10 +84,11 @@
                             <th>Date de début </th>
                             <th>Date fin</th>
                             <th>Heure(s) de marche</th>
-                            <th>Puissance moyenne ~</th>
                             <th>Production</th>
                             <th>Consomation</th>
                             <th>CSP</th>
+                            <th>Appoint</th>
+                            <th>Vidange</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -106,9 +107,6 @@
 
                                     {{ heureMarche.heure}}
                                 </td>
-                                <td class="text-center" >
-                                    {{ heureMarche.puissance}}
-                                </td>
                                 <td class="text-center">
                                     {{ heureMarche.production }}
                                 </td>
@@ -117,6 +115,16 @@
                                 </td>
                                 <td class="text-center">
                                     {{ heureMarche.csp }}
+                                </td>
+                                <td class="text-center">
+                                    {% if heureMarche.appoint %}
+                                        <i class="fa fa-check"></i> ({{ heureMarche.appoint.huileUtilise }}L)
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if heureMarche.vidange %}
+                                        <i class="fa fa-check fa-2x"></i>
+                                    {% endif %}
                                 </td>
                                 <td>
                                     <a href="{{ path('GroupeHeureMarche_detailHeureMarche', {"id" : heureMarche.id}) }}" class="btn btn-default"><i class="fa fa-info-circle"></i></a>
