@@ -16,7 +16,7 @@
 
     <ul class="list-inline">
 
-        {% if app.user|ifRole('ROLE_GESTION_COMMANDE') %}
+        {% if app.user|ifRole('ROLE_GESTION_ENTRE') %}
             <li><a href="{{ path('commande_creer') }}" class="btn btn-lg btn-success"><i class="fa fa-mail-forward"></i> Nouvelle Commande</a></li>
         {% endif %}
     </ul>
