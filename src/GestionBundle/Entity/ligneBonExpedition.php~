@@ -1,0 +1,74 @@
+<?php
+
+namespace GestionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ligneBonExpedition
+ *
+ * @ORM\Table(name="ligne_bon_expedition")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\ligneBonExpeditionRepository")
+ */
+class ligneBonExpedition
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="quantite", type="float")
+     */
+    private $quantite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="designation", type="string", length=255)
+     */
+    private $designation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="utilite", type="string", length=255, nullable=true)
+     */
+    private $utilite;
+
+//------------\\\\\\\////////////-----------
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $produit;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonExpedition", inversedBy="ligneBonExpeditions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bonExpedition;
+
+//------------\\\\\\\////////////-----------
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+

@@ -400,4 +400,28 @@ class Commande
     {
         return $this->texte;
     }
+
+    /**
+     * Set tva
+     *
+     * @param integer $tva
+     *
+     * @return Commande
+     */
+    public function setTva($tva)
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    /**
+     * Get tva
+     *
+     * @return integer
+     */
+    public function getTva()
+    {
+        return $this->tva;
+    }
 }

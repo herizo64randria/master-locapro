@@ -76,6 +76,11 @@ class Depot
      */
     private $immos; // Notez le « s », il y a plusieur historique
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\BonExpedition", mappedBy="depot")
+     */
+    private $bonExpeditions; // Notez le « s », un stocks est liée à plusieurs entrées
+
 
 //------------------------------------------------
 

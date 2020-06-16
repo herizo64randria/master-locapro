@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ebfb667e-8021-4104-945a-ec3d2389aa0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +74,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -122,7 +124,7 @@
       <workItem from="1591857605002" duration="12792000" />
       <workItem from="1591943009198" duration="124000" />
       <workItem from="1592203886333" duration="5265000" />
-      <workItem from="1592286268842" duration="597000" />
+      <workItem from="1592286268842" duration="2156000" />
     </task>
     <servers />
   </component>
