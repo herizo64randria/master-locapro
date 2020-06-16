@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ebfb667e-8021-4104-945a-ec3d2389aa0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +121,8 @@
       <workItem from="1591680791499" duration="591000" />
       <workItem from="1591857605002" duration="12792000" />
       <workItem from="1591943009198" duration="124000" />
+      <workItem from="1592203886333" duration="5265000" />
+      <workItem from="1592286268842" duration="597000" />
     </task>
     <servers />
   </component>
@@ -152,10 +154,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590473369303" />
-    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1591943105929">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592207866689">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1591943105929" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592207866689" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1591871074677">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -164,9 +166,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1591863130064" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1591867089608">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592218213426">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1591867089608" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592218213426" />
   </component>
 </project>

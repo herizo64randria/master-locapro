@@ -49,15 +49,15 @@
 
                         <div class="form-group">
                             <div class="input-group " >
-                                <label for="production" class="input-group-addon control-label">Production: <b class="text-danger" id="err_production"></b></label>
-                                <input type="text" class="form-control only_float" name="production" id="production"  />
+                                <label for="production" class="input-group-addon control-label ">Production: <b class="text-danger" id="err_production"></b></label>
+                                <input type="text" class="form-control only_float calculCSP" name="production" id="production"  />
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <div class="input-group " >
-                                <label for="consomation" class="input-group-addon control-label">Consomation: <b class="text-danger" id="err_consomation"></b></label>
-                                <input  type="text" class="form-control only_float" name="consomation" id="consomation"  />
+                                <label for="consomation" class="input-group-addon control-label ">Consomation: <b class="text-danger" id="err_consomation"></b></label>
+                                <input  type="text" class="form-control only_float calculCSP" name="consomation" id="consomation"  />
                             </div>
                         </div>
 
@@ -150,6 +150,7 @@
     {#NUMERAL FORMAT#}
     <script>
         $('#groupe').select2();
+        numeralFormat('#csp');
 
     </script>
 
@@ -167,6 +168,24 @@
             startView: 2,
             minView: 2,
             forceParse: 0
+        });
+    </script>
+
+{#    SCRIPT CALCUL CSP#}
+    <script>
+        $('.calculCSP').keyup(function () {
+            if ($('#consomation').val() > 0 && $('#production').val() > 0){
+                setTimeout(function () {
+                    consomation = $('#consomation').val();
+                    production = $('#production').val();
+
+                    csp = (consomation * 840)/production;
+
+                    $('#csp').val(csp);
+                    affichageFormat('#csp');
+                }, 500)
+            }
+
         });
     </script>
 
