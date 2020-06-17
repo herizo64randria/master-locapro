@@ -87,6 +87,7 @@ class CommandeController extends Controller
         $em->persist($numero);
 
     }
+
     /**
      * INDEX
      *
@@ -100,10 +101,9 @@ class CommandeController extends Controller
 
         return $this->render('@Gestion/BonCommande/index.html.twig', array(
             'commandes' => $commandes,
-
         ));
-
     }
+
     /**
      * nouveau entity.
      *

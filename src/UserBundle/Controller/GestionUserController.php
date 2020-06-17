@@ -66,7 +66,7 @@ class GestionUserController extends Controller
             }
 
             $user->setNom($_POST['nom']);
-            if (!$_POST['passeword']=='•••••••••••••••')
+            if ($_POST['passeword']!='•••••••••••••••')
                 $user->setPlainPassword($_POST['passeword']);
 
             $user->setEmail($_POST['email']);

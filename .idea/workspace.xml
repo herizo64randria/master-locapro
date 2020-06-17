@@ -3,18 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ebfb667e-8021-4104-945a-ec3d2389aa0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/security.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/security.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneBonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneBonExpedition.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/CommandeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/CommandeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/views/user/edit.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +129,7 @@
       <workItem from="1591943009198" duration="124000" />
       <workItem from="1592203886333" duration="5265000" />
       <workItem from="1592286268842" duration="17110000" />
-      <workItem from="1592371794905" duration="10449000" />
+      <workItem from="1592371794905" duration="10910000" />
     </task>
     <servers />
   </component>
@@ -174,10 +165,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590473369303" />
-    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592382796385">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592384544797">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592382796385" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592384544797" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1591871074677">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -186,9 +177,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1592380365941" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592303382556">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592384746104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592303382556" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592384746104" />
   </component>
 </project>
