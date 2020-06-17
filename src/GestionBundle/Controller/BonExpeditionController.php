@@ -245,6 +245,9 @@ class BonExpeditionController extends Controller
             if (isset($_POST['vehiculeTransporteur']))
                 $bonExpedition->setVehiculeTransporteur($_POST['vehiculeTransporteur']);
 
+            if(isset($_POST['coutTransport']))
+                $bonExpedition->setCoutTransport($_POST['coutTransport']);
+
             // ------------------- EMPLACEMEMNT ---------------------
 
             if($_POST['emplacement'] == 'site'){
@@ -298,7 +301,7 @@ class BonExpeditionController extends Controller
      *
      * @Route("/afficher/{id}/", name="bonExpedition_show")
      */
-    public function showAction(Request $request, BonExpedition $bonExpedition){
+    public function showAction(BonExpedition $bonExpedition){
 
         $em = $this->getDoctrine()->getManager();
 
@@ -406,7 +409,7 @@ class BonExpeditionController extends Controller
      *
      * @Route("/supprimer/ligne{id}/1", name="bonExpedition_supprimerLigne")
      */
-    public function supprimerLigneAction(Request $request, ligneBonExpedition $ligneBonExpedition)
+    public function supprimerLigneAction(ligneBonExpedition $ligneBonExpedition)
     {
         $em = $this->getDoctrine()->getManager();
         $bonExpedition = $ligneBonExpedition->getBonExpedition();
@@ -423,7 +426,7 @@ class BonExpeditionController extends Controller
      *
      * @Route("/s/save/{id}", name="bonExpedition_enregistrer")
      */
-    public function enregistrerAction(Request $request, BonExpedition $bonExpedition)
+    public function enregistrerAction(BonExpedition $bonExpedition)
     {
         $em = $this->getDoctrine()->getManager();
         if(! $bonExpedition->getModifiable())
@@ -451,7 +454,7 @@ class BonExpeditionController extends Controller
      *
      * @Route("/confirmer/{id}/500", name="bonExpedition_confirmer")
      */
-    public function confirmerAction(Request $request, BonExpedition $bonExpedition)
+    public function confirmerAction(BonExpedition $bonExpedition)
     {
         $em = $this->getDoctrine()->getManager();
         if($bonExpedition->getEtat() == self::DEMANDE_CONFIRME){
@@ -586,5 +589,116 @@ class BonExpeditionController extends Controller
         throw new Exception('Erreur 404 NOT-FOUND');
 
 
+    }
+
+    /**
+     * REFUSER
+     *
+     * @Route("/modifier/{id}/demande", name="bonExpedition_edit")
+     */
+    public function modifierAction(Request $request, BonExpedition $bonExpedition)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
+        $repositoryGroupe = $em->getRepository('GroupeBundle:Groupe');
+        $repositorySite = $em->getRepository('GroupeBundle:Site');
+
+        $depots = $repositoryDepot->findBy(array('etat'=>true));
+        $groupes = $repositoryGroupe->findAll();
+        $sites = $repositorySite->findBy(
+            array(),
+            array('emplacement' => "asc")
+        );
+
+        if ($request->getMethod() == 'POST'){
+            $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
+            $bonExpedition->setDate($date);
+            if($_POST['groupe'])
+            {
+                $groupe = $repositoryGroupe->findOneBy(array('id'=>$_POST['groupe']));
+                $bonExpedition->setGroupe($groupe);
+            }
+            $bonExpedition->setDate($date);
+            $bonExpedition->setUserCreer($this->getUser());
+
+            if (isset($_POST['motif']))
+                $bonExpedition->setMotif($_POST['motif']);
+
+
+            $bonExpedition->setDestination($_POST['destination']);
+
+            $bonExpedition->setAgent($_POST['agent']);
+
+            if (isset($_POST['contactAgent']))
+                $bonExpedition->setContactAgent($_POST['contactAgent']);
+
+            if(isset($_POST['transporteur']))
+                $bonExpedition->setTransporteur($_POST['transporteur']);
+
+            if (isset($_POST['numeroTransporteur']))
+                $bonExpedition->setContactTransporteur($_POST['numeroTransporteur']);
+
+            if (isset($_POST['vehiculeTransporteur']))
+                $bonExpedition->setVehiculeTransporteur($_POST['vehiculeTransporteur']);
+
+            if(isset($_POST['coutTransport']))
+                $bonExpedition->setCoutTransport($_POST['coutTransport']);
+
+            // ------------------- EMPLACEMEMNT ---------------------
+
+            if($_POST['emplacement'] == 'site'){
+                $site = $repositorySite->findOneBy(array('id' => $_POST['site']));
+                $bonExpedition->setSite($site);
+            }
+
+            if ($_POST['emplacement'] == "depot"){
+                $depot = $repositoryDepot->findOneBy(array('id' => $_POST['depot']));
+                $bonExpedition->setDepot($depot);
+            }
+
+            // ------------------- ////// EMPLACEMEMNT ////// ---------------------
+
+            //NEXT NUMERO
+            $this->nextNumero($em);
+
+            $em->persist($bonExpedition);
+            $em->flush();
+
+            // ------------------- HISTORIQUE GLOBAL ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Modification du Bon d\'expédition n° '.$bonExpedition->getNumero());
+            $historiqueGlobal->setLien($this->generateUrl('bonExpedition_show', array('id' => $bonExpedition->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            return $this->redirectToRoute('bonExpedition_show', array('id' => $bonExpedition->getId()));
+        }
+
+
+        return $this->render('@Gestion/BonExpedition/edit.html.twig', array(
+            'numero' => $bonExpedition->getNumero(),
+            'depots' => $depots,
+            'groupes'=> $groupes,
+            'sites' => $sites,
+            'bonExpedition' => $bonExpedition
+        ));
+    }
+
+    /**
+     * IMPRIMER
+     *
+     * @Route("/imp{id}/imprimer", name="bonExpedition_imprimer")
+     */
+    public function imprimerAction(BonExpedition $bonExpedition)
+    {
+        return $this->render('@Gestion/BonExpedition/imprimer.html.twig', array(
+            'bonExpedition' => $bonExpedition
+        ));
     }
 }

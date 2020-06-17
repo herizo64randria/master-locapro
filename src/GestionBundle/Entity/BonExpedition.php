@@ -113,6 +113,13 @@ class BonExpedition
      */
     private $texte;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="coutTransport", type="float", nullable=true)
+     */
+    private $coutTransport;
+
 //---------------------------------------------
 
     /**
@@ -681,5 +688,29 @@ class BonExpedition
     public function getVehiculeTransporteur()
     {
         return $this->vehiculeTransporteur;
+    }
+
+    /**
+     * Set coutTransport
+     *
+     * @param float $coutTransport
+     *
+     * @return BonExpedition
+     */
+    public function setCoutTransport($coutTransport)
+    {
+        $this->coutTransport = $coutTransport;
+
+        return $this;
+    }
+
+    /**
+     * Get coutTransport
+     *
+     * @return float
+     */
+    public function getCoutTransport()
+    {
+        return $this->coutTransport;
     }
 }

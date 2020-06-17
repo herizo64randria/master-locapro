@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block titre_page %} <strong class="text-danger">Nouveau bon d'expédition</strong> {% endblock %}
-{% block titre_description %}Création d'un bon d'expédition{% endblock %}
+{% block titre_page %} <strong class="text-primary">Modification bon d'expédition</strong> {% endblock %}
+{% block titre_description %}Modification d'un bon d'expédition{% endblock %}
 {% block body %}
+
+    {% set  DEMANDE_ENATTENTE = 'En attente de confirmation' %}
+    {% set  DEMANDE_CONFIRME = 'Demande confirmée' %}
+    {% set  DEMANDE_REFUSER = 'Demande refusée' %}
+    {% set  DEMANDE_CLOTURE = 'Demande clôturée' %}
+    {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
 
     <div class="row">
         <div class="col-md-6">
@@ -16,7 +22,7 @@
                         <div class="form-group">
                             <label for="date" class=" control-label">Date :</label>
                             <div class="input-group date form_date " data-date="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                <input required class="form-control"  type="text" value="" readonly name="date">
+                                <input required class="form-control"  type="text" value="{{ bonExpedition.date|date('d/m/Y') }}" readonly name="date">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -30,7 +36,7 @@
 
                         <div class="form-group">
                             <label for="destination">Destinataire <b class="text-danger" id="err_destination"></b></label>
-                            <input required list="listDestinataire" class="form-control" name="destination" id="destination"  />
+                            <input required list="listDestinataire" class="form-control" name="destination" id="destination" value="{{ bonExpedition.destination }}"  />
 
                             <datalist id="listDestinataire">
                                 <option value="Jirama">
@@ -39,53 +45,52 @@
 
                        <div class="form-group">
                            <label for="agent">Adressé à <b class="text-danger" id="err_agent"></b></label>
-                           <input required type="text" class="form-control" name="agent" id="agent"  />
+                           <input required type="text" class="form-control" name="agent" id="agent" value="{{ bonExpedition.agent }}" />
                        </div>
 
                         <div class="form-group">
                             <label for="contactAgent">Contact agent <b class="text-danger" id="err_contactAgent"></b></label>
-                            <input  type="text" class="form-control" name="contactAgent" id="contactAgent"  />
+                            <input  type="text" class="form-control" name="contactAgent" id="contactAgent" value="{{ bonExpedition.contactAgent }}" />
                         </div>
 
                         <hr>
                        
                         <div class="form-group">
                             <label for="transporteur">Transporteur <b class="text-danger" id="err_transporteur"></b></label>
-                            <input type="text" class="form-control" name="transporteur" id="transporteur"  />
+                            <input type="text" class="form-control" name="transporteur" id="transporteur" value="{{ bonExpedition.contactTransporteur }}"  />
                         </div>
                         
                         <div class="form-group">
                             <label for="numeroTransporteur">Contact transporteur <b class="text-danger" id="err_numeroTransporteur"></b></label>
-                            <input type="text" class="form-control" name="numeroTransporteur" id="numeroTransporteur"  />
+                            <input type="text" class="form-control" name="numeroTransporteur" id="numeroTransporteur" value="{{ bonExpedition.contactTransporteur }}" />
                         </div>
 
                         <div class="form-group">
                             <label for="vehiculeTransporteur">Véhicule <b class="text-danger" id="err_vehiculeTransporteur"></b></label>
-                            <input type="text" class="form-control" name="vehiculeTransporteur" id="vehiculeTransporteur"  />
+                            <input type="text" class="form-control" name="vehiculeTransporteur" id="vehiculeTransporteur" value="{{ bonExpedition.vehiculeTransporteur }}" />
                         </div>
 
                         <div class="form-group">
                             <label for="coutTransport">Coût du transport (Ar) <b class="text-danger" id="err_coutTransport"></b></label>
-                            <input type="text" class="form-control only_float" name="coutTransport" id="coutTransport"  />
+                            <input type="text" class="form-control only_float" name="coutTransport" id="coutTransport" value="{{ bonExpedition.coutTransport }}"  />
                         </div>
 
                         <div class="form-group">
                             <label for="groupe">Groupe <b class="text-danger" id="err_groupe"></b></label>
                             <select required  class="form-control" name="groupe" id="groupe" >
-                                <option value=""></option>
                                 {% for groupe in groupes %}
-                                    <option value="{{ groupe.id }}">{{ groupe.numero }} - {{ groupe.site.emplacement }} </option>
+                                    <option value="{{ groupe.id }}" {% if groupe == bonExpedition.groupe %}selected{% endif %}>{{ groupe.numero }} - {{ groupe.site.emplacement }} </option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
-                            <textarea rows="3" class="form-control" name="motif" id="motif" ></textarea>
+                            <textarea rows="3" class="form-control" name="motif" id="motif" >{{ bonExpedition.motif }}</textarea>
                         </div>
 
                         <!-- ----------------  EMPLACEMENT ------------------ -->
 
-                        <div class="box">
+                        <div class="box" id="emplacementStock">
                             <div class="box-header with-border">
                                 <h4 class="box-title text-primary"> Emplacement de sortie en stock</h4>
                             </div>
@@ -96,7 +101,7 @@
                                     <div class="col-md-5">
                                         <div class="funkyradio">
                                             <div class="funkyradio-primary">
-                                                <input type="radio" name="emplacement" id="emplacementDepot" value="depot" checked/>
+                                                <input type="radio" name="emplacement" id="emplacementDepot" value="depot" {% if bonExpedition.depot %}checked{% endif %}/>
                                                 <label for="emplacementDepot">Dépôt</label>
                                             </div>
                                         </div>
@@ -107,7 +112,13 @@
                                                 <label for="depot">Dépôt de stockage <b class="text-danger" id="err_depot"></b></label>
                                                 <select required  class="form-control" name="depot" id="depot" >
                                                     {% for key, depot in depots %}
-                                                        <option value="{{ depot.id }}" {% if key == 0 %}selected {% endif %}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                        {% set selectDepot = '' %}
+                                                        {% if bonExpedition.depot %}
+                                                            {% if bonExpedition.depot == depot %}
+                                                                {% set selectDepot = 'selected' %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        <option value="{{ depot.id }}" {{ selectDepot }}>{{ depot.nom }} - {{ depot.abrv }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -119,7 +130,7 @@
                                     <div class="col-md-5">
                                         <div class="funkyradio">
                                             <div class="funkyradio-info">
-                                                <input type="radio" name="emplacement" id="emplacementSite" value="site" />
+                                                <input type="radio" name="emplacement" id="emplacementSite" value="site" {% if bonExpedition.site %}checked{% endif %}/>
                                                 <label for="emplacementSite">Site</label>
                                             </div>
                                         </div>
@@ -131,6 +142,12 @@
                                                     <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
                                                     <select required class="form-control" name="site" id="site">
                                                         {% for key, site in sites %}
+                                                            {% set selectSite = '' %}
+                                                            {% if bonExpedition.site %}
+                                                                {% if bonExpedition.site == site %}
+                                                                    {% set selectSite = 'selected' %}
+                                                                {% endif %}
+                                                            {% endif %}
                                                             <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
                                                         {% endfor %}
                                                     </select>
@@ -146,7 +163,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary btn-block  btn-lg"><i class="fa fa-save"></i> Créer</button>
+                                <button type="submit" class="btn btn-primary btn-block  btn-lg"><i class="fa fa-save"></i> Enregistrer</button>
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ path('sortie_index') }}" class="btn btn-default btn-block btn-lg">Annuler</a>
@@ -204,4 +221,14 @@
         });
 
     </script>
+
+{#    CACHER BOUTON SI CONFIRMER#}
+    {% if bonExpedition.etat == DEMANDE_CONFIRME %}
+        <script>
+            $('#emplacementStock').addClass('hide');
+            $('#groupe').parent().addClass('hide');
+            $('#motif').parent().addClass('hide');
+
+        </script>
+    {% endif %}
 {% endblock %}

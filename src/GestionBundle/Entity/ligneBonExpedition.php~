@@ -168,4 +168,28 @@ class ligneBonExpedition
     {
         return $this->bonExpedition;
     }
+
+    /**
+     * Set observation
+     *
+     * @param string $observation
+     *
+     * @return ligneBonExpedition
+     */
+    public function setObservation($observation)
+    {
+        $this->observation = $observation;
+
+        return $this;
+    }
+
+    /**
+     * Get observation
+     *
+     * @return string
+     */
+    public function getObservation()
+    {
+        return $this->observation;
+    }
 }

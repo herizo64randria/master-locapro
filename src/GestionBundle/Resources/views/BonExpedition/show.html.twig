@@ -66,8 +66,39 @@
                                 <td><a target="_blank" href="{{ path('groupe_show',{'id':bonExpedition.groupe.id}) }}">{{ bonExpedition.groupe.numero }} - {{ bonExpedition.groupe.site.emplacement }}</a></td>
                             </tr>
                         {% endif %}
-
+                        <tr>
+                            <td colspan="2" class="text-right"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapsePlusInfo">Voir plus</button></td>
+                        </tr>
                     </table>
+                    <div id="collapsePlusInfo" class="collapse">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Destinataire</td>
+                                <td>{{ bonExpedition.destination }}</td>
+                            </tr>
+                            <tr>
+                                <td>Adréssé à</td>
+                                <td>{{ bonExpedition.agent }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Transporteur</td>
+                                <td>
+                                    <ul>
+                                        <li>{{ bonExpedition.transporteur }}</li>
+                                        <li>{{ bonExpedition.contactTransporteur }}</li>
+                                        <li>{{ bonExpedition.vehiculeTransporteur }}</li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Coût du transport</td>
+                                <td class="text-right">{{ bonExpedition.coutTransport|number_format(2, ',', ' ') }}</td>
+                            </tr>
+                        </table>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,13 +112,13 @@
                 </li>
                 {% if bonExpedition.modifiable or (bonExpedition.etat == 'En attente de confirmation' or bonExpedition.etat == 'Demande confirmée') and bonExpedition.userCreer == app.user %}
                     <li>
-                        <a href="#" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
+                        <a href="{{ path('bonExpedition_edit', {'id' : bonExpedition.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
 
                     </li>
                 {% endif %}
                 {% if bonExpedition.etat == DEMANDE_CONFIRME %}
                     <li>
-                        <a href="#" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
+                        <a href="{{ path('bonExpedition_imprimer', {'id' : bonExpedition.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
                     </li>
                 {% endif %}
             </ul>
