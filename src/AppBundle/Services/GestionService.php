@@ -3,6 +3,7 @@
 namespace AppBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use GestionBundle\Entity\BonExpedition;
 use GestionBundle\Entity\Deplacement;
 use GestionBundle\Entity\Sortie;
 use ProduitBundle\Entity\Stock_;
@@ -95,6 +96,48 @@ class GestionService
 
 
             if($ligneSortie->getQuantite() > $quantiteEnStock)
+                $erreur ++;
+        }
+
+        return $erreur;
+    }
+
+    public  function testErreurLigneExpedition(BonExpedition $bonExpedition){
+        $erreur = 0;
+
+        $repositoryStock = $this->em->getRepository(Stock_::class);
+
+        foreach ($bonExpedition->getLigneBonExpeditions() as $ligne){
+
+            //-----------------TEST DU STOCK-----------------
+            $produit = $ligne->getProduit();
+            $stock = null;
+            if ($bonExpedition->getDepot()){
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $produit,
+                    'depot' => $bonExpedition->getDepot()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le dépôt: '.$produit->getReference());
+                }
+            }
+
+            if ($bonExpedition->getSite()){
+                $stock = $repositoryStock->findOneBy(array(
+                    'produit' => $produit,
+                    'site' => $bonExpedition->getSite()
+                ));
+
+                if(!$stock){
+                    throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le site: '.$produit->getReference());
+                }
+            }
+
+            $quantiteEnStock = $stock->getQuantite();
+
+
+            if($ligne->getQuantite() > $quantiteEnStock)
                 $erreur ++;
         }
 

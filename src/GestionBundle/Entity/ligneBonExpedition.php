@@ -38,9 +38,9 @@ class ligneBonExpedition
     /**
      * @var string
      *
-     * @ORM\Column(name="utilite", type="string", length=255, nullable=true)
+     * @ORM\Column(name="observation", type="string", length=255, nullable=true)
      */
-    private $utilite;
+    private $observation;
 
 //------------\\\\\\\////////////-----------
 
@@ -119,29 +119,7 @@ class ligneBonExpedition
         return $this->designation;
     }
 
-    /**
-     * Set utilite
-     *
-     * @param string $utilite
-     *
-     * @return ligneBonExpedition
-     */
-    public function setUtilite($utilite)
-    {
-        $this->utilite = $utilite;
 
-        return $this;
-    }
-
-    /**
-     * Get utilite
-     *
-     * @return string
-     */
-    public function getUtilite()
-    {
-        return $this->utilite;
-    }
 
     /**
      * Set produit
@@ -189,5 +167,29 @@ class ligneBonExpedition
     public function getBonExpedition()
     {
         return $this->bonExpedition;
+    }
+
+    /**
+     * Set observation
+     *
+     * @param string $observation
+     *
+     * @return ligneBonExpedition
+     */
+    public function setObservation($observation)
+    {
+        $this->observation = $observation;
+
+        return $this;
+    }
+
+    /**
+     * Get observation
+     *
+     * @return string
+     */
+    public function getObservation()
+    {
+        return $this->observation;
     }
 }

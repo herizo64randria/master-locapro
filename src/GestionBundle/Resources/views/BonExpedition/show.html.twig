@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}{{ sortie.numero }}{% endblock %}
-{% block titre_page %} <a href="{{ path('sortie_index') }}"><strong class="text-danger"><i class="fa fa-minus-circle"></i>Bon de sortie</strong></a> {% endblock %}
+{% block titre %}{{ bonExpedition.numero }}{% endblock %}
+{% block titre_page %} <a href="{{ path('bonExpedition_index') }}"><strong class="text-danger"><i class="fa fa-minus-circle"></i>Bon d'expédition</strong></a> {% endblock %}
 {% block titre_description %}
-    Les informations sur le bon de sortie
+    Les informations sur le bon d'expédition
 {% endblock %}
 {% block body %}
 
@@ -16,13 +16,13 @@
 
     {#COULEUR DE L'ETAT#}
     {% set couleurEtat = '' %}
-    {% if sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC %}
+    {% if bonExpedition.etat == DEMANDE_ENATTENTE or bonExpedition.etat == DEMANDE_ENATTENTE_REC %}
         {% set couleurEtat = 'warning' %}
     {% endif %}
-    {% if sortie.etat == DEMANDE_CONFIRME %}
+    {% if bonExpedition.etat == DEMANDE_CONFIRME %}
         {% set couleurEtat = 'success' %}
     {% endif %}
-    {% if sortie.etat == DEMANDE_REFUSER or sortie.etat == DEMANDE_CLOTURE %}
+    {% if bonExpedition.etat == DEMANDE_REFUSER or bonExpedition.etat == DEMANDE_CLOTURE %}
         {% set couleurEtat = 'danger' %}
     {% endif %}
 
@@ -38,32 +38,32 @@
                     <table class="table table-striped">
                         <tr>
                             <td>Numero:</td>
-                            <td><b>{{ sortie.numero }}</b></td>
+                            <td><b>{{ bonExpedition.numero }}</b></td>
                         </tr>
                         <tr>
                             <td>Date:</td>
-                            <td>{{ sortie.date|date('d/m/Y') }}</td>
+                            <td>{{ bonExpedition.date|date('d/m/Y') }}</td>
                         </tr>
                         <tr>
                             <td>Dépôt:</td>
-                            {% if sortie.depot %}
-                                <td><i>Dépôt</i> {{ sortie.depot.nom }}</td>
+                            {% if bonExpedition.depot %}
+                                <td><i>Dépôt</i> {{ bonExpedition.depot.nom }}</td>
                             {% endif %}
-                            {% if sortie.site %}
-                                <td><i>Site</i> {{ sortie.site.emplacement }} </td>
+                            {% if bonExpedition.site %}
+                                <td><i>Site</i> {{ bonExpedition.site.emplacement }} </td>
                             {% endif %}
                         </tr>
-                        {% if sortie.destination %}
+                        {% if bonExpedition.destination %}
                         <tr>
                             <td>Destination:</td>
-                            <td>{{ sortie.destination }}</td>
+                            <td>{{ bonExpedition.destination }}</td>
                         </tr>
                         {% endif %}
-                        {% if sortie.groupe %}
+                        {% if bonExpedition.groupe %}
                             <tr>
                                 <td>Groupe de destination :</td>
 
-                                <td><a href="{{ path('groupe_show',{'id':sortie.groupe.id}) }}">{{ sortie.groupe.numero }}</a></td>
+                                <td><a target="_blank" href="{{ path('groupe_show',{'id':bonExpedition.groupe.id}) }}">{{ bonExpedition.groupe.numero }} - {{ bonExpedition.groupe.site.emplacement }}</a></td>
                             </tr>
                         {% endif %}
 
@@ -72,56 +72,56 @@
             </div>
         </div>
         <div class="col-md-5">
-            <h3 class="text-center">Etat du B.S.: <i class="text-{{ couleurEtat }}">{{ sortie.etat }}</i></h3>
+            <h3 class="text-center">Etat du B.S.: <i class="text-{{ couleurEtat }}">{{ bonExpedition.etat }}</i></h3>
             <ul class="list-inline">
                 <li>
 
-                    <button class="btn btn-lg btn-danger hide" data-toggle="modal" id="btnEnregistrerSortie" data-target="#modalEnregistrerSortie"><i class="fa fa-save" ></i> Enregistrer</button>
+                    <button class="btn btn-lg btn-danger hide" type="button" data-toggle="modal" id="btnEnregistrerSortie" data-target="#modalEnregistrerSortie"><i class="fa fa-save" ></i> Enregistrer</button>
+
                 </li>
-                {% if sortie.modifiable or (sortie.etat == 'En attente de confirmation' or sortie.etat == 'Demande confirmée') and sortie.userCreer == app.user %}
+                {% if bonExpedition.modifiable or (bonExpedition.etat == 'En attente de confirmation' or bonExpedition.etat == 'Demande confirmée') and bonExpedition.userCreer == app.user %}
                     <li>
-                        <a href="{{ path('sortie_edit', {'id' : sortie.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
+                        <a href="#" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
 
                     </li>
                 {% endif %}
-                {% if sortie.etat == DEMANDE_CONFIRME %}
+                {% if bonExpedition.etat == DEMANDE_CONFIRME %}
                     <li>
-                        <a href="{{ path('sortie_imprimer', {'id' : sortie.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
+                        <a href="#" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
                     </li>
                 {% endif %}
             </ul>
-
-            {% if sortie.motif %}
+            {% if bonExpedition.motif %}
                 <div>
                     <p ><b>Motif:</b></p>
-                    <p>{{ sortie.motif|nl2br }}</p>
+                    <p>{{ bonExpedition.motif|nl2br }}</p>
                 </div>
             {% endif %}
         </div>
-        {% if (sortie.etat == DEMANDE_ENATTENTE or sortie.etat == DEMANDE_ENATTENTE_REC ) and app.user|ifRole('ROLE_RESP') %}
+        {% if (bonExpedition.etat == DEMANDE_ENATTENTE or bonExpedition.etat == DEMANDE_ENATTENTE_REC ) and app.user|ifRole('ROLE_RESP') %}
         <div class="col-md-4">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Menu confirmation</h3>
                 </div>
                 <!-- /.box-header -->
-                {% if app.user in sortie.userConfirmes %}
+                {% if app.user in bonExpedition.userConfirmes %}
                 <div class="box-body">
                     <p class="text-success">Vous avez confirmer cette de demande</p>
                 </div>
                 {% else %}
                 <div class="box-body">
-                    {% if sortie.userConfirmes|length > 0 %}
+                    {% if bonExpedition.userConfirmes|length > 0 %}
                         <p>Demande confirmer par:</p>
                         <ul>
-                        {% for userConfirme in sortie.userConfirmes %}
+                        {% for userConfirme in bonExpedition.userConfirmes %}
                             <li>{{ userConfirme.nom }}</li>
                         {% endfor %}
                         </ul>
 
                     {% endif %}
 
-                    <a href="{{ path('sortie_confirme', {'id' : sortie.id}) }}" id="btnConfirmerSortie" class="btn btn-lg btn-block btn-success">
+                    <a href="{{ path('bonExpedition_confirmer', {'id' : bonExpedition.id}) }}" id="btnConfirmerSortie" class="btn btn-lg btn-block btn-success">
                         <i class="fa fa-check-circle"></i> Accepter
                     </a>
                     <button type="button" class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#modalRefuserSortie">
@@ -135,7 +135,7 @@
 
             </div>
         </div>
-        {% elseif sortie.etat == DEMANDE_REFUSER and app.user|ifRole('ROLE_RESP') %}
+        {% elseif bonExpedition.etat == DEMANDE_REFUSER and app.user|ifRole('ROLE_RESP') %}
             <div class="col-md-4">
                 <div class="box">
                     <div class="box-header with-border">
@@ -143,10 +143,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <p class="text-danger">Refusé par: <b>{{ sortie.userRefuser.nom }}</b></p>
-                        <p><b class="text-danger">Motif:</b> {{ sortie.texte }}</p>
+                        <p class="text-danger">Refusé par: <b>{{ bonExpedition.userRefuser.nom }}</b></p>
+                        <p><b class="text-danger">Motif:</b> {{ bonExpedition.texte }}</p>
 
-                        <a href="{{ path('sortie_confirme', {'id' : sortie.id}) }}" id="btnConfirmerSortie" class="btn btn-lg btn-block btn-success">
+                        <a href="{{ path('bonExpedition_confirmer', {'id' : bonExpedition.id}) }}" id="btnConfirmerSortie" class="btn btn-lg btn-block btn-success">
                             <i class="fa fa-check-circle"></i> Reconfirmer
                         </a>
 
@@ -165,21 +165,21 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        {% if sortie.userConfirmes|length > 0 %}
+                        {% if bonExpedition.userConfirmes|length > 0 %}
                             <p>Demande confirmer par:</p>
                             <ul>
-                                {% for userConfirme in sortie.userConfirmes %}
+                                {% for userConfirme in bonExpedition.userConfirmes %}
                                     <li>{{ userConfirme.nom }}</li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
-                        {% if sortie.userRefuser and sortie.etat == DEMANDE_REFUSER %}
-                            <p > <b class="text-danger">Refusé par: </b>{{ sortie.userRefuser.nom }}</p>
-                            <p><b class="text-danger">Cause: </b> {{ sortie.texte }}</p>
+                        {% if bonExpedition.userRefuser and bonExpedition.etat == DEMANDE_REFUSER %}
+                            <p > <b class="text-danger">Refusé par: </b>{{ bonExpedition.userRefuser.nom }}</p>
+                            <p><b class="text-danger">Cause: </b> {{ bonExpedition.texte }}</p>
                         {% endif %}
-                        {% if sortie.userRefuser and sortie.etat == DEMANDE_CLOTURE %}
-                            <p > <b class="text-danger">Demande clôturée par: </b>{{ sortie.userRefuser.nom }}</p>
-                            <p><b class="text-danger">Cause: </b> {{ sortie.texte }}</p>
+                        {% if bonExpedition.userRefuser and bonExpedition.etat == DEMANDE_CLOTURE %}
+                            <p > <b class="text-danger">Demande clôturée par: </b>{{ bonExpedition.userRefuser.nom }}</p>
+                            <p><b class="text-danger">Cause: </b> {{ bonExpedition.texte }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <form action="{{ path('sortie_ajouterLigne', {'id' : sortie.id}) }}"  method="post" autocomplete="off" >
+                    <form action="{{ path('bonExpedition_ajouterLigne', { 'id' : bonExpedition.id }) }}"  method="post" autocomplete="off" >
                         <table class="table table-striped table-bordered" id="tableEntre">
                             <thead>
                             <tr>
@@ -204,27 +204,29 @@
                                 <th>Libellé</th>
                                 <th>Réf. produit</th>
                                 <th>Quantité</th>
-                                {% if sortie.modifiable and sortie.userCreer == app.user %}
+                                {% if bonExpedition.modifiable and bonExpedition.userCreer == app.user %}
                                     <th class="action">Action</th>
                                 {% endif %}
                             </tr>
                             </thead>
-                            <tbody>
+
                             {% set erreurLigne = 0 %}
-                            {% for ligneSortie in sortie.ligneSorties %}
+
+                            <tbody>
+                            {% for ligneBonExpedition in bonExpedition.ligneBonExpeditions %}
                                 {% set couleurLigne = '' %}
                                 {% set couleurQuantite = '' %}
 
                                 {% set qttProduit = -1 %}
-                                {% if sortie.site %}
-                                    {% set qttProduit = sortie.site|stockBySite(ligneSortie.produit) %}
+                                {% if bonExpedition.site %}
+                                    {% set qttProduit = bonExpedition.site|stockBySite(ligneBonExpedition.produit) %}
                                 {% endif %}
 
-                                {% if sortie.depot %}
-                                    {% set qttProduit = sortie.depot|stockByDepot(ligneSortie.produit) %}
+                                {% if bonExpedition.depot %}
+                                    {% set qttProduit = bonExpedition.depot|stockByDepot(ligneBonExpedition.produit) %}
                                 {% endif %}
 
-                                {% if ligneSortie.quantite > qttProduit and sortie.etat != 'Demande confirmée' %}
+                                {% if ligneBonExpedition.quantite > qttProduit and bonExpedition.etat != 'Demande confirmée' %}
                                     {% set couleurLigne = 'danger' %}
                                     {% set couleurQuantite = 'text-danger' %}
 
@@ -232,60 +234,60 @@
                                 {% endif %}
 
                                 <tr class="{{ couleurLigne }} ">
-                                    <td  class="class_produit" idProduit="{{ ligneSortie.produit.id }}" >
+                                    <td  class="class_produit" idProduit="{{ ligneBonExpedition.produit.id }}" >
                                         {% set ligneCode = '<i class="">Non-codé</i>' %}
-                                        {% set pathProduit = path('produit_show', {'id' : ligneSortie.produit.id}) %}
-                                        {% if ligneSortie.produit.code %}
-                                            {% set ligneCode = ligneSortie.produit.code %}
+                                        {% set pathProduit = path('produit_show', {'id' : ligneBonExpedition.produit.id}) %}
+                                        {% if ligneBonExpedition.produit.code %}
+                                            {% set ligneCode = ligneBonExpedition.produit.code %}
                                         {% endif %}
 
-                                        {% if ligneSortie.produit.siHuile %}
-                                            {% set pathProduit = path('huile_show', {'id' : ligneSortie.produit.id}) %}
+                                        {% if ligneBonExpedition.produit.siHuile %}
+                                            {% set pathProduit = path('huile_show', {'id' : ligneBonExpedition.produit.id}) %}
                                             {% set ligneCode = '<b class="text-warning">(H)</b> '~ligneCode %}
                                         {% endif %}
 
                                         <a href="{{ pathProduit }}" target="_blank">{{ ligneCode|raw }}</a>
                                     </td>
                                     <td>
-                                        {{ ligneSortie.designation }}
-                                        {% if ligneSortie.utilite %}
+                                        {{ ligneBonExpedition.designation }}
+                                        {% if ligneBonExpedition.observation %}
                                             <br>
-                                            - {{ ligneSortie.utilite }}
+                                            - {{ ligneBonExpedition.observation }}
                                         {% endif %}
 
                                     </td>
-                                    <td>{{ ligneSortie.produit.reference }}</td>
+                                    <td>{{ ligneBonExpedition.produit.reference }}</td>
                                     <td class="{{ couleurQuantite }} ">
-                                        {{ ligneSortie.quantite }}
+                                        {{ ligneBonExpedition.quantite }}
                                         {% if couleurLigne != '' %}
                                             <i style="font-size: 80%">(Quantité actuel insuffisante)</i>
                                         {% endif %}
                                     </td>
-                                    {% if sortie.modifiable and sortie.userCreer == app.user %}
+                                    {% if bonExpedition.modifiable and bonExpedition.userCreer == app.user %}
                                         <td class="action">
-                                            <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('sortie_supprimerLigne', { 'id' : ligneSortie.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                            <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('bonExpedition_supprimerLigne', { 'id' : ligneBonExpedition.id }) }}"><i class="fa fa-minus-circle "></i></button>
                                         </td>
                                     {% endif %}
 
                                 </tr>
                             {% endfor %}
                             </tbody>
-                            {% if sortie.modifiable and sortie.userCreer == app.user %}
+                            {% if bonExpedition.modifiable and bonExpedition.userCreer == app.user %}
 
                             <tfoot id="formLigne">
                                 <tr >
                                     <td>
                                         <div class="form-group" >
                                             <select required  class="form-control" name="produit" id="produit" >
-                                                <option value=" "></option>
+                                                <option value=""></option>
                                                 {% for produit in produits %}
                                                     {% set qttProduit = '-' %}
-                                                    {% if sortie.site %}
-                                                        {% set qttProduit = sortie.site|stockBySite(produit) %}
+                                                    {% if bonExpedition.site %}
+                                                        {% set qttProduit = bonExpedition.site|stockBySite(produit) %}
                                                     {% endif %}
 
-                                                    {% if sortie.depot %}
-                                                        {% set qttProduit = sortie.depot|stockByDepot(produit) %}
+                                                    {% if bonExpedition.depot %}
+                                                        {% set qttProduit = bonExpedition.depot|stockByDepot(produit) %}
                                                     {% endif %}
 
                                                     <option value="{{ produit.id }}"  quantite="{{ qttProduit }}">
@@ -301,7 +303,7 @@
                                     <td>
                                         <div class="form-group">
                                             <input required type="text" class="form-control" name="designation" id="designation"   />
-                                            <input  type="text" class="form-control" name="utilite" id="utilite" placeholder="Utilité" />
+                                            <input  type="text" class="form-control" name="observation" id="observation" placeholder="Observation" />
                                         </div>
                                     </td>
                                     <td>
@@ -323,17 +325,17 @@
                         </table>
 
                     </form>
-                    {% if sortie.modifiable %}
-                    <div class="center-block text-center" >
-                        <img src="{{ asset('images/loading.gif') }}" alt="" id="imgLoading">
-                    </div>
+                    {% if bonExpedition.modifiable %}
+                        <div class="center-block text-center" >
+                            <img src="{{ asset('images/loading.gif') }}" alt="" id="imgLoading">
+                        </div>
                     {% endif %}
-
                 </div>
             </div>
         </div>
     </div>
 
+{#    <-------------------------------------------------------------------------------------->#}
     {#MODALS SUPPRIMER LIGNE#}
     <div class="modal modal-danger fade" id="modalSupprimerLigne">
         <div class="modal-dialog">
@@ -368,10 +370,10 @@
                     <h4 class="modal-title text-warning">Confirmation</h4>
                 </div>
                 <div class="modal-body">
-                    <p><b class="text-danger">Attention!</b> Voulez-vous vraiment enregistrer le bon de sortie? <br> <i>L'action est irréversible</i></p>
+                    <p><b class="text-danger">Attention!</b> Voulez-vous vraiment enregistrer le bon d'expédition? <br> <i>L'action est irréversible</i></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ path('sortie_enregistrer', {'id' : sortie.id}) }}" class="btn btn-warning ">Accepter</a>
+                    <a href="{{ path('bonExpedition_enregistrer', {'id' : bonExpedition.id}) }}" class="btn btn-warning ">Accepter</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
@@ -385,13 +387,13 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-                <form action="{{ path('sortie_refuser', { 'id' : sortie.id }) }}" method="post">
+                <form action="{{ path('bonExpedition_refuser', {'id' : bonExpedition.id}) }}" method="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title text-danger">Confirmation</h4>
                     </div>
                     <div class="modal-body">
-                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande de bon de sortie? </p>
+                        <p><b class="text-danger">Attention!</b> Voulez-vous vraiment refuser la demande de bon d'expedition? </p>
                         <br>
                         <div class="form-group">
                             <label for="text">Motif du refus <b class="text-danger" id="err_text"></b></label>
@@ -420,9 +422,9 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title text-warning">Confirmation</h4>
                 </div>
-                <form action="{{ path('sortie_cloturer', { 'id' : sortie.id }) }}" method="post">
+                <form action="{{ path('bonExpedition_cloturer', { 'id' : bonExpedition.id }) }}" method="post">
                     <div class="modal-body">
-                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande de bon de sortie? <br> <i>L'action est irréversible</i></p>
+                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande de bon d'expédition'? <br> <i>L'action est irréversible</i></p>
                         <div class="form-group">
                             <label for="text">Motif du clôture <b class="text-danger" id="err_text"></b></label>
                             <textarea required type="text" class="form-control" name="text" id="text" rows="4" ></textarea>
@@ -440,9 +442,6 @@
     </div>
 
 
-
-
-{#    #}
     <script>
         produits = [];
     </script>
@@ -465,7 +464,6 @@
         $('#produit').select2();
     </script>
 
-
     {#    ----------------- SCRIPT SELECTION DU PRODUIT ----------------- #}
     <script>
         $('#produit').change(function () {
@@ -486,12 +484,13 @@
     </script>
     {#    ----------------- SCRIPT SELECTION DU PRODUIT ----------------- #}
 
-{#    BTN ANNULER LIGNE#}
+    {#    BTN ANNULER LIGNE#}
     <script>
         $('#btnAnnulerProduit').click(function () {
             $('#designation').val('');
             $('#reference').val('');
-            $('#produit').val(" ");
+            $('#produit').val("");
+            $('#observation').val("");
         });
     </script>
 
@@ -527,7 +526,7 @@
         });
     </script>
 
-{#    TEST SI QUANTITE INSUFFISANTE#}
+    {#    TEST SI QUANTITE INSUFFISANTE#}
     <script>
         $('#btnAjouterProduit').click(function () {
 
@@ -551,6 +550,7 @@
         });
     </script>
 
+
     {#    SCRIPT SUPPRIMER LIGNE #}
     <script>
         $('.btnSupprimerLigne').click(function () {
@@ -560,42 +560,40 @@
         });
     </script>
 
-{#    SCRIPT TEST ERREUR DANS LES LIGNE#}
+    {#    SCRIPT TEST ERREUR DANS LES LIGNE#}
     {% if erreurLigne > 0 %}
-    <script>
-        $('#btnEnregistrerSortie').attr('disabled', true);
-        $('#btnEnregistrerSortie').attr('title', 'Erreur! Veuillez vérifier les quantités des produits');
+        <script>
+            $('#btnEnregistrerSortie').attr('disabled', true);
+            $('#btnEnregistrerSortie').attr('title', 'Erreur! Veuillez vérifier les quantités des produits');
 
-        $('#btnEnregistrerSortie').click(function () {
-            $('#textModalDanger').text('Erreur! Veuillez vérifier les quantités des produits');
-            $('#modalDanger').modal();
-        });
-
-
-    </script>
+            $('#btnEnregistrerSortie').click(function () {
+                $('#textModalDanger').text('Erreur! Veuillez vérifier les quantités des produits');
+                $('#modalDanger').modal();
+            });
+        </script>
     {% endif %}
 
+    {% if erreurLigne > 0 and bonExpedition.etat == 'En attente de confirmation' and app.user|ifRole('ROLE_RESP') %}
+        <script>
+            $('#btnConfirmerSortie').attr('disabled', true);
+            $('#btnConfirmerSortie').attr('title', 'Erreur! Veuillez vérifier les quantités des produits');
+            $('#btnConfirmerSortie').attr('href', '#');
 
-    {% if erreurLigne > 0 and sortie.etat == 'En attente de confirmation' and app.user|ifRole('ROLE_RESP') %}
-    <script>
-        $('#btnConfirmerSortie').attr('disabled', true);
-        $('#btnConfirmerSortie').attr('title', 'Erreur! Veuillez vérifier les quantités des produits');
-        $('#btnConfirmerSortie').attr('href', '#');
 
-
-        $('#btnConfirmerSortie').click(function () {
-            $('#textModalDanger').text('Erreur! Veuillez vérifier les quantités des produits');
-            $('#modalDanger').modal();
-        });
-    </script>
+            $('#btnConfirmerSortie').click(function () {
+                $('#textModalDanger').text('Erreur! Veuillez vérifier les quantités des produits');
+                $('#modalDanger').modal();
+            });
+        </script>
     {% endif %}
 
-{#    SCRIPT AFFICHE ENREGISTRER #}
-    {% if sortie.modifiable and sortie.userCreer == app.user %}
-    <script>
-        $('#btnEnregistrerSortie').removeClass('hide');
-    </script>
+    {#    SCRIPT AFFICHE ENREGISTRER#}
+    {% if bonExpedition.modifiable and bonExpedition.userCreer == app.user %}
+        <script>
+            $('#btnEnregistrerSortie').removeClass('hide');
+        </script>
     {% endif %}
+
 
 
 {% endblock %}

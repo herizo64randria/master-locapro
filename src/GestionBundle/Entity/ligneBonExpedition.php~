@@ -38,9 +38,9 @@ class ligneBonExpedition
     /**
      * @var string
      *
-     * @ORM\Column(name="utilite", type="string", length=255, nullable=true)
+     * @ORM\Column(name="observation", type="string", length=255, nullable=true)
      */
-    private $utilite;
+    private $observation;
 
 //------------\\\\\\\////////////-----------
 
@@ -70,5 +70,102 @@ class ligneBonExpedition
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set quantite
+     *
+     * @param float $quantite
+     *
+     * @return ligneBonExpedition
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return float
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set designation
+     *
+     * @param string $designation
+     *
+     * @return ligneBonExpedition
+     */
+    public function setDesignation($designation)
+    {
+        $this->designation = $designation;
+
+        return $this;
+    }
+
+    /**
+     * Get designation
+     *
+     * @return string
+     */
+    public function getDesignation()
+    {
+        return $this->designation;
+    }
+
+
+
+    /**
+     * Set produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     *
+     * @return ligneBonExpedition
+     */
+    public function setProduit(\ProduitBundle\Entity\Produit $produit = null)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \ProduitBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Set bonExpedition
+     *
+     * @param \GestionBundle\Entity\BonExpedition $bonExpedition
+     *
+     * @return ligneBonExpedition
+     */
+    public function setBonExpedition(\GestionBundle\Entity\BonExpedition $bonExpedition)
+    {
+        $this->bonExpedition = $bonExpedition;
+
+        return $this;
+    }
+
+    /**
+     * Get bonExpedition
+     *
+     * @return \GestionBundle\Entity\BonExpedition
+     */
+    public function getBonExpedition()
+    {
+        return $this->bonExpedition;
+    }
+}

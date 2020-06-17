@@ -3,8 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="ebfb667e-8021-4104-945a-ec3d2389aa0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/security.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/security.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneBonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneBonExpedition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,24 +88,27 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Resources\views\BonExpedition" />
+      <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Controller" />
+      <recent name="C:\xampp\htdocs\locapro\src\GestionBundle\Resources\views\BonCommande" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\locapro\src\GroupeBundle\Resources\views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\locapro\src\GestionBundle\Resources\views\BonCommande" />
     </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="s doctrine:schema:update --dump-sql" />
       <command value="s doctrine:generate:entities GestionBundle" />
+      <command value="s doctrine:generate:entities ProduitBundle" />
       <command value="s doctrine:schema:update --dump-sql --force" />
     </option>
   </component>
@@ -124,7 +137,8 @@
       <workItem from="1591857605002" duration="12792000" />
       <workItem from="1591943009198" duration="124000" />
       <workItem from="1592203886333" duration="5265000" />
-      <workItem from="1592286268842" duration="2156000" />
+      <workItem from="1592286268842" duration="17110000" />
+      <workItem from="1592371794905" duration="10449000" />
     </task>
     <servers />
   </component>
@@ -136,41 +150,45 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="305" key="#Composer/0.0.1536.824@0.0.1536.824" timestamp="1590473410322" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1591872297344">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592380232908">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591872297344" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1591872297344">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592380232908" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592380732546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591872297344" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1591872297340">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592380732546" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592380732546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591872297340" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1591872297344">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592380732546" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592380732546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591872297344" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592380732546" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592380732546">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592380732546" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1590473369303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590473369303" />
-    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592207866689">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592382796385">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592207866689" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592382796385" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1591871074677">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1591871074677" />
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1591863130064">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1592380365941">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1591863130064" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592218213426">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1592380365941" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592303382556">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592218213426" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592303382556" />
   </component>
 </project>

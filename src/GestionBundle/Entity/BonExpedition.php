@@ -67,6 +67,41 @@ class BonExpedition
     /**
      * @var string
      *
+     * @ORM\Column(name="agent", type="string", length=50, nullable=true)
+     */
+    private $agent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact_agent", type="string", length=50, nullable=true)
+     */
+    private $contactAgent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="transporteur", type="string", length=100, nullable=true)
+     */
+    private $transporteur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact_transporteur", type="string", length=50, nullable=true)
+     */
+    private $contactTransporteur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicule_transporteur", type="string", length=100, nullable=true)
+     */
+    private $vehiculeTransporteur;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="motif", type="text", nullable=true)
      */
     private $motif;
@@ -141,6 +176,10 @@ class BonExpedition
     {
         $this->ligneBonExpeditions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->userConfirmes = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $this->etat = 'En cour de création';
+        $this->modifiable = true;
+        $this->dateOperation = new \DateTime();
     }
 
     /**
@@ -521,5 +560,126 @@ class BonExpedition
     public function getGroupe()
     {
         return $this->groupe;
+    }
+
+
+    /**
+     * Set agent
+     *
+     * @param string $agent
+     *
+     * @return BonExpedition
+     */
+    public function setAgent($agent)
+    {
+        $this->agent = $agent;
+
+        return $this;
+    }
+
+    /**
+     * Get agent
+     *
+     * @return string
+     */
+    public function getAgent()
+    {
+        return $this->agent;
+    }
+
+    /**
+     * Set contactAgent
+     *
+     * @param string $contactAgent
+     *
+     * @return BonExpedition
+     */
+    public function setContactAgent($contactAgent)
+    {
+        $this->contactAgent = $contactAgent;
+
+        return $this;
+    }
+
+    /**
+     * Get contactAgent
+     *
+     * @return string
+     */
+    public function getContactAgent()
+    {
+        return $this->contactAgent;
+    }
+
+    /**
+     * Set transporteur
+     *
+     * @param string $transporteur
+     *
+     * @return BonExpedition
+     */
+    public function setTransporteur($transporteur)
+    {
+        $this->transporteur = $transporteur;
+
+        return $this;
+    }
+
+    /**
+     * Get transporteur
+     *
+     * @return string
+     */
+    public function getTransporteur()
+    {
+        return $this->transporteur;
+    }
+
+    /**
+     * Set contactTransporteur
+     *
+     * @param string $contactTransporteur
+     *
+     * @return BonExpedition
+     */
+    public function setContactTransporteur($contactTransporteur)
+    {
+        $this->contactTransporteur = $contactTransporteur;
+
+        return $this;
+    }
+
+    /**
+     * Get contactTransporteur
+     *
+     * @return string
+     */
+    public function getContactTransporteur()
+    {
+        return $this->contactTransporteur;
+    }
+
+    /**
+     * Set vehiculeTransporteur
+     *
+     * @param string $vehiculeTransporteur
+     *
+     * @return BonExpedition
+     */
+    public function setVehiculeTransporteur($vehiculeTransporteur)
+    {
+        $this->vehiculeTransporteur = $vehiculeTransporteur;
+
+        return $this;
+    }
+
+    /**
+     * Get vehiculeTransporteur
+     *
+     * @return string
+     */
+    public function getVehiculeTransporteur()
+    {
+        return $this->vehiculeTransporteur;
     }
 }

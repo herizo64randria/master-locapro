@@ -68,6 +68,18 @@ class DefaultController extends Controller
             $em->persist($nombreConfirmationCommande);
         }
 
+        $nombreConfirmationExpedition = $em->getRepository('AdminBundle:NombreConfirmation')
+            ->findOneBy(array(
+                'nomDemande' => 'expedition'
+            ))
+        ;
+
+        if(!$nombreConfirmationExpedition){
+            $nombreConfirmationExpedition = new NombreConfirmation();
+            $nombreConfirmationExpedition->setNombre(1);
+            $nombreConfirmationExpedition->setNomDemande('expedition');
+            $em->persist($nombreConfirmationExpedition);
+        }
 
         $em->flush();
 

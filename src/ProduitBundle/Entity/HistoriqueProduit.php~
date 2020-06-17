@@ -61,6 +61,7 @@ class HistoriqueProduit
      * @ORM\JoinColumn(nullable=true)
      */
     private $sortie;
+
     /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\Commande")
      * @ORM\JoinColumn(nullable=true)
@@ -96,6 +97,11 @@ class HistoriqueProduit
      */
     private $appoint;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonExpedition")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $bonExpedition;
 
 
 //------------\\\\\\\////////////-----------
@@ -373,5 +379,29 @@ class HistoriqueProduit
     public function getAppoint()
     {
         return $this->appoint;
+    }
+
+    /**
+     * Set commande
+     *
+     * @param \GestionBundle\Entity\Commande $commande
+     *
+     * @return HistoriqueProduit
+     */
+    public function setCommande(\GestionBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \GestionBundle\Entity\Commande
+     */
+    public function getCommande()
+    {
+        return $this->commande;
     }
 }

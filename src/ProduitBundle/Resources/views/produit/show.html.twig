@@ -224,6 +224,16 @@
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
                                     </tr>
                                 {% endif %}
+                                {% if historiqueProduit.bonExpedition %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Bon d'expedition': N° {{ historiqueProduit.bonExpedition.numero }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                    </tr>
+                                {% endif %}
                             {% endif %}
 
                         {% endfor %}

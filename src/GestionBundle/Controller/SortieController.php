@@ -19,7 +19,7 @@ use GroupeBundle\Entity\Groupe;
 use UserBundle\Entity\HistoriqueGlobal;
 
 /**
- * Entrée controller.
+ * Sortie controller.
  *
  * @Route("/document/bon-sortie/s")
  */
@@ -182,11 +182,11 @@ class SortieController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $repositoryDepot = $em->getRepository('ProduitBundle:Depot');
-        $depots = $repositoryDepot->findBy(array('etat'=>true));
-        $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
-
+        $repositoryGroupe = $em->getRepository('GroupeBundle:Groupe');
         $repositorySite = $em->getRepository('GroupeBundle:Site');
 
+        $depots = $repositoryDepot->findBy(array('etat'=>true));
+        $groupes = $repositoryGroupe->findAll();
         $sites = $repositorySite->findBy(
             array(),
             array('emplacement' => "asc")
@@ -641,7 +641,7 @@ class SortieController extends Controller
 
         }
 
-        return $this->redirectToRoute('sortie_afficher', array('id' => $sortie->getId()));
+        throw new Exception('Erreur 404 NOT-FOUND');
 
     }
 
