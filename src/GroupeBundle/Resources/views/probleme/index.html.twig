@@ -31,6 +31,7 @@
                         <tr>
                             <th>Numero</th>
                             <th>Date signalement</th>
+                            <th>Num. Groupe</th>
                             <th>Etat</th>
                             <th>Actions</th>
                         </tr>
@@ -58,6 +59,7 @@
                             <tr>
                                 <td><a href="{{ path('probleme_show', { 'id': probleme.id }) }}">{{ probleme.numero }}</a></td>
                                 <td>{% if probleme.dateSignalement %}{{ probleme.dateSignalement|date('d/m/Y') }}{% endif %}</td>
+                                <td>{{ probleme.groupe.numero }} {{ probleme.groupe.site.emplacement }}</td>
                                 <td class="{{ couleur }}">{{ probleme.etat }}</td>
                                 <td>
                                     <a href="{{ path('probleme_show', {'id' : probleme.id}) }}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> Afficher</a>

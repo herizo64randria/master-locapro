@@ -63,6 +63,10 @@
                             <td>{% if probleme.dateSignalement %}{{ probleme.dateSignalement|date('d/m/Y') }}{% endif %}</td>
                         </tr>
                         <tr>
+                            <th>Numero Groupe</th>
+                            <td><a href="{{ path('groupe_show', {'id' : probleme.groupe.id}) }}" target="_blank" ><b>{{ probleme.groupe.numero }} - {{ probleme.groupe.site.emplacement }}</b></a></td>
+                        </tr>
+                        <tr>
                             <th>Cause:</th>
                             <td>{{ probleme.cause }}</td>
                         </tr>
@@ -253,6 +257,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title text-danger">Comptabilité</h3>
+                    <h4>Total: <b>{{ totalDepense|number_format(2, ',', ' ') }} MGA</b></h4>
 
                 </div>
                 <!-- /.box-header -->

@@ -3,10 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ebfb667e-8021-4104-945a-ec3d2389aa0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/BonExpeditionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/BonExpeditionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AppKernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/security.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/security.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalDepense.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/modalDepense.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,20 +87,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/ApiExterneBundle/Controller" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\locapro\src\GroupeBundle\Resources\views" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\stock\src\ApiExterneBundle\Controller" />
       <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Resources\views\BonExpedition" />
       <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Controller" />
       <recent name="C:\xampp\htdocs\locapro\src\GestionBundle\Resources\views\BonCommande" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\locapro\src\GroupeBundle\Resources\views" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -133,7 +139,8 @@
       <workItem from="1591943009198" duration="124000" />
       <workItem from="1592203886333" duration="5265000" />
       <workItem from="1592286268842" duration="17110000" />
-      <workItem from="1592371794905" duration="19019000" />
+      <workItem from="1592371794905" duration="19772000" />
+      <workItem from="1592458041082" duration="12358000" />
     </task>
     <servers />
   </component>
@@ -145,45 +152,53 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="305" key="#Composer/0.0.1536.824@0.0.1536.824" timestamp="1590473410322" />
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592380232908">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592464954627">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592380232908" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592397560382">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592464954627" />
+    <state x="516" y="257" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1592477641223">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592397560382" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592397560382">
+    <state x="516" y="257" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1592477641223" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592402238812">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592397560382" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592397560382">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592402238812" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592402238811">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592397560382" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592397560382">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592402238811" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592402238811">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592397560382" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592402238811" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592402238812">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592402238812" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1592396199938">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592396199938" />
-    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592397702504">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1592479612780">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592397702504" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1592479612780" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1591871074677">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1591871074677" />
+    <state x="125" y="78" width="977" height="627" key="find.popup" timestamp="1592477684844">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="125" y="78" width="977" height="627" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1592477684844" />
     <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1592397537982">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1592397537982" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592394340700">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592475289118">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592394340700" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592475289118" />
   </component>
 </project>

@@ -19,6 +19,8 @@
                     <input type="hidden" name="numero" id="numero">
                     <input type="hidden" name="lien" id="lien">
 
+                    <input type="hidden" name="numeroGroupeDepense" id="numeroGroupeDepense" value="{{ probleme.groupe.numero }}">
+
 
                 </div>
                 <div class="modal-footer">
@@ -43,14 +45,17 @@
 
 <script>
     var depenses = null;
-    $.getJSON( "http://{{ ipServeur }}/FATEMI/web/api/externe/d/liste/demande", function( data ) {
+    numeroGroupeDepense = $('#numeroGroupeDepense').val();
+    $.getJSON( "http://{{ ipServeur }}/IBC/web/api/externe/d/num/groupe/"+numeroGroupeDepense, function( data ) {
 
         depenses = data;
         console.log(depenses);
 
         selectDepense = $('#depense');
         $.each(depenses, function (key, depense) {
-            option = "<option value='"+ depense.id +"'>"+ depense.numero +" / "+ depense.total +"</option>";
+            totalDepense = numeral(depense.total)
+            totalDepense = totalDepense.format(myFormat);
+            option = "<option value='"+ depense.id +"'>"+ depense.numero +" | montant: "+ totalDepense +"MGA</option>";
 
             selectDepense.append(option);
 
@@ -66,7 +71,7 @@
             $.each(depenses, function (key, depense) {
 
                 if(depense.id == idDepense){
-                    $('#montant').val(depense.montant);
+                    $('#montant').val(depense.total);
                     $('#numero').val(depense.numero);
                     $('#lien').val(depense.lien);
                 }

@@ -196,7 +196,6 @@ class ProblemeController extends Controller
             'probleme' => $probleme,
             'missions' => $missions,
         ));
-
     }
 
 

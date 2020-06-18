@@ -1,7 +1,10 @@
 
 
-
 #-------------MES ROUTES-------------
+api_externe:
+  resource: "@ApiExterneBundle/Controller/"
+  type:     annotation
+  prefix:   /apipr
 
 groupe:
     resource: "@GroupeBundle/Controller/"
