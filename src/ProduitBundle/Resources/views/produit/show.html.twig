@@ -186,6 +186,16 @@
                                         <td class="success"></td>
                                     </tr>
                                 {% endif %}
+                                {% if historiqueProduit.bonExpedition %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            bon d'expédition: N° {{ historiqueProduit.bonExpedition.numero }}</td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
+                                        <td class="text-center success">{{ historiqueProduit.quantite }}</td>
+                                        <td class="success"></td>
+                                    </tr>
+                                {% endif %}
                             {% endif %}
 
 

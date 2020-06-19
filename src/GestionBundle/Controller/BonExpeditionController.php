@@ -152,6 +152,43 @@ class BonExpeditionController extends Controller
             $em->persist($stock);
 
             //------------------------------------------------
+
+            //---------------------------  ENTRER DANS LE STOCK  -------------------------------
+
+            $historiqueProduit1 = new HistoriqueProduit();
+
+            $historiqueProduit1->setType('credit');
+            $historiqueProduit1->setProduit($ligne->getProduit());
+            $historiqueProduit1->setBonExpedition($bonExpedition);
+            $historiqueProduit1->setDate($bonExpedition->getDate());
+            $historiqueProduit1->setQuantite($ligne->getQuantite());
+
+            //DESTINATION
+            $historiqueProduit1->setSite($bonExpedition->getSiteDestination());
+
+            $em->persist($historiqueProduit1);
+
+//            MIS A JOUR DU STOCK
+            $stockDestination = null;
+
+            $stockDestination = $repositoryStock->findOneBy(array(
+                'produit' => $historiqueProduit1->getProduit(),
+                'site' => $bonExpedition->getSiteDestination()
+            ));
+
+            if (!$stockDestination){
+                $stockDestination = new Stock_();
+                $stockDestination->setQuantite(0);
+                $stockDestination->setProduit($historiqueProduit1->getProduit());
+                $stockDestination->setSite($bonExpedition->getSiteDestination());
+            }
+
+            $quantite1 = $stockDestination->getQuantite() + $historiqueProduit1->getQuantite();
+            $stockDestination->setQuantite($quantite1);
+
+            $em->persist($stockDestination);
+
+            //-----------------------------/// ENTRER DANS LE STOCK ///-----------------------------
         }
 
         $em->flush();
@@ -220,7 +257,13 @@ class BonExpeditionController extends Controller
             {
                 $groupe = $repositoryGroupe->findOneBy(array('id'=>$_POST['groupe']));
                 $bonExpedition->setGroupe($groupe);
+
+                if(!$groupe)
+                    throw new Exception('Vérifier le groupe');
+
+                $bonExpedition->setSiteDestination($groupe->getSite());
             }
+
             $bonExpedition->setDate($date);
             $bonExpedition->setNumero($_POST['numero']);
             $bonExpedition->setUserCreer($this->getUser());
@@ -292,8 +335,7 @@ class BonExpeditionController extends Controller
 
         ));
 
-
-
+        
     }
 
     /**
@@ -618,6 +660,11 @@ class BonExpeditionController extends Controller
             {
                 $groupe = $repositoryGroupe->findOneBy(array('id'=>$_POST['groupe']));
                 $bonExpedition->setGroupe($groupe);
+
+                if(!$groupe)
+                    throw new Exception('Vérifier le groupe');
+
+                $bonExpedition->setSiteDestination($groupe->getSite());
             }
             $bonExpedition->setDate($date);
             $bonExpedition->setUserCreer($this->getUser());

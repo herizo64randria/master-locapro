@@ -146,6 +146,12 @@ class BonExpedition
     private $site;
 
     /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $siteDestination;
+
+    /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", cascade={"persist"})
      */
     private $userConfirmes;
@@ -155,7 +161,6 @@ class BonExpedition
      * @ORM\JoinColumn(nullable=true)
      */
     private $userRefuser;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Groupe")
@@ -712,5 +717,29 @@ class BonExpedition
     public function getCoutTransport()
     {
         return $this->coutTransport;
+    }
+
+    /**
+     * Set siteDestination
+     *
+     * @param \GroupeBundle\Entity\Site $siteDestination
+     *
+     * @return BonExpedition
+     */
+    public function setSiteDestination(\GroupeBundle\Entity\Site $siteDestination = null)
+    {
+        $this->siteDestination = $siteDestination;
+
+        return $this;
+    }
+
+    /**
+     * Get siteDestination
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSiteDestination()
+    {
+        return $this->siteDestination;
     }
 }
