@@ -128,6 +128,29 @@
                     <p>{{ bonExpedition.motif|nl2br }}</p>
                 </div>
             {% endif %}
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-file"></i> Pièce jointe</h3><br>
+                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#modalPieceJointe"><i class="fa fa-plus"></i> Ajouter</button>
+                </div>
+                <!-- /.box-header -->
+
+                <div class="box-body">
+                    <ul>
+                        {% for piece in bonExpedition.pjBonExpeditions %}
+                            <li>
+                                <a href="{{ asset('document/'~piece.url) }}" target="_blank">{{ piece.nom }} <i class="fa fa-download"></i></a>
+                                {% if piece.userCreer == app.user or app.user|ifRole('ROLE_RESP') %}
+                                    -|- <a href="{{ path('pjGestion_supprimer', {'id' : piece.id}) }}" onclick="return confirm('Voulez-vous supprimer?')" class="btn btn-danger btn-xs"><i class="fa fa-minus-circle"></i></a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+            </div>
         </div>
         {% if (bonExpedition.etat == DEMANDE_ENATTENTE or bonExpedition.etat == DEMANDE_ENATTENTE_REC ) and app.user|ifRole('ROLE_RESP') %}
         <div class="col-md-4">
@@ -471,6 +494,11 @@
 
         </div>
     </div>
+
+    {#    MODAL PIECE JOINTE#}
+    {% set typeDoc = 'expedition' %}
+    {% set idDoc = bonExpedition.id %}
+    {% include '@Gestion/pieceJointe/modalPieceJointe.html.twig' %}
 
 
     <script>

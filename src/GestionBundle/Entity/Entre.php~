@@ -115,6 +115,11 @@ class Entre
         * @ORM\JoinColumn(nullable=true)
         */
     private $commande;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\PieceJointe", mappedBy="entre")
+     */
+    private $pjEntres; // Notez le « s »,
 //------------------------------------------////////////////////
 
 
@@ -517,5 +522,39 @@ class Entre
     public function getCommande()
     {
         return $this->commande;
+    }
+
+    /**
+     * Add pjEntre
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjEntre
+     *
+     * @return Entre
+     */
+    public function addPjEntre(\GestionBundle\Entity\PieceJointe $pjEntre)
+    {
+        $this->pjEntres[] = $pjEntre;
+
+        return $this;
+    }
+
+    /**
+     * Remove pjEntre
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjEntre
+     */
+    public function removePjEntre(\GestionBundle\Entity\PieceJointe $pjEntre)
+    {
+        $this->pjEntres->removeElement($pjEntre);
+    }
+
+    /**
+     * Get pjEntres
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPjEntres()
+    {
+        return $this->pjEntres;
     }
 }

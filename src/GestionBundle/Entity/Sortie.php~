@@ -120,6 +120,11 @@ class Sortie
      */
     private $groupe;
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\PieceJointe", mappedBy="sortie")
+     */
+    private $pjSorties; // Notez le « s »,
+
 
 //------------------------------------------////////////////////
 
@@ -526,5 +531,39 @@ class Sortie
     public function getGroupe()
     {
         return $this->groupe;
+    }
+
+    /**
+     * Add pjSorty
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjSorty
+     *
+     * @return Sortie
+     */
+    public function addPjSorty(\GestionBundle\Entity\PieceJointe $pjSorty)
+    {
+        $this->pjSorties[] = $pjSorty;
+
+        return $this;
+    }
+
+    /**
+     * Remove pjSorty
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjSorty
+     */
+    public function removePjSorty(\GestionBundle\Entity\PieceJointe $pjSorty)
+    {
+        $this->pjSorties->removeElement($pjSorty);
+    }
+
+    /**
+     * Get pjSorties
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPjSorties()
+    {
+        return $this->pjSorties;
     }
 }

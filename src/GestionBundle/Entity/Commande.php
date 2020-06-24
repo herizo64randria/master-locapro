@@ -96,6 +96,11 @@ class Commande
      * @ORM\JoinColumn(nullable=true)
      */
     private $fournisseur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\PieceJointe", mappedBy="commande")
+     */
+    private $pjCommandes; // Notez le « s »,
 //------------------------------------------////////////////////
     /**
      * Get id
@@ -423,5 +428,39 @@ class Commande
     public function getTva()
     {
         return $this->tva;
+    }
+
+    /**
+     * Add pjCommande
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjCommande
+     *
+     * @return Commande
+     */
+    public function addPjCommande(\GestionBundle\Entity\PieceJointe $pjCommande)
+    {
+        $this->pjCommandes[] = $pjCommande;
+
+        return $this;
+    }
+
+    /**
+     * Remove pjCommande
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjCommande
+     */
+    public function removePjCommande(\GestionBundle\Entity\PieceJointe $pjCommande)
+    {
+        $this->pjCommandes->removeElement($pjCommande);
+    }
+
+    /**
+     * Get pjCommandes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPjCommandes()
+    {
+        return $this->pjCommandes;
     }
 }

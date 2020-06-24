@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fc7a073a-a25a-485c-876b-3e335534a048" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/ProblemeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Commande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Commande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,15 +83,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GestionBundle/Resources/views/pieceJointe" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Resources\views\pieceJointe" />
+      <recent name="C:\xampp\htdocs\stock\src\GestionBundle\Controller" />
       <recent name="C:\xampp\htdocs\stock\src\GroupeBundle\Resources\views\probleme" />
     </key>
   </component>
@@ -108,7 +120,7 @@
       <workItem from="1592546056896" duration="6880000" />
       <workItem from="1592560892285" duration="1182000" />
       <workItem from="1592805593748" duration="254000" />
-      <workItem from="1592989841126" duration="1818000" />
+      <workItem from="1592989841126" duration="7705000" />
     </task>
     <servers />
   </component>
@@ -120,26 +132,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="305" key="#Composer/0.0.1536.824@0.0.1536.824" timestamp="1592485385861" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592998008956">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592998008956" />
     <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1592551598356">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592551598356" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1592555341828">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593001072972">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592555341828" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1592555341828">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593001072972" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1593001072957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592555341828" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1592555341827">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593001072957" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1593001072957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592555341827" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1592555341828">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593001072957" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1593001072972">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592555341828" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593001072972" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1592551610475">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -152,13 +168,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="613" y="314" key="SymfonyPathDialog/0.0.1536.824@0.0.1536.824" timestamp="1592551601323" />
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1592552973621">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1592999289317">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1592552973621" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1592990390379">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1592999289317" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1593000961435">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592990390379" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1593000961435" />
   </component>
 </project>

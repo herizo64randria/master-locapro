@@ -116,6 +116,11 @@ class Deplacement
      * @ORM\JoinColumn(nullable=true)
      */
     private $userRefuser;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\PieceJointe", mappedBy="deplacement")
+     */
+    private $pjDeplacements; // Notez le « s »,
 //------------------------------------------////////////////////
 
     /**
@@ -519,5 +524,39 @@ class Deplacement
     public function getUserRefuser()
     {
         return $this->userRefuser;
+    }
+
+    /**
+     * Add pjDeplacement
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjDeplacement
+     *
+     * @return Deplacement
+     */
+    public function addPjDeplacement(\GestionBundle\Entity\PieceJointe $pjDeplacement)
+    {
+        $this->pjDeplacements[] = $pjDeplacement;
+
+        return $this;
+    }
+
+    /**
+     * Remove pjDeplacement
+     *
+     * @param \GestionBundle\Entity\PieceJointe $pjDeplacement
+     */
+    public function removePjDeplacement(\GestionBundle\Entity\PieceJointe $pjDeplacement)
+    {
+        $this->pjDeplacements->removeElement($pjDeplacement);
+    }
+
+    /**
+     * Get pjDeplacements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPjDeplacements()
+    {
+        return $this->pjDeplacements;
     }
 }
