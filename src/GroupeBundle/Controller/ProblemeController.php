@@ -377,5 +377,44 @@ class ProblemeController extends Controller
         
     }
 
+    /**
+     * Lists all probleme entities.
+     *
+     * @Route("/modifier{id}/500", name="probleme_edit")
+     *
+     */
+    public function editAction(Request $request, Probleme $probleme){
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->getMethod() == "POST"){
+
+            $probleme->setCause($_POST['motif']);
+            $probleme->setDescription($_POST['description']);
+
+            $em->persist($probleme);;
+
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Modification du problème'.$probleme->getNumero());
+            $historiqueGlobal->setLien($this->generateUrl('probleme_show', array('id' => $probleme->getId())));
+
+            $em->persist($historiqueGlobal);
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            $em->flush();
+
+            return $this->redirectToRoute('probleme_show', array('id' => $probleme->getId()));
+        }
+
+        return $this->render('@Groupe/probleme/edit.html.twig', array(
+            'numero' => $probleme->getNumero(),
+            'probleme' => $probleme
+        ));
+    }
+
 
 }

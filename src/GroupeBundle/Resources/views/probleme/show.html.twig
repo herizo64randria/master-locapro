@@ -97,7 +97,13 @@
                     <hr>
                     <div>
                         {% if app.user == probleme.userCreer %}
-                            <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#modalProblemePhoto"><i class="fa fa-plus"></i> Ajouter une pièce jointe</button>
+                            <ul class="list-inline">
+                                <li><button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalProblemePhoto"><i class="fa fa-plus"></i> Ajouter une pièce jointe</button></li>
+                                <li>
+                                    <a href="{{ path('probleme_edit', {'id' : probleme.id}) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                                </li>
+                            </ul>
+
                         {% endif %}
                     </div>
                 </div>
