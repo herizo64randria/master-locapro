@@ -98,6 +98,7 @@
                             <tr>
                                 {% if heureMarche.datedebut|date('Ymd') == heureMarche.dateFin|date('Ymd') %}
                                     <td colspan="2" class="text-center"><strong class="hide">{{ heureMarche.datedebut|date('Ymd') }}</strong>{{ heureMarche.datedebut|date('d/m/Y') }}</td>
+                                    <td style="display: none"></td>
                                 {% else %}
                                     <td><strong class="hide">{{ heureMarche.datedebut|date('Ymd') }}</strong>{{ heureMarche.datedebut|date('d/m/Y') }}</td>
                                     <td class="text-center">{{ heureMarche.dateFin|date('d/m/Y') }}</td>
