@@ -28,6 +28,8 @@ class GroupeExtension extends \Twig_Extension
             new \Twig_SimpleFilter('heureMarcheDate', array($this, 'heureMarcheDateFunction')),
             new \Twig_SimpleFilter('typeFile', array($this, 'getTypeFile')),
             new \Twig_SimpleFilter('origineNum', array($this, 'getOrigineNum')),
+            new \Twig_SimpleFilter('appointByDate', array($this, 'getEtatAppointByDate')),
+            new \Twig_SimpleFilter('vidangeByDate', array($this, 'getEtatVidangeByDate')),
         );
     }
 
@@ -91,6 +93,44 @@ class GroupeExtension extends \Twig_Extension
         ;
 
         return $h;
+    }
+
+    public function getEtatAppointByDate(\DateTime $dateTime, Groupe $groupe){
+        $respositoryAppoint = $this->em->getRepository('GroupeBundle:Appoint');
+
+        $appoints = $respositoryAppoint->findBy(array(
+            'groupe' => $groupe
+        ));
+
+        if (count($appoints) < 0)
+            return false;
+
+        $testDate = $dateTime->format('dmY');
+        foreach ($appoints as $appoint){
+            if ($appoint->getDate()->format('dmY') == $testDate)
+                return $appoint;
+        }
+
+        return false;
+    }
+
+    public function getEtatVidangeByDate(\DateTime $dateTime, Groupe $groupe){
+        $respositoryVidange = $this->em->getRepository('GroupeBundle:Vidange');
+
+        $vidanges = $respositoryVidange->findBy(array(
+            'groupe' => $groupe
+        ));
+
+        if (count($vidanges) < 0)
+            return false;
+
+        $testDate = $dateTime->format('dmY');
+        foreach ($vidanges as $vidange){
+            if ($vidange->getDate()->format('dmY') == $testDate)
+                return $vidange;
+        }
+
+        return false;
     }
 
     function getTypeFile($nom){
