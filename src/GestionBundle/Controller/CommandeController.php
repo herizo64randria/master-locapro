@@ -450,6 +450,8 @@ class CommandeController extends Controller
 
         return $this->redirectToRoute('commande_afficher', array('id' => $commande->getId()));
     }
+
+
     private function demandeConfirme(Commande $commande, ObjectManager $em){
         //        //Initialisation$repositoryStock = $em->getRepository('ProduitBundle:Stock_');
 
@@ -479,9 +481,8 @@ class CommandeController extends Controller
         $commande->setModifiable(false);
         $em->persist($commande);
 
-        $em->flush();
-
     }
+
     /**
      * nouveau entity.
      *
