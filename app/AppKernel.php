@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new AdminBundle\AdminBundle(),
             new GroupeBundle\GroupeBundle(),
             new ApiExterneBundle\ApiExterneBundle(),
+            new RessourceHumaine\EmployeBundle\RH_EmployeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

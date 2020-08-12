@@ -1,6 +1,12 @@
 
-
 #-------------MES ROUTES-------------
+
+rh.employe:
+  resource: "@RH_EmployeBundle/Controller/"
+  type:     annotation
+  prefix:   /GRH
+
+
 api_externe:
   resource: "@ApiExterneBundle/Controller/"
   type:     annotation

@@ -1,0 +1,4 @@
+services:
+#    rh.employe.example:
+#        class: RessourceHumaine\EmployeBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
