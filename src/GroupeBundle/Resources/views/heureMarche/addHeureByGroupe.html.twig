@@ -38,12 +38,27 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="input-group " >
-                                <label for="heure" class="input-group-addon control-label">Heure de marche:</label>
-                                <input class="form-control only_float"  type="text" id="heure"  name="heure">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group " >
+                                        <label for="heure" class="input-group-addon control-label">Heure de marche:</label>
+                                        <input class="form-control only_float"  type="text" id="heure"  name="heure">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label for="minute" class="input-group-addon control-label">Minute: <b class="text-danger" id="err_minute"></b></label>
+                                        <input type="text" class="form-control only_float" name="minute" id="minute"  />
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+
+
 
                         <input type="hidden" name="puissance" value="" id="puissance" class="form-control only_float">
 

@@ -16,21 +16,26 @@ class GroupeService
         );
 
         $heures = 0;
-        $puissances = 0;
+        $minutes = 0;
 
         foreach ($listeHeures as $listeHeure){
-
-
             $heures = $heures+ $listeHeure->getHeure();
-
-
+            $minutes = $minutes + $listeHeure->getMinute();
         }
 
         if ($groupe->getPremierDemarrage()){
             $heures += $groupe->getPremierDemarrage();
         }
 
-        $groupe->setHeureMarche($heures);
+        $minutes = ($heures * 60) + $minutes;
+
+        $valueHm = array(
+            'heure' => intval($minutes / 60),
+            'minute' => fmod($minutes, 60)
+        );
+
+        $groupe->setHeureMarche($valueHm['heure']);
+        $groupe->setMinuteMarche($valueHm['minute']);
         $em->persist($groupe);
 
     }

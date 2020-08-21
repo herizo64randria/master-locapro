@@ -21,9 +21,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fc7a073a-a25a-485c-876b-3e335534a048" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AppKernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Services/GroupeService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Services/GroupeService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Twig/Extension/GroupeExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Twig/Extension/GroupeExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeHeureMarcheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/GroupeHeureMarcheController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/HeureMarche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/HeureMarche.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/detailHeureGroupe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/detailHeureGroupe.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/GroupeHeureMarche/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/heureMarche/addHeureByGroupe.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,10 +117,11 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="s doctrine:generate:entities" />
       <command value="s doctrine:generate:entities GestionBundle" />
-      <command value="s doctrine:schema:update --dump-sql --force" />
       <command value="s doctrine:database:create" />
+      <command value="s doctrine:generate:entities" />
+      <command value="s doctrine:generate:entities GroupeBundle " />
+      <command value="s doctrine:schema:update --dump-sql --force" />
     </option>
   </component>
   <component name="SvnConfiguration">
@@ -142,7 +150,11 @@
       <workItem from="1593776008283" duration="1488000" />
       <workItem from="1593778186494" duration="193000" />
       <workItem from="1597213084008" duration="756000" />
-      <workItem from="1597214928334" duration="1547000" />
+      <workItem from="1597214928334" duration="2849000" />
+      <workItem from="1597386595448" duration="1523000" />
+      <workItem from="1597644113973" duration="6250000" />
+      <workItem from="1597816572325" duration="11398000" />
+      <workItem from="1597990067717" duration="6275000" />
     </task>
     <servers />
   </component>
@@ -174,45 +186,49 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592998008956" />
-    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1592551598356">
+    <state x="645" y="341" key="#com.jetbrains.php.framework.ui.FailedToParseDialog" timestamp="1597819543550">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592551598356" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593772345977">
+    <state x="645" y="341" key="#com.jetbrains.php.framework.ui.FailedToParseDialog/0.0.1536.824@0.0.1536.824" timestamp="1597819543550" />
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1597220727601">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593772345977" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1593772345977">
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597220727601" />
+    <state width="1493" height="245" key="GridCell.Tab.0.bottom" timestamp="1597840364720">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593772345977" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1593772345977">
+    <state width="1493" height="245" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597840364720" />
+    <state width="1493" height="245" key="GridCell.Tab.0.center" timestamp="1597840364720">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593772345977" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1593772345977">
+    <state width="1493" height="245" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597840364720" />
+    <state width="1493" height="245" key="GridCell.Tab.0.left" timestamp="1597840364720">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593772345977" />
+    <state width="1493" height="245" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597840364720" />
+    <state width="1493" height="245" key="GridCell.Tab.0.right" timestamp="1597840364720">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="245" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597840364720" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1592551610475">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592551610475" />
-    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1593778318594">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1598006198101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1593778318594" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1598006198101" />
     <state x="613" y="314" key="SymfonyPathDialog" timestamp="1592551601323">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="613" y="314" key="SymfonyPathDialog/0.0.1536.824@0.0.1536.824" timestamp="1592551601323" />
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1593765513629">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1597825424330">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1593765513629" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1593000961435">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1597825424330" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1597997767863">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1593000961435" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1597997767863" />
   </component>
 </project>

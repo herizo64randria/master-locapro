@@ -48,6 +48,14 @@ class Groupe
      * @ORM\Column(name="heuretotale", type="float", nullable=true)
      */
     private $heureMarche;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="minutetotal", type="float", nullable=true)
+     */
+    private $minuteMarche;
+
     /**
      * @var float
      *
@@ -614,5 +622,29 @@ class Groupe
     public function getListepieces()
     {
         return $this->listepieces;
+    }
+
+    /**
+     * Set minuteMarche
+     *
+     * @param float $minuteMarche
+     *
+     * @return Groupe
+     */
+    public function setMinuteMarche($minuteMarche)
+    {
+        $this->minuteMarche = $minuteMarche;
+
+        return $this;
+    }
+
+    /**
+     * Get minuteMarche
+     *
+     * @return float
+     */
+    public function getMinuteMarche()
+    {
+        return $this->minuteMarche;
     }
 }

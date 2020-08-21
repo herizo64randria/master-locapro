@@ -30,6 +30,7 @@ class GroupeExtension extends \Twig_Extension
             new \Twig_SimpleFilter('origineNum', array($this, 'getOrigineNum')),
             new \Twig_SimpleFilter('appointByDate', array($this, 'getEtatAppointByDate')),
             new \Twig_SimpleFilter('vidangeByDate', array($this, 'getEtatVidangeByDate')),
+            new \Twig_SimpleFilter('affichageHm', array($this, 'affichageHeureMinute')),
         );
     }
 
@@ -163,6 +164,42 @@ class GroupeExtension extends \Twig_Extension
      public function getOrigineNum($numero){
         $num = "$numero[10]$numero[11]$numero[4]$numero[5]$numero[6]";
         return $num;
+    }
+
+    public function affichageHeureMinute($heure_, $minute){
+
+        $h = $heure_;
+        $m = $minute;
+
+        if($h <= 0 and $m <= 0)
+            return '-';
+
+        if (is_float($heure_) or is_float($minute)){
+            $hTotal = $heure_;
+            $hMarche = intval($hTotal);
+            $restehTotal = $hTotal-$hMarche;
+
+            $mTotal = intval($minute);
+            $mTotal = $mTotal + ($hMarche * 60) + ($restehTotal * 60);
+
+            $h = intval($mTotal / 60);
+            $m = intval(fmod($mTotal, 60));
+
+        }
+
+        if($h < 10)
+            $h = "0".$heure_;
+
+        if ($m < 10)
+            $m = "0".$minute;
+
+        if($h == 0 or $h == null)
+            $h = "00";
+
+        if ($m == 0 or $m == null)
+            $m = "00";
+
+        return $h."h".$m."m";
     }
 
     /**

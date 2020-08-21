@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use AdminBundle\Entity\NombreConfirmation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
@@ -97,5 +99,20 @@ class DefaultController extends Controller
         return $this->render('default/accueil.html.twig', array(
 
         ));
+    }
+
+    /**
+     * @Route("/montest", name="mon_test")
+     */
+    public function montestAction(Request $request)
+    {
+        $test = 3.5;
+
+        if (is_float($test)){
+            return new Response('FL');
+        }
+
+
+        return new Response(var_dump($test));
     }
 }

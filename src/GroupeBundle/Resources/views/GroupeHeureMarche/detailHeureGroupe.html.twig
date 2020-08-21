@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <th>Heure de marche:</th>
-                                <td>{{ groupe.heureMarche|number_format(0, ' ', ' ') }}</td>
+                                <td>{{ groupe.heureMarche|affichageHm(groupe.minuteMarche) }}</td>
                             </tr>
 
                             </tbody>
@@ -106,7 +106,7 @@
 
                                 <td class="text-center" >
 
-                                    {{ heureMarche.heure}}
+                                    {{ heureMarche.heure|affichageHm(heureMarche.minute) }}
                                 </td>
                                 <td class="text-center">
                                     {{ heureMarche.production }}

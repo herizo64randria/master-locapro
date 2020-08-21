@@ -48,6 +48,14 @@ class Groupe
      * @ORM\Column(name="heuretotale", type="float", nullable=true)
      */
     private $heureMarche;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="minutetotal", type="float", nullable=true)
+     */
+    private $minuteMarche;
+
     /**
      * @var float
      *

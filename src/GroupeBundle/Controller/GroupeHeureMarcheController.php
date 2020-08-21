@@ -243,7 +243,33 @@ class GroupeHeureMarcheController extends Controller
             $heuremarche->setGroupe($groupe);
             $heuremarche->setDatedebut($dated);
             $heuremarche->setDatefin($datef);
-            $heuremarche->setHeure($_POST['heure']);
+
+
+            //---------------------------  HEURE ET MINUTE MARCHE  -------------------------------
+
+            $heuremarche->setHeure(0);
+
+            $hTotal = $_POST['heure'];
+            $hMarche = intval($hTotal);
+            $restehTotal = $hTotal-$hMarche;
+
+            $mTotal = intval($_POST['minute']);
+            $mTotal = $mTotal + ($hMarche * 60) + ($restehTotal * 60);
+
+            if ($mTotal <= 0){
+                return new Exception('Vérifier l\'heure de marche');
+            }
+
+            $valueHm = array(
+                'heure' => intval($mTotal / 60),
+                'minute' => fmod($mTotal, 60)
+            );
+
+            $heuremarche->setHeure($valueHm['heure']);
+            $heuremarche->setMinute($valueHm['minute']);
+
+            //-----------------------------/// HEURE ET MINUTE MARCHE ///-----------------------------
+
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setDate($date);
             $historiqueGroupe->setHeureMarche($heuremarche);

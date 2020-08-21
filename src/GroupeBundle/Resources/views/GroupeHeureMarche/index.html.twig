@@ -2,7 +2,7 @@
 
 {% block titre %}Liste des heures de marches{% endblock %}
 {% block titre_page %}Liste des heures de marches{% endblock %}
-{% block titre_description %}<br>Liste des heures de marches</br>{% endblock %}
+{% block titre_description %}<br>Liste des heures de marches{% endblock %}
 {% block body %}
 
     <div class="">
@@ -37,10 +37,11 @@
                                 </td>
                                 <td>{{ groupe.marque }}</td>
                                 <td>{{ groupe.site.emplacement }}</td>
-                                <td >
-                                    {{ groupe.heureMarche }}
+                                <td class="text-right">
+                                    {{ groupe.heureMarche|affichageHm(groupe.minuteMarche) }}
                                 </td>
-                                <td><a class="btn btn-default" href="{{  path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id})  }}">
+                                <td>
+                                    <a class="btn btn-default" href="{{  path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id})  }}">
                                         <i class="fa fa-info-circle"></i> Détails
                                     </a>
                                 </td>

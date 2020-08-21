@@ -77,6 +77,13 @@ class HeureMarche
      */
     private $csp;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="minute", type="float")
+     */
+    private $minute;
+
 
    // ------------------- RELATION ---------------------
 
@@ -421,5 +428,29 @@ class HeureMarche
     public function getVidange()
     {
         return $this->vidange;
+    }
+
+    /**
+     * Set minute
+     *
+     * @param float $minute
+     *
+     * @return HeureMarche
+     */
+    public function setMinute($minute)
+    {
+        $this->minute = $minute;
+
+        return $this;
+    }
+
+    /**
+     * Get minute
+     *
+     * @return float
+     */
+    public function getMinute()
+    {
+        return $this->minute;
     }
 }
