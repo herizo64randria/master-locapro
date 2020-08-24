@@ -24,13 +24,29 @@
                     <th>Code</th>
                     <th>Designation</th>
                     <th>Prixachat</th>
-                    <th>Stocktotal</th>
-                    <th>Alert</th>
+                    <th>Stock Dépôt</th>
+                    <th>Stock Site</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for huile in huiles %}
+
+                    {% set stockDepot = 0 %}
+                    {% set stockSite = 0 %}
+
+                    {% for depot in depots %}
+                        {% if depot|stockByDepot(huile) != '-' %}
+                            {% set stockDepot = stockDepot + (depot|stockByDepot(huile)) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for site in sites %}
+                        {% if site|stockBySite(huile) != '-' %}
+                            {% set stockSite = stockSite + (site|stockBySite(huile)) %}
+                        {% endif %}
+                    {% endfor %}
+
                     <tr>
                         <td><a href="{{ path('huile_show', { 'id': huile.id }) }}">
                                 {% if huile.huileParDefaut %}
@@ -40,8 +56,23 @@
                                 {% if not huile.code %}- {% endif %}</a></td>
                         <td>{{ huile.designation }}</td>
                         <td>{{ huile.prixAchat }}</td>
-                        <td>{{ huile.stockTotal }}</td>
-                        <td>{{ huile.alert }}</td>
+
+                        <td class="text-right">
+                            {% if stockDepot <= 0 %}
+                                -
+                            {% else %}
+                                {{ stockDepot }}
+                            {% endif %}
+                        </td>
+
+                        <td class="text-right">
+                            {% if stockSite <= 0 %}
+                                -
+                            {% else %}
+                                {{ stockSite }}
+                            {% endif %}
+                        </td>
+
                         <td>
                             <a href="{{ path('huile_show', { 'id': huile.id }) }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle"></i> Info</a>
                             {% if is_granted('ROLE_HUILE') %}

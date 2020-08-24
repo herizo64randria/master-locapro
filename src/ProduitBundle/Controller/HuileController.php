@@ -30,8 +30,13 @@ class HuileController extends Controller
             'siHuile' => true
         ));
 
+        $sites = $em->getRepository('GroupeBundle:Site')->findAll();
+        $depots = $em->getRepository('ProduitBundle:Depot')->findAll();
+
         return $this->render('@Produit/huile/index.html.twig', array(
             'huiles' => $huiles,
+            'sites' => $sites,
+            'depots' => $depots
         ));
     }
 

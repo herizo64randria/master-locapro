@@ -169,7 +169,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="box">
 
                 <div class="box-header with-border">
@@ -177,7 +177,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="tableHistorique">
                         <thead>
                             <tr>
                                 <th>Date</th>
@@ -185,6 +185,7 @@
                                 <th>Emplacement</th>
                                 <th>Entrée</th>
                                 <th>Sortie</th>
+                                <th>Solde</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -201,30 +202,33 @@
                                 {% if historiqueProduit.entre %}
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
-                                        <td>Bon d'entrée: N° {{ historiqueProduit.entre.numero }}</td>
+                                        <td>Bon d'entrée: N° <a href="{{ path('entre_affcher', {'id' : historiqueProduit.entre.id}) }}" target="_blank">{{ historiqueProduit.entre.numero }}</a></td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="text-center success" >{{ historiqueProduit.quantite }}</td>
                                         <td class="success"></td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                                 {% if historiqueProduit.deplacement %}
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            Transfert de produit(s): N° {{ historiqueProduit.deplacement.numero }}</td>
+                                            Transfert de produit(s): N° <a href="{{ path('deplacement_affcher', {'id' : historiqueProduit.deplacement.id}) }}" target="_blank">{{ historiqueProduit.deplacement.numero }}</a></td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="text-center success">{{ historiqueProduit.quantite }}</td>
                                         <td class="success"></td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                                 {% if historiqueProduit.bonExpedition %}
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            bon d'expédition: N° {{ historiqueProduit.bonExpedition.numero }}</td>
+                                            Bon d'expédition: N° <a href="{{ path('bonExpedition_show', {'id' : historiqueProduit.bonExpedition.id}) }}" target="_blank">{{ historiqueProduit.bonExpedition.numero }}</a></td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="text-center success">{{ historiqueProduit.quantite }}</td>
                                         <td class="success"></td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                             {% endif %}
@@ -239,20 +243,23 @@
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            Bon de sortie: N° {{ historiqueProduit.sortie.numero }}</td>
+                                            Bon de sortie: N° <a href="{{ path('sortie_afficher', {'id' : historiqueProduit.sortie.id}) }}" target="_blank">{{ historiqueProduit.sortie.numero }}</a>
+                                        </td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                                 {% if historiqueProduit.deplacement %}
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            Transfert de produit(s): N° {{ historiqueProduit.deplacement.numero }}</td>
+                                            Transfert de produit(s): N° <a href="{{ path('deplacement_affcher', {'id' : historiqueProduit.deplacement.id}) }}" target="_blank">{{ historiqueProduit.deplacement.numero }}</a></td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                                 {% if historiqueProduit.vidange %}
@@ -263,16 +270,18 @@
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                                 {% if historiqueProduit.bonExpedition %}
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            Bon d'expedition': N° {{ historiqueProduit.bonExpedition.numero }}</td>
+                                            Bon d'expedition': N° <a href="{{ path('bonExpedition_show', {'id' : historiqueProduit.bonExpedition.id }) }}" target="_blank">{{ historiqueProduit.bonExpedition.numero }}</a></td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
                             {% endif %}
@@ -284,5 +293,49 @@
             </div>
         </div>
     </div>
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+    <script>
+        $(document).ready(function() {
+            $('#tableHistorique').DataTable({
+                scrollY: 350,
+                paging: false,
+                bSort: false,
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                },
+                scrollCollapse: true,
+                fixedColumns:   {
+                    leftColumns: 1,
+                    rightColumns: 1
+                },
+                fixedHeader: true
+            });
+        } );
+    </script>
 
 {% endblock %}
