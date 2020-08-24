@@ -59,7 +59,6 @@ class ProduitExtension extends \Twig_Extension
 
         ));
 
-
         if($stock)
             return $stock->getQuantite();
         else

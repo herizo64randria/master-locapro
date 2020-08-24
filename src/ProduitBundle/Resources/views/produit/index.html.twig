@@ -27,20 +27,39 @@
                             <th>Réference</th>
                             <th>Réf. equi.</th>
                             <th>Prix d'achat</th>
-                            <th>Prix de vente</th>
-                            <th>Stocktotal</th>
-                            {% for depot in depots %}
-                                <th>{{ depot.abrv }}</th>
-                            {% endfor %}
-                            <th>Alert</th>
+                            <th>Stock Dépot</th>
+                            <th>Stock Site</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for produit in produits %}
+                            {% set stockDepot = 0 %}
+                            {% set stockSite = 0 %}
+
+                            {% for depot in depots %}
+                                {% if depot|stockByDepot(produit) != '-' %}
+                                    {% set stockDepot = stockDepot + (depot|stockByDepot(produit)) %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for site in sites %}
+                                {% if site|stockBySite(produit) != '-' %}
+                                    {% set stockSite = stockSite + (site|stockBySite(produit)) %}
+                                {% endif %}
+                            {% endfor %}
+
                             <tr>
                                 <td>{{ produit.designation }}</td>
-                                <td><a href="{{ path('produit_show', {'id' : produit.id}) }}">{{ produit.code }}</a></td>
+                                <td>
+                                    <a href="{{ path('produit_show', {'id' : produit.id}) }}">
+                                        {% if not produit.code %}
+                                            <i>Non-codé</i>
+                                        {% else %}
+                                        {{ produit.code }}
+                                        {% endif %}
+                                    </a>
+                                </td>
                                 <td>{{ produit.reference }}</td>
                                 <td>{{ produit.refEqui }}</td>
                                 <td class="text-right" style="white-space: nowrap;" >
@@ -50,18 +69,24 @@
                                         -
                                     {% endif %}
                                 </td>
-                                <td class="text-right" style="white-space: nowrap;">
-                                    {% if produit.prixVente %}
-                                        {{ produit.prixVente|number_format('2', ',', ' ') }}
-                                    {% else %}
+
+                                <td class="text-right">
+                                    {% if stockDepot <= 0 %}
                                         -
+                                    {% else %}
+                                        {{ stockDepot }}
                                     {% endif %}
                                 </td>
-                                <td class="text-center">{{ produit.stockTotal }}</td>
-                                {% for depot in depots %}
-                                    <td class="text-right">{{ depot|stockByDepot(produit) }}</td>
-                                {% endfor %}
-                                <td class="text-center">{{ produit.alert }}</td>
+
+                                <td class="text-right">
+                                    {% if stockSite <= 0 %}
+                                        -
+                                    {% else %}
+                                        {{ stockSite }}
+                                    {% endif %}
+                                </td>
+
+
                                 <td>
                                     {% set pathInfo = path('produit_show', {'id' : produit.id}) %}
                                     {% set pathEdit = path('produit_edit', {'id' : produit.id}) %}
@@ -98,6 +123,7 @@
         $(document).ready(function() {
             $('#tableProduit').DataTable({
                 scrollX: true,
+                scrollY: 350,
                 pageLength: 50,
                 language: {
                     processing:     "Traitement en cours...",
@@ -125,7 +151,8 @@
                 fixedColumns:   {
                     leftColumns: 1,
                     rightColumns: 1
-                }
+                },
+                fixedHeader: true
             });
         } );
     </script>

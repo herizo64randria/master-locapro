@@ -80,9 +80,40 @@
                                     </td>
                                 </tr>
 
+                                {% set stockDepot = 0 %}
+                                {% set stockSite = 0 %}
+
+                                {% for depot in depots %}
+                                    {% if depot|stockByDepot(produit) != '-' %}
+                                        {% set stockDepot = stockDepot + (depot|stockByDepot(produit)) %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% for site in listeSiteStockages %}
+                                    {% if site|stockBySite(produit) != '-' %}
+                                        {% set stockSite = stockSite + (site|stockBySite(produit)) %}
+                                    {% endif %}
+                                {% endfor %}
+
                                 <tr>
-                                    <th><i class="fa fa-exchange"></i> Stock total</th>
-                                    <td class="text-right"><b>{{ produit.stockTotal }}</b></td>
+                                    <th><i class="fa fa-exchange"></i> Stock en Dépôt</th>
+                                    <td class="text-right">
+                                        {% if stockDepot <= 0 %}
+                                            -
+                                        {% else %}
+                                            <b>{{ stockDepot }}</b>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="fa fa-exchange"></i> Stock sur site</th>
+                                    <td class="text-right">
+                                        {% if stockSite <= 0 %}
+                                            -
+                                        {% else %}
+                                            <b>{{ stockSite }}</b>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><i class="fa fa-warning"></i> Alert de stock</th>

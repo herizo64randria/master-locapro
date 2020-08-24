@@ -28,12 +28,16 @@ class ProduitController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $produits = $em->getRepository('ProduitBundle:Produit')->findAll();
+
         $repositoryDepot =  $em->getRepository('ProduitBundle:Depot');
         $depots = $repositoryDepot->findBy(array('etat'=>true),array('id' => 'asc'));
+
+        $sites = $em->getRepository('GroupeBundle:Site')->findAll();
 
         return $this->render('@Produit/produit/index.html.twig', array(
             'produits' => $produits,
             'depots' => $depots,
+            'sites' => $sites,
         ));
     }
 
