@@ -78,52 +78,5 @@ class HistoriqueEtatGroupe
     {
         return $this->date;
     }
-
-    /**
-     * Set groupe
-     *
-     * @param \GroupeBundle\Entity\Groupe $groupe
-     *
-     * @return HistoriqueEtatGroupe
-     */
-    public function setGroupe(\GroupeBundle\Entity\Groupe $groupe)
-    {
-        $this->groupe = $groupe;
-
-        return $this;
-    }
-
-    /**
-     * Get groupe
-     *
-     * @return \GroupeBundle\Entity\Groupe
-     */
-    public function getGroupe()
-    {
-        return $this->groupe;
-    }
-
-    /**
-     * Set etat
-     *
-     * @param \GroupeBundle\Entity\ListeEtatGroupe $etat
-     *
-     * @return HistoriqueEtatGroupe
-     */
-    public function setEtat(\GroupeBundle\Entity\ListeEtatGroupe $etat)
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
-    /**
-     * Get etat
-     *
-     * @return \GroupeBundle\Entity\ListeEtatGroupe
-     */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
 }
+
