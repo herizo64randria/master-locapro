@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Historique des groupes{% endblock %}
+{% block titre_page %}Historique des groupes{% endblock %}
+
+{% block titre_description %}<br>Tableau des groupes par date{% endblock %}
+{% block body %}
+    {% if not groupage %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <h3>Aucun historique trouvé</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">Historique du <b class="text-primary">{{ groupage.dateString }}</b></h2>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-striped table-bordered" id="tableProbleme">
+                            <thead>
+                            <tr>
+                                <th>Numero</th>
+                                <th>Site</th>
+                                <th>Etat</th>
+                                <th>Heure Marche</th>
+                                <th>Vidange</th>
+                                <th>Appoint</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for historiqueEtat in groupage. %}
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+{% endblock %}
+

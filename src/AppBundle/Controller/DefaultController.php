@@ -106,13 +106,10 @@ class DefaultController extends Controller
      */
     public function montestAction(Request $request)
     {
-        $test = 3.5;
-
-        if (is_float($test)){
-            return new Response('FL');
-        }
+        $test = new \DateTime();
+        $test->setDate(2020,8,3);
 
 
-        return new Response(var_dump($test));
+        return new Response(var_dump($test->format('d/m/Y')));
     }
 }

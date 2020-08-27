@@ -42,6 +42,18 @@ class HistoriqueEtatGroupe
      */
     private $etat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $site;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\GroupageHistoriqueGroupe", inversedBy="historiqueEtatGroupes")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $groupageHist;
+
     //-----------------------------/// RELATION ///-----------------------------
 
 
@@ -125,5 +137,53 @@ class HistoriqueEtatGroupe
     public function getEtat()
     {
         return $this->etat;
+    }
+
+    /**
+     * Set groupageHist
+     *
+     * @param \GroupeBundle\Entity\GroupageHistoriqueGroupe $groupageHist
+     *
+     * @return HistoriqueEtatGroupe
+     */
+    public function setGroupageHist(\GroupeBundle\Entity\GroupageHistoriqueGroupe $groupageHist)
+    {
+        $this->groupageHist = $groupageHist;
+
+        return $this;
+    }
+
+    /**
+     * Get groupageHist
+     *
+     * @return \GroupeBundle\Entity\GroupageHistoriqueGroupe
+     */
+    public function getGroupageHist()
+    {
+        return $this->groupageHist;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return HistoriqueEtatGroupe
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }
