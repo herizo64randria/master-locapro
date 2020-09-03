@@ -37,8 +37,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for historiqueEtat in groupage. %}
+                            {% for historiqueEtat in groupage.historiqueEtatGroupes %}
                                 <tr>
+                                    <td>{{ historiqueEtat.groupe.numero }}</td>
+                                    <td>{{ historiqueEtat.site.emplacement }}</td>
+                                    <td class="{{ 'text-'~historiqueEtat.etat.couleur }}">{{ historiqueEtat.etat.etat }}</td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td></td>
                                     <td></td>
                                 </tr>
                             {% endfor %}

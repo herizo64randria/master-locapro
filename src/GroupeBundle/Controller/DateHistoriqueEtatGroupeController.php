@@ -53,7 +53,8 @@ class DateHistoriqueEtatGroupeController extends Controller
 
 
         return $this->render('@Groupe/dateHistoriqueEtat/indexHistorique.html.twig', array(
-            'groupage' => $groupage
+            'groupage' => $groupage,
+            'historiqueEtat' => new HistoriqueEtatGroupe()
         ));
 
 

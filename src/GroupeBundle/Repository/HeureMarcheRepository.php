@@ -2,6 +2,8 @@
 
 namespace GroupeBundle\Repository;
 
+use GroupeBundle\Entity\Groupe;
+
 /**
  * HeureMarcheRepository
  *
@@ -10,4 +12,22 @@ namespace GroupeBundle\Repository;
  */
 class HeureMarcheRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByDateAndGroupe(Groupe $groupe, $dateDebut, $dateFin){
+
+        $qb = $this->createQueryBuilder('h');
+
+        $qb->join('h.groupe', 'g')
+            ->where('g = :groupe')
+            ->andWhere('h.date >= :dateDebut')
+            ->andWhere('hist.date <= :dateFin')
+            ->setParameter('groupe', $groupe)
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('dateFin', $dateFin);
+
+        return $qb->getQuery()
+            ->getResult()
+            ;
+
+
+    }
 }

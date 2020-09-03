@@ -31,6 +31,7 @@ class GroupeExtension extends \Twig_Extension
             new \Twig_SimpleFilter('appointByDate', array($this, 'getEtatAppointByDate')),
             new \Twig_SimpleFilter('vidangeByDate', array($this, 'getEtatVidangeByDate')),
             new \Twig_SimpleFilter('affichageHm', array($this, 'affichageHeureMinute')),
+            new \Twig_SimpleFilter('hmDate', array($this, 'heureMarcheParDate')),
         );
     }
 
@@ -200,6 +201,27 @@ class GroupeExtension extends \Twig_Extension
             $m = "00";
 
         return $h."h".$m."m";
+    }
+
+    public function heureMarcheParDate(Groupe $groupe, $dateString)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $dateString);
+        $dateDebut = $date->format('Y-m-d 00:00:00');
+        $dateFin = $date->format('Y-m-d 23:59:59');
+
+        $heureMarches = $this->em->getRepository('GroupeBundle:HeureMarche')
+            ->findByDateAndGroupe($groupe, $dateDebut, $dateFin);
+
+        if(! $heureMarches)
+            return '-';
+
+        $heure = null;
+        foreach ($heureMarches as $heureMarche){
+            $heure = $heureMarche;
+        }
+
+        return $heure;
+
     }
 
     /**
