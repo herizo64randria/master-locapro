@@ -18,8 +18,8 @@ class HeureMarcheRepository extends \Doctrine\ORM\EntityRepository
 
         $qb->join('h.groupe', 'g')
             ->where('g = :groupe')
-            ->andWhere('h.date >= :dateDebut')
-            ->andWhere('hist.date <= :dateFin')
+            ->andWhere('h.datedebut >= :dateDebut')
+            ->andWhere('h.datedebut <= :dateFin')
             ->setParameter('groupe', $groupe)
             ->setParameter('dateDebut', $dateDebut)
             ->setParameter('dateFin', $dateFin);

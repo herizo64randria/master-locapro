@@ -120,7 +120,7 @@
                                     {% if heureMarche.appoint %}
                                         <i class="fa fa-check"></i> ({{ heureMarche.appoint.huileUtilise }}L)
                                     {% else %}
-                                        {% set siAppoint = heureMarche.datedebut|appointByDate(heureMarche.groupe) %}
+                                        {% set siAppoint = heureMarche.groupe|appointParDate(heureMarche.datedebut|date('d/m/Y')) %}
                                         {% if siAppoint %}
                                             <i class="fa fa-check"></i> ({{ siAppoint.huileUtilise }}L)
                                         {% endif %}
@@ -130,7 +130,7 @@
                                     {% if heureMarche.vidange %}
                                         <i class="fa fa-check fa-2x"></i>
                                     {% else %}
-                                        {% set siVidange = heureMarche.datedebut|vidangeByDate(heureMarche.groupe) %}
+                                        {% set siVidange = heureMarche.groupe|vidangeParDate(heureMarche.datedebut|date('d/m/Y')) %}
                                         {% if siVidange %}
                                             <i class="fa fa-check fa-2x"></i>
                                         {% endif %}

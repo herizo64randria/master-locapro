@@ -32,24 +32,41 @@
                                 <th>Site</th>
                                 <th>Etat</th>
                                 <th>Heure Marche</th>
-                                <th>Vidange</th>
                                 <th>Appoint</th>
+                                <th>Vidange</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for historiqueEtat in groupage.historiqueEtatGroupes %}
                                 <tr>
-                                    <td>{{ historiqueEtat.groupe.numero }}</td>
+                                    <td><a href="{{ path('groupe_show', {'id' : historiqueEtat.groupe.id}) }}" target="_blank">{{ historiqueEtat.groupe.numero }} <i class="fa fa-external-link"></i></a></td>
                                     <td>{{ historiqueEtat.site.emplacement }}</td>
                                     <td class="{{ 'text-'~historiqueEtat.etat.couleur }}">{{ historiqueEtat.etat.etat }}</td>
-                                    <td>
-                                        
+                                    <td class="text-center">
+                                        {% set hmDate = historiqueEtat.groupe|hmDate(groupage.dateString) %}
+
+                                        {% if not hmDate %}
+                                            -
+                                        {% else %}
+                                            {{ hmDate.heure|affichageHm(hmDate.minute) }}
+                                        {% endif %}
                                     </td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="text-center">
+                                        {% set appointDate = historiqueEtat.groupe|appointParDate(groupage.dateString) %}
+
+                                        {% if appointDate  %}
+                                            <i class="fa fa-check "></i> {{ appointDate.huileUtilise }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        {% set vidangeDate = historiqueEtat.groupe|vidangeParDate(groupage.dateString) %}
+
+                                        {% if vidangeDate %}
+                                            <i class="fa fa-check fa-2x"></i>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
-
                             </tbody>
                         </table>
                     </div>

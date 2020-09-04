@@ -2,6 +2,8 @@
 
 namespace GroupeBundle\Repository;
 
+use GroupeBundle\Entity\Groupe;
+
 /**
  * AppointRepository
  *
@@ -10,4 +12,22 @@ namespace GroupeBundle\Repository;
  */
 class AppointRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByDateAndGroupe(Groupe $groupe, $dateDebut, $dateFin){
+
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->join('a.groupe', 'g')
+            ->where('g = :groupe')
+            ->andWhere('a.date >= :dateDebut')
+            ->andWhere('a.date <= :dateFin')
+            ->setParameter('groupe', $groupe)
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('dateFin', $dateFin);
+
+        return $qb->getQuery()
+            ->getResult()
+            ;
+
+
+    }
 }

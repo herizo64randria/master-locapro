@@ -71,7 +71,7 @@
                                 </td>
 
                                 <td class="text-right">
-                                    {% if stockDepot <= 0 %}
+                                    {% if stockDepot < 0 %}
                                         -
                                     {% else %}
                                         {{ stockDepot }}
@@ -79,7 +79,7 @@
                                 </td>
 
                                 <td class="text-right">
-                                    {% if stockSite <= 0 %}
+                                    {% if stockSite < 0 %}
                                         -
                                     {% else %}
                                         {{ stockSite }}

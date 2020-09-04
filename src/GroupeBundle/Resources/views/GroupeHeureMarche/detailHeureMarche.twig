@@ -70,7 +70,7 @@
                             {% if heureMarche.vidange %}
                                 {% set heureVidange = heureMarche.vidange %}
                             {% else %}
-                                {% set siVidange = heureMarche.datedebut|vidangeByDate(heureMarche.groupe) %}
+                                {% set siVidange = heureMarche.groupe|vidangeParDate(heureMarche.datedebut|date('d/m/Y')) %}
                                 {% if siVidange %}
                                     {% set heureVidange = siVidange %}
                                 {% endif %}
@@ -117,7 +117,7 @@
                             {% if heureMarche.appoint %}
                                 {% set heureAppoint = heureMarche.appoint %}
                             {% else %}
-                                {% set siAppoint = heureMarche.datedebut|appointByDate(heureMarche.groupe) %}
+                                {% set siAppoint = heureMarche.groupe|appointParDate(heureMarche.datedebut|date('d/m/Y')) %}
                                 {% if siAppoint %}
                                     {% set heureAppoint = siAppoint %}
                                 {% endif %}

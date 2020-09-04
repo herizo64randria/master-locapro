@@ -2,6 +2,8 @@
 
 namespace GroupeBundle\Repository;
 
+use GroupeBundle\Entity\Groupe;
+
 /**
  * VidangeRepository
  *
@@ -10,4 +12,22 @@ namespace GroupeBundle\Repository;
  */
 class VidangeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByDateAndGroupe(Groupe $groupe, $dateDebut, $dateFin){
+
+        $qb = $this->createQueryBuilder('v');
+
+        $qb->join('v.groupe', 'g')
+            ->where('g = :groupe')
+            ->andWhere('v.date >= :dateDebut')
+            ->andWhere('v.date <= :dateFin')
+            ->setParameter('groupe', $groupe)
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('dateFin', $dateFin);
+
+        return $qb->getQuery()
+            ->getResult()
+            ;
+
+
+    }
 }

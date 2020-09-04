@@ -28,10 +28,10 @@ class GroupeExtension extends \Twig_Extension
             new \Twig_SimpleFilter('heureMarcheDate', array($this, 'heureMarcheDateFunction')),
             new \Twig_SimpleFilter('typeFile', array($this, 'getTypeFile')),
             new \Twig_SimpleFilter('origineNum', array($this, 'getOrigineNum')),
-            new \Twig_SimpleFilter('appointByDate', array($this, 'getEtatAppointByDate')),
-            new \Twig_SimpleFilter('vidangeByDate', array($this, 'getEtatVidangeByDate')),
             new \Twig_SimpleFilter('affichageHm', array($this, 'affichageHeureMinute')),
             new \Twig_SimpleFilter('hmDate', array($this, 'heureMarcheParDate')),
+            new \Twig_SimpleFilter('vidangeParDate', array($this, 'vidangeParDate')),
+            new \Twig_SimpleFilter('appointParDate', array($this, 'appointParDate')),
         );
     }
 
@@ -177,22 +177,22 @@ class GroupeExtension extends \Twig_Extension
 
         if (is_float($heure_) or is_float($minute)){
             $hTotal = $heure_;
-            $hMarche = intval($hTotal);
+            $hMarche = (int)$hTotal;
             $restehTotal = $hTotal-$hMarche;
 
-            $mTotal = intval($minute);
+            $mTotal = (int)$minute;
             $mTotal = $mTotal + ($hMarche * 60) + ($restehTotal * 60);
 
-            $h = intval($mTotal / 60);
-            $m = intval(fmod($mTotal, 60));
+            $h = (int)($mTotal / 60);
+            $m = (int)fmod($mTotal, 60);
 
         }
 
         if($h < 10)
-            $h = "0".$heure_;
+            $h = "0".$h;
 
         if ($m < 10)
-            $m = "0".$minute;
+            $m = "0".$m;
 
         if($h == 0 or $h == null)
             $h = "00";
@@ -213,7 +213,7 @@ class GroupeExtension extends \Twig_Extension
             ->findByDateAndGroupe($groupe, $dateDebut, $dateFin);
 
         if(! $heureMarches)
-            return '-';
+            return null;
 
         $heure = null;
         foreach ($heureMarches as $heureMarche){
@@ -221,6 +221,48 @@ class GroupeExtension extends \Twig_Extension
         }
 
         return $heure;
+
+    }
+
+    public function vidangeParDate(Groupe $groupe, $dateString)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $dateString);
+        $dateDebut = $date->format('Y-m-d 00:00:00');
+        $dateFin = $date->format('Y-m-d 23:59:59');
+
+        $vidanges = $this->em->getRepository('GroupeBundle:Vidange')
+            ->findByDateAndGroupe($groupe, $dateDebut, $dateFin);
+
+        if(! $vidanges)
+            return null;
+
+        $returnVidange = null;
+        foreach ($vidanges as $vidange){
+            $returnVidange = $vidange;
+        }
+
+        return $returnVidange;
+
+    }
+
+    public function appointParDate(Groupe $groupe, $dateString)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $dateString);
+        $dateDebut = $date->format('Y-m-d 00:00:00');
+        $dateFin = $date->format('Y-m-d 23:59:59');
+
+        $appoints = $this->em->getRepository('GroupeBundle:Appoint')
+            ->findByDateAndGroupe($groupe, $dateDebut, $dateFin);
+
+        if(! $appoints)
+            return null;
+
+        $returnAppoint = null;
+        foreach ($appoints as $appoint){
+            $returnAppoint = $appoint;
+        }
+
+        return $returnAppoint;
 
     }
 

@@ -56,8 +56,6 @@ class DateHistoriqueEtatGroupeController extends Controller
             'groupage' => $groupage,
             'historiqueEtat' => new HistoriqueEtatGroupe()
         ));
-
-
     }
 
 
@@ -74,7 +72,7 @@ class DateHistoriqueEtatGroupeController extends Controller
         $listeGroupages = $em->getRepository('GroupeBundle:GroupageHistoriqueGroupe')->findAll();
 
         $dateJour = new \DateTime();
-        $dateJour->setDate(2020,8,26);
+        $dateJour->setDate(2020,9,1);
         $testDate = 0;
         foreach($listeGroupages as $listeGroupage){
 //            $listeGroupage = new GroupageHistoriqueGroupe();
