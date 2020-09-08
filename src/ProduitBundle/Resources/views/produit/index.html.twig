@@ -115,16 +115,24 @@
     <!-- DataTables JS -->
     <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/buttons.html5.min.js') }}"></script>
+
     <!-- DataTables CSS -->
     <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet"  href="{{ asset('assets/DataTables/plugins/buttons.dataTables.min.css') }}">
 
 
     <script>
         $(document).ready(function() {
+
             $('#tableProduit').DataTable({
                 scrollX: true,
                 scrollY: 350,
-                pageLength: 50,
+                pageLength: 100,
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",
@@ -152,8 +160,18 @@
                     leftColumns: 1,
                     rightColumns: 1
                 },
-                fixedHeader: true
+                fixedHeader: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'pdfHtml5'
+                ]
+
+
             });
+
+
         } );
     </script>
 
