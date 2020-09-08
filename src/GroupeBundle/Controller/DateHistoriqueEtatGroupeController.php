@@ -25,8 +25,20 @@ class DateHistoriqueEtatGroupeController extends Controller
      * @Route("/", name="dateHistoriqueEtat_index")
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+
+        if($request->getMethod() === "POST"){
+            $dateChoix = \DateTime::createFromFormat('d/m/Y', $_POST['date']);
+
+
+            return $this->redirectToRoute('dateHistoriqueEtat_index', array(
+                'd' => $dateChoix->format('d'),
+                'm' => $dateChoix->format('m'),
+                'y' => $dateChoix->format('Y'),
+            ));
+        }
+
         $em = $this->getDoctrine()->getManager();
         $dateJ = new \DateTime();
         $dateStringJ = $dateJ->format('d/m/Y');
@@ -43,7 +55,12 @@ class DateHistoriqueEtatGroupeController extends Controller
         //---------------------------  DATE DU JOUR  -------------------------------
 
         if ($dateStringJ == $dateString){
-            return new Response('');
+            $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
+            return $this->render('@Groupe/dateHistoriqueEtat/indexDateJour.html.twig', array(
+                'dateString' => $dateString,
+                'groupes' => $groupes,
+                'historiqueEtat' => new HistoriqueEtatGroupe()
+            ));
         }
         
         //-----------------------------/// DATE DU JOUR ///-----------------------------
