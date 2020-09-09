@@ -458,23 +458,21 @@ class CommandeController extends Controller
 
         $serviceProduit = new ProduitService($em);
 
-        foreach ($commande->getLigneCommandes()as $ligneCommande) {
-
-            //--------HISTORIQUE DU PRODUIT------------
-            $historiqueProduit = new HistoriqueProduit();
-
-            $historiqueProduit->setType('credit');
-            $historiqueProduit->setProduit($ligneCommande->getProduit());
-            $historiqueProduit->setCommande($commande);
-            $historiqueProduit->setDate($commande->getDate());
-            $historiqueProduit->setQuantite($ligneCommande->getQuantite());
-
-
-            $em->persist($historiqueProduit);
-
-        }
-
-
+//        foreach ($commande->getLigneCommandes()as $ligneCommande) {
+//
+//            //--------HISTORIQUE DU PRODUIT------------
+//            $historiqueProduit = new HistoriqueProduit();
+//
+//            $historiqueProduit->setType('credit');
+//            $historiqueProduit->setProduit($ligneCommande->getProduit());
+//            $historiqueProduit->setCommande($commande);
+//            $historiqueProduit->setDate($commande->getDate());
+//            $historiqueProduit->setQuantite($ligneCommande->getQuantite());
+//
+//
+//            $em->persist($historiqueProduit);
+//
+//        }
 
 //        MODIFICATION DU ENTRE
         $commande->setEtat(self::DEMANDE_CONFIRME);
@@ -504,8 +502,10 @@ class CommandeController extends Controller
 
         $numeroPrec = $entityNumero->getNumero();
 
-        $intNextNum = intval($numeroPrec) + 1;
-        $nextNum = intval($numeroPrec) + 1;
+        $intNextNum = (int)$numeroPrec + 1;
+        $nextNum = (int)$numeroPrec + 1;
+
+
 
         if(strlen($intNextNum) == 1){
             $nextNum = '00'.$intNextNum;

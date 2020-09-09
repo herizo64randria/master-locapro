@@ -22,7 +22,7 @@
     <list default="true" id="46024aa8-108c-492a-ad68-d8f9c97ae5ea" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/DateHistoriqueEtatGroupeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/DateHistoriqueEtatGroupeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/CommandeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/CommandeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +83,9 @@
       <workItem from="1599215207668" duration="3127000" />
       <workItem from="1599458186911" duration="8636000" />
       <workItem from="1599542963048" duration="9716000" />
+      <workItem from="1599564704056" duration="2173000" />
+      <workItem from="1599636720080" duration="401000" />
+      <workItem from="1599637142359" duration="1003000" />
     </task>
     <servers />
   </component>
@@ -110,6 +113,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="55" key="#PHP/0.0.1536.824@0.0.1536.824" timestamp="1599115736396" />
+    <state x="361" y="53" key="#Plugins" timestamp="1599637164275">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="53" key="#Plugins/0.0.1536.824@0.0.1536.824" timestamp="1599637164275" />
     <state x="484" y="95" key="#Symfony-Run" timestamp="1599115740039">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -130,30 +137,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1599119958937" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1599559845002">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1599637521420">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599559845002" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1599559845002">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599637521420" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1599637521420">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599559845002" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1599559844899">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599637521420" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1599637521420">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599559844899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1599559845002">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599637521420" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1599637521420">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599559845002" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599637521420" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1599554514663">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1599554514663" />
-    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1599553144082">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1599566298812">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1599553144082" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1599566298812" />
     <state x="580" y="314" key="SymfonyPathDialog" timestamp="1599119960188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -162,13 +169,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1599202525029" />
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1599483046858">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1599637388677">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1599483046858" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599552401148">
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1599637388677" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599637526740">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599552401148" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599637526740" />
   </component>
 </project>
