@@ -250,23 +250,29 @@ class GroupeHeureMarcheController extends Controller
             $heuremarche->setHeure(0);
 
             $hTotal = $_POST['heure'];
-            $hMarche = intval($hTotal);
+            $hMarche = (int)$hTotal;
             $restehTotal = $hTotal-$hMarche;
 
-            $mTotal = intval($_POST['minute']);
+            $mTotal = (int)$_POST['minute'];
             $mTotal = $mTotal + ($hMarche * 60) + ($restehTotal * 60);
 
-            if ($mTotal <= 0){
+            if ($mTotal < 0) {
                 return new Exception('Vérifier l\'heure de marche');
             }
 
-            $valueHm = array(
-                'heure' => intval($mTotal / 60),
-                'minute' => fmod($mTotal, 60)
-            );
+            if ($mTotal == 0) {
+                $heuremarche->setHeure(0);
+                $heuremarche->setMinute(0);
+            } else{
+                $valueHm = array(
+                    'heure' => (int)($mTotal / 60),
+                    'minute' => fmod($mTotal, 60)
+                );
 
-            $heuremarche->setHeure($valueHm['heure']);
-            $heuremarche->setMinute($valueHm['minute']);
+                $heuremarche->setHeure($valueHm['heure']);
+                $heuremarche->setMinute($valueHm['minute']);
+            }
+
 
             //-----------------------------/// HEURE ET MINUTE MARCHE ///-----------------------------
 
@@ -311,10 +317,10 @@ class GroupeHeureMarcheController extends Controller
             $totalHuileUtilise = $appointHuileUtilise + $vidangeHuileUtilise;
 
             if (! isset($_POST['appoint_chkHuile']))
-                $totalHuileUtilise = $totalHuileUtilise - $appointHuileUtilise;
+                $totalHuileUtilise -= $appointHuileUtilise;
 
             if (! isset($_POST['vidange_chkHuile']))
-                $totalHuileUtilise = $totalHuileUtilise - $vidangeHuileUtilise;
+                $totalHuileUtilise -= $vidangeHuileUtilise;
 
             if($totalHuileUtilise > $stockHuile and (isset($_POST['appoint_chkHuile']) or isset($_POST['vidange_chkHuile'])))
                 return new Exception('Stock d\'huile insuffisante sur site' );
