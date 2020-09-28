@@ -107,7 +107,7 @@ class GroupeHeureMarcheController extends Controller
 
         // ------------------- HUILE UTILISE ---------------------
 
-        if (isset($_POST['huileUtilise']) and isset($_POST['vidange_chkHuile'])){
+        if (isset($_POST['vidange_huileUtilise']) and isset($_POST['vidange_chkHuile'])){
 
             if ($qttUtilise < 0)
                 throw new Exception('Erreur! Valeur de huile utilisé négatif');
