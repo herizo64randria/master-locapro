@@ -19,7 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
 use GestionBundle\Entity\ligneDeplacement;
 use UserBundle\Entity\HistoriqueGlobal;
 
-
+/**
+ * Entrée controller.
+ *
+ * @Route("/document/bon/d/deplacement")
+ */
 class DeplacementController extends Controller
 {
 

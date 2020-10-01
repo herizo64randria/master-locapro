@@ -25,7 +25,7 @@ use UserBundle\Entity\HistoriqueGlobal;
 /**
  * Entrée controller.
  *
- * @Route("/document/bon")
+ * @Route("/document/bon/entré")
  */
 class EntreController extends Controller
 {

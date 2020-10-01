@@ -233,7 +233,7 @@ class CommandeController extends Controller
     /**
      * nouveau entity.
      *
-     * @Route("/ligne/edit/R89{id}2L55/supprimer", name="commande_supprimerLigne")
+     * @Route("/ligne/s/edit/R89{id}2/supprimer", name="commande_supprimerLigne")
      */
     public function supprimerLigneAction(Request $request, ligneCommande $ligneCommande){
         $em = $this->getDoctrine()->getManager();
