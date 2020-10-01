@@ -328,10 +328,14 @@ class EntreController extends Controller
             $ligne->setEntre($entre);
 
             if (isset($_POST['prixAchat']))
-                $ligne->setPrixAchat($_POST['prixAchat']);
+                if($_POST['prixAchat'] != "")
+                    $ligne->setPrixAchat($_POST['prixAchat']);
+            else
+                $ligne->setPrixAchat(null);
 
             if (isset($_POST['utilite']))
                 $ligne->setUtilite($_POST['utilite']);
+
 
             $repositoryProduit = $em->getRepository('ProduitBundle:Produit');
             $produit = $repositoryProduit->findOneBy(array('id' => $idProduit));
