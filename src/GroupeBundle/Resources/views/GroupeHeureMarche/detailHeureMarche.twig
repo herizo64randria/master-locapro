@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block titre %}{{ groupe.numero }} - {{ heureMarche.datedebut|date('d/m/Y') }}{% endblock %}
-{% block titre_page %}Détails: <a href="{{ path('groupe_show', {'id' : groupe.numero}) }}">{{ groupe.numero }}</a> ({{ groupe.site.emplacement }}) - {{ heureMarche.datedebut|date('d/m/Y') }}{% endblock %}
+{% block titre_page %}Détails: <a href="{{ path('groupe_show', {'id' : groupe.id}) }}">{{ groupe.numero }}</a> ({{ groupe.site.emplacement }}) - {{ heureMarche.datedebut|date('d/m/Y') }}{% endblock %}
 {% block titre_description %}{% endblock %}
 {% block body %}
 
