@@ -109,8 +109,6 @@ class VidangeController extends Controller
                 // ------------------- ////// HUILE UTILISE ////// ---------------------
             }
 
-
-
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setVidange($vidange);
             $historiqueGroupe->setDate($vidange->getDate());
@@ -161,9 +159,22 @@ class VidangeController extends Controller
             array('nom' => 'asc')
         );
 
+        $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
+        $stockSites = $repositoryStock->findBy(array(
+            'site' => $vidange->getGroupe()->getSite()
+        ));
+
+        $stockProduits = array();
+
+        foreach ($stockSites as $stock){
+            if($stock->getQuantite() > 0)
+                array_push($stockProduits, $stock);
+        }
+
         return $this->render('@Groupe/vidange/show.html.twig',array(
             'vidange' => $vidange,
             'listePieces' => $listePieces,
+            'stockProduits' => $stockProduits
 
         ));
 
@@ -253,6 +264,50 @@ class VidangeController extends Controller
 
             if (isset($_POST['descriptionSuivi']))
                 $suivi->setDescription($_POST['descriptionSuivi']);
+
+            // ------------------ SORTIE EN STOCK PIECE ------------------
+
+            if(isset($_POST['chk_sortieEnStockSuivi'])){
+                $suivi->setSortieEnStock(true);
+
+                $suivi_produit = $em->getRepository('ProduitBundle:Produit')->findOneBy(array(
+                    'id' => $_POST['suivi_produit']
+                    )
+                );
+
+                if(!$suivi_produit)
+                    throw new Exception('Produit non-trouvé');
+
+                $repositoryStock = $this->getDoctrine()->getRepository('ProduitBundle:Stock_');
+                $stkProduit = $repositoryStock->findOneBy(array(
+                    'produit' => $suivi_produit,
+                    'site' => $groupe->getSite()
+                ));
+
+                if($stkProduit->getQuantite() < 1)
+                    throw new Exception('Quantité produit insuffisante');
+
+                $stkProduit->setQuantite($stkProduit->getQuantite() - 1);
+                $em->persist($stkProduit);
+
+                // ------------------ HISTORIQUE PRODUIT ------------------
+
+                $historiqueProduit = new HistoriqueProduit();
+
+                $historiqueProduit->setType('debit');
+                $historiqueProduit->setProduit($suivi_produit);
+                $historiqueProduit->setRemplacementPiece($suivi);
+                $historiqueProduit->setDate($vidange->getDate());
+                $historiqueProduit->setQuantite(1);
+                $historiqueProduit->setSite($groupe->getSite());
+
+                $em->persist($historiqueProduit);
+
+                // ------------------///// HISTORIQUE PRODUIT /////------------------
+
+            }
+
+            // ------------------///// SORTIE EN STOCK PIECE /////------------------
 
             $historiqueGroupe = new HistoriqueGroupe();
             $historiqueGroupe->setDate($suivi->getDate());

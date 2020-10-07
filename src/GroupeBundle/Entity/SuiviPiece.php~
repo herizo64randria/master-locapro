@@ -49,6 +49,17 @@ class SuiviPiece
      */
     private $typePiece;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="sortie_en_stock", type="boolean", nullable=true)
+     */
+    private $sortieEnStock;
+
+
+
+
+
 
 //------------\\\\\\\////////////-----------
 

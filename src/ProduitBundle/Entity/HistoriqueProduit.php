@@ -103,6 +103,12 @@ class HistoriqueProduit
      */
     private $bonExpedition;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\SuiviPiece")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $remplacementPiece;
+
 
 //------------\\\\\\\////////////-----------
 
@@ -427,5 +433,29 @@ class HistoriqueProduit
     public function getBonExpedition()
     {
         return $this->bonExpedition;
+    }
+
+    /**
+     * Set remplacementPiece
+     *
+     * @param \GroupeBundle\Entity\SuiviPiece $remplacementPiece
+     *
+     * @return HistoriqueProduit
+     */
+    public function setRemplacementPiece(\GroupeBundle\Entity\SuiviPiece $remplacementPiece = null)
+    {
+        $this->remplacementPiece = $remplacementPiece;
+
+        return $this;
+    }
+
+    /**
+     * Get remplacementPiece
+     *
+     * @return \GroupeBundle\Entity\SuiviPiece
+     */
+    public function getRemplacementPiece()
+    {
+        return $this->remplacementPiece;
     }
 }

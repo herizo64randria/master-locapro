@@ -49,6 +49,17 @@ class SuiviPiece
      */
     private $typePiece;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="sortie_en_stock", type="boolean", nullable=true)
+     */
+    private $sortieEnStock;
+
+
+
+
+
 
 //------------\\\\\\\////////////-----------
 
@@ -220,5 +231,29 @@ class SuiviPiece
     public function getVidange()
     {
         return $this->vidange;
+    }
+
+    /**
+     * Set sortieEnStock
+     *
+     * @param boolean $sortieEnStock
+     *
+     * @return SuiviPiece
+     */
+    public function setSortieEnStock($sortieEnStock)
+    {
+        $this->sortieEnStock = $sortieEnStock;
+
+        return $this;
+    }
+
+    /**
+     * Get sortieEnStock
+     *
+     * @return boolean
+     */
+    public function getSortieEnStock()
+    {
+        return $this->sortieEnStock;
     }
 }

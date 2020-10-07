@@ -377,4 +377,38 @@ class Depot
     {
         return $this->immos;
     }
+
+    /**
+     * Add bonExpedition
+     *
+     * @param \GestionBundle\Entity\BonExpedition $bonExpedition
+     *
+     * @return Depot
+     */
+    public function addBonExpedition(\GestionBundle\Entity\BonExpedition $bonExpedition)
+    {
+        $this->bonExpeditions[] = $bonExpedition;
+
+        return $this;
+    }
+
+    /**
+     * Remove bonExpedition
+     *
+     * @param \GestionBundle\Entity\BonExpedition $bonExpedition
+     */
+    public function removeBonExpedition(\GestionBundle\Entity\BonExpedition $bonExpedition)
+    {
+        $this->bonExpeditions->removeElement($bonExpedition);
+    }
+
+    /**
+     * Get bonExpeditions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBonExpeditions()
+    {
+        return $this->bonExpeditions;
+    }
 }
