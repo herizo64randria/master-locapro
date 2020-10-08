@@ -284,6 +284,32 @@
                                         <td class="text-right">{{ solde }}</td>
                                     </tr>
                                 {% endif %}
+
+                                {% if historiqueProduit.appoint %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Vigange du groupe {{ historiqueProduit.appoint.groupe.numero }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if historiqueProduit.remplacementPiece %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Remplacement pièce sur site du groupe {{ historiqueProduit.remplacementPiece.groupe.numero }}
+                                            {% if historiqueProduit.remplacementPiece.vidange %}
+                                                <a href="{{ path('vidange_show', {'id' : historiqueProduit.remplacementPiece.vidange.id}) }}" target="_blank">(Vidange)</a>
+                                            {% endif %}
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
+                                    </tr>
+                                {% endif %}
                             {% endif %}
 
                         {% endfor %}

@@ -88,6 +88,12 @@
                             <tr>
                                 <td>
                                     (<i class="fa fa-refresh"></i> {{ suiviPiece.typePiece.nom }}) {{ suiviPiece.libelle }}
+                                    {% if suiviPiece.sortieEnStock %}
+                                        {% set produitPiece = suiviPiece|produitBySuiviPiece %}
+                                        {% if produitPiece %}
+                                            <span></span> - <a href="{{ path('produit_show', {"id" : produitPiece.id}) }}" target="_blank">{{ produitPiece.reference }}</a>
+                                        {% endif %}
+                                    {% endif %}
                                 </td>
                                 <td>
                                     {{ suiviPiece.description|nl2br }}

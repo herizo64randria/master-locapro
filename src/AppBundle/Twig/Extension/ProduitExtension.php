@@ -5,6 +5,7 @@ namespace AppBundle\Twig\Extension;
 use AppBundle\Services\UserService;
 use Doctrine\Common\Persistence\ObjectManager;
 use GroupeBundle\Entity\Site;
+use GroupeBundle\Entity\SuiviPiece;
 use ProduitBundle\Entity\Depot;
 use ProduitBundle\Entity\HistoriqueProduit;
 use ProduitBundle\Entity\Produit;
@@ -31,6 +32,7 @@ class ProduitExtension extends \Twig_Extension
             new \Twig_SimpleFilter('stockByDepot', array($this, 'stockByDepotFunction')),
             new \Twig_SimpleFilter('emplacementHist', array($this, 'historiqueProduitEmplacement')),
             new \Twig_SimpleFilter('ifProdInListePiece', array($this, 'ifProdInListePieceFunction')),
+            new \Twig_SimpleFilter('produitBySuiviPiece', array($this, 'produitBySuiviPiece')),
         );
     }
 
@@ -98,6 +100,17 @@ class ProduitExtension extends \Twig_Extension
             return false
         ;
 
+    }
+
+    public function produitBySuiviPiece(SuiviPiece $suiviPiece){
+        $historiqueProduit = $this->em->getRepository('ProduitBundle:HistoriqueProduit')->findOneBy(array(
+            'remplacementPiece' => $suiviPiece
+        ));
+
+        if ($historiqueProduit)
+            return $historiqueProduit->getProduit();
+
+        return null;
     }
 
 
