@@ -30,4 +30,17 @@ class VidangeRepository extends \Doctrine\ORM\EntityRepository
 
 
     }
+
+    public function findByDateRecentAndGroupe(Groupe $groupe){
+
+        $qb = $this->createQueryBuilder('v');
+
+        return $qb->join('v.groupe', 'g')
+            ->where('g = :groupe')
+            ->orderBy('v.date', 'DESC')
+            ->setParameter('groupe', $groupe)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

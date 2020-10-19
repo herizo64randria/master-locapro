@@ -7,72 +7,57 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <form action="#" method="post">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Pièce détachée </h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-plus-circle"></i> Pièce détachée </h3>
+                    <hr>
 
+                    <ul class="list-inline">
+                        <li><a href="{{ path('listepiece_edit', {'id' : listePiece.id}) }}" class="btn btn-lg btn-primary"><i class="fa fa-edit"></i> Modifier</a></li>
+                    </ul>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
+                    <hr>
+                </div>
 
-                                <label for="groupe">Pièce compatible : <a  style="color:black" href="{{ path('produit_show',{id:listePiece.produit.id}) }}">{{ listePiece.produit.designation }} - {{ listePiece.produit.reference }}</a> </label>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="groupe">Pièce compatible : <a  style="color:black" href="{{ path('produit_show',{id:listePiece.produit.id}) }}">{{ listePiece.produit.designation }} - {{ listePiece.produit.reference }}</a> </label>
 
-                               <br>
+                            <br>
 
-                                <label for="groupe">Groupe(s) compatible <b class="text-danger" id="err_groupe"></b></label>
+                            <label for="groupe">Groupe(s) compatible <b class="text-danger" id="err_groupe"></b></label>
 
-                                <div class="card" >
-                                    <ul class="list-group list-group-flush">
-                                        {% for val in listePiece.groupes %}
-                                            <li class="list-group-item">
-                                                <a href="{{ path('groupe_show',{id:val.id}) }}">   {{ val.numero }} - {{ val.marque }}</a>
+                            <div class="card" >
+                                <ul class="list-group list-group-flush">
+                                    {% for val in listePiece.groupes %}
+                                        <li class="list-group-item">
+                                            <a href="{{ path('groupe_show',{id:val.id}) }}" target="_blank">{{ val.numero }} - {{ val.marque }}</a>
+                                        </li>
 
-                                            </li>
-
-                                        {% endfor %}
-
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-
-                                <label for="produit">Référence equivalence <b class="text-danger" id="err_produit"></b></label>
-
-                                <div class="card" >
-                                    <ul class="list-group list-group-flush">
-                                        {% for val in listePiece.produits %}
-                                            <li class="list-group-item">
-                                                <a href="{{ path('produit_show',{id:val.id}) }}">{{ val.designation }} - {{ val.reference }}</a>
-
-                                            </li>
-
-                                        {% endfor %}
-
-
-                                    </ul>
-                                </div>
-
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <br>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="submit" value="Modifier" class="btn btn-primary btn-block" />
+                            <label for="produit">Référence equivalence <b class="text-danger" id="err_produit"></b></label>
+
+                            <div class="card" >
+                                <ul class="list-group list-group-flush">
+                                    {% for val in listePiece.produits %}
+                                        <li class="list-group-item">
+                                            <a href="{{ path('produit_show',{id:val.id}) }}" target="_blank">{{ val.designation }} - {{ val.reference }}</a>
+                                        </li>
+
+                                    {% endfor %}
+                                </ul>
                             </div>
-                            <div class="col-md-6">
-                                <a href="{{ path('listepiece_index') }}" class="btn btn-default btn-block">Annuler</a>
-                            </div>
+
                         </div>
-
                     </div>
-                </form>
-
+                </div>
             </div>
         </div>
 

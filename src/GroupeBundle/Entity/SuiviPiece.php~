@@ -259,28 +259,4 @@ class SuiviPiece
     {
         return $this->sortieEnStock;
     }
-
-    /**
-     * Set quantite
-     *
-     * @param float $quantite
-     *
-     * @return SuiviPiece
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    /**
-     * Get quantite
-     *
-     * @return float
-     */
-    public function getQuantite()
-    {
-        return $this->quantite;
-    }
 }

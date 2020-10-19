@@ -20,7 +20,7 @@ class ListePieceController extends Controller
     /**
      * Lists all listePiece entities.
      *
-     * @Route("/", name="listepiece_index")
+     * @Route("/liste", name="listepiece_index")
      *
      */
     public function indexAction()
@@ -89,6 +89,7 @@ class ListePieceController extends Controller
         $deleteForm = $this->createDeleteForm($listePiece);
         $groupes= $em->getRepository("GroupeBundle:Groupe")->findAll();
         $produits=$em->getRepository("ProduitBundle:Produit")->findAll();
+
         return $this->render('@Groupe/listepiece/show.html.twig', array(
             'listePiece' => $listePiece,
             'delete_form' => $deleteForm->createView(),

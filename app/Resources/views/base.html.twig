@@ -249,13 +249,13 @@ desired effect
                 {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
                     <li><a href="{{ path('site_index') }}"><i class="fa fa-list"></i> Liste des sites</a></li>
                 {% endif %}
-                <li><a href="{{ path('dateHistoriqueEtat_index') }}"><i class="fa fa-clock-o"></i> Historique Etat Groupe</a></li>
-{#                <li><a href="{{ path('dateHistoriqueEtat_index', {'d':1, 'm':9, 'y':2020}) }}"><i class="fa fa-clock-o"></i> Historique Etat Groupe</a></li>#}
-
-                <li><a href="{{ path('listepiece_index') }}"><i class="fa fa-wrench"></i> Liste des pièces compatibles</a></li>
-
                 <li><a href="{{ path('probleme_index') }}"><i class="fa fa-warning"></i> Liste problème</a></li>
+
                 <li><a href="{{ path('GroupeHeureMarche_index') }}"><i class="fa fa-clock-o"></i> Heure de marche</a></li>
+                <li><a href="{{ path('dateHistoriqueEtat_index') }}"><i class="fa fa-clock-o"></i> Historique Etat Groupe</a></li>
+
+                <li class="header"></li>
+                <li><a href="{{ path('listepiece_index') }}"><i class="fa fa-wrench"></i> Liste des pièces compatibles</a></li>
                 <li><a href="{{ path('catalogue_index') }}"><i class="fa fa-support"></i> Liste catalogue</a></li>
                 <li><a href="{{ path('carteMadagascar_index') }}"><i class="fa fa-won"></i> Carte de Madagascar</a></li>
 

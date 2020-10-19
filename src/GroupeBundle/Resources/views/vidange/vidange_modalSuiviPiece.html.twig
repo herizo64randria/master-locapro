@@ -41,7 +41,7 @@
                             <div class="panel-footer">
                                 <div class="form-group">
                                     <label for="suivi_produit">Produit: </label>
-                                    <select type="text" id="suivi_produit" name="suivi_produit" class="form-control" >
+                                    <select  id="suivi_produit" name="suivi_produit" class="form-control" >
                                         <option value=""></option>
                                         {% for produitSuivi in stockProduits %}
                                             <option value="{{ produitSuivi.produit.id }}">
@@ -51,7 +51,12 @@
                                     </select>
                                 </div>
 
-                                <p class="text-danger">NB: Le produit ne sera plus modifiable <br>
+                                <div class="form-group">
+                                    <label for="suivi_quantite">Quantité produit sélectionné: </label>
+                                    <input type="number" id="suivi_quantite" name="suivi_quantite" class="form-control only_float"  required>
+                                </div>
+
+                                <p class="text-danger">NB: L'action' ne sera plus modifiable <br>
                                 et aurra des répercution sur le stock du site
                                 </p>
                             </div>

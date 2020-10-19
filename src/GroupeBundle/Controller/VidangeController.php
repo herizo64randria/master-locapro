@@ -154,10 +154,7 @@ class VidangeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $listePieces = $em->getRepository('GroupeBundle:ListePiece')->findBy(
-            array(),
-            array('nom' => 'asc')
-        );
+        $listePieces = $vidange->getGroupe()->getListepieces();
 
         $repositoryStock = $em->getRepository('ProduitBundle:Stock_');
         $stockSites = $repositoryStock->findBy(array(
@@ -252,13 +249,22 @@ class VidangeController extends Controller
             $suivi->setGroupe($groupe);
             $suivi->setDate($vidange->getDate());
 
-            //---------SET VIDANGE---------
+            $quantitePiece = (int)$_POST['suivi_quantite'];
 
+            if ($quantitePiece < 1 )
+                return new Response('Erreur dans la quantité saisie');
+
+            $suivi->setQuantite($quantitePiece);
+
+            //---------SET VIDANGE---------
             $suivi->setVidange($vidange);
 
             $typePiece = $em->getRepository('GroupeBundle:ListePiece')->findOneBy(
                 array('id' => $_POST['typePiece'])
             );
+
+            if($typePiece == null)
+                return new Response('Type de piece non-reconnue');
 
             $suivi->setTypePiece($typePiece);
 
@@ -284,10 +290,10 @@ class VidangeController extends Controller
                     'site' => $groupe->getSite()
                 ));
 
-                if($stkProduit->getQuantite() < 1)
-                    throw new Exception('Quantité produit insuffisante');
+                if($stkProduit->getQuantite() < 1 or $stkProduit->getQuantite() < $quantitePiece)
+                    return new Response('Quantité produit insuffisante');
 
-                $stkProduit->setQuantite($stkProduit->getQuantite() - 1);
+                $stkProduit->setQuantite($stkProduit->getQuantite() - $quantitePiece);
                 $em->persist($stkProduit);
 
                 // ------------------ HISTORIQUE PRODUIT ------------------
@@ -298,7 +304,7 @@ class VidangeController extends Controller
                 $historiqueProduit->setProduit($suivi_produit);
                 $historiqueProduit->setRemplacementPiece($suivi);
                 $historiqueProduit->setDate($vidange->getDate());
-                $historiqueProduit->setQuantite(1);
+                $historiqueProduit->setQuantite($quantitePiece);
                 $historiqueProduit->setSite($groupe->getSite());
 
                 $em->persist($historiqueProduit);
@@ -323,5 +329,44 @@ class VidangeController extends Controller
         }
 
         throw new Exception('Erreur! 404 NOT-FOUND');
+    }
+
+    /**
+     * Lists all site entities.
+     *
+     * @Route("/résumé/tableau", name="vidange_resume")
+     *
+     */
+    public function listeVidangeParGroupe(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
+
+        $tableauVidanges = array();
+
+        $repositoryVidange = $em->getRepository('GroupeBundle:Vidange');
+        $repositoryAppoint = $em->getRepository('GroupeBundle:Appoint');
+        foreach ($groupes as $groupe){
+            $ligneTableau['groupe'] = $groupe->getNumero();
+
+            // ------------------ DERNIERE VIDANGE ------------------
+
+
+            $derniereVidange = $repositoryVidange->findByDateRecentAndGroupe($groupe);
+
+            if($derniereVidange)
+                $ligneTableau['derniereVidange'] = $derniereVidange;
+            else
+                $ligneTableau['derniereVidange'] = null;
+
+            // ------------------///// DERNIERE VIDANGE /////------------------
+            
+
+
+            array_push($tableauVidanges, $ligneTableau);
+        }
+
+        return new Response(var_dump($tableauVidanges));
+
     }
 }

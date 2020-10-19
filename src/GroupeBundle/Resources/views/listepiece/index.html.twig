@@ -41,12 +41,14 @@
                                 <td>
                                     <ul style="list-style: none">
                                         {% for grpComp in listePiece.groupes  %}
-                                            <li >{{ grpComp.marque }} - {{ grpComp.numero}}</li>
+                                            <li >
+                                                <a href="{{ path('groupe_show', {'id' : grpComp.id }) }}" target="_blank">{{ grpComp.marque }} - {{ grpComp.numero}}</a>
+                                            </li>
                                         {% endfor %}
                                     </ul>
                                 </td>
                                 <td>
-                                    <a href="{{ path('listepiece_show', { 'id': listePiece.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i>Voir</a>
+                                    <a href="{{ path('listepiece_show', { 'id': listePiece.id }) }}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i>Voir</a>
 
                                     <a href="{{ path('listepiece_edit', { 'id': listePiece.id }) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
                                 </td>
