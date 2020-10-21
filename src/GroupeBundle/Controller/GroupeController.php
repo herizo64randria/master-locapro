@@ -228,8 +228,16 @@ class GroupeController extends Controller
             $stockHuile = $stcHuile->getQuantite();
         }
 
+        $stockProduits = array();
 
+        $stockSites = $repositoryStock->findBy(array(
+            'site' => $groupe->getSite()
+        ));
 
+        foreach ($stockSites as $stock){
+            if($stock->getQuantite() > 0)
+                array_push($stockProduits, $stock);
+        }
 
         // ------------------- ////// STOCK D'HUILE ////// ---------------------
 
@@ -240,7 +248,7 @@ class GroupeController extends Controller
             'historiqueGroupes' => $historiqueGroupes,
             'listePieces' => $listePieces,
             'stockHuile' => $stockHuile,
-
+            'stockProduits' => $stockProduits
         ));
     }
 

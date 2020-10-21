@@ -59,7 +59,7 @@ class SuiviPiece
     /**
      * @var float
      *
-     * @ORM\Column(name="quantite", type="float")
+     * @ORM\Column(name="quantite", type="float", nullable=true)
      */
     private $quantite;
 

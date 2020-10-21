@@ -46,7 +46,7 @@
                         </tr>
                         <tr>
                             <td>Libellé:</td>
-                            <td><b>{{ suivi.libelle }}</b></td>
+                            <td>{{ suivi.libelle }}</td>
                         </tr>
 
                         {% if suivi.description %}
@@ -55,6 +55,17 @@
                                 {{ suivi.description|nl2br }}
                             </td>
                         </tr>
+                        {% endif %}
+                        {% if suivi.sortieEnStock %}
+                            <tr>
+                                <th>Produit: </th>
+                                <td>
+                                    {% set produitPiece = suivi|produitBySuiviPiece %}
+                                    {% if produitPiece %}
+                                        <a href="{{ path('produit_show', {"id" : produitPiece.id}) }}" target="_blank">{{ produitPiece.reference }}</a> -|- Qtt: <b>{{ suivi.quantite }}</b>
+                                    {% endif %}
+                                </td>
+                            </tr>
                         {% endif %}
                     </table>
                 </div>

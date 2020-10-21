@@ -30,9 +30,40 @@
                                     {% endfor %}
                                 </select>
                             </div>
-
                         </div>
+                    </div>
 
+                    <div class="form-group">
+                        <input type="checkbox" id="chk_sortieEnStockSuivi" name="chk_sortieEnStockSuivi" data-toggle="collapse" data-target="#divSortieEnStockSuivi">
+                        <label for="chk_sortieEnStockSuivi" class="text-danger">Sortie en stock</label>
+                    </div>
+
+                    <div id="divSortieEnStockSuivi" class="collapse">
+                        <div class="panel panel-default">
+                            <div class="panel-body">Sortie en stock sur site du produit</div>
+                            <div class="panel-footer">
+                                <div class="form-group">
+                                    <label for="suivi_produit">Produit: </label>
+                                    <select  id="suivi_produit" name="suivi_produit" class="form-control" >
+                                        <option value=""></option>
+                                        {% for produitSuivi in stockProduits %}
+                                            <option value="{{ produitSuivi.produit.id }}">
+                                                {{ produitSuivi.produit.designation }} - {{ produitSuivi.produit.code }} | {{ produitSuivi.produit.reference }} <b>({{ produitSuivi.quantite }})</b>
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="suivi_quantite">Quantité produit sélectionné: </label>
+                                    <input type="number" id="suivi_quantite" name="suivi_quantite" class="form-control only_float"  required>
+                                </div>
+
+                                <p class="text-danger">NB: L'action' ne sera plus modifiable <br>
+                                    et aurra des répercution sur le stock du site
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -64,5 +95,6 @@
 
 <script>
     $('#typePiece').select2();
+    $('#suivi_produit').select2();
 </script>
 <!-- /.modal -->
