@@ -79,6 +79,7 @@
                         <thead>
                         <tr>
                             <th>Libellé</th>
+                            <th>Qte</th>
                             <th>Détails</th>
                             <th>Action</th>
                         </tr>
@@ -87,7 +88,7 @@
                         {% for suiviPiece in vidange.suiviPieces %}
                             <tr>
                                 <td>
-                                    <i class="fa fa-refresh">< /i> {{ suiviPiece.typePiece.nom }}) {{ suiviPiece.libelle }}
+                                    <i class="fa fa-refresh"></i> {{ suiviPiece.typePiece.nom }}) {{ suiviPiece.libelle }}
                                     {% if suiviPiece.sortieEnStock %}
                                         {% set produitPiece = suiviPiece|produitBySuiviPiece %}
                                         {% if produitPiece %}
@@ -95,6 +96,7 @@
                                         {% endif %}
                                     {% endif %}
                                 </td>
+                                <td>{{ suiviPiece.quantite }}</td>
                                 <td>
                                     {{ suiviPiece.description|nl2br }}
                                 </td>

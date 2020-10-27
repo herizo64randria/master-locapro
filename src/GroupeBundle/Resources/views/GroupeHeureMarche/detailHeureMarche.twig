@@ -59,7 +59,10 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">
                                 <b>Vidange</b>
-                            </h3>
+                            </h3> -|-
+                            {% if heureMarche.vidange %}
+                                <a href="{{ path('vidange_show', {'id' : heureMarche.vidange.id}) }}" target="_blank" class="btn btn-primary"><i class="fa fa-info-circle"></i> Afficher plus d'information</a>
+                            {% endif %}
 
                         </div>
 
@@ -96,7 +99,46 @@
                                         <td>{{ vidange.huileUtilise }} L</td>
                                     </tr>
                                 </table>
+
+                                {% if vidange.suiviPieces|length > 0 %}
+                                    <hr>
+                                    <h4>Remplacement de pièce:</h4>
+                                    <table class="table table-striped" id="tableHistoriqueGroupe">
+                                        <thead>
+                                        <tr>
+                                            <th>Libellé</th>
+                                            <th>Qte</th>
+                                            <th>Détails</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for suiviPiece in vidange.suiviPieces %}
+                                            <tr>
+                                                <td>
+                                                    <i class="fa fa-refresh"></i> {{ suiviPiece.typePiece.nom }}) {{ suiviPiece.libelle }}
+                                                    {% if suiviPiece.sortieEnStock %}
+                                                        {% set produitPiece = suiviPiece|produitBySuiviPiece %}
+                                                        {% if produitPiece %}
+                                                            <span></span> - <a href="{{ path('produit_show', {"id" : produitPiece.id}) }}" target="_blank">{{ produitPiece.reference }}</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ suiviPiece.quantite }}</td>
+                                                <td>
+                                                    {{ suiviPiece.description|nl2br }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ path('suivi_piece_show', {'id' : suiviPiece.id }) }}" target="_blank" class="btn btn-default btn-xs"> <i class="fa fa-info-circle"></i> Détails</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
                             {% endif %}
+
+
                         </div>
                     </div>
                 </div>
