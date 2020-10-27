@@ -111,6 +111,15 @@ class SuiviPieceController extends Controller
             $em->flush();
 
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().' ajouté');
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+
 
             return $this->redirectToRoute('groupe_show', array('id' => $groupe->getId()));
         }
@@ -209,14 +218,35 @@ class SuiviPieceController extends Controller
 
         $groupe = $suivi->getGroupe();
 
+        if($suivi->getSortieEnStock()){
+            $site = $groupe->getSite();
+
+            $historiqueProduit = $em->getRepository('ProduitBundle:HistoriqueProduit')
+                ->findOneBy(array('remplacementPiece' => $suivi));
+
+            $produit = $historiqueProduit->getProduit();
+
+            $stkProduit = $em->getRepository('ProduitBundle:Stock_')->findOneBy(array(
+                'produit' => $produit,
+                'site' => $groupe->getSite()
+            ));
+
+            $stkProduit->setQuantite($stkProduit->getQuantite() + $suivi->getQuantite());
+
+            $em->persist($stkProduit);
+            $em->remove($historiqueProduit);
+
+        }
+
         $em->remove($suivi);
         $em->remove($historiqueGroupe);
+
 
         $em->flush();
         // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
         $historiqueGlobal = new HistoriqueGlobal();
         $historiqueGlobal->setUserHistorique($this->getUser());
-        $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().'supprimé');
+        $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().' supprimé');
 
         $em->persist($historiqueGlobal);
         $em->flush();

@@ -18,25 +18,25 @@
 
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped" >
                             <tr>
                                 <th>Heure(s) de marche: </th>
-                                <td>{{ heureMarche.heure }}</td>
+                                <td class="text-center">{{ heureMarche.heure|affichageHm(heureMarche.minute) }}</td>
                             </tr>
                             <tr>
                                 <th>Production: </th>
-                                <td>{{ heureMarche.production }}</td>
+                                <td class="text-center">{{ heureMarche.production }}</td>
                             </tr>
                             <tr>
                                 <th>Consomation: </th>
-                                <td>{{ heureMarche.consomation }}</td>
+                                <td class="text-center">{{ heureMarche.consomation }}</td>
                             </tr>
                             <tr>
                                 <th>CSP: </th>
-                                <td>{{ heureMarche.csp }}</td>
+                                <td class="text-center">{{ heureMarche.csp }}</td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="2" >
                                     <b>Note/Autre: </b>
                                     {% if not heureMarche.note or heureMarche.note == '' %}
                                         ---
