@@ -120,7 +120,7 @@
                             {% if historiqueGroupe.deplacement %}
                                 <tr>
                                     <td>
-                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                        <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
                                     </td>
                                     <td>
                                         Déplacement du groupe dans le site <b class="text-danger">{{ historiqueGroupe.deplacement.siteDepart.emplacement }}</b> vers <b class="text-success">{{ historiqueGroupe.deplacement.siteDestination.emplacement }}</b>
@@ -136,7 +136,7 @@
                             {% if historiqueGroupe.suiviPiece %}
                                 <tr>
                                     <td>
-                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                        <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
                                     </td>
                                     <td>
                                         (<i class="fa fa-refresh"></i> {{ historiqueGroupe.suiviPiece.typePiece.nom }}) {{ historiqueGroupe.suiviPiece.libelle }}
@@ -155,7 +155,7 @@
                             {% if historiqueGroupe.vidange %}
                                 <tr>
                                     <td>
-                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                        <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
                                     </td>
                                     <td>
                                          Vidange
@@ -171,7 +171,7 @@
                                 {% if historiqueGroupe.historiqueEtat.statut == 'Marche' %}
                                     <tr>
                                         <td>
-                                            {{ historiqueGroupe.date|date('d/m/Y') }}
+                                            <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
                                         </td>
                                         <td>
                                             <b><i class="text-success fa fa-power-off"></i></b> Groupe en marche
@@ -185,7 +185,7 @@
                                 {% if historiqueGroupe.historiqueEtat.statut == 'Arrêt' %}
                                     <tr>
                                         <td>
-                                            {{ historiqueGroupe.date|date('d/m/Y') }}
+                                            <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
                                         </td>
                                         <td>
                                             <b><i class="text-danger fa fa-power-off"></i></b> Groupe arrêtée
@@ -202,7 +202,7 @@
                             {% if historiqueGroupe.appoint %}
                                 <tr>
                                     <td>
-                                        {{ historiqueGroupe.date|date('d/m/Y') }}
+                                        <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
                                     </td>
                                     <td>
                                         Appoint d'huile - <b>{{ historiqueGroupe.appoint.huileUtilise }} L</b>
@@ -212,6 +212,26 @@
                                     </td>
                                 </tr>
                             {% endif %}
+
+                            {#  ------------------------ PROBLEME ------------------------  #}
+
+                            {% if historiqueGroupe.problemeSignale %}
+                                <tr>
+                                    <td>
+                                        <span class="hide">{{ historiqueGroupe.date|date('Ymd') }}</span>{{ historiqueGroupe.date|date('d/m/Y') }}
+                                    </td>
+                                    <td>
+                                        <b class="text-danger">Problème signaler</b>
+                                        <br>
+                                        - {{ historiqueGroupe.problemeSignale.cause }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('probleme_show', {'id' : historiqueGroupe.problemeSignale.id}) }}" class="btn btn-default btn-xs" target="_blank"><i class="fa fa-info-circle"></i> Afficher</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+                            {#  -------------------///// PROBLEME /////-------------------  #}
 
                         {% endfor %}
 
@@ -265,6 +285,7 @@
     <script>
         $(document).ready(function() {
             $('#tableHistoriqueGroupe').DataTable({
+                scrollY: 350,
                 pageLength: 100,
                 order: [[ 0, "desc" ]],
                 language: {
