@@ -120,6 +120,13 @@ class BonExpedition
      */
     private $coutTransport;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_arrivee", type="datetime", nullable=true)
+     */
+    private $dateArrivee;
+
 //---------------------------------------------
 
     /**
@@ -780,5 +787,29 @@ class BonExpedition
     public function getPjBonExpeditions()
     {
         return $this->pjBonExpeditions;
+    }
+
+    /**
+     * Set dateArrivee
+     *
+     * @param \DateTime $dateArrivee
+     *
+     * @return BonExpedition
+     */
+    public function setDateArrivee($dateArrivee)
+    {
+        $this->dateArrivee = $dateArrivee;
+
+        return $this;
+    }
+
+    /**
+     * Get dateArrivee
+     *
+     * @return \DateTime
+     */
+    public function getDateArrivee()
+    {
+        return $this->dateArrivee;
     }
 }

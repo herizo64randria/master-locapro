@@ -30,7 +30,8 @@
                         <tr>
                             <th>Numéro</th>
                             <th>Utilisateur</th>
-                            <th>Date</th>
+                            <th>Date d'expédition</th>
+                            <th>Date d'arrivée sur site</th>
                             <th>Groupe</th>
                             <th>Destination</th>
                             <th>Dépôt de sortie</th>
@@ -57,11 +58,18 @@
                                 <td><strong class="hide">{{ bonExpedition.numero|origineNum }}</strong><a href="{{ path('bonExpedition_show', {'id' : bonExpedition.id}) }}">{{ bonExpedition.numero }}</a></td>
                                 <td>{{ bonExpedition.userCreer.nom }}</td>
                                 <td>{{ bonExpedition.date|date('d/m/Y') }}</td>
-
-                                    {% set groupe = '-'  %}
-                                    {% if bonExpedition.groupe %}
-                                        {% set groupe = bonExpedition.groupe.numero  %}
+                                <td>
+                                    {% if bonExpedition.dateArrivee %}
+                                        {{ bonExpedition.dateArrivee|date('d/m/Y') }}
+                                    {% else %}
+                                        -
                                     {% endif %}
+                                </td>
+
+                                {% set groupe = '-'  %}
+                                {% if bonExpedition.groupe %}
+                                    {% set groupe = bonExpedition.groupe.numero  %}
+                                {% endif %}
                                 <td>
                                     {{ groupe }}
                                 </td>

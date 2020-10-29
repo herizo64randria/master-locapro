@@ -114,6 +114,7 @@ class SuiviPieceController extends Controller
             $historiqueGlobal = new HistoriqueGlobal();
             $historiqueGlobal->setUserHistorique($this->getUser());
             $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().' ajouté');
+            $historiqueGlobal->setLien('#');
 
             $em->persist($historiqueGlobal);
             $em->flush();
@@ -247,6 +248,7 @@ class SuiviPieceController extends Controller
         $historiqueGlobal = new HistoriqueGlobal();
         $historiqueGlobal->setUserHistorique($this->getUser());
         $historiqueGlobal->setLibelle('Information suivi du pièce: '. $suivi->getLibelle().' supprimé');
+        $historiqueGlobal->setLien('#');
 
         $em->persist($historiqueGlobal);
         $em->flush();

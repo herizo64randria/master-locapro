@@ -31,7 +31,7 @@
         <div class="col-md-3">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Information du bon de sortie</h3>
+                    <h3 class="box-title">Information du bon d'expedition'</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -41,9 +41,20 @@
                             <td><b>{{ bonExpedition.numero }}</b></td>
                         </tr>
                         <tr>
-                            <td>Date:</td>
+                            <td>Date d'expedition:</td>
                             <td>{{ bonExpedition.date|date('d/m/Y') }}</td>
                         </tr>
+                        <tr>
+                            <td>Date d'arrivée:</td>
+                            {% if bonExpedition.dateArrivee %}
+                                <td class="text-success text-"><b>{{ bonExpedition.dateArrivee|date('d/m/Y') }}</b></td>
+                            {% else %}
+                                <td>(Non-expédié)</td>
+                            {% endif %}
+                        </tr>
+                        {% if bonExpedition.dateArrivee %}
+
+                        {% endif %}
                         <tr>
                             <td>Dépôt:</td>
                             {% if bonExpedition.depot %}
@@ -110,9 +121,12 @@
                     <button class="btn btn-lg btn-danger hide" type="button" data-toggle="modal" id="btnEnregistrerSortie" data-target="#modalEnregistrerSortie"><i class="fa fa-save" ></i> Enregistrer</button>
 
                 </li>
-                {% if bonExpedition.modifiable or (bonExpedition.etat == 'En attente de confirmation' or bonExpedition.etat == 'Demande confirmée') and bonExpedition.userCreer == app.user %}
+                {% if bonExpedition.modifiable or (bonExpedition.etat == 'En attente de confirmation' or bonExpedition.etat == 'Demande confirmée') and (bonExpedition.userCreer == app.user or app.user|ifRole('ROLE_RESP')) %}
                     <li>
                         <a href="{{ path('bonExpedition_edit', {'id' : bonExpedition.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
+                        {% if not bonExpedition.dateArrivee %}
+                            <button class="btn btn-lg btn-success" type="button" data-toggle="modal" data-target="#modalDateArrivee"><i class="fa fa-refresh" ></i> Date d'arrivée</button>
+                        {% endif %}
 
                     </li>
                 {% endif %}
@@ -478,7 +492,7 @@
                 </div>
                 <form action="{{ path('bonExpedition_cloturer', { 'id' : bonExpedition.id }) }}" method="post">
                     <div class="modal-body">
-                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande de bon d'expédition'? <br> <i>L'action est irréversible</i></p>
+                        <p><b class="text-warning">Attention!</b> Voulez-vous vraiment clôturer la demande de bon d'expédition? <br> <i>L'action est irréversible</i></p>
                         <div class="form-group">
                             <label for="text">Motif du clôture <b class="text-danger" id="err_text"></b></label>
                             <textarea required type="text" class="form-control" name="text" id="text" rows="4" ></textarea>
@@ -494,6 +508,56 @@
 
         </div>
     </div>
+
+    <!-- DATE ARRIVE -->
+    <div class="modal fade" id="modalDateArrivee" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">Changement date d'arrivé sur site</h4>
+                </div>
+                <form action="{{ path('bonExpedition_dateArrivee', {'id' : bonExpedition.id}) }}" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="date" class=" control-label">Date d'arrivée sur site:</label>
+                            <div class="input-group date form_date " data-date="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input required class="form-control"  type="text" value="" readonly name="dateArrivee">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" > Enregistrer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    {#DATEPICKER#}
+    <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DatePicker1/js/locales/bootstrap-datetimepicker.fr.js') }}" charset="UTF-8"></script>
+    <script>
+        $('.form_date').datetimepicker({
+            format: 'dd/mm/yyyy',
+            language:  'fr',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
 
     {#    MODAL PIECE JOINTE#}
     {% set typeDoc = 'expedition' %}

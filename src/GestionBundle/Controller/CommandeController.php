@@ -145,7 +145,7 @@ class CommandeController extends Controller
              $historiqueGlobal = new HistoriqueGlobal();
              $historiqueGlobal->setUserHistorique($this->getUser());
              $historiqueGlobal->setLibelle('Bon commande n° '.$commande->getNumero().' créer');
-             //$historiqueGlobal->setLien($this->generateUrl('commande_afficher', array('id' => $commande->getId())));
+             $historiqueGlobal->setLien($this->generateUrl('commande_afficher', array('id' => $commande->getId())));
 
              $em->persist($historiqueGlobal);
              $em->flush();

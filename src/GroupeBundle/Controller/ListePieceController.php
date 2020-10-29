@@ -207,6 +207,7 @@ class ListePieceController extends Controller
             $historiqueGlobal = new HistoriqueGlobal();
             $historiqueGlobal->setUserHistorique($this->getUser());
             $historiqueGlobal->setLibelle('Supprimer pièce'.$listePiece->getNom());
+            $historiqueGlobal->setLien('#');
 
             $em->persist($historiqueGlobal);
 

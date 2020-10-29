@@ -748,4 +748,34 @@ class BonExpeditionController extends Controller
             'bonExpedition' => $bonExpedition
         ));
     }
+
+    /**
+     * REFUSER
+     *
+     * @Route("/{id}/date/200/arrivée", name="bonExpedition_dateArrivee")
+     */
+    public function ajouterDateArriveeAction(Request $request, BonExpedition $bonExpedition)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->getMethod() ==  'POST'){
+            $dateArrivee = \DateTime::createFromFormat('d/m/Y',$_POST['dateArrivee']);
+            $bonExpedition->setDateArrivee($dateArrivee);
+
+            $em->persist($bonExpedition);
+            $em->flush();
+
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Attribution du date d\'arrivée '.$bonExpedition->getNumero().'');
+            $historiqueGlobal->setLien($this->generateUrl('bonExpedition_show', array('id' => $bonExpedition->getId())));
+
+            $em->persist($historiqueGlobal);
+            $em->flush();
+
+            return $this->redirectToRoute('bonExpedition_show', array('id' => $bonExpedition->getId()));
+        }
+
+        throw new Exception('404 NOT-FOUND');
+    }
 }

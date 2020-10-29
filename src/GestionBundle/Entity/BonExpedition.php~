@@ -120,6 +120,13 @@ class BonExpedition
      */
     private $coutTransport;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_arrivee", type="datetime", nullable=true)
+     */
+    private $dateArrivee;
+
 //---------------------------------------------
 
     /**
