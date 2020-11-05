@@ -131,6 +131,7 @@
             <p>contact.locapro@groupe-ibc.com</p>
             <p>NIF 3003 300 382</p>
             <p>STAT 77100 31 2019 0 00212</p>
+
         </div>
     </div>
     <div id="droit">
@@ -155,6 +156,12 @@
 
 <div id="contenu">
     <div id="Scontenu">
+        {% if commande.motif %}
+            <div>
+                <p><b>Motif:</b> {{ commande.motif|nl2br }}</p>
+            </div>
+        {% endif %}
+
         <table border="1">
 
             <thead >

@@ -27,7 +27,18 @@ class AppointRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()
             ->getResult()
             ;
+    }
 
+    public function findByDateRecentAndGroupe(Groupe $groupe){
 
+        $qb = $this->createQueryBuilder('a');
+
+        return $qb->join('a.groupe', 'g')
+            ->where('g = :groupe')
+            ->orderBy('a.date', 'DESC')
+            ->setParameter('groupe', $groupe)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

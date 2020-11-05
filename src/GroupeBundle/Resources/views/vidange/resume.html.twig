@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %} <strong class="text-primary">Tableau de résumé des vidange et appoint</strong>{% endblock %}
+{% block titre_description %}
+    Les informations sur les vidanges et appoint des groupe  <br>
+{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tableau de résumé</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="tableResume">
+                        <tr>
+                            <td>N° Groupe</td>
+                            <td>Site</td>
+                            <td>Site</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

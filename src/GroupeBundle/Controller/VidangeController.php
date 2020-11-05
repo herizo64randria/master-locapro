@@ -351,16 +351,36 @@ class VidangeController extends Controller
 
             // ------------------ DERNIERE VIDANGE ------------------
 
-
             $derniereVidange = $repositoryVidange->findByDateRecentAndGroupe($groupe);
 
-            if($derniereVidange)
-                $ligneTableau['derniereVidange'] = $derniereVidange;
-            else
+            if($derniereVidange){
+                $derniereVidange = new Vidange();
+                $ligneTableau['derniereVidange'] = $derniereVidange->getDate();
+                $listePieces = $derniereVidange->getSuiviPieces();
+                
+
+            }
+            else{
                 $ligneTableau['derniereVidange'] = null;
+
+            }
 
             // ------------------///// DERNIERE VIDANGE /////------------------
             
+            // ------------------ APPOINT ------------------
+            
+            $derniereAppoint = $repositoryAppoint->findByDateRecentAndGroupe($groupe);
+            if($derniereAppoint){
+                $ligneTableau['derniereAppoint'] = $derniereAppoint->getDate();
+
+            }
+
+            else{
+                $ligneTableau['derniereAppoint'] = null;
+                $ligneTableau['filtreAppoint'] = null;
+            }
+
+            // ------------------///// APPOINT /////------------------
 
 
             array_push($tableauVidanges, $ligneTableau);
