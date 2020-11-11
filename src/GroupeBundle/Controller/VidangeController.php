@@ -346,23 +346,21 @@ class VidangeController extends Controller
 
         $repositoryVidange = $em->getRepository('GroupeBundle:Vidange');
         $repositoryAppoint = $em->getRepository('GroupeBundle:Appoint');
+        $repositorySuiviPiece = $em->getRepository('GroupeBundle:SuiviPiece');
+
         foreach ($groupes as $groupe){
-            $ligneTableau['groupe'] = $groupe->getNumero();
+            $ligneTableau['groupe'] = $groupe;
 
             // ------------------ DERNIERE VIDANGE ------------------
 
             $derniereVidange = $repositoryVidange->findByDateRecentAndGroupe($groupe);
 
             if($derniereVidange){
-                $derniereVidange = new Vidange();
-                $ligneTableau['derniereVidange'] = $derniereVidange->getDate();
-                $listePieces = $derniereVidange->getSuiviPieces();
-                
-
+//                $derniereVidange = new Vidange();
+                $ligneTableau['derniereVidange'] = $derniereVidange;
             }
             else{
                 $ligneTableau['derniereVidange'] = null;
-
             }
 
             // ------------------///// DERNIERE VIDANGE /////------------------
@@ -371,22 +369,64 @@ class VidangeController extends Controller
             
             $derniereAppoint = $repositoryAppoint->findByDateRecentAndGroupe($groupe);
             if($derniereAppoint){
-                $ligneTableau['derniereAppoint'] = $derniereAppoint->getDate();
+                $ligneTableau['derniereAppoint'] = $derniereAppoint;
 
             }
-
             else{
                 $ligneTableau['derniereAppoint'] = null;
-                $ligneTableau['filtreAppoint'] = null;
             }
 
             // ------------------///// APPOINT /////------------------
+
+            // ------------------ FILTRE A HUILE ------------------
+
+            $filtreHuile = $repositorySuiviPiece->findChangementFhuile($groupe);
+            if($filtreHuile){
+                $ligneTableau['filtreHuile'] = $filtreHuile;
+
+            }
+            else{
+                $ligneTableau['filtreHuile'] = null;
+            }
+
+            // ------------------///// FILTRE A HUILE /////------------------
+
+            // ------------------ FILTRE A GASOIL ------------------
+
+            $filtreGasoil = $repositorySuiviPiece->findChangementFgasoil($groupe);
+            if($filtreGasoil){
+                $ligneTableau['filtreGasoil'] = $filtreGasoil;
+
+            }
+            else{
+                $ligneTableau['filtreGasoil'] = null;
+            }
+
+            // ------------------///// FILTRE A GASOIL /////------------------
+
+            // ------------------ FILTRE A GASOIL ------------------
+
+            $filtreAir = $repositorySuiviPiece->findChangementFair($groupe);
+            if($filtreAir){
+                $ligneTableau['filtreAir'] = $filtreAir;
+
+            }
+            else{
+                $ligneTableau['filtreAir'] = null;
+            }
+
+            // ------------------///// FILTRE A GASOIL /////------------------
+
+
 
 
             array_push($tableauVidanges, $ligneTableau);
         }
 
-        return new Response(var_dump($tableauVidanges));
+//        return new Response(var_dump($tableauVidanges));
+        return $this->render('@Groupe/vidange/resume.html.twig', array(
+            'tables' => $tableauVidanges
+        ));
 
     }
 }

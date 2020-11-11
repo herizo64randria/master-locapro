@@ -16,19 +16,145 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="tableResume">
+                    <table id="tableResume" class="table table-striped">
+                        <thead>
                         <tr>
-                            <td>N° Groupe</td>
-                            <td>Site</td>
-                            <td>Site</td>
+                            <th>N° Groupe</th>
+                            <th>Site</th>
+                            <th>Heure de marche</th>
+                            <th>Etat</th>
+                            <th>Vidange</th>
+                            <th>Filtre Huile</th>
+                            <th>Filtre Gasoil</th>
+                            <th>Filtre à Air</th>
                         </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for liste in tables %}
+                            <tr>
+                                <td>{{ liste.groupe.numero }}</td>
+                                <td>{{ liste.groupe.site.emplacement }}</td>
+                                <td class="text-right">
+                                    {{ liste.groupe.heureMarche|affichageHm(liste.groupe.minuteMarche) }}
+                                </td>
+                                <td class="{{ 'text-'~liste.groupe.etatGroupe.couleur }}">
+                                    <strong class="hidden">{{ liste.groupe.etatGroupe.etat }}</strong>
+                                    <i class="fa fa-circle "></i> {{ liste.groupe.etatGroupe.etat }}
+                                </td>
+                                <td>
+                                    {% if liste.derniereVidange %}
+                                        <p>
+                                            <b>Date: </b> {{ liste.derniereVidange.date|date('d-m-Y') }} <br>
+                                            <b>Type: </b> {{ liste.derniereVidange.type }} <br>
+                                            <b>H. marche: </b> {{ liste.derniereVidange.heureMarche|number_format(0, ',', ' ') }}
+                                        </p>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if liste.filtreHuile %}
+                                        <p>
+                                            <b>Date: </b> {{ liste.filtreHuile.date|date('d-m-Y') }} <br>
+                                            <b>Ref.: </b>
+                                            {% if liste.filtreHuile.typePiece %}
+                                                {{ liste.filtreHuile.typePiece.produit.reference }}
+                                            {% endif %}
+                                        </p>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if liste.filtreGasoil %}
+                                        <p>
+                                            <b>Date: </b> {{ liste.filtreGasoil.date|date('d-m-Y') }} <br>
+                                            <b>Ref.: </b>
+                                            {% if liste.filtreGasoil.typePiece %}
+                                                {{ liste.filtreGasoil.typePiece.produit.reference }}
+                                            {% endif %}
+                                        </p>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if liste.filtreAir %}
+                                        <p>
+                                            <b>Date: </b> {{ liste.filtreAir.date|date('d-m-Y') }} <br>
+                                            <b>Ref.: </b>
+                                            {% if liste.filtreAir.typePiece %}
+                                                {{ liste.filtreAir.typePiece.produit.reference }}
+                                            {% endif %}
+                                        </p>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
                     </table>
 
                 </div>
             </div>
         </div>
     </div>
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets/DataTables/plugins/buttons.html5.min.js') }}"></script>
 
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet"  href="{{ asset('assets/DataTables/plugins/buttons.dataTables.min.css') }}">
+
+    <script>
+        $(document).ready(function() {
+            $('#tableResume').DataTable({
+                scrollY: 350,
+                paging: false,
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                },
+                scrollCollapse: true,
+                fixedHeader: true,
+
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'pdfHtml5'
+                ]
+            });
+        } );
+    </script>
 
 
 
