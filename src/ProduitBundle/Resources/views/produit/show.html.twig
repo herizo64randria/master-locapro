@@ -289,7 +289,9 @@
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            Vigange du groupe {{ historiqueProduit.appoint.groupe.numero }}</td>
+                                            Vigange du groupe {{ historiqueProduit.appoint.groupe.numero }}
+                                        </td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
                                         <td class="text-right">{{ solde }}</td>
