@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="46024aa8-108c-492a-ad68-d8f9c97ae5ea" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +129,9 @@
       <workItem from="1605072984081" duration="6325000" />
       <workItem from="1605159625476" duration="3246000" />
       <workItem from="1605247536786" duration="1137000" />
+      <workItem from="1605252353334" duration="978000" />
+      <workItem from="1605503935843" duration="1804000" />
+      <workItem from="1605590101893" duration="1140000" />
     </task>
     <servers />
   </component>
