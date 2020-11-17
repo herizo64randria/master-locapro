@@ -526,7 +526,7 @@ class GroupeHeureMarcheController extends Controller
         $groupe = $heureMarche->getGroupe();
 
         $libelle = "Suppression dheure de marche du {$heureMarche->getDatedebut()->format('d/m/Y')} du groupe {$groupe->getNumero()}";
-        if ($heureMarche->getDatedebut()->format('d/m/Y') == $heureMarche->getDatefin()->format('d/m/Y')){
+        if ($heureMarche->getDatedebut()->format('d/m/Y') != $heureMarche->getDatefin()->format('d/m/Y')){
             $libelle = "Suppression dheure de marche du {$heureMarche->getDatedebut()->format('d/m/Y')} au {$heureMarche->getDatefin()->format('d/m/Y')} du groupe {$groupe->getNumero()}";
         }
         $url = $this->generateUrl('GroupeHeureMarche_detailHeureGroupe', array('id' =>$groupe->getId()));
