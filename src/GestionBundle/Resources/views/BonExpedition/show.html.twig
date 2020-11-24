@@ -121,7 +121,7 @@
                     <button class="btn btn-lg btn-danger hide" type="button" data-toggle="modal" id="btnEnregistrerSortie" data-target="#modalEnregistrerSortie"><i class="fa fa-save" ></i> Enregistrer</button>
 
                 </li>
-                {% if bonExpedition.modifiable or (bonExpedition.etat == 'En attente de confirmation' or bonExpedition.etat == 'Demande confirmée') and (bonExpedition.userCreer == app.user or app.user|ifRole('ROLE_RESP')) %}
+                {% if bonExpedition.modifiable or (bonExpedition.etat == 'En attente de confirmation' or bonExpedition.etat == 'Demande confirmée') and (bonExpedition.userCreer == app.user or app.user|ifRole('ROLE_RESP') or app.user|ifRole('ROLE_SAI_DATE_ARRIVE')) %}
                     <li>
                         <a href="{{ path('bonExpedition_edit', {'id' : bonExpedition.id}) }}" class="btn btn-lg btn-info"><i class="fa fa-edit"></i>Modifier</a>
                         {% if not bonExpedition.dateArrivee %}
