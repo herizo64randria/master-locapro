@@ -417,9 +417,6 @@ class VidangeController extends Controller
 
             // ------------------///// FILTRE A GASOIL /////------------------
 
-
-
-
             array_push($tableauVidanges, $ligneTableau);
         }
 

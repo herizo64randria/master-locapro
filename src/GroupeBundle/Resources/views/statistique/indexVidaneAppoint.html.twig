@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
 
-{% block titre_page %} <strong class="text-primary">Tableau de résumé des vidange et filtre</strong>{% endblock %}
+{% block titre_page %} <strong class="text-primary">Tableau de résumé d'huile des vidange et appoint</strong>{% endblock %}
 {% block titre_description %}
-    Les informations sur les vidanges et filtres des groupe  <br>
+    Les informations sur les vidanges et appoint des groupe  <br>
 {% endblock %}
 {% block body %}
 
     <div class="row">
         <div class="col-md-12">
+            <ul class="list-inline">
+                <li><button class="btn btn-lg"><i class="fa fa-calendar"></i> Choisir mois</button></li>
+            </ul>
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tableau de résumé</h3>
@@ -21,17 +24,10 @@
                         <tr>
                             <th>N° Groupe</th>
                             <th>Site</th>
-                            <th>Heure de marche</th>
                             <th>Etat</th>
-                            <th>Date Vidange</th>
-                            <th>Type Vidange</th>
-                            <th>Heure de marche Vidange</th>
-                            <th>Date F. Huile</th>
-                            <th>Ref. F. Huile</th>
-                            <th>Date F. Gasoil</th>
-                            <th>Ref. F. Gasoil</th>
-                            <th>Date F. Air</th>
-                            <th>Ref. F. Air</th>
+                            <th>H.M. total</th>
+                            <th>Total huiles Vidange</th>
+                            <th>Total huiles Appoint</th>
                         </tr>
                         </thead>
 
@@ -40,72 +36,28 @@
                             <tr>
                                 <td>{{ liste.groupe.numero }}</td>
                                 <td>{{ liste.groupe.site.emplacement }}</td>
-                                <td class="text-right">
-                                    {{ liste.groupe.heureMarche|affichageHm(liste.groupe.minuteMarche) }}
-                                </td>
                                 <td class="{{ 'text-'~liste.groupe.etatGroupe.couleur }}">
                                     <strong class="hidden">{{ liste.groupe.etatGroupe.etat }}</strong>
                                     <i class="fa fa-circle "></i> {{ liste.groupe.etatGroupe.etat }}
                                 </td>
+                                <td class="text-right">
+                                    {{ liste.groupe.heureMarche|affichageHm(liste.groupe.minuteMarche) }}
+                                </td>
 
-                                {% if liste.derniereVidange %}
-                                    <td>{{ liste.derniereVidange.date|date('d/m/Y') }}</td>
-                                    <td>{{ liste.derniereVidange.type }}</td>
-                                    <td>{{ liste.derniereVidange.heureMarche|number_format(0, ',', ' ') }}</td>
-                                {% else %}
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                {% endif %}
-
-
-                                {% if liste.filtreHuile %}
-                                        <td>{{ liste.filtreHuile.date|date('d/m/Y') }}</td>
-
-                                        {% if liste.filtreHuile.typePiece %}
-                                            <td>
-                                                {{ liste.filtreHuile.typePiece.produit.reference }}
-                                            </td>
-                                        {% else %}
-                                            <td>-</td>
-                                        {% endif %}
-                                {% else %}
-                                    <td>-</td>
-                                    <td>-</td>
-                                {% endif %}
-
-
-                                {% if liste.filtreGasoil %}
-                                        <td>{{ liste.filtreGasoil.date|date('d/m/Y') }}</td>
-
-                                        {% if liste.filtreGasoil.typePiece %}
-                                            <td>
-                                                {{ liste.filtreGasoil.typePiece.produit.reference }}
-                                            </td>
-                                        {% else %}
-                                            <td>-</td>
-                                        {% endif %}
-                                {% else %}
-                                    <td>-</td>
-                                    <td>-</td>
-                                {% endif %}
-
-
-                                {% if liste.filtreAir %}
-                                        <td>{{ liste.filtreAir.date|date('d/m/Y') }}</td>
-
-                                        {% if liste.filtreAir.typePiece %}
-                                            <td>
-                                                {{ liste.filtreAir.typePiece.produit.reference }}
-                                            </td>
-                                        {% else %}
-                                            <td>-</td>
-                                        {% endif %}
-                                {% else %}
-                                    <td>-</td>
-                                    <td>-</td>
-                                {% endif %}
-
+                                <td class="text-right">
+                                    {% if liste.huileVidange >= 0 %}
+                                        {{ liste.huileVidange }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td class="text-right">
+                                    {% if liste.huileAppoint >= 0 %}
+                                        {{ liste.huileAppoint }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
 
                             </tr>
                         {% endfor %}
@@ -134,7 +86,6 @@
         $(document).ready(function() {
             $('#tableResume').DataTable({
                 scrollY: 350,
-                scrollX: true,
                 paging: false,
                 language: {
                     processing:     "Traitement en cours...",
