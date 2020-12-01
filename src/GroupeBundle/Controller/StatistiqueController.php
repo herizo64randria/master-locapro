@@ -105,6 +105,7 @@ class StatistiqueController extends Controller
 
             $repositoryVidange = $em->getRepository('GroupeBundle:Vidange');
             $repositoryAppoint = $em->getRepository('GroupeBundle:Appoint');
+            $repositoryHeureMarche = $em->getRepository('GroupeBundle:HeureMarche');
 
             $tableauListes = array();
             foreach ($groupes as $groupe){
@@ -141,6 +142,26 @@ class StatistiqueController extends Controller
                 $ligne['huileAppoint'] = $huileAppoint;
 
                 // ------------------///// APPOINT /////------------------
+
+                // ------------------ HEURE DE MARCHE ------------------
+
+                $heureMarche = 0;
+                $minuteMarche = 0;
+
+                $heureMarches = $repositoryHeureMarche->findByDateAndGroupe($groupe, $dateDebut, $dateFin);
+
+                foreach ($heureMarches as $heureM){
+                    if($heureM->getHeure())
+                        $heureMarche += $heureM->getHeure();
+
+                    if($heureM->getMinute())
+                        $minuteMarche += $heureM->getMinute();
+                }
+
+                $ligne['heureMarche'] = $heureMarche;
+                $ligne['minuteMarche'] = $minuteMarche;
+
+                // ------------------///// HEURE DE MARCHE /////------------------
 
                 array_push($tableauListes, $ligne);
             }
