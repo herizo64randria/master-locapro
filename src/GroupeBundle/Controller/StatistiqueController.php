@@ -170,8 +170,6 @@ class StatistiqueController extends Controller
                 'tables' => $tableauListes,
                 'dateDebut' => $dateDebut
             ));
-
-
         }else
            throw new Exception('Erreur 404 NOT-FOUND');
     }

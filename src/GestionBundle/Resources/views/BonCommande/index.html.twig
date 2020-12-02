@@ -58,7 +58,7 @@
 
                             <tr>
                                 <td><strong class="hide">{{ commande.numero|origineNum }}</strong><a href="{{ path('commande_afficher',{id:commande.id}) }}">{{ commande.numero }}</a></td>
-                                <td>{{ commande.date|date('d/m/Y') }}</td>
+                                <td><strong class="hide">{{ commande.date|date('Ymd') }}</strong>{{ commande.date|date('d/m/Y') }}</td>
                                 <td>{{ commande.userCreer.nom }}</td>
 
                                 <td class="{{ couleurEtat }}">{{ commande.etat }}</td>
