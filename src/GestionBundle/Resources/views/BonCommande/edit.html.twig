@@ -62,6 +62,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="remise">Remise (%):</label>
+                            <input type="text" id="remise" name="remise" class="form-control only_float" value="{{ commande.remise }}" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tva">TVA (%):</label>
+                            <input type="text" id="tva" name="tva" class="form-control only_float" value="{{ commande.tva }}" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
                             <textarea rows="3" class="form-control"  name="motif" id="motif" >{{ commande.motif }}</textarea>
                         </div>

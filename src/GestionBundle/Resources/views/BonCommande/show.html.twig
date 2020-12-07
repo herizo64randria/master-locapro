@@ -49,6 +49,12 @@
                             <td>TVA</td>
                             <td>{{ commande.tva }}%</td>
                         </tr>
+                        {% if commande.remise %}
+                            <tr>
+                                <td>Remise:</td>
+                                <td>{{ commande.remise }}%</td>
+                            </tr>
+                        {% endif %}
 
                     </table>
                 </div>
@@ -228,6 +234,11 @@
                                 <th>Réf. produit</th>
                                 <th>Quantité</th>
                                 <th>PU HT</th>
+                                {% if commande.remise %}
+                                    {% if commande.remise > 0 %}
+                                        <th>PU Remisé HT</th>
+                                    {% endif %}
+                                {% endif %}
                                 <th>Montant HT</th>
                                 {% if commande.modifiable and commande.userCreer == app.user %}
                                 <th class="action">Action</th>
@@ -238,6 +249,7 @@
                             <tbody>
 
                             {% set montantTotalHT = 0 %}
+                            {% set totalRemise = 0 %}
 
                             {% for lignecommande in commande.lignecommandes %}
                                 <tr>
@@ -271,7 +283,30 @@
                                         {% set prixAchat = '' %}
                                     {% endif %}
 
-                                    <td class="text-right" style="white-space: nowrap">{{ prixAchat }}</td>
+                                    <td class="text-right" style="white-space: nowrap">
+                                        {{ prixAchat }}
+                                    </td>
+
+                                    {% if commande.remise %}
+                                        {% if commande.remise > 0 %}
+                                            {% if lignecommande.remise > 0 %}
+                                                {% set puRemise = lignecommande.prix - (lignecommande.prix * lignecommande.remise / 100) %}
+                                                {% set totalRemise = (lignecommande.prix * lignecommande.remise / 100) * lignecommande.quantite %}
+
+                                                <td class="text-right" style="white-space: nowrap">
+                                                    {{ puRemise|number_format(2, ',', ' ') }}
+                                                    <br>
+                                                    <b>- {{ lignecommande.remise }}%</b>
+                                                </td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                        {% else %}
+                                            <td>-</td>
+                                        {% endif %}
+
+                                    {% endif %}
+
 
                                     {# ------------- CALCUL MONTANT TOTAL ------------- #}
 
@@ -301,8 +336,6 @@
                                                 <option value=" ">
                                                 </option>
                                                 {% for produit in produits %}
-
-
                                                     <option value="{{ produit.id }}">
                                                         {% if produit.siHuile %}
                                                             (H)
@@ -338,6 +371,16 @@
                                             <button class="btn btn-default" type="button">Annuler</button>
                                         </div>
                                     </td>
+                                    {% if commande.remise %}
+                                        {% if commande.remise > 0 %}
+                                            <td>
+                                                <div>
+                                                    Remise (%):
+                                                    <input type="text" class="form-control only_float text-right" name="remise" id="remise" value="{{ commande.remise }}"  placeholder="Remise" />
+                                                </div>
+                                            </td>
+                                        {% endif %}
+                                    {% endif %}
                                 </tr>
                                 </tfoot>
                             {% endif %}
@@ -351,13 +394,28 @@
                                             <th>TOTAL HT</th>
                                             <td class="text-right">{{ montantTotalHT|number_format(2, ',', ' ') }}</td>
                                         </tr>
+
+                                        {% set montantTVA = montantTotalHT * (commande.tva / 100) %}
+                                        {% set netHt = montantTotalHT %}
+
+                                        {% set montantTTC = montantTotalHT + montantTVA %}
+
+                                        {% if commande.remise %}
+                                            {% if commande.remise > 0 and totalRemise > 0 %}
+
+                                                {% set montantTVA = (montantTotalHT - totalRemise) * (commande.tva / 100) %}
+                                                {% set montantTTC = montantTotalHT + montantTVA - totalRemise %}
+
+                                                <th>TOTAL Remise</th>
+                                                <td class="text-right">{{ totalRemise|number_format(2, ',', ' ') }}</td>
+                                            {% endif %}
+                                        {% endif %}
+
                                         <tr>
-                                            {% set montantTVA = montantTotalHT * (commande.tva / 100) %}
                                             <th>TVA {{ commande.tva }}%</th>
                                             <td class="text-right">{{ montantTVA|number_format(2, ',', ' ') }}</td>
                                         </tr>
                                         <tr>
-                                            {% set montantTTC = montantTotalHT + montantTVA %}
                                             <th>TOTAL TTC</th>
                                             <td class="text-right"><b>{{ montantTTC|number_format(2, ',', ' ') }}</b></td>
                                         </tr>

@@ -49,6 +49,13 @@ class ligneCommande
      */
     private $utilite;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="remise", type="integer", nullable=true)
+     */
+    private $remise;
+
 //------------Relation-----------
 
     /**

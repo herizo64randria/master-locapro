@@ -253,4 +253,28 @@ class PieceJointe
     {
         return $this->bonExpedition;
     }
+
+    /**
+     * Set userCreer
+     *
+     * @param \UserBundle\Entity\User $userCreer
+     *
+     * @return PieceJointe
+     */
+    public function setUserCreer(\UserBundle\Entity\User $userCreer)
+    {
+        $this->userCreer = $userCreer;
+
+        return $this;
+    }
+
+    /**
+     * Get userCreer
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserCreer()
+    {
+        return $this->userCreer;
+    }
 }

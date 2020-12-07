@@ -169,7 +169,17 @@
                     <th>REFERENCE</th>
                     <th>DESIGNATION</th>
                     <th>QTE</th>
+                    {% if commande.remise %}
+                        {% if commande.remise > 0 %}
+                            <th>Rem.</th>
+                        {% endif %}
+                    {% endif %}
                     <th>PU HT</th>
+                    {% if commande.remise %}
+                        {% if commande.remise > 0 %}
+                            <th>PU Rem.</th>
+                        {% endif %}
+                    {% endif %}
                     <th>MONTANT HT</th>
                 </tr>
             </thead>
@@ -178,13 +188,46 @@
 
             {% set nbrLigne = 0 %}
             {% set montantTotalHT = 0 %}
+            {% set totalRemise = 0 %}
             {% for ligne in commande.lignecommandes %}
                 {% set nbrLigne = nbrLigne + 1 %}
                 <tr>
                     <td>{{ ligne.produit.reference }}</td>
                     <td>{{ ligne.designation }}</td>
                     <td>{{ ligne.quantite }}</td>
+
+                    {% if commande.remise %}
+                        {% if commande.remise > 0 %}
+                            {% if ligne.remise > 0 %}
+                                {% set puRemise = ligne.prix - (ligne.prix * ligne.remise / 100) %}
+                                {% set totalRemise = (ligne.prix * ligne.remise / 100) * ligne.quantite %}
+
+                                <td class="text-right" style="white-space: nowrap">
+                                    {{ ligne.remise }}%
+                                </td>
+                            {% else %}
+                                <td class="text-right">-</td>
+                            {% endif %}
+                        {% else %}
+                            <td class="text-right">-</td>
+                        {% endif %}
+                    {% endif %}
+
                     <td style="text-align: right; white-space: nowrap">{{ ligne.prix|number_format(2, ',', ' ') }}</td>
+
+                    {% if commande.remise %}
+                        {% if commande.remise > 0 %}
+                            {% if ligne.remise > 0 %}
+                                {% set puRemise = ligne.prix - (ligne.prix * ligne.remise / 100) %}
+
+                                <td style="text-align: right; white-space: nowrap">{{ puRemise|number_format(2, ',', ' ') }}</td>
+                            {% else %}
+                                <td class="text-right">-</td>
+                            {% endif %}
+                        {% else %}
+                            <td class="text-right">-</td>
+                        {% endif %}
+                    {% endif %}
 
                     {% set montantLigne = 0 %}
                     {% set montantLigne = ligne.quantite * ligne.prix %}
@@ -196,10 +239,24 @@
             {% endfor %}
 
             {% for i in nbrLigne..30 %}
-                <tr> <td ><p></p></td><td ><p></p></td><td ><p></p></td> <td><p></p></td> <td><p></p></td></tr>
+                <tr> <td ><p></p></td><td ><p></p></td><td ><p></p></td> <td><p></p></td> <td><p></p></td>
+                    {% if commande.remise %}
+                        {% if commande.remise > 0 %}
+                            <td></td>
+                            <td></td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
             {% endfor %}
 
-            <tr> <td id="piedtr"><p></p></td><td id="piedtr"><p></p></td><td id="piedtr"><p><td id="piedtr"><p></p></td> <td id="piedtr"><p></p></td></tr>
+            <tr>
+                {% if commande.remise %}
+                    {% if commande.remise > 0 %}
+                        <td id="piedtr"></td>
+                        <td id="piedtr"></td>
+                    {% endif %}
+                {% endif %}
+                <td id="piedtr"><p></p></td><td id="piedtr"><p></p></td><td id="piedtr"><p><td id="piedtr"><p></p></td> <td id="piedtr"><p></p></td></tr>
 
             </tbody>
 
@@ -212,11 +269,29 @@
         {% set montantTVA = montantTotalHT * (commande.tva / 100) %}
         {% set montantTTC = montantTotalHT + montantTVA %}
 
+        {% set montantTTC = montantTotalHT + montantTVA %}
+
+
+
         <table border="2" style="width: 380px; border-radius: 5px">
             <tr>
                 <td id="piedtr" style="text-align: center"><b>TOTAL HT</b>
                 </td><td id="piedtr" style="text-align: right">{{ montantTotalHT|number_format(2, ',', ' ') }}</td>
             </tr>
+
+            {% if commande.remise %}
+                {% if commande.remise > 0 and totalRemise > 0 %}
+
+                    {% set montantTVA = (montantTotalHT - totalRemise) * (commande.tva / 100) %}
+                    {% set montantTTC = montantTotalHT + montantTVA - totalRemise %}
+
+                    <tr>
+                        <td  id="piedtr" style="text-align: center"><b>TOTAL Remise</b>
+                        </td><td id="piedtr" style="text-align: right">{{ totalRemise|number_format(2, ',', ' ') }}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+
             <tr>
                 <td  id="piedtr" style="text-align: center"><b>TVA {{ commande.tva }}%</b>
                 </td><td id="piedtr" style="text-align: right">{{ montantTVA|number_format(2, ',', ' ') }}</td>

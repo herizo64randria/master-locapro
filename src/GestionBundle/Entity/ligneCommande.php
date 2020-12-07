@@ -49,6 +49,13 @@ class ligneCommande
      */
     private $utilite;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="remise", type="integer", nullable=true)
+     */
+    private $remise;
+
 //------------Relation-----------
 
     /**
@@ -216,5 +223,29 @@ class ligneCommande
     public function getCommande()
     {
         return $this->commande;
+    }
+
+    /**
+     * Set remise
+     *
+     * @param integer $remise
+     *
+     * @return ligneCommande
+     */
+    public function setRemise($remise)
+    {
+        $this->remise = $remise;
+
+        return $this;
+    }
+
+    /**
+     * Get remise
+     *
+     * @return integer
+     */
+    public function getRemise()
+    {
+        return $this->remise;
     }
 }

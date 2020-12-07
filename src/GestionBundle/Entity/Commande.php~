@@ -68,6 +68,13 @@ class Commande
      */
     private $tva;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="remise", type="integer", nullable=true)
+     */
+    private $remise;
+
 //------------------------------------------
 
     /**
@@ -462,5 +469,29 @@ class Commande
     public function getPjCommandes()
     {
         return $this->pjCommandes;
+    }
+
+    /**
+     * Set remise
+     *
+     * @param integer $remise
+     *
+     * @return Commande
+     */
+    public function setRemise($remise)
+    {
+        $this->remise = $remise;
+
+        return $this;
+    }
+
+    /**
+     * Get remise
+     *
+     * @return integer
+     */
+    public function getRemise()
+    {
+        return $this->remise;
     }
 }

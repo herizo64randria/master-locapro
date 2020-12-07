@@ -111,20 +111,25 @@ class CommandeController extends Controller
      */
     public function newAction(Request $request)
     {
-         $em=$this->getDoctrine()->getManager();
-         $numero=$this->recupereNumeroCommande($em);
+        $em=$this->getDoctrine()->getManager();
+        $numero=$this->recupereNumeroCommande($em);
         $fournisseurs =  $em->getRepository('FournisseurBundle:Fournisseur')->findAll();
 
         if ($request->getMethod()=='POST'){
-             $commande = new Commande();
-             $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
-             $commande->setDate($date);
-             $commande->setNumero($_POST['numero']);
-             if(isset($_POST['motif']))
+            $commande = new Commande();
+            $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
+            $commande->setDate($date);
+            $commande->setNumero($_POST['numero']);
+            if(isset($_POST['motif']))
                 $commande->setMotif($_POST['motif']);
-             $commande->setUserCreer($this->getUser());
+            if(isset($_POST['remise'])){
+                if($_POST['remise'] > 0)
+                    $commande->setRemise($_POST['remise']);
+            }
 
-             $commande->setTva($_POST['tva']);
+            $commande->setUserCreer($this->getUser());
+
+            $commande->setTva($_POST['tva']);
 
             $fournisseur = null;
             if (isset($_POST['fournisseur']) and $_POST['fournisseur'])
@@ -137,22 +142,22 @@ class CommandeController extends Controller
                 return new Exception('Veuillez choisir le fournisseur');
 
             $this->nextNumero($em);
-             $em->persist($commande);
-             $em->flush();
+            $em->persist($commande);
+            $em->flush();
 
-             // ------------------- HISTORIQUE GLOBAL ---------------------
+            // ------------------- HISTORIQUE GLOBAL ---------------------
 
-             $historiqueGlobal = new HistoriqueGlobal();
-             $historiqueGlobal->setUserHistorique($this->getUser());
-             $historiqueGlobal->setLibelle('Bon commande n° '.$commande->getNumero().' créer');
-             $historiqueGlobal->setLien($this->generateUrl('commande_afficher', array('id' => $commande->getId())));
+            $historiqueGlobal = new HistoriqueGlobal();
+            $historiqueGlobal->setUserHistorique($this->getUser());
+            $historiqueGlobal->setLibelle('Bon commande n° '.$commande->getNumero().' créer');
+            $historiqueGlobal->setLien($this->generateUrl('commande_afficher', array('id' => $commande->getId())));
 
-             $em->persist($historiqueGlobal);
-             $em->flush();
+            $em->persist($historiqueGlobal);
+            $em->flush();
             return $this->redirectToRoute('commande_afficher', array('id' => $commande->getId()));
-             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
+            // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
-         }
+        }
         return $this->render('@Gestion/BonCommande/new.html.twig',array('numero'=>$numero,'fournisseurs'=>$fournisseurs));
     }
     /**
@@ -216,6 +221,9 @@ class CommandeController extends Controller
             if (isset($_POST['utilite']))
                 $ligne->setUtilite($_POST['utilite']);
 
+            if (isset($_POST['remise']))
+                $ligne->setRemise($_POST['remise']);
+
             $repositoryProduit = $em->getRepository('ProduitBundle:Produit');
             $produit = $repositoryProduit->findOneBy(array('id' => $idProduit));
 
@@ -273,15 +281,9 @@ class CommandeController extends Controller
     public function modifierEntreAction(Request $request,Commande $commande)
     {
         $em = $this->getDoctrine()->getManager();
-
-
         $fournisseurs =  $em->getRepository('FournisseurBundle:Fournisseur')->findAll();
 
-
-
         if($request->getMethod() == 'POST'){
-
-
             $date = \DateTime::createFromFormat('d/m/Y',$_POST['date']);
             $commande->setDate($date);
 
@@ -306,8 +308,12 @@ class CommandeController extends Controller
 
             }
 
+            if(isset($_POST['remise'])){
+                if($_POST['remise'] > 0)
+                    $commande->setRemise($_POST['remise']);
+            }
 
-
+            $commande->setTva($_POST['tva']);
 
             $em->persist($commande);
             $em->flush();
