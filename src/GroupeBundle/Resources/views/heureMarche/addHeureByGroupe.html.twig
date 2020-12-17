@@ -169,6 +169,8 @@
 
     </script>
 
+    <input type="hidden" id="densiteGasoil" value="{{ groupe.densiteGasoil }}">
+
     {#DATEPICKER#}
     <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('DatePicker1/js/locales/bootstrap-datetimepicker.fr.js') }}" charset="UTF-8"></script>
@@ -194,7 +196,9 @@
                     consomation = $('#consomation').val();
                     production = $('#production').val();
 
-                    csp = (consomation * 840)/production;
+                    densiteGasoil = $('#densiteGasoil').val();
+
+                    csp = (consomation * densiteGasoil)/production;
 
                     $('#csp').val(csp);
                     affichageFormat('#csp');

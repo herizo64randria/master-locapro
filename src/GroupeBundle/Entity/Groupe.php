@@ -63,6 +63,12 @@ class Groupe
      */
     private $puissanceConsommer;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="densite_gasoil", type="float", nullable=true)
+     */
+    private $densiteGasoil;
 
 
     //------UPDATE---------------
@@ -646,5 +652,29 @@ class Groupe
     public function getMinuteMarche()
     {
         return $this->minuteMarche;
+    }
+
+    /**
+     * Set densiteGasoil
+     *
+     * @param float $densiteGasoil
+     *
+     * @return Groupe
+     */
+    public function setDensiteGasoil($densiteGasoil)
+    {
+        $this->densiteGasoil = $densiteGasoil;
+
+        return $this;
+    }
+
+    /**
+     * Get densiteGasoil
+     *
+     * @return float
+     */
+    public function getDensiteGasoil()
+    {
+        return $this->densiteGasoil;
     }
 }
