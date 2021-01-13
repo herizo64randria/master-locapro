@@ -57,7 +57,7 @@
                             <tr>
                                 <td><strong class="hide">{{ bonExpedition.numero|origineNum }}</strong><a href="{{ path('bonExpedition_show', {'id' : bonExpedition.id}) }}">{{ bonExpedition.numero }}</a></td>
                                 <td>{{ bonExpedition.userCreer.nom }}</td>
-                                <td>{{ bonExpedition.date|date('d/m/Y') }}</td>
+                                <td><strong class="hide">{{ bonExpedition.date|date('Ymd') }}</strong> {{ bonExpedition.date|date('d/m/Y') }}</td>
                                 <td>
                                     {% if bonExpedition.dateArrivee %}
                                         {{ bonExpedition.dateArrivee|date('d/m/Y') }}
@@ -121,7 +121,7 @@
         $(document).ready(function() {
             $('#tableSortie').DataTable({
                 pageLength: 100,
-                order: [[ 0, "desc" ]],
+                order: [[ 2, "desc" ], [ 0, "desc" ]],
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",

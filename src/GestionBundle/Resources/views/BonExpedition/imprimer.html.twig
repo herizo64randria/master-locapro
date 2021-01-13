@@ -147,9 +147,9 @@
             <h3 style="display:inline">BORDEREAU D'EXPEDITION N°</h3>            <h3 style="display:inline;margin-left:10px"><u>{{ bonExpedition.numero }}</u></h3>
 
             <ul style="list-style:none;displayinline-block;margin-left:-40px">
-                <li>Destinataire : {{ bonExpedition.destination }} {{ bonExpedition.groupe.site.emplacement }}</li>
+                <li>Destinataire : {{ bonExpedition.destination }}</li>
                 <li>Adressé à : {{ bonExpedition.agent }}</li>
-                <li>Générateur : {{ bonExpedition.groupe.numero }}</li>
+                <li>Générateur : {{ bonExpedition.groupe.numero }} -|- {{ bonExpedition.groupe.site.emplacement }}</li>
                 <li>Transporteur : {{ bonExpedition.transporteur }}</li>
                 <li>Numéro : {{ bonExpedition.contactTransporteur }}</li>
                 <li>Véhicule : {{ bonExpedition.vehiculeTransporteur }}</li>
