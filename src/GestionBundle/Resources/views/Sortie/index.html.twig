@@ -56,12 +56,12 @@
                             <tr>
                                 <td><strong class="hide">{{ sortie.numero|origineNum }}</strong><a href="{{ path('sortie_afficher', {'id' : sortie.id}) }}">{{ sortie.numero }}</a></td>
                                 <td>{{ sortie.userCreer.nom }}</td>
-                                <td>{{ sortie.date|date('d/m/Y') }}</td>
+                                <td><strong class="hide">{{ sortie.date|date('Ymd') }}</strong>{{ sortie.date|date('d/m/Y') }}</td>
 
-                                    {% set groupe = '-'  %}
-                                    {% if sortie.groupe %}
-                                        {% set groupe = sortie.groupe.numero  %}
-                                    {% endif %}
+                                {% set groupe = '-'  %}
+                                {% if sortie.groupe %}
+                                    {% set groupe = sortie.groupe.numero  %}
+                                {% endif %}
                                 <td>
                                     {{ groupe }}
                                 </td>
@@ -113,7 +113,7 @@
         $(document).ready(function() {
             $('#tableSortie').DataTable({
                 pageLength: 100,
-                order: [[ 0, "desc" ]],
+                order: [[ 1, "desc" ], [ 0, "desc" ]],
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",

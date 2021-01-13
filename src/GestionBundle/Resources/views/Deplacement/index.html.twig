@@ -31,8 +31,8 @@
                             <th>Numéro</th>
                             <th>Date</th>
                             <th>Utilisateur</th>
-                            <th>Dépôt source</th>
-                            <th>Dépôt déstination</th>
+                            <th>Source</th>
+                            <th>Déstination</th>
                             <th>Etat</th>
 
                         </tr>
@@ -54,13 +54,32 @@
                             {% endif %}
                             <tr>
                                 <td><strong class="hide">{{ deplacement.numero|origineNum }}</strong><a href="{{ path('deplacement_affcher', {'id' : deplacement.id}) }}">{{ deplacement.numero }}</a></td>
-                                <td>{{ deplacement.date|date('d/m/Y') }}</td>
+                                <td><strong class="hide">{{ deplacement.date|date('Ymd') }}</strong>{{ deplacement.date|date('d/m/Y') }}</td>
                                 <td>{{ deplacement.userCreer.nom }}</td>
                                 <td>
-{#                                    {{ deplacement.sourcedepot.nom }}#}
+                                    {% set emplacementSource = "" %}
+                                    {% if deplacement.sourcesite %}
+                                        {% set emplacementSource = deplacement.sourcesite.emplacement %}
+                                    {% endif %}
+
+                                    {% if deplacement.sourcedepot %}
+                                        {% set emplacementSource = deplacement.sourcedepot.nom %}
+                                    {% endif %}
+{#                                    AFFICHAGE#}
+                                    {{ emplacementSource }}
                                 </td>
                                 <td>
-{#                                    {{ deplacement.destinationdepot.nom }}#}
+                                    {% set emplacementDestination = "" %}
+                                    {% if deplacement.destinationsite %}
+                                        {% set emplacementDestination = deplacement.destinationsite.emplacement %}
+                                    {% endif %}
+
+                                    {% if deplacement.destinationdepot %}
+                                        {% set emplacementDestination = deplacement.destinationdepot.nom %}
+                                    {% endif %}
+
+{#                                    AFFICHAGE#}
+                                    {{ emplacementDestination }}
                                 </td>
                                 <td class="{{ couleurEtat }}">{{ deplacement.etat }}</td>
                             </tr>
@@ -85,7 +104,7 @@
         $(document).ready(function() {
             $('#tabledeplacement').DataTable({
                 pageLength: 100,
-                order: [[ 0, "desc" ]],
+                order: [[ 1, "desc" ], [ 0, "desc" ]],
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",

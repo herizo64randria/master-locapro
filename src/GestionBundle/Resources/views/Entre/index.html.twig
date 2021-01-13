@@ -59,7 +59,7 @@
 
                             <tr>
                                 <td><strong class="hide">{{ entre.numero|origineNum }}</strong><a href="{{ path('entre_affcher', {'id' : entre.id}) }}">{{ entre.numero }}</a></td>
-                                <td>{{ entre.date|date('d/m/Y') }}</td>
+                                <td><strong class="hide">{{ entre.date|date('Ymd') }}</strong>{{ entre.date|date('d/m/Y') }}</td>
                                 <td>{{ entre.userCreer.nom }}</td>
                                 <td>
                                 {% if entre.fournisseur %}
@@ -101,7 +101,7 @@
         $(document).ready(function() {
             $('#tableEntre').DataTable({
                 pageLength: 100,
-                order: [[ 0, "desc" ]],
+                order: [[ 1, "desc" ], [ 0, "desc" ]],
                 language: {
                     processing:     "Traitement en cours...",
                     search:         "Rechercher&nbsp;:",
