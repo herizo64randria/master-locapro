@@ -21,10 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="46024aa8-108c-492a-ad68-d8f9c97ae5ea" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/imprimer.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,6 +158,9 @@
       <workItem from="1610096153078" duration="10000" />
       <workItem from="1610097544203" duration="63000" />
       <workItem from="1610521726153" duration="3967000" />
+      <workItem from="1611560743519" duration="1278000" />
+      <workItem from="1612164344341" duration="1998000" />
+      <workItem from="1614587489467" duration="285000" />
     </task>
     <servers />
   </component>
@@ -190,42 +190,26 @@
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1604994454670" />
     <state x="499" y="169" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1606715022308" />
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1608192193424">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1611564876060">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605083239427" />
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1608192193424" />
-    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1608192193424">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1611564876060" />
+    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1611564876060">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605083239425" />
-    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1608192193424" />
-    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1608192193424">
+    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1611564876060" />
+    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1611564876060">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605083239424" />
-    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1608192193424" />
-    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1608192193424">
+    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1611564876060" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1611564876060">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605083239426" />
-    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1608192193424" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1602494834874">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602494834874" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1602494834874">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602494834874" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1602494834874">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602494834874" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1602494834874">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602494834874" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1611564876060" />
     <state x="277" y="58" key="SettingsEditor" timestamp="1607070134114">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
