@@ -34,6 +34,7 @@
                         <tr>
                             <th>Numéro</th>
                             <th>Date</th>
+                            <th>Fournisseur</th>
                             <th>Utilisateur</th>
                             <th>Etat</th>
 
@@ -59,6 +60,7 @@
                             <tr>
                                 <td><strong class="hide">{{ commande.numero|origineNum }}</strong><a href="{{ path('commande_afficher',{id:commande.id}) }}">{{ commande.numero }}</a></td>
                                 <td><strong class="hide">{{ commande.date|date('Ymd') }}</strong>{{ commande.date|date('d/m/Y') }}</td>
+                                <td>{{ commande.fournisseur.nom }}</td>
                                 <td>{{ commande.userCreer.nom }}</td>
 
                                 <td class="{{ couleurEtat }}">{{ commande.etat }}</td>

@@ -291,7 +291,7 @@
                                         {% if commande.remise > 0 %}
                                             {% if lignecommande.remise > 0 %}
                                                 {% set puRemise = lignecommande.prix - (lignecommande.prix * lignecommande.remise / 100) %}
-                                                {% set totalRemise = (lignecommande.prix * lignecommande.remise / 100) * lignecommande.quantite %}
+                                                {% set totalRemise = totalRemise + ((lignecommande.prix * lignecommande.remise / 100) * lignecommande.quantite) %}
 
                                                 <td class="text-right" style="white-space: nowrap">
                                                     {{ puRemise|number_format(2, ',', ' ') }}
