@@ -2,271 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed90ec69-647c-4885-b969-0f1098cb82e7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/stock.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/symfony_requirements" beforeDir="false" afterPath="$PROJECT_DIR$/bin/symfony_requirements" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/src/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/AdminBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/AdminBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/NombreConfirmationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/NombreConfirmationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/NombreConfirmation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/NombreConfirmation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Form/NombreConfirmationType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Form/NombreConfirmationType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/NombreConfirmationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/NombreConfirmationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Resources/views/nombreconfirmation/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Tests/Controller/NombreConfirmationControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Tests/Controller/NombreConfirmationControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiExterneBundle/ApiExterneBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiExterneBundle/ApiExterneBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiExterneBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiExterneBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiExterneBundle/Controller/ProblemeAPIController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiExterneBundle/Controller/ProblemeAPIController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiExterneBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiExterneBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiExterneBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiExterneBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/AppBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/AppBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Services/GestionService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/ClientBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/ClientBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Entity/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Entity/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Entity/FamilleClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Entity/FamilleClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Repository/ClientRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Repository/ClientRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Repository/FamilleClientRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Repository/FamilleClientRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientBundle/Resources/views/Default/test.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBundle/Resources/views/Default/test.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Controller/FournisseurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Controller/FournisseurController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Entity/Doc.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Entity/Doc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Entity/Fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Entity/Fournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Form/FournisseurType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Form/FournisseurType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/FournisseurBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/FournisseurBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Repository/DocRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Repository/DocRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Repository/FournisseurRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Repository/FournisseurRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Resources/views/fournisseur/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FournisseurBundle/Tests/Controller/FournisseurControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/FournisseurBundle/Tests/Controller/FournisseurControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/BonExpeditionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/BonExpeditionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/PieceJointeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/PieceJointeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/SortieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonExpedition.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Commande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Commande.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Deplacement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Entre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/NumDoc.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/NumDoc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/PieceJointe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/PieceJointe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/Sortie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneBonExpedition.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneBonExpedition.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneCommande.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneDeplacement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneDeplacement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneEntre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneSortie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/GestionBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/GestionBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/BonExpeditionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/BonExpeditionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/DeplacementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/DeplacementRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/EntreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/EntreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/NumDocRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/NumDocRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/PieceJointeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/PieceJointeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/SortieRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/SortieRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneBonExpeditionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneBonExpeditionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneDeplacementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneDeplacementRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneEntreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneEntreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneSortieRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Repository/ligneSortieRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Default/accueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Default/accueil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Deplacement/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/editLigneEntre.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/editLigneEntre.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Entre/show1.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/editLigneSortie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/Sortie/show1.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/CarteMadagascarController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/DateHistoriqueEtatGroupeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/DateHistoriqueEtatGroupeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/HIstoriqueEtatController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/HIstoriqueEtatController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/HeureMarcheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/HeureMarcheController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/SiteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Alternateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Alternateur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Appoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Appoint.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Catalogue.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Catalogue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Depense.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Depense.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/DeplacementGroupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/DeplacementGroupe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/EmployeMission.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/EmployeMission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/GroupageHistoriqueGroupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/GroupageHistoriqueGroupe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Groupe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/HeureMarche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/HeureMarche.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/HistoriqueEtat.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/HistoriqueEtat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/HistoriqueEtatGroupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/HistoriqueEtatGroupe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/HistoriqueGroupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/HistoriqueGroupe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/ListeEtatGroupe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/ListeEtatGroupe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/ListePiece.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/ListePiece.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Mission.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Mission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Moteur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Moteur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/PieceRefEqiv.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/PieceRefEqiv.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/PjCatalogue.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/PjCatalogue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Probleme.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Probleme.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Site.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/SousHeureMarche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/SousHeureMarche.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/SuiviPiece.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/SuiviPiece.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Vidange.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Vidange.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/problemePhoto.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/problemePhoto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/solutionProbleme.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/solutionProbleme.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Form/GroupeType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Form/GroupeType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Form/ListePieceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Form/ListePieceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Form/SiteType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Form/SiteType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/GroupeBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/GroupeBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/AlternateurRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/AlternateurRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/AppointRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/AppointRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/CatalogueRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/CatalogueRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/DepenseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/DepenseRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/DeplacementGroupeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/DeplacementGroupeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/DeplacementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/DeplacementRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/EmployeMissionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/EmployeMissionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/EtatRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/EtatRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/GroupageHistoriqueGroupeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/GroupageHistoriqueGroupeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/GroupeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/GroupeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/HeureMarcheRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/HeureMarcheRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueEtatGroupeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueEtatGroupeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueEtatRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueEtatRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueGroupeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/HistoriqueGroupeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/ListeEtatGroupeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/ListeEtatGroupeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/ListePieceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/ListePieceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/MissionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/MissionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/MoteurRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/MoteurRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/PjCatalogueRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/PjCatalogueRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/ProblemeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/ProblemeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/SiteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/SiteRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/SousHeureMarcheRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/SousHeureMarcheRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/SuiviPieceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/SuiviPieceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/VidangeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/VidangeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/problemePhotoRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/problemePhotoRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Repository/solutionProblemeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Repository/solutionProblemeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/carteMadagascar/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/catalogue/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/dateHistoriqueEtat/indexDateJour.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/dateHistoriqueEtat/indexDateJour.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/dateHistoriqueEtat/indexHistorique.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/dateHistoriqueEtat/indexHistorique.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/deplacement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/deplacement/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/modalInfoirmataionShowGroupe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/modalInfoirmataionShowGroupe.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/groupe/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/historiqueEtatGroupe/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/historiqueEtatGroupe/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/probleme/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/site/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/suiviPiece/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/suiviPiece/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/CatalogueControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/CatalogueControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/GroupeControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/GroupeControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/ListePieceControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/ListePieceControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/ProblemeControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/ProblemeControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/SiteControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Tests/Controller/SiteControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/DepotController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/DepotController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/FamilleProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/FamilleProduitController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/HuileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/HuileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/ImmoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/ImmoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitAPIController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitAPIController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Controller/ProduitController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Depot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/FamilleProduit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/FamilleProduit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueImmo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueImmo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/HistoriqueProduit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Immo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Immo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Stock_.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Stock_.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/DepotType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Form/DepotType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/FamilleProduitType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Form/FamilleProduitType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/ImmoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Form/ImmoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/ProduitBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/ProduitBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/DepotRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/DepotRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/FamilleProduitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/FamilleProduitRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/HistoriqueImmoRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/HistoriqueImmoRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/HistoriqueProduitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/HistoriqueProduitRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/ImmoRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/ImmoRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/ProduitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/ProduitRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Repository/Stock_Repository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Repository/Stock_Repository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/depot/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/familleproduit/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/huile/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/immo/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/showHistoriqueDepot.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/showHistoriqueDepot.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/showHistoriqueSite.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Resources/views/produit/showHistoriqueSite.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/DepotControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/DepotControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/FamilleProduitControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/FamilleProduitControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/HuileControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/HuileControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/ImmoControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/ImmoControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/ProduitControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Tests/Controller/ProduitControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Entity/Employe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Entity/Employe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/RH_EmployeBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/RH_EmployeBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Repository/EmployeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Repository/EmployeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/RessourceHumaine/EmployeBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/HistoriqueGlobal.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/HistoriqueGlobal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Repository/HistoriqueGlobalRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Repository/HistoriqueGlobalRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/translations/messages.en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/translations/messages.en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/translations/messages.fr.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/translations/messages.fr.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login_content.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/Resources/views/Security/login_content.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/UserBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserBundle/UserBundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/SymfonyRequirements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/StatistiqueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/StatistiqueController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexByDateVidaneAppoint.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexByDateVidaneAppoint.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexVidaneAppoint.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexVidaneAppoint.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,7 +100,7 @@
       <updated>1620373269874</updated>
       <workItem from="1620373275739" duration="399000" />
       <workItem from="1620374582436" duration="2496000" />
-      <workItem from="1620627817607" duration="5339000" />
+      <workItem from="1620627817607" duration="7037000" />
     </task>
     <servers />
   </component>
@@ -408,9 +148,9 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" width="672" height="677" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1620634588919" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620634615960">
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620635831078">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620634615960" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620635831078" />
   </component>
 </project>

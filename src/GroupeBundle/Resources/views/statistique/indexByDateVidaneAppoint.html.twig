@@ -27,7 +27,8 @@
                             <th>N° Groupe</th>
                             <th>Site</th>
                             <th>Etat</th>
-                            <th>H.M. total (h)</th>
+                            <th>H.M. total</th>
+                            <th>H.M. moyenne</th>
                             <th>Total huiles Vidange (l)</th>
                             <th>Total huiles Appoint (l)</th>
                         </tr>
@@ -42,8 +43,18 @@
                                     <strong class="hidden">{{ liste.groupe.etatGroupe.etat }}</strong>
                                     <i class="fa fa-circle "></i> {{ liste.groupe.etatGroupe.etat }}
                                 </td>
-                                <td class="text-center">
+                                <td class="text-right">
                                     {{ liste.heureMarche|affichageHm(liste.minuteMarche) }}
+                                </td>
+                                <td class="text-right">
+                                    <strong class="hide">{{ liste.moyenHeureMarche }}</strong>
+                                    {% if liste.moyenHeureMarche != '-' %}
+
+                                        {{ liste.moyenHeureMarche }} h
+                                        (pour {{ liste.nbJourMarche }} j)
+                                    {% else %}
+                                        -
+                                    {% endif %}
                                 </td>
 
                                 <td class="text-center">

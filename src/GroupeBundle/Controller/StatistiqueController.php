@@ -150,6 +150,8 @@ class StatistiqueController extends Controller
 
                 $heureMarches = $repositoryHeureMarche->findByDateAndGroupe($groupe, $dateDebut, $dateFin);
 
+                $nbJourMache = count($heureMarches);
+
                 foreach ($heureMarches as $heureM){
                     if($heureM->getHeure())
                         $heureMarche += $heureM->getHeure();
@@ -160,6 +162,17 @@ class StatistiqueController extends Controller
 
                 $ligne['heureMarche'] = $heureMarche;
                 $ligne['minuteMarche'] = $minuteMarche;
+                $ligne['moyenHeureMarche'] = '-';
+                $ligne['nbJourMarche'] = $nbJourMache;
+
+                if($nbJourMache > 0){
+                    $mTotal = (int)$minuteMarche;
+                    $mTotal = $mTotal + ($heureMarche * 60);
+
+                    $moyenneHM = $mTotal / 60 / $nbJourMache;
+
+                    $ligne['moyenHeureMarche'] = round($moyenneHM);
+                }
 
                 // ------------------///// HEURE DE MARCHE /////------------------
 
