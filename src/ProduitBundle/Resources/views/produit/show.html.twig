@@ -277,7 +277,19 @@
                                     <tr>
                                         <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
                                         <td>
-                                            Bon d'expedition': N° <a href="{{ path('bonExpedition_show', {'id' : historiqueProduit.bonExpedition.id }) }}" target="_blank">{{ historiqueProduit.bonExpedition.numero }}</a></td>
+                                            Bon d'expedition: N° <a href="{{ path('bonExpedition_show', {'id' : historiqueProduit.bonExpedition.id }) }}" target="_blank">{{ historiqueProduit.bonExpedition.numero }}</a></td>
+                                        <td>{{ historiqueProduit|emplacementHist }}</td>
+                                        <td class="danger"></td>
+                                        <td class="danger text-center">{{ historiqueProduit.quantite }}</td>
+                                        <td class="text-right">{{ solde }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if historiqueProduit.bonLivraison %}
+                                    <tr>
+                                        <td>{{ historiqueProduit.date|date('d/m/Y') }}</td>
+                                        <td>
+                                            Bon de livraison: N° <a href="{{ path('bonLivraison_show', {'id' : historiqueProduit.bonLivraison.id }) }}" target="_blank">{{ historiqueProduit.bonLivraison.numero }}</a></td>
                                         <td>{{ historiqueProduit|emplacementHist }}</td>
                                         <td class="danger"></td>
                                         <td class="danger text-center">{{ historiqueProduit.quantite }}</td>

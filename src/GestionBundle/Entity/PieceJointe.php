@@ -68,6 +68,12 @@ class PieceJointe
     private $bonExpedition;
 
     /**
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonLivraison", inversedBy="pjBonLivraisons")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $bonLivraison;
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -276,5 +282,29 @@ class PieceJointe
     public function getUserCreer()
     {
         return $this->userCreer;
+    }
+
+    /**
+     * Set bonLivraison
+     *
+     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
+     *
+     * @return PieceJointe
+     */
+    public function setBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison = null)
+    {
+        $this->bonLivraison = $bonLivraison;
+
+        return $this;
+    }
+
+    /**
+     * Get bonLivraison
+     *
+     * @return \GestionBundle\Entity\BonLivraison
+     */
+    public function getBonLivraison()
+    {
+        return $this->bonLivraison;
     }
 }

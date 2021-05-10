@@ -84,6 +84,11 @@ class Site
      */
     private $bonExpeditions; // Notez le « s », un stocks est liée à plusieurs entrées
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\BonLivraison", mappedBy="site")
+     */
+    private $bonLivraisons; // Notez le « s », un stocks est liée à plusieurs entrées
+
 
 //------------------------------------------
 
@@ -446,5 +451,39 @@ class Site
     public function getBonExpeditions()
     {
         return $this->bonExpeditions;
+    }
+
+    /**
+     * Add bonLivraison
+     *
+     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
+     *
+     * @return Site
+     */
+    public function addBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison)
+    {
+        $this->bonLivraisons[] = $bonLivraison;
+
+        return $this;
+    }
+
+    /**
+     * Remove bonLivraison
+     *
+     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
+     */
+    public function removeBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison)
+    {
+        $this->bonLivraisons->removeElement($bonLivraison);
+    }
+
+    /**
+     * Get bonLivraisons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBonLivraisons()
+    {
+        return $this->bonLivraisons;
     }
 }

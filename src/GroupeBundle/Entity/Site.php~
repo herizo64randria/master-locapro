@@ -84,6 +84,11 @@ class Site
      */
     private $bonExpeditions; // Notez le « s », un stocks est liée à plusieurs entrées
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\BonLivraison", mappedBy="site")
+     */
+    private $bonLivraisons; // Notez le « s », un stocks est liée à plusieurs entrées
+
 
 //------------------------------------------
 

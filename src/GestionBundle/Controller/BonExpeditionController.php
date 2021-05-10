@@ -480,8 +480,11 @@ class BonExpeditionController extends Controller
 
         }
 
-//        MODIFICATION DU ENTRE
-        $bonExpedition->setEtat(self::DEMANDE_ENATTENTE);
+        if($bonExpedition->getEtat() == self::DEMANDE_REFUSER){
+            $bonExpedition->setEtat(self::DEMANDE_ENATTENTE_REC);
+        }else{
+            $bonExpedition->setEtat(self::DEMANDE_ENATTENTE);
+        }
         $bonExpedition->setModifiable(false);
         $em->persist($bonExpedition);
 
@@ -706,8 +709,6 @@ class BonExpeditionController extends Controller
 
             // ------------------- ////// EMPLACEMEMNT ////// ---------------------
 
-            //NEXT NUMERO
-            $this->nextNumero($em);
 
             $em->persist($bonExpedition);
             $em->flush();

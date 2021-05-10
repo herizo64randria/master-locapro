@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+
+{% block titre_page %} <strong class="text-primary">Modification bon de livraison</strong> {% endblock %}
+{% block titre_description %}Modification d'un bon delivraison{% endblock %}
+{% block body %}
+
+    {% set  DEMANDE_ENATTENTE = 'En attente de confirmation' %}
+    {% set  DEMANDE_CONFIRME = 'Demande confirmée' %}
+    {% set  DEMANDE_REFUSER = 'Demande refusée' %}
+    {% set  DEMANDE_CLOTURE = 'Demande clôturée' %}
+    {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <form action="#" method="post" autocomplete="off">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-plus-circle"></i> Formulaire Bon de livraison</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="date" class=" control-label">Date :</label>
+                            <div class="input-group date form_date " data-date="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input required class="form-control"  type="text" value="{{ bonLivraison.date|date('d/m/Y') }}" readonly name="date">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numero">Numero du bon de livraison <b class="text-danger" id="err_numero"></b></label>
+                            <input required type="text" class="form-control" name="numero" id="numero" value="{{ numero }}" readonly  />
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="groupe">Groupe <b class="text-danger" id="err_groupe"></b></label>
+                            <select required  class="form-control" name="groupe" id="groupe" >
+                                {% for groupe in groupes %}
+                                    <option value="{{ groupe.id }}" {% if groupe == bonLivraison.groupe %}selected{% endif %}>{{ groupe.numero }} - {{ groupe.site.emplacement }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
+                            <textarea rows="3" class="form-control" name="motif" id="motif" >{{ bonLivraison.motif }}</textarea>
+                        </div>
+
+                        <!-- ----------------  EMPLACEMENT ------------------ -->
+
+                        <div class="box" id="emplacementStock">
+                            <div class="box-header with-border">
+                                <h4 class="box-title text-primary"> Emplacement de sortie en stock</h4>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-primary">
+                                                <input type="radio" name="emplacement" id="emplacementDepot" value="depot" {% if bonLivraison.depot %}checked{% endif %}/>
+                                                <label for="emplacementDepot">Dépôt</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementDepot">
+                                            <div class="form-group">
+                                                <label for="depot">Dépôt de stockage <b class="text-danger" id="err_depot"></b></label>
+                                                <select required  class="form-control" name="depot" id="depot" >
+                                                    {% for key, depot in depots %}
+                                                        {% set selectDepot = '' %}
+                                                        {% if bonLivraison.depot %}
+                                                            {% if bonLivraison.depot == depot %}
+                                                                {% set selectDepot = 'selected' %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        <option value="{{ depot.id }}" {{ selectDepot }}>{{ depot.nom }} - {{ depot.abrv }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="funkyradio">
+                                            <div class="funkyradio-info">
+                                                <input type="radio" name="emplacement" id="emplacementSite" value="site" {% if bonLivraison.site %}checked{% endif %}/>
+                                                <label for="emplacementSite">Site</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="emplacementSite">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="site">Site: <b class="text-danger" id="err_site"></b></label>
+                                                    <select required class="form-control" name="site" id="site">
+                                                        {% for key, site in sites %}
+                                                            {% set selectSite = '' %}
+                                                            {% if bonLivraison.site %}
+                                                                {% if bonLivraison.site == site %}
+                                                                    {% set selectSite = 'selected' %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                            <option value="{{ site.id }}" {% if key == 0 %}selected {% endif %}>{{ site.emplacement }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ----------------  ///// EMPLACEMENT ///// ------------------ -->
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary btn-block  btn-lg"><i class="fa fa-save"></i> Enregistrer</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ path('bonLivraison_index') }}" class="btn btn-default btn-block btn-lg">Annuler</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <script>
+        $('#groupe').select2();
+    </script>
+
+    {#DATEPICKER#}
+    <script src="{{ asset('DatePicker1/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DatePicker1/js/locales/bootstrap-datetimepicker.fr.js') }}" charset="UTF-8"></script>
+    <script>
+        $('.form_date').datetimepicker({
+            format: 'dd/mm/yyyy',
+            language:  'fr',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+
+    <script>
+        $('#site').select2();
+        $('#depot').select2();
+    </script>
+
+    {#    SCRIPT CHOIX EMPLACEMENT#}
+    <script>
+        $('#site').prop('disabled', true);
+        $('#depot').prop('disabled', false);
+
+        $('#emplacementDepot').click(function () {
+            $('#site').prop('disabled', true);
+            $('#depot').prop('disabled', false);
+        });
+
+        $('#emplacementSite').click(function () {
+            $('#site').prop('disabled', false);
+            $('#depot').prop('disabled', true);
+        });
+
+    </script>
+
+    {#    CACHER BOUTON SI CONFIRMER#}
+    {% if bonLivraison.etat == DEMANDE_CONFIRME %}
+        <script>
+            $('#emplacementStock').addClass('hide');
+            $('#groupe').parent().addClass('hide');
+            $('#motif').parent().addClass('hide');
+
+        </script>
+    {% endif %}
+{% endblock %}

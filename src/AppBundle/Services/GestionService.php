@@ -4,7 +4,9 @@ namespace AppBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use GestionBundle\Entity\BonExpedition;
+use GestionBundle\Entity\BonLivraison;
 use GestionBundle\Entity\Deplacement;
+use GestionBundle\Entity\ligneBonLivraison;
 use GestionBundle\Entity\Sortie;
 use ProduitBundle\Entity\Stock_;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -139,6 +141,50 @@ class GestionService
 
             if($ligne->getQuantite() > $quantiteEnStock)
                 $erreur ++;
+        }
+
+        return $erreur;
+    }
+
+    public  function testErreurLigneLivraison(BonLivraison $bonLivraison){
+        $erreur = 0;
+
+        $repositoryStock = $this->em->getRepository(Stock_::class);
+
+        foreach ($bonLivraison->getLigneBonLivraisons() as $ligne){
+
+//            $ligne = new ligneBonLivraison();
+            //-----------------TEST DU STOCK-----------------
+            if ($ligne->getProduit()){
+                $produit = $ligne->getProduit();
+                $stock = null;
+                if ($bonLivraison->getDepot()){
+                    $stock = $repositoryStock->findOneBy(array(
+                        'produit' => $produit,
+                        'depot' => $bonLivraison->getDepot()
+                    ));
+
+                    if(!$stock){
+                        throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le dépôt: '.$produit->getReference());
+                    }
+                }
+
+                if ($bonLivraison->getSite()){
+                    $stock = $repositoryStock->findOneBy(array(
+                        'produit' => $produit,
+                        'site' => $bonLivraison->getSite()
+                    ));
+
+                    if(!$stock){
+                        throw new Exception('Erreur! La quantité est supérieur par rapport au stock dans le site: '.$produit->getReference());
+                    }
+                }
+
+                $quantiteEnStock = $stock->getQuantite();
+
+                if($ligne->getQuantite() > $quantiteEnStock)
+                    $erreur ++;
+            }
         }
 
         return $erreur;

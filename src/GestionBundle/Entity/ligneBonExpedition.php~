@@ -50,8 +50,6 @@ class ligneBonExpedition
      */
     private $produit;
 
-
-
     /**
      * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonExpedition", inversedBy="ligneBonExpeditions")
      * @ORM\JoinColumn(nullable=false)

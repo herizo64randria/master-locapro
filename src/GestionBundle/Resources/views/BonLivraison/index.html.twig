@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block titre %}Bon d'Expédition{% endblock %}
-{% block titre_page %}Bon d'Expédition{% endblock %}
-{% block titre_description %}<br>Liste des bons d'expedition{% endblock %}
+{% block titre_page %}Bon de livraison{% endblock %}
+{% block titre_description %}<br>Liste des bons de livraison{% endblock %}
 {% block body %}
 
     {% set  DEMANDE_ENATTENTE = 'En attente de confirmation' %}
@@ -12,16 +12,16 @@
     {% set  DEMANDE_ENATTENTE_REC = 'En attente de reconfirmation' %}
 
     <ul class="list-inline">
-        {% if app.user|ifRole('ROLE_GESTION_EXPEDITION') %}
-            <li><a href="{{ path('bonExpedition_new') }}" class="btn btn-lg btn-danger"><i class="fa fa-mail-reply"></i> Nouveau Bon d'expédition</a></li>
-        {% endif %}
+{#        {% if app.user|ifRole('ROLE_GESTION_LIVRAISON') %}#}
+            <li><a href="{{ path('bonLivraison_new') }}" class="btn btn-lg btn-danger"><i class="fa fa-mail-reply"></i> Nouveau Bon de Livraison</a></li>
+{#        {% endif %}#}
     </ul>
 
     <div class="row">
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Table liste bon d'expédition</h3>
+                    <h3 class="box-title">Table liste bon de livraison</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -30,71 +30,63 @@
                         <tr>
                             <th>Numéro</th>
                             <th>Utilisateur</th>
-                            <th>Date d'expédition</th>
-                            <th>Date d'arrivée sur site</th>
+                            <th>Date de livraison</th>
                             <th>Groupe</th>
+                            <th>Site</th>
                             <th>Destination</th>
-                            <th>Dépôt de sortie</th>
                             <th>Etat</th>
-
                         </tr>
                         </thead>
                         <tbody>
-                        {% for bonExpedition in bonExpeditions %}
+                        {% for bonLivraison in bonLivraisons %}
 
                             {#COULEUR DE L'ETAT#}
                             {% set couleurEtat = '' %}
-                            {% if bonExpedition.etat == DEMANDE_ENATTENTE or bonExpedition.etat == DEMANDE_ENATTENTE_REC %}
+                            {% if bonLivraison.etat == DEMANDE_ENATTENTE or bonLivraison.etat == DEMANDE_ENATTENTE_REC %}
                                 {% set couleurEtat = 'warning' %}
                             {% endif %}
-                            {% if bonExpedition.etat == DEMANDE_CONFIRME %}
+                            {% if bonLivraison.etat == DEMANDE_CONFIRME %}
                                 {% set couleurEtat = 'success' %}
                             {% endif %}
-                            {% if bonExpedition.etat == DEMANDE_REFUSER or bonExpedition.etat == DEMANDE_CLOTURE %}
+                            {% if bonLivraison.etat == DEMANDE_REFUSER or bonLivraison.etat == DEMANDE_CLOTURE %}
                                 {% set couleurEtat = 'danger' %}
                             {% endif %}
 
                             <tr>
-                                <td><strong class="hide">{{ bonExpedition.numero|origineNum }}</strong><a href="{{ path('bonExpedition_show', {'id' : bonExpedition.id}) }}">{{ bonExpedition.numero }}</a></td>
-                                <td>{{ bonExpedition.userCreer.nom }}</td>
-                                <td><strong class="hide">{{ bonExpedition.date|date('Ymd') }}</strong> {{ bonExpedition.date|date('d/m/Y') }}</td>
-                                <td>
-                                    {% if bonExpedition.dateArrivee %}
-                                        {{ bonExpedition.dateArrivee|date('d/m/Y') }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
-                                </td>
+                               <td><strong class="hide">{{ bonLivraison.numero|origineNum }}</strong><a href="{{ path('bonLivraison_show', {'id' : bonLivraison.id}) }}">{{ bonLivraison.numero }}</a></td>{#{{ path('bonLivraison_show', {'id' : bonLivraison.id}) }}#}
+                                <td>{{ bonLivraison.userCreer.nom }}</td>
+                                <td><strong class="hide">{{ bonLivraison.date|date('Ymd') }}</strong> {{ bonLivraison.date|date('d/m/Y') }}</td>
+
 
                                 {% set groupe = '-'  %}
-                                {% if bonExpedition.groupe %}
-                                    {% set groupe = bonExpedition.groupe.numero  %}
+                                {% if bonLivraison.groupe %}
+                                    {% set groupe = bonLivraison.groupe.numero  %}
                                 {% endif %}
                                 <td>
                                     {{ groupe }}
                                 </td>
-                                {% set destination = '-' %}
-                                {% if bonExpedition.destination %}
-                                    {% set destination = bonExpedition.destination %}
+                                {% set siteGroupe = '-'  %}
+                                {% if bonLivraison.groupe %}
+                                    {% set siteGroupe = bonLivraison.groupe.numero  %}
                                 {% endif %}
-                                <td>{{ destination }}</td>
+                                <td>{{ siteGroupe }}</td>
 
                                 <td>
-                                    {% if bonExpedition.depot %}
-                                        {% set sortieEmplacement = 'Dépôt- '~bonExpedition.depot.nom %}
+                                    {% if bonLivraison.depot %}
+                                        {% set sortieEmplacement = 'Dépôt- '~bonLivraison.depot.nom %}
                                     {% endif %}
-                                    {% if bonExpedition.site %}
-                                        {% set sortieEmplacement = 'Site- '~bonExpedition.site.emplacement %}
+                                    {% if bonLivraison.site %}
+                                        {% set sortieEmplacement = 'Site- '~bonLivraison.site.emplacement %}
                                     {% endif %}
 
                                     {{ sortieEmplacement }}
                                 </td>
 
                                 <td class="{{ couleurEtat }} text-center">
-                                    {{ bonExpedition.etat }}
-                                    {% if bonExpedition.userConfirmes|length > 0 and (bonExpedition.etat == DEMANDE_ENATTENTE or bonExpedition.etat == DEMANDE_ENATTENTE_REC) %}
+                                    {{ bonLivraison.etat }}
+                                    {% if bonLivraison.userConfirmes|length > 0 and (bonLivraison.etat == DEMANDE_ENATTENTE or bonLivraison.etat == DEMANDE_ENATTENTE_REC) %}
                                         <ul>
-                                            {% for userConfirme in bonExpedition.userConfirmes %}
+                                            {% for userConfirme in bonLivraison.userConfirmes %}
                                                 <li>{{ userConfirme.nom }}</li>
                                             {% endfor %}
                                         </ul>

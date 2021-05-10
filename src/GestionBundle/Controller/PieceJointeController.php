@@ -20,9 +20,8 @@ class PieceJointeController extends Controller
      */
     public function creerAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         if($request->getMethod() == 'POST'){
-
-            $em = $this->getDoctrine()->getManager();
 
             $lienRedicect = '';
 
@@ -90,6 +89,14 @@ class PieceJointeController extends Controller
 
                 $lienRedicect = $this->generateUrl('bonExpedition_show', array('id' => $idDoc));
             }
+            if ($typeDoc == 'livraison'){
+                $bonLivraison = $em->getRepository('GestionBundle:BonLivraison')->findOneBy(array(
+                    'id' => $idDoc
+                ));
+                $pjGestion->setBonLivraison($bonLivraison);
+
+                $lienRedicect = $this->generateUrl('bonLivraison_show', array('id' => $idDoc));
+            }
 
             $em->persist($pjGestion);
             $em->flush();
@@ -106,7 +113,7 @@ class PieceJointeController extends Controller
      * @Route("/piece-jointe/supprimer/{id}", name="pjGestion_supprimer")
      */
     public function supprimerAction(PieceJointe $pieceJointe){
-
+        $em = $this->getDoctrine()->getManager();
         $lienRedirect = '';
         if($pieceJointe->getEntre()){
             $lienRedirect = $this->generateUrl('entre_affcher', array('id' => $pieceJointe->getEntre()->getId()));
@@ -127,8 +134,11 @@ class PieceJointeController extends Controller
         if($pieceJointe->getBonExpedition()){
             $lienRedirect = $this->generateUrl('bonExpedition_show', array('id' => $pieceJointe->getBonExpedition()->getId()));
         }
+        if($pieceJointe->getBonLivraison()){
+            $lienRedirect = $this->generateUrl('bonLivraison_show', array('id' => $pieceJointe->getBonLivraison()->getId()));
+        }
 
-        $em = $this->getDoctrine()->getManager();
+
 
         $em->remove($pieceJointe);
 

@@ -5,12 +5,12 @@ namespace GestionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ligneBonExpedition
+ * ligneBonLivraison
  *
- * @ORM\Table(name="ligne_bon_expedition")
- * @ORM\Entity(repositoryClass="GestionBundle\Repository\ligneBonExpeditionRepository")
+ * @ORM\Table(name="ligne_bon_livraison")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\ligneBonLivraisonRepository")
  */
-class ligneBonExpedition
+class ligneBonLivraison
 {
     /**
      * @var int
@@ -42,7 +42,7 @@ class ligneBonExpedition
      */
     private $observation;
 
-//------------\\\\\\\////////////-----------
+    //------------\\\\\\\////////////-----------
 
     /**
      * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
@@ -51,10 +51,10 @@ class ligneBonExpedition
     private $produit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonExpedition", inversedBy="ligneBonExpeditions")
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonLivraison", inversedBy="ligneBonLivraisons")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $bonExpedition;
+    private $bonLivraison;
 
 //------------\\\\\\\////////////-----------
 
@@ -74,7 +74,7 @@ class ligneBonExpedition
      *
      * @param float $quantite
      *
-     * @return ligneBonExpedition
+     * @return ligneBonLivraison
      */
     public function setQuantite($quantite)
     {
@@ -98,7 +98,7 @@ class ligneBonExpedition
      *
      * @param string $designation
      *
-     * @return ligneBonExpedition
+     * @return ligneBonLivraison
      */
     public function setDesignation($designation)
     {
@@ -117,14 +117,36 @@ class ligneBonExpedition
         return $this->designation;
     }
 
+    /**
+     * Set observation
+     *
+     * @param string $observation
+     *
+     * @return ligneBonLivraison
+     */
+    public function setObservation($observation)
+    {
+        $this->observation = $observation;
 
+        return $this;
+    }
+
+    /**
+     * Get observation
+     *
+     * @return string
+     */
+    public function getObservation()
+    {
+        return $this->observation;
+    }
 
     /**
      * Set produit
      *
      * @param \ProduitBundle\Entity\Produit $produit
      *
-     * @return ligneBonExpedition
+     * @return ligneBonLivraison
      */
     public function setProduit(\ProduitBundle\Entity\Produit $produit = null)
     {
@@ -144,50 +166,26 @@ class ligneBonExpedition
     }
 
     /**
-     * Set bonExpedition
+     * Set bonLivraison
      *
-     * @param \GestionBundle\Entity\BonExpedition $bonExpedition
+     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
      *
-     * @return ligneBonExpedition
+     * @return ligneBonLivraison
      */
-    public function setBonExpedition(\GestionBundle\Entity\BonExpedition $bonExpedition)
+    public function setBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison)
     {
-        $this->bonExpedition = $bonExpedition;
+        $this->bonLivraison = $bonLivraison;
 
         return $this;
     }
 
     /**
-     * Get bonExpedition
+     * Get bonLivraison
      *
-     * @return \GestionBundle\Entity\BonExpedition
+     * @return \GestionBundle\Entity\BonLivraison
      */
-    public function getBonExpedition()
+    public function getBonLivraison()
     {
-        return $this->bonExpedition;
-    }
-
-    /**
-     * Set observation
-     *
-     * @param string $observation
-     *
-     * @return ligneBonExpedition
-     */
-    public function setObservation($observation)
-    {
-        $this->observation = $observation;
-
-        return $this;
-    }
-
-    /**
-     * Get observation
-     *
-     * @return string
-     */
-    public function getObservation()
-    {
-        return $this->observation;
+        return $this->bonLivraison;
     }
 }

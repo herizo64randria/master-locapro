@@ -3,6 +3,7 @@
 namespace ProduitBundle\Controller;
 
 use AppBundle\Services\ProduitService;
+use ProduitBundle\Entity\HistoriqueProduit;
 use ProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;

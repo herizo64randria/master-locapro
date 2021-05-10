@@ -104,6 +104,12 @@ class HistoriqueProduit
     private $bonExpedition;
 
     /**
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonLivraison")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $bonLivraison;
+
+    /**
      * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\SuiviPiece")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -457,5 +463,29 @@ class HistoriqueProduit
     public function getRemplacementPiece()
     {
         return $this->remplacementPiece;
+    }
+
+    /**
+     * Set bonLivraison
+     *
+     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
+     *
+     * @return HistoriqueProduit
+     */
+    public function setBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison = null)
+    {
+        $this->bonLivraison = $bonLivraison;
+
+        return $this;
+    }
+
+    /**
+     * Get bonLivraison
+     *
+     * @return \GestionBundle\Entity\BonLivraison
+     */
+    public function getBonLivraison()
+    {
+        return $this->bonLivraison;
     }
 }
