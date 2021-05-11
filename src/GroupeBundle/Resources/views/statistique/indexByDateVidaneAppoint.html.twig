@@ -29,6 +29,7 @@
                             <th>Etat</th>
                             <th>H.M. total</th>
                             <th>H.M. moyenne</th>
+                            <th>Nombre de jour</th>
                             <th>Total huiles Vidange (l)</th>
                             <th>Total huiles Appoint (l)</th>
                         </tr>
@@ -49,12 +50,13 @@
                                 <td class="text-right">
                                     <strong class="hide">{{ liste.moyenHeureMarche }}</strong>
                                     {% if liste.moyenHeureMarche != '-' %}
-
                                         {{ liste.moyenHeureMarche }} h
-                                        (pour {{ liste.nbJourMarche }} j)
                                     {% else %}
                                         -
                                     {% endif %}
+                                </td>
+                                <td>
+                                    {{ liste.nbJourMarche }} j
                                 </td>
 
                                 <td class="text-center">

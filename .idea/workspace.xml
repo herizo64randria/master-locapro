@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed90ec69-647c-4885-b969-0f1098cb82e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/BonLivraisonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/BonLivraisonController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonLivraison.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonLivraison.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/imprimer.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexByDateVidaneAppoint.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexByDateVidaneAppoint.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +101,7 @@
       <workItem from="1620627817607" duration="7275000" />
       <workItem from="1620637569282" duration="70000" />
       <workItem from="1620648621551" duration="821000" />
-      <workItem from="1620711049903" duration="5345000" />
+      <workItem from="1620711049903" duration="6429000" />
     </task>
     <servers />
   </component>
@@ -156,9 +149,9 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="425" y="189" width="672" height="677" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1620715120052" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620716505993">
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620720365613">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620716505993" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620720365613" />
   </component>
 </project>
