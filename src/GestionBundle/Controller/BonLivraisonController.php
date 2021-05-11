@@ -282,6 +282,28 @@ class BonLivraisonController extends Controller
             if (isset($_POST['motif']))
                 $bonLivraison->setMotif($_POST['motif']);
 
+            $bonLivraison->setDestination($_POST['destination']);
+
+            // ------------------ AGENT ------------------
+
+            $bonLivraison->setAgent($_POST['agent']);
+            $bonLivraison->setPosteAgent($_POST['posteAgent']);
+            $bonLivraison->setContactAgent($_POST['contactAgent']);
+
+            if (isset($_POST['agent2']))
+                $bonLivraison->setAgent2($_POST['agent2']);
+
+
+            if (isset($_POST['posteAgent2']))
+                $bonLivraison->setPosteAgent2($_POST['posteAgent2']);
+
+
+            if (isset($_POST['contactAgent2']))
+                $bonLivraison->setContactAgent2($_POST['contactAgent2']);
+
+
+            // ------------------///// AGENT /////------------------
+
 
 
             // ------------------- EMPLACEMEMNT ---------------------
@@ -669,7 +691,27 @@ class BonLivraisonController extends Controller
             if (isset($_POST['motif']))
                 $bonLivraison->setMotif($_POST['motif']);
 
+            $bonLivraison->setDestination($_POST['destination']);
 
+            // ------------------ AGENT ------------------
+
+            $bonLivraison->setAgent($_POST['agent']);
+            $bonLivraison->setPosteAgent($_POST['posteAgent']);
+            $bonLivraison->setContactAgent($_POST['contactAgent']);
+
+            if (isset($_POST['agent2']))
+                $bonLivraison->setAgent2($_POST['agent2']);
+
+
+            if (isset($_POST['posteAgent2']))
+                $bonLivraison->setPosteAgent2($_POST['posteAgent2']);
+
+
+            if (isset($_POST['contactAgent2']))
+                $bonLivraison->setContactAgent2($_POST['contactAgent2']);
+
+
+            // ------------------///// AGENT /////------------------
 
             // ------------------- EMPLACEMEMNT ---------------------
 

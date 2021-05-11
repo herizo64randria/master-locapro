@@ -52,9 +52,10 @@
                                 <td>(Non-livré)</td>
                             {% endif %}
                         </tr>
-                        {% if bonLivraison.dateArrivee %}
-
-                        {% endif %}
+                        <tr>
+                            <td>Destination:</td>
+                            <td>{{ bonLivraison.destination }}</td>
+                        </tr>
                         <tr>
                             <td>Dépôt:</td>
                             {% if bonLivraison.depot %}
@@ -77,8 +78,34 @@
                                 <td><a target="_blank" href="{{ path('groupe_show',{'id':bonLivraison.groupe.id}) }}">{{ bonLivraison.groupe.numero }} - {{ bonLivraison.groupe.site.emplacement }}</a></td>
                             </tr>
                         {% endif %}
-
+                        <tr>
+                            <td colspan="2" class="text-right"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapsePlusInfo">Voir plus</button></td>
+                        </tr>
                     </table>
+                    <div id="collapsePlusInfo" class="collapse">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Agent:</td>
+                                <td>{{ bonLivraison.agent }}</td>
+                            </tr>
+                            <tr>
+                                <td>Poste agent:</td>
+                                <td>{{ bonLivraison.posteAgent }}</td>
+                            </tr>
+
+                            {% if bonLivraison.agent2 %}
+                                <tr>
+                                    <td>Agent 2:</td>
+                                    <td>{{ bonLivraison.agent2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Poste:</td>
+                                    <td>{{ bonLivraison.posteAgent2 }}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+
 
                 </div>
             </div>
@@ -102,7 +129,7 @@
                 {% endif %}
                 {% if bonLivraison.etat == DEMANDE_CONFIRME %}
                     <li>
-{#                        <a href="{{ path('bonLivraison_imprimer', {'id' : bonLivraison.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>#}
+                        <a href="{{ path('bonLivraison_imprimer', {'id' : bonLivraison.id}) }}" class="btn btn-lg btn-warning"><i class="fa fa-print"></i> Imprimer</a>
                     </li>
                 {% endif %}
             </ul>

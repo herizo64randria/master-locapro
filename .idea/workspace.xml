@@ -4,9 +4,13 @@
     <list default="true" id="ed90ec69-647c-4885-b969-0f1098cb82e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/StatistiqueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/StatistiqueController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexByDateVidaneAppoint.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexByDateVidaneAppoint.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexVidaneAppoint.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/statistique/indexVidaneAppoint.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/BonLivraisonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/BonLivraisonController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/BonLivraison.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/BonLivraison.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/imprimer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +89,7 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="s doctrine:generate:entities GestionBundle:BonLivraison" />
       <command value="s doctrine:schema:update --dump-sql --force" />
     </option>
   </component>
@@ -100,7 +105,10 @@
       <updated>1620373269874</updated>
       <workItem from="1620373275739" duration="399000" />
       <workItem from="1620374582436" duration="2496000" />
-      <workItem from="1620627817607" duration="7037000" />
+      <workItem from="1620627817607" duration="7275000" />
+      <workItem from="1620637569282" duration="70000" />
+      <workItem from="1620648621551" duration="821000" />
+      <workItem from="1620711049903" duration="5345000" />
     </task>
     <servers />
   </component>
@@ -116,41 +124,41 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="157" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1620377734075" />
-    <state width="1493" height="214" key="GridCell.Tab.0.bottom" timestamp="1620632711702">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1620715238714">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1620632711702" />
-    <state width="1493" height="214" key="GridCell.Tab.0.center" timestamp="1620632711702">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1620715238714" />
+    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1620715238714">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1620632711702" />
-    <state width="1493" height="214" key="GridCell.Tab.0.left" timestamp="1620632711702">
+    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1620715238714" />
+    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1620715238714">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1620632711702" />
-    <state width="1493" height="214" key="GridCell.Tab.0.right" timestamp="1620632711702">
+    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1620715238714" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1620715238714">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1620632711702" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1620715238714" />
     <state x="277" y="62" key="SettingsEditor" timestamp="1620377757126">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="277" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1620377757126" />
-    <state x="490" y="159" width="540" height="524" key="StructurePopup" timestamp="1620635555915">
+    <state x="490" y="159" width="540" height="524" key="StructurePopup" timestamp="1620719044522">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="490" y="159" width="540" height="524" key="StructurePopup/0.0.1536.834@0.0.1536.834" timestamp="1620635555915" />
+    <state x="490" y="159" width="540" height="524" key="StructurePopup/0.0.1536.834@0.0.1536.834" timestamp="1620719044522" />
     <state x="581" y="319" key="SymfonyPathDialog" timestamp="1620377736169">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="581" y="319" key="SymfonyPathDialog/0.0.1536.834@0.0.1536.834" timestamp="1620377736169" />
-    <state x="425" y="189" width="672" height="677" key="run.anything.popup" timestamp="1620634588919">
+    <state x="425" y="189" width="672" height="677" key="run.anything.popup" timestamp="1620715120052">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="425" y="189" width="672" height="677" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1620634588919" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620635831078">
+    <state x="425" y="189" width="672" height="677" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1620715120052" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620716505993">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620635831078" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620716505993" />
   </component>
 </project>

@@ -35,8 +35,10 @@
                             <input required type="text" class="form-control" name="numero" id="numero" value="{{ numero }}" readonly  />
                         </div>
 
-
-
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" id="destination" name="destination" class="form-control" value="{{ bonLivraison.destination }}"  required>
+                        </div>
 
                         <div class="form-group">
                             <label for="groupe">Groupe <b class="text-danger" id="err_groupe"></b></label>
@@ -46,6 +48,44 @@
                                 {% endfor %}
                             </select>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box">
+                                    <h3>Agent recepteur</h3>
+                                    <div class="form-group">
+                                        <label for="agent">Adressé à <b class="text-danger" id="err_agent"></b></label>
+                                        <input required type="text" class="form-control" name="agent" id="agent" value="{{ bonLivraison.agent }}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="posteAgent">Poste</label>
+                                        <input type="text" id="posteAgent" name="posteAgent" class="form-control" value="{{ bonLivraison.posteAgent }}"   required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactAgent">Tél.</label>
+                                        <input type="text" id="contactAgent" name="contactAgent" class="form-control" value="{{ bonLivraison.contactAgent }}"  required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box">
+                                    <h3>Autre agent recepteur</h3>
+                                    <div class="form-group">
+                                        <label for="agent2">Adressé à <b class="text-danger" id="err_agent2"></b></label>
+                                        <input  type="text" class="form-control" name="agent2" id="agent2" value="{{ bonLivraison.agent2 }}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="posteAgent2">Poste</label>
+                                        <input type="text" id="posteAgent2" name="posteAgent2" class="form-control" value="{{ bonLivraison.posteAgent2 }}"  >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactAgent2">Tél.</label>
+                                        <input type="text" id="contactAgent2" name="contactAgent2" class="form-control" value="{{ bonLivraison.contactAgent2 }}" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="motif">Motif (facultatif): <b class="text-danger" id="err_motif"></b></label>
                             <textarea rows="3" class="form-control" name="motif" id="motif" >{{ bonLivraison.motif }}</textarea>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bordereau expédition</title>
+    <title>Bon de livraison</title>
     <style>
         div#bandeau {
             width: 1000px;
@@ -134,7 +134,12 @@
             <p>501 Toamasina</p>
             <p>Tél. : 034 59 109 62</p>
 
-            <p>infos.locapro@groupe-ibc.com</p>
+            <p>
+                infos.locapro@groupe-ibc.com
+            </p>
+            <p>
+                maintenance.locapro@groupe-ibc.com
+            </p>
             <p>NIF 3003 300 382</p>
             <p>STAT 77100 31 2019 0 00212</p>
 
@@ -142,28 +147,34 @@
     </div>
     <div id="droit">
         <div id="sdroit">
-            <p style="margin-left:180px;margin-bottom:25px">Antananarivo, le {{ bonExpedition.date|date('d/m/Y') }}</p>
+            <h2 style="display:inline">BON DE LIVRAISON <br></h2>
 
-            <h3 style="display:inline">BORDEREAU D'EXPEDITION N°</h3>            <h3 style="display:inline;margin-left:10px"><u>{{ bonExpedition.numero }}</u></h3>
 
-            <ul style="list-style:none;displayinline-block;margin-left:-40px">
-                <li>Destinataire : {{ bonExpedition.destination }}</li>
-                <li>Adressé à : {{ bonExpedition.agent }}</li>
-                <li>Générateur : {{ bonExpedition.groupe.numero }} -|- {{ bonExpedition.groupe.site.emplacement }}</li>
-                <li>Transporteur : {{ bonExpedition.transporteur }}</li>
-                <li>Numéro : {{ bonExpedition.contactTransporteur }}</li>
-                <li>Véhicule : {{ bonExpedition.vehiculeTransporteur }}</li>
+            <ul style="list-style:none;display: inline-block;margin-left:-40px">
+                <li><b>N° {{ bonLivraison.numero }}</b></li>
+                <li>Destination: {{ bonLivraison.destination }}</li>
+                <li>Adressé à: {{ bonLivraison.agent }}</li>
+                <li>Poste: {{ bonLivraison.posteAgent }}</li>
+                <li>Numéro: {{ bonLivraison.contactAgent }}</li>
+
+                {% if bonLivraison.agent2 %}
+                    <li>---------------------</li>
+                    <li>Adressé à: {{ bonLivraison.agent2 }}</li>
+                    <li>Poste: {{ bonLivraison.posteAgent2 }}</li>
+                    <li>Numéro: {{ bonLivraison.contactAgent2 }}</li>
+                {% endif %}
+
             </ul>
-            <ul style="list-style:none;display:inline;margin-right:230px;margin-top:-150px;float:right">
-                <li>Tél : {{ bonExpedition.contactAgent }}</li>
+           {# <ul style="list-style:none;display:inline;margin-right:230px;margin-top:-150px;float:right">
+                <li>Tél : {{ bonLivraison.contactAgent }}</li>
 
 
-            </ul>
+            </ul>#}
 
         </div>
     </div>
 </div>
-<br><br>
+<br><br><br><br><br><br>
 <div id="contenu">
 
     <div id="Scontenu">
@@ -174,21 +185,19 @@
             <th>Références</th>
             <th width="50px" style="text-align: center">Quantité</th>
             <th>Désignations</th>
-            <th>Observtions</th>
             </thead>
 
             <tbody>
 
             {% set nbrLigne = 0 %}
             {% set totalQuantite = 0 %}
-            {% for ligne in bonExpedition.ligneBonExpeditions %}
+            {% for ligne in bonLivraison.lignebonLivraisons %}
                 {% set nbrLigne = nbrLigne + 1 %}
                 {% set totalQuantite = totalQuantite + ligne.quantite %}
                 <tr>
                     <td>{{ ligne.produit.reference }}</td>
                     <td style="text-align: center">{{ ligne.quantite }}</td>
                     <td>{{ ligne.designation }}</td>
-                    <td>{{ ligne.observation }}</td>
                 </tr>
             {% endfor %}
 
@@ -197,14 +206,13 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
                 </tr>
             {% endfor %}
 
             <tr>
-                <td   style="text-align:center">TOTAL COLIS</td  >
+                <td   style="text-align:center">TOTAL</td  >
                 <td style="text-align: center">{{ totalQuantite }}</td>
-                <td colspan="2" style="text-align:center" >COUT D'EXPEDITION = {{ bonExpedition.coutTransport|number_format(2, ',', ' ') }} MGA</td>
+{#                <td colspan="2" style="text-align:center" >COUT D'EXPEDITION = {{ bonLivraison.coutTransport|number_format(2, ',', ' ') }} MGA</td>#}
             </tr>
 
 
@@ -221,10 +229,10 @@
     <table id="footer">
 
         <tr>
-            <td>Expéditeur</td>
-            <td ></td>
-            <td style="float:left;margin-left:350px">Chauffeur</td>
-            <td style="float:right">Receptionneur</td>
+            <td>Le Fournisseur</td>
+            <td style="float:left;margin-left:125px">Le Magasinier</td>
+            <td style="float:left;margin-left:125px">Le Chauffeur</td>
+            <td style="float:right">Le Client</td>
         </tr>
 
     </table>
