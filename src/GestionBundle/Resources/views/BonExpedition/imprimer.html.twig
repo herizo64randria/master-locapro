@@ -146,23 +146,26 @@
 
             <h3 style="display:inline">BORDEREAU D'EXPEDITION N°</h3>            <h3 style="display:inline;margin-left:10px"><u>{{ bonExpedition.numero }}</u></h3>
 
-            <ul style="list-style:none;displayinline-block;margin-left:-40px">
+            <ul style="list-style:none;margin-left:-40px">
                 <li>Destinataire : {{ bonExpedition.destination }}</li>
                 <li>Adressé à : {{ bonExpedition.agent }}</li>
+                <li>Tél destinataire: {{ bonExpedition.contactAgent }}</li>
                 <li>Générateur : {{ bonExpedition.groupe.numero }} -|- {{ bonExpedition.groupe.site.emplacement }}</li>
                 <li>Transporteur : {{ bonExpedition.transporteur }}</li>
                 <li>Numéro : {{ bonExpedition.contactTransporteur }}</li>
                 <li>Véhicule : {{ bonExpedition.vehiculeTransporteur }}</li>
             </ul>
-            <ul style="list-style:none;display:inline;margin-right:230px;margin-top:-150px;float:right">
-                <li>Tél : {{ bonExpedition.contactAgent }}</li>
-
-
-            </ul>
 
         </div>
     </div>
 </div>
+<br>
+{% if bonExpedition.motif and bonExpedition.motif != "" %}
+    <div style="text-align: center">
+        <p style="line-height: 20px"><b>Motif:</b> {{ bonExpedition.motif|nl2br }}</p>
+    </div>
+{% endif %}
+
 <br><br>
 <div id="contenu">
 
@@ -171,10 +174,13 @@
 
             <thead >
 
-            <th>Références</th>
-            <th width="50px" style="text-align: center">Quantité</th>
-            <th>Désignations</th>
-            <th>Observtions</th>
+            <tr>
+                <th>Références</th>
+                <th width="50px" style="text-align: center">Quantité</th>
+                <th>Désignations</th>
+                <th>Observtions</th>
+            </tr>
+
             </thead>
 
             <tbody>
@@ -223,15 +229,15 @@
         <tr>
             <td>Expéditeur</td>
             <td ></td>
-            <td style="float:left;margin-left:350px">Chauffeur</td>
+            <td style="float:left;margin-left:250px">Chauffeur</td>
             <td style="float:right">Receptionneur</td>
         </tr>
 
     </table>
 </div>
-<br/> <br><br><br><br>
-<div style="margin-left:350px;">
-    <p style="font-style:italic;margin-left:10px">Merci d'en accuser réception et à nous retourner s'il vous plait</p>
+<br/> <br><br><br><br><br>
+<div style="text-align: center; margin-top: 15px;">
+    <p style="font-style:italic">Merci d'en accuser réception et à nous retourner s'il vous plait</p>
     <b style="">Les marchandises voyagent aux risques et périls du destinataire</b>
 </div>
 

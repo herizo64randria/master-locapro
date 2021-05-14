@@ -174,7 +174,15 @@
         </div>
     </div>
 </div>
-<br><br><br><br><br><br>
+<br>
+
+{% if bonLivraison.motif and bonLivraison.motif != "" %}
+    <div style="text-align: center">
+        <p style="line-height: 20px">Motif: {{ bonLivraison.motif|nl2br }}</p>
+    </div>
+{% endif %}
+
+<br><br>
 <div id="contenu">
 
     <div id="Scontenu">
@@ -238,9 +246,9 @@
     </table>
 </div>
 <br/> <br><br><br><br>
-<div style="margin-left:350px;">
-    <p style="font-style:italic;margin-left:10px">Merci d'en accuser réception et à nous retourner s'il vous plait</p>
-    <b style="">Les marchandises voyagent aux risques et périls du destinataire</b>
+<div style="text-align: center">
+    <p style="font-style:italic;">Merci d'en accuser réception et à nous retourner s'il vous plait</p>
+    <b >Les marchandises voyagent aux risques et périls du destinataire</b>
 </div>
 
 </body>
