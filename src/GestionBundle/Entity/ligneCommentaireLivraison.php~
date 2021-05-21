@@ -5,12 +5,12 @@ namespace GestionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ligneBonLivraison
+ * ligneCommentaireLivraison
  *
- * @ORM\Table(name="ligne_bon_livraison")
- * @ORM\Entity(repositoryClass="GestionBundle\Repository\ligneBonLivraisonRepository")
+ * @ORM\Table(name="ligne_commentaire_livraison")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\ligneCommentaireLivraisonRepository")
  */
-class ligneBonLivraison
+class ligneCommentaireLivraison
 {
     /**
      * @var int
@@ -24,39 +24,40 @@ class ligneBonLivraison
     /**
      * @var float
      *
-     * @ORM\Column(name="quantite", type="float")
+     * @ORM\Column(name="quantite", type="float", nullable=true)
      */
     private $quantite;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="designation", type="string", length=255)
+     * @ORM\Column(name="designation", type="text", nullable=true)
      */
     private $designation;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="observation", type="string", length=255, nullable=true)
+     * @ORM\Column(name="observation", type="text", nullable=true)
      */
     private $observation;
 
-    //------------\\\\\\\////////////-----------
-
     /**
-     * @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Produit")
-     * @ORM\JoinColumn(nullable=true)
+     * @var float
+     *
+     * @ORM\Column(name="ligne", type="float")
      */
-    private $produit;
+    private $ligne;
+
+    // ------------------ LIAISON ------------------
 
     /**
-     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonLivraison", inversedBy="ligneBonLivraisons")
+     * @ORM\ManyToOne(targetEntity="GestionBundle\Entity\BonLivraison", inversedBy="ligneCommantaireLivraisons")
      * @ORM\JoinColumn(nullable=false)
      */
     private $bonLivraison;
 
-//------------\\\\\\\////////////-----------
+    // ------------------///// LIAISON /////------------------
 
 
     /**
@@ -74,7 +75,7 @@ class ligneBonLivraison
      *
      * @param float $quantite
      *
-     * @return ligneBonLivraison
+     * @return ligneCommentaireLivraison
      */
     public function setQuantite($quantite)
     {
@@ -98,7 +99,7 @@ class ligneBonLivraison
      *
      * @param string $designation
      *
-     * @return ligneBonLivraison
+     * @return ligneCommentaireLivraison
      */
     public function setDesignation($designation)
     {
@@ -122,7 +123,7 @@ class ligneBonLivraison
      *
      * @param string $observation
      *
-     * @return ligneBonLivraison
+     * @return ligneCommentaireLivraison
      */
     public function setObservation($observation)
     {
@@ -142,50 +143,26 @@ class ligneBonLivraison
     }
 
     /**
-     * Set produit
+     * Set ligne
      *
-     * @param \ProduitBundle\Entity\Produit $produit
+     * @param float $ligne
      *
-     * @return ligneBonLivraison
+     * @return ligneCommentaireLivraison
      */
-    public function setProduit(\ProduitBundle\Entity\Produit $produit = null)
+    public function setLigne($ligne)
     {
-        $this->produit = $produit;
+        $this->ligne = $ligne;
 
         return $this;
     }
 
     /**
-     * Get produit
+     * Get ligne
      *
-     * @return \ProduitBundle\Entity\Produit
+     * @return float
      */
-    public function getProduit()
+    public function getLigne()
     {
-        return $this->produit;
-    }
-
-    /**
-     * Set bonLivraison
-     *
-     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
-     *
-     * @return ligneBonLivraison
-     */
-    public function setBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison)
-    {
-        $this->bonLivraison = $bonLivraison;
-
-        return $this;
-    }
-
-    /**
-     * Get bonLivraison
-     *
-     * @return \GestionBundle\Entity\BonLivraison
-     */
-    public function getBonLivraison()
-    {
-        return $this->bonLivraison;
+        return $this->ligne;
     }
 }

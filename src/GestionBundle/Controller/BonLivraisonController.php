@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use GestionBundle\Entity\BonExpedition;
 use GestionBundle\Entity\BonLivraison;
 use GestionBundle\Entity\ligneBonExpedition;
+use GestionBundle\Entity\ligneCommentaireLivraison;
 use GestionBundle\Entity\NumDoc;
 use ProduitBundle\Entity\HistoriqueProduit;
 use ProduitBundle\Entity\Stock_;
@@ -643,8 +644,6 @@ class BonLivraisonController extends Controller
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             return $this->redirectToRoute('bonLivraison_show', array('id'=>$bonLivraison->getId()));
-
-
         }
 
         throw new Exception('Erreur 404 NOT-FOUND');
@@ -795,5 +794,57 @@ class BonLivraisonController extends Controller
         }
 
         throw new Exception('404 NOT-FOUND');
+    }
+
+    /**
+     * Ajouter Commentaire
+     *
+     * @Route("/{id}/add-comment/200", name="bonLivraison_addCommentaire")
+     */
+    public function addCommentaireAction(Request $request, BonLivraison $bonLivraison)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ligneComm = new ligneCommentaireLivraison();
+
+        $ligneComm->setBonLivraison($bonLivraison);
+
+        $ligneComm->setLigne($_POST['ligneComm_ligne']);
+
+        if(isset($_POST['ligneComm_designation'])){
+            $ligneComm->setDesignation($_POST['ligneComm_designation']);
+        }
+
+        if(isset($_POST['ligneComm_quantite']) && $_POST['ligneComm_quantite'] > 0){
+            $ligneComm->setQuantite($_POST['ligneComm_quantite']);
+        }
+
+        if(isset($_POST['ligneComm_observation'])){
+            $ligneComm->setObservation($_POST['ligneComm_observation']);
+        }
+
+        $em->persist($ligneComm);
+
+        $em->flush();
+
+        return $this->redirectToRoute('bonLivraison_show', array('id' => $bonLivraison->getId()));
+    }
+
+    /**
+     * Ajouter Commentaire
+     *
+     * @Route("/supprimer/{id}/comment", name="bonLivraison_deleteCommentaire")
+     */
+    public function deleteCommentaireAction(Request $request, ligneCommentaireLivraison $commentaireLivraison)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $bonLivraison = $commentaireLivraison->getBonLivraison();
+        $em->remove($commentaireLivraison);
+
+        $em->flush();
+
+        return $this->redirectToRoute('bonLivraison_show', array('id' => $bonLivraison->getId()));
+
     }
 }

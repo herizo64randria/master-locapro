@@ -180,6 +180,11 @@ class BonLivraison
      */
     private $pjBonLivraisons; // Notez le « s »,
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\ligneCommentaireLivraison", mappedBy="bonLivraison")
+     */
+    private $ligneCommantaireLivraisons; // Notez le « s », un stocks est liée à plusieurs ligne
+
 //-------------------------//////////---------------------------//////////---------------------------
 
 
@@ -810,5 +815,39 @@ class BonLivraison
     public function getPosteAgent2()
     {
         return $this->posteAgent2;
+    }
+
+    /**
+     * Add ligneCommantaireLivraison
+     *
+     * @param \GestionBundle\Entity\ligneCommentaireLivraison $ligneCommantaireLivraison
+     *
+     * @return BonLivraison
+     */
+    public function addLigneCommantaireLivraison(\GestionBundle\Entity\ligneCommentaireLivraison $ligneCommantaireLivraison)
+    {
+        $this->ligneCommantaireLivraisons[] = $ligneCommantaireLivraison;
+
+        return $this;
+    }
+
+    /**
+     * Remove ligneCommantaireLivraison
+     *
+     * @param \GestionBundle\Entity\ligneCommentaireLivraison $ligneCommantaireLivraison
+     */
+    public function removeLigneCommantaireLivraison(\GestionBundle\Entity\ligneCommentaireLivraison $ligneCommantaireLivraison)
+    {
+        $this->ligneCommantaireLivraisons->removeElement($ligneCommantaireLivraison);
+    }
+
+    /**
+     * Get ligneCommantaireLivraisons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLigneCommantaireLivraisons()
+    {
+        return $this->ligneCommantaireLivraisons;
     }
 }
