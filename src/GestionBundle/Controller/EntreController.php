@@ -455,6 +455,8 @@ class EntreController extends Controller
 
         foreach ($entre->getLigneEntres() as $ligneEntre){
 
+//            $ligneEntre = new ligneEntre();
+
             //--------HISTORIQUE DU PRODUIT------------
             $historiqueProduit = new HistoriqueProduit();
 
@@ -463,8 +465,6 @@ class EntreController extends Controller
             $historiqueProduit->setEntre($entre);
             $historiqueProduit->setDate($entre->getDate());
             $historiqueProduit->setQuantite($ligneEntre->getQuantite());
-
-
 
             $em->persist($historiqueProduit);
 
@@ -507,8 +507,17 @@ class EntreController extends Controller
             $stock->setQuantite($quantite);
 
             $em->persist($stock);
-            $em->flush();
+
             //------------------------------------------------
+
+
+            // ------------------ MIS A JOUR STOCK ------------------
+
+            $serviceProduit->updatePrixProduit($em, $ligneEntre->getProduit(), $ligneEntre->getPrixAchat());
+
+            // ------------------///// MIS A JOUR STOCK /////------------------
+
+            $em->flush();
 
             //--------UPDATE STOCK TOTAL-----------------
             $produit = $historiqueProduit->getProduit();

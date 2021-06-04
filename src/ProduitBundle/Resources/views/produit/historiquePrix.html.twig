@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Historique prix produit{% endblock %}
+
+{% block titre_page %} <strong class="text-primary">Historique prix produit</strong> {% endblock %}
+{% block titre_description %}Information du produit{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-slack"></i> Fiche Information Produit - <a href="{{ path('produit_show', {'id' : produit.id}) }}">{{ produit.designation }} | {{ produit.reference }}</a></h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered" id="tablePrixProduit">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Num. Doc.</th>
+                                    <th>Prix</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ligneEntre in ligneEntres %}
+                                    <tr>
+                                        <td>
+                                            <strong class="hidden">{{ ligneEntre.entre.date|date('Ymd') }}</strong>
+                                            {{ ligneEntre.entre.date|date('d/m/Y') }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('entre_affcher', {'id' : ligneEntre.entre.id }) }}" target="_blank">
+                                                {{ ligneEntre.entre.numero }}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{ ligneEntre.prixAchat|number_format(2, ',', ' ') }}
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+    <script>
+        $(document).ready(function() {
+
+            $('#tablePrixProduit').DataTable({
+                pageLength: 100,
+                language: {
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher&nbsp;:",
+                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Pr&eacute;c&eacute;dent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+                    aria: {
+                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+
+
+        } );
+    </script>
+
+{% endblock %}
