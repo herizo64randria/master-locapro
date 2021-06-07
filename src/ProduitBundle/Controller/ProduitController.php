@@ -279,4 +279,27 @@ class ProduitController extends Controller
         ));
     }
 
+    /**
+     * Finds and displays a produit entity.
+     *
+     * @Route("/{id}25O/historique-prix", name="produit_historiquePrix")
+     */
+    public function historiquePrixProduitAction(Produit $produit)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $repositoryLigneEntre =  $em->getRepository('GestionBundle:ligneEntre');
+
+        $ligneEntres = $repositoryLigneEntre->findBy(
+            array(
+                'produit' => $produit,
+            )
+        );
+
+        return $this->render('@Produit/produit/historiquePrix.html.twig', array(
+            'produit' => $produit,
+            'ligneEntres' => $ligneEntres
+        ));
+    }
+
 }

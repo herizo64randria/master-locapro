@@ -21,6 +21,9 @@
                                         <a href="{{ path('produit_edit', {'id' : produit.id}) }}" class="btn btn-info btn-lg"><i class="fa fa-edit"></i> Modifier</a>
                                     </li>
                                 {% endif %}
+                                <li>
+                                    <a href="{{ path('produit_historiquePrix', {'id' : produit.id}) }}" class="btn btn-warning btn-lg"><i class="fa fa-edit"></i> Historique prix</a>
+                                </li>
 
                             </ul>
                         </div>

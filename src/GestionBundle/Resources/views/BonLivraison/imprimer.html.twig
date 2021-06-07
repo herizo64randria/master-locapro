@@ -99,6 +99,7 @@
         td{
 
             padding-left:10px;
+            border-bottom: hidden;
         }
         th{
             text-align:center;white-space:nowrap
@@ -117,7 +118,9 @@
             border-bottom: 1px solid #7f7f7f;
 
         }
-
+        #piedtr1{
+            border-bottom: 1px solid black;
+        }
         li{padding-bottom:10px}
 
     </style>
@@ -190,46 +193,111 @@
 
             <thead >
 
+            <th>Désignations</th>
             <th>Références</th>
             <th width="50px" style="text-align: center">Quantité</th>
-            <th>Désignations</th>
             </thead>
-
+{#                            INITIALISATION TEMP LIGNE#}
+            {% set tmpLigne = 0 %}
+            {% set ligneActive = 1 %}
             <tbody>
 
             {% set nbrLigne = 0 %}
-            {% set totalQuantite = 0 %}
+
+            {#---------------- LIGNE COMMENTAIRE ---------------#}
+
+            {% if bonLivraison.ligneBonLivraisons|length == 0 %}
+                {% for ligneComm in bonLivraison.ligneCommantaireLivraisons %}
+                    {% if ligneActive == ligneComm.ligne %}
+                        <tr>
+                            <td>{{ ligneComm.designation|nl2br }}</td>
+                            <td>{{ ligneComm.observation|nl2br }}</td>
+                            <td style="text-align: center">{{ ligneComm.quantite }}</td>
+                        </tr>
+
+                        {% set ligneActive = ligneActive + 1  %}
+                        {% set tmpLigne = tmpLigne + 1 %}
+
+                        {% set nbrLigne = nbrLigne + 1 %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {#---------------- //// LIGNE COMMENTAIRE ///// ---------------#}
+
+
+
             {% for ligne in bonLivraison.lignebonLivraisons %}
+
+                {#---------------- LIGNE COMMENTAIRE ---------------#}
+
+                {% for ligneComm in bonLivraison.ligneCommantaireLivraisons %}
+                    {% if ligneActive == ligneComm.ligne %}
+                        <tr>
+                            <td>{{ ligneComm.designation|nl2br }}</td>
+                            <td>{{ ligneComm.observation|nl2br }}</td>
+                            <td style="text-align: center">{{ ligneComm.quantite }}</td>
+                        </tr>
+
+                        {% set ligneActive = ligneActive + 1  %}
+                        {% set tmpLigne = tmpLigne + 1 %}
+
+                        {% set nbrLigne = nbrLigne + 1 %}
+                    {% endif %}
+                {% endfor %}
+
+                {#---------------- //// LIGNE COMMENTAIRE ///// ---------------#}
+
                 {% set nbrLigne = nbrLigne + 1 %}
-                {% set totalQuantite = totalQuantite + ligne.quantite %}
                 <tr>
+                    <td>{{ ligne.designation }}</td>
                     <td>{{ ligne.produit.reference }}</td>
                     <td style="text-align: center">{{ ligne.quantite }}</td>
-                    <td>{{ ligne.designation }}</td>
                 </tr>
             {% endfor %}
+
+            {#---------------- LIGNE COMMENTAIRE ---------------#}
+
+            {% for ligneComm in bonLivraison.ligneCommantaireLivraisons %}
+                {% if ligneActive <= ligneComm.ligne %}
+                    <tr>
+                        <td>{{ ligneComm.designation|nl2br }}</td>
+                        <td>{{ ligneComm.observation|nl2br }}</td>
+                        <td style="text-align: center">{{ ligneComm.quantite }}</td>
+                    </tr>
+
+                    {% set ligneActive = ligneActive + 1  %}
+                    {% set tmpLigne = tmpLigne + 1 %}
+
+                    {% set nbrLigne = nbrLigne + 1 %}
+                {% endif %}
+            {% endfor %}
+
+            {#---------------- //// LIGNE COMMENTAIRE ///// ---------------#}
 
             {% for i in nbrLigne..28 %}
                 <tr>
-                    <td></td>
+                    <td ></td>
                     <td></td>
                     <td></td>
                 </tr>
             {% endfor %}
 
-            <tr>
-                <td   style="text-align:center">TOTAL</td  >
-                <td style="text-align: center">{{ totalQuantite }}</td>
-{#                <td colspan="2" style="text-align:center" >COUT D'EXPEDITION = {{ bonLivraison.coutTransport|number_format(2, ',', ' ') }} MGA</td>#}
-            </tr>
-
-
             </tbody>
+            <tfoot>
+            <tr >
+                <td id="piedtr1" ></td>
+                <td id="piedtr1"></td>
+                <td id="piedtr1"></td>
 
+            </tr>
+            </tfoot>
         </table>
         <br>
 
     </div>
+
+
 
 
 </div>

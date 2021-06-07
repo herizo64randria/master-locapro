@@ -114,9 +114,7 @@
             <h3 class="text-center">Etat du B.S.: <i class="text-{{ couleurEtat }}">{{ bonLivraison.etat }}</i></h3>
             <ul class="list-inline">
                 <li>
-
                     <button class="btn btn-lg btn-danger hide" type="button" data-toggle="modal" id="btnEnregistrerSortie" data-target="#modalEnregistrerSortie"><i class="fa fa-save" ></i> Enregistrer</button>
-
                 </li>
                 {% if bonLivraison.modifiable or (bonLivraison.etat == 'En attente de confirmation' or bonLivraison.etat == 'Demande confirmée') and (bonLivraison.userCreer == app.user or app.user|ifRole('ROLE_RESP') or app.user|ifRole('ROLE_SAI_DATE_ARRIVE')) %}
                     <li>
@@ -265,6 +263,7 @@
                         <table class="table table-striped table-bordered" id="tableEntre">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Code Produit</th>
                                 <th>Libellé</th>
                                 <th>Réf. produit</th>
@@ -277,8 +276,62 @@
 
                             {% set erreurLigne = 0 %}
 
+{#                            INITIALISATION TEMP LIGNE#}
+                            {% set tmpLigne = 0 %}
+                            {% set ligneActive = 1 %}
+
                             <tbody>
+
+                            {% if bonLivraison.ligneBonLivraisons|length == 0 %}
+                                {% for ligneComm in bonLivraison.ligneCommantaireLivraisons %}
+                                    {% if ligneActive == ligneComm.ligne %}
+                                        <tr>
+                                            <td>{{ ligneActive }}</td>
+                                            <td>-</td>
+                                            <td>{{ ligneComm.designation }}</td>
+                                            <td>-</td>
+                                            <td>{{ ligneComm.quantite }}</td>
+
+                                            {% if bonLivraison.modifiable and bonLivraison.userCreer == app.user %}
+                                                <td class="action">
+                                                    <button type="button" class="btn btn-xs btn-danger btnSupprimerLigneCommentaire"  lien="{{ path('bonLivraison_deleteCommentaire', { 'id' : ligneComm.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+
+                                        {% set ligneActive = ligneActive + 1  %}
+                                        {% set tmpLigne = tmpLigne + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
                             {% for lignebonLivraison in bonLivraison.lignebonLivraisons %}
+
+{#                                 ----------------- Ligne COMMENTAIRE ----------------- #}
+
+                                {% for ligneComm in bonLivraison.ligneCommantaireLivraisons %}
+                                    {% if ligneActive == ligneComm.ligne %}
+                                        <tr>
+                                            <td>{{ ligneActive }}</td>
+                                            <td>-</td>
+                                            <td>{{ ligneComm.designation }}</td>
+                                            <td>-</td>
+                                            <td>{{ ligneComm.quantite }}</td>
+
+                                            {% if bonLivraison.modifiable and bonLivraison.userCreer == app.user %}
+                                                <td class="action">
+                                                    <button type="button" class="btn btn-xs btn-danger btnSupprimerLigneCommentaire"  lien="{{ path('bonLivraison_deleteCommentaire', { 'id' : ligneComm.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+
+                                        {% set ligneActive = ligneActive + 1  %}
+                                        {% set tmpLigne = tmpLigne + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+
+{#                                 ----------------- ////// Ligne COMMENTAIRE //////  ----------------- #}
+
                                 {% set couleurLigne = '' %}
                                 {% set couleurQuantite = '' %}
 
@@ -299,6 +352,10 @@
                                 {% endif %}
 
                                 <tr class="{{ couleurLigne }} ">
+                                    <td>{{ ligneActive }}</td>
+
+                                    {% set ligneActive = ligneActive + 1  %}
+
                                     <td  class="class_produit" idProduit="{{ lignebonLivraison.produit.id }}" >
                                         {% set ligneCode = '<i class="">Non-codé</i>' %}
                                         {% set pathProduit = path('produit_show', {'id' : lignebonLivraison.produit.id}) %}
@@ -335,12 +392,43 @@
                                     {% endif %}
 
                                 </tr>
+
+                                {# ---------------- SET LIGNE ---------------- #}
+                                {% set tmpLigne = tmpLigne + 1 %}
                             {% endfor %}
+
+        {#                                 ----------------- Ligne COMMENTAIRE ----------------- #}
+
+                            {% for ligneComm in bonLivraison.ligneCommantaireLivraisons %}
+                                {% if ligneActive <= ligneComm.ligne %}
+                                    <tr>
+                                        <td>{{ ligneActive }}</td>
+                                        <td>-</td>
+                                        <td>{{ ligneComm.designation }}</td>
+                                        <td>-</td>
+                                        <td>{{ ligneComm.quantite }}</td>
+
+                                        {% if bonLivraison.modifiable and bonLivraison.userCreer == app.user %}
+                                            <td class="action">
+                                                <button type="button" class="btn btn-xs btn-danger btnSupprimerLigneCommentaire"  lien="{{ path('bonLivraison_deleteCommentaire', { 'id' : ligneComm.id }) }}"><i class="fa fa-minus-circle "></i></button>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+
+
+
+                                    {% set ligneActive = ligneActive + 1  %}
+                                    {% set tmpLigne = tmpLigne + 1 %}
+                                {% endif %}
+                            {% endfor %}
+
+        {#                                 ----------------- ////// Ligne COMMENTAIRE //////  ----------------- #}
+
                             </tbody>
                             {% if bonLivraison.modifiable and bonLivraison.userCreer == app.user %}
-
                                 <tfoot id="formLigne">
                                 <tr >
+                                    <td></td>
                                     <td>
                                         <div class="form-group" >
                                             <select required  class="form-control" name="produit" id="produit" >
@@ -381,6 +469,7 @@
                                             <input required type="text" class="form-control only_float" name="quantite" id="quantite" placeholder="Quantité"  />
                                             <button class="btn btn-success" type="submit" id="btnAjouterProduit"><i class="fa fa-plus-circle"></i> Ajouter la ligne</button>
                                             <button class="btn btn-default" id="btnAnnulerProduit" type="button">Annuler</button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddCommentaire" type="button">Ajouter commentaire</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -462,7 +551,7 @@
                         <br>
                         <div class="form-group">
                             <label for="text">Motif du refus <b class="text-danger" id="err_text"></b></label>
-                            <textarea required type="text" class="form-control" name="text" id="text" rows="4" ></textarea>
+                            <textarea required class="form-control" name="text" id="text" rows="4" ></textarea>
                         </div>
                     </div>
 
@@ -526,6 +615,50 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                             <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" > Enregistrer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- COMMENTAIRE -->
+    <div class="modal fade" id="modalAddCommentaire" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-success">Ajouter commentaire</h4>
+                </div>
+                <form action="{{ path('bonLivraison_addCommentaire', {'id' : bonLivraison.id}) }}" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="ligneComm_designation">Désignation</label>
+                            <textarea id="ligneComm_designation" name="ligneComm_designation" class="form-control"  ></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ligneComm_quantite">Quantité</label>
+                            <input type="text" id="ligneComm_quantite" name="ligneComm_quantite" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ligneComm_observation">Observation</label>
+                            <textarea id="ligneComm_observation" name="ligneComm_observation" class="form-control" ></textarea>
+                        </div>
+
+                        {% set tmpLigne = tmpLigne + 1 %}
+                        <div class="form-group">
+                            <label for="ligneComm_ligne">Position</label>
+                            <input type="number" id="ligneComm_ligne" name="ligneComm_ligne" class="form-control" value="{{ tmpLigne }}" required>
                         </div>
                     </div>
 
@@ -713,6 +846,15 @@
             $('#btnEnregistrerSortie').removeClass('hide');
         </script>
     {% endif %}
+
+    {#    SCRIPT SUPPRIMER LIGNE COMMENTAIRE #}
+    <script>
+        $('.btnSupprimerLigneCommentaire').click(function () {
+            lien = $(this).attr('lien');
+            $('#lienSupprimerLigne').attr('href', lien);
+            $('#modalSupprimerLigne').modal();
+        });
+    </script>
 
 
 

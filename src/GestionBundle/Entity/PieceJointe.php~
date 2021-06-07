@@ -283,4 +283,28 @@ class PieceJointe
     {
         return $this->userCreer;
     }
+
+    /**
+     * Set bonLivraison
+     *
+     * @param \GestionBundle\Entity\BonLivraison $bonLivraison
+     *
+     * @return PieceJointe
+     */
+    public function setBonLivraison(\GestionBundle\Entity\BonLivraison $bonLivraison = null)
+    {
+        $this->bonLivraison = $bonLivraison;
+
+        return $this;
+    }
+
+    /**
+     * Get bonLivraison
+     *
+     * @return \GestionBundle\Entity\BonLivraison
+     */
+    public function getBonLivraison()
+    {
+        return $this->bonLivraison;
+    }
 }

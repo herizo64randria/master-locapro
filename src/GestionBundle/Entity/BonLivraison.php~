@@ -180,6 +180,11 @@ class BonLivraison
      */
     private $pjBonLivraisons; // Notez le « s »,
 
+    /**
+     * @ORM\OneToMany(targetEntity="GestionBundle\Entity\ligneCommentaireLivraison", mappedBy="bonLivraison")
+     */
+    private $ligneCommantaireLivraisons; // Notez le « s », un stocks est liée à plusieurs ligne
+
 //-------------------------//////////---------------------------//////////---------------------------
 
 
@@ -642,5 +647,173 @@ class BonLivraison
     public function getPjBonLivraisons()
     {
         return $this->pjBonLivraisons;
+    }
+
+    /**
+     * Set destination
+     *
+     * @param string $destination
+     *
+     * @return BonLivraison
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
+
+        return $this;
+    }
+
+    /**
+     * Get destination
+     *
+     * @return string
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * Set agent
+     *
+     * @param string $agent
+     *
+     * @return BonLivraison
+     */
+    public function setAgent($agent)
+    {
+        $this->agent = $agent;
+
+        return $this;
+    }
+
+    /**
+     * Get agent
+     *
+     * @return string
+     */
+    public function getAgent()
+    {
+        return $this->agent;
+    }
+
+    /**
+     * Set contactAgent
+     *
+     * @param string $contactAgent
+     *
+     * @return BonLivraison
+     */
+    public function setContactAgent($contactAgent)
+    {
+        $this->contactAgent = $contactAgent;
+
+        return $this;
+    }
+
+    /**
+     * Get contactAgent
+     *
+     * @return string
+     */
+    public function getContactAgent()
+    {
+        return $this->contactAgent;
+    }
+
+    /**
+     * Set posteAgent
+     *
+     * @param string $posteAgent
+     *
+     * @return BonLivraison
+     */
+    public function setPosteAgent($posteAgent)
+    {
+        $this->posteAgent = $posteAgent;
+
+        return $this;
+    }
+
+    /**
+     * Get posteAgent
+     *
+     * @return string
+     */
+    public function getPosteAgent()
+    {
+        return $this->posteAgent;
+    }
+
+    /**
+     * Set agent2
+     *
+     * @param string $agent2
+     *
+     * @return BonLivraison
+     */
+    public function setAgent2($agent2)
+    {
+        $this->agent2 = $agent2;
+
+        return $this;
+    }
+
+    /**
+     * Get agent2
+     *
+     * @return string
+     */
+    public function getAgent2()
+    {
+        return $this->agent2;
+    }
+
+    /**
+     * Set contactAgent2
+     *
+     * @param string $contactAgent2
+     *
+     * @return BonLivraison
+     */
+    public function setContactAgent2($contactAgent2)
+    {
+        $this->contactAgent2 = $contactAgent2;
+
+        return $this;
+    }
+
+    /**
+     * Get contactAgent2
+     *
+     * @return string
+     */
+    public function getContactAgent2()
+    {
+        return $this->contactAgent2;
+    }
+
+    /**
+     * Set posteAgent2
+     *
+     * @param string $posteAgent2
+     *
+     * @return BonLivraison
+     */
+    public function setPosteAgent2($posteAgent2)
+    {
+        $this->posteAgent2 = $posteAgent2;
+
+        return $this;
+    }
+
+    /**
+     * Get posteAgent2
+     *
+     * @return string
+     */
+    public function getPosteAgent2()
+    {
+        return $this->posteAgent2;
     }
 }

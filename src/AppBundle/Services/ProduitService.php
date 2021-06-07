@@ -79,4 +79,12 @@ class ProduitService
         $this->em->persist($immo);
     }
 
+    public function updatePrixProduit(ObjectManager $manager, Produit $produit, $prix){
+        if($prix !== $produit->getPrixAchat()){
+            $produit->setPrixAchat($prix);
+        }
+
+        $manager->persist($produit);
+    }
+
 }
