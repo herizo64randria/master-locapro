@@ -26,25 +26,29 @@ class MissionController extends Controller
     /**
      * Lists all site entities.
      *
-     * @Route("/créer/500{id}/check", name="mission_newProbleme")
+     * @Route("/créer/500/{id}/check", name="mission_newProbleme")
      *
      */
-    public function newAction(Request $request, Probleme $probleme)
+    public function newByProblemeAction(Request $request, Probleme $probleme)
     {
         $em = $this->getDoctrine()->getManager();
 
-        if($request->getMethod() == 'POST'){
+        if($request->getMethod() === 'POST'){
             $mission = new Mission();
             $mission->setDateDebut(\DateTime::createFromFormat('d/m/Y', $_POST['dateDebutMission']));
             $mission->setDateFin(\DateTime::createFromFormat('d/m/Y', $_POST['dateFinMission']));
 
-            if (isset($_POST['descriptionMission']))
+            if (isset($_POST['descriptionMission'])) {
                 $mission->setDescription($_POST['descriptionMission']);
+            }
 
             $mission->setSite($probleme->getGroupe()->getSite());
             $mission->setProbleme($probleme);
 
             $em->persist($mission);
+
+            $em->flush();
+
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             $historiqueGlobal = new HistoriqueGlobal();
@@ -54,10 +58,11 @@ class MissionController extends Controller
 
             $em->persist($historiqueGlobal);
 
-
             // ------------------- ////// HISTORIQUE GLOBAL ////// ---------------------
 
             $em->flush();
+
+//            return new Response("ID: ".$mission->getId());
 
             return $this->redirectToRoute('mission_show', array('id' => $mission->getId()));
         }
@@ -68,7 +73,7 @@ class MissionController extends Controller
     /**
      * Lists all site entities.
      *
-     * @Route("/afficher/500{id}500", name="mission_show")
+     * @Route("/afficher/{id}/s", name="mission_show")
      *
      */
     public function showAction(Request $request, Mission $mission)
@@ -90,7 +95,7 @@ class MissionController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        if($request->getMethod() == 'POST'){
+        if($request->getMethod() === 'POST'){
 
             $employe = new EmployeMission();
             $employe->setNom($_POST['nomEmploye']);
@@ -126,6 +131,20 @@ class MissionController extends Controller
         return $this->redirectToRoute('mission_show', array('id' => $mission->getId()));
     }
 
+    /**
+     * Lists all site entities.
+     *
+     * @Route("/", name="mission_index")
+     *
+     */
+    public function indexMissionAction(){
+        $em = $this->getDoctrine()->getManager();
+        $missions = $em->getRepository('GroupeBundle:Mission')->findAll();
+
+        return $this->render('@Groupe/mission/index.html.twig', array(
+            'missions' => $missions,
+        ));
+    }
 
 
 }

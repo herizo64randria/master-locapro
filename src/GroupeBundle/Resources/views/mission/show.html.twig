@@ -80,7 +80,7 @@
                                     <td><a href="{{ employe.lien }}" target="_blank">{{ employe.nom }}</a></td>
                                     <td>{{ employe.poste }}</td>
                                     {% if app.user|ifRole('ROLE_MISSION') %}
-                                        <td><a href="{{ path('employeMission_supprimer', {"id" : employe.id}) }}" class="btn btn-default btn-xs deleteEmploye" ><i class="fa fa-circle"></i> </a></td>
+                                        <td><a href="{{ path('employeMission_supprimer', {"id" : employe.id}) }}" class="btn btn-danger btn-xs deleteEmploye" ><i class="fa fa-minus-circle"></i> </a></td>
 
                                     {% endif %}
                                 </tr>

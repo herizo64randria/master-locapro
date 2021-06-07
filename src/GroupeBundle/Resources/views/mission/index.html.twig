@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre_page %}<strong class="text-info">Liste des missions</strong>{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tableau liste des missions</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped table-bordered" id="tableSortie">
+                        <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Nom</th>
+                            <th>Date de début</th>
+                            <th>Date fin</th>
+                            <th>Site</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for mission in missions %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('mission_show', {'id' : mission.id}) }}">
+                                        {% if mission.numero %}
+                                            {{ mission.numero }}
+                                        {% else %}
+                                            <i>Non-numeroté</i>
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for emp in mission.employeMissions %}
+                                            <li><a href="{{ emp.lien }}" target="_blank"></a>{{ emp.nom }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>{{ mission.dateDebut|date('d/m/Y') }}</td>
+                                <td>{{ mission.dateFin|date('d/m/Y') }}</td>
+                                <td>{{ mission.site.emplacement }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+
+
+{% endblock %}

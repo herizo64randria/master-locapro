@@ -249,8 +249,11 @@ desired effect
                 {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
                     <li><a href="{{ path('site_index') }}"><i class="fa fa-list"></i> Liste des sites</a></li>
                 {% endif %}
+                <li class="header"></li>
                 <li><a href="{{ path('probleme_index') }}"><i class="fa fa-warning"></i> Liste problème</a></li>
+                <li><a href="{{ path('mission_index') }}"><i class="fa fa-plane"></i> Liste des missions</a></li>
 
+                <li class="header"></li>
                 <li><a href="{{ path('GroupeHeureMarche_index') }}"><i class="fa fa-clock-o"></i> Heure de marche</a></li>
                 <li><a href="{{ path('dateHistoriqueEtat_index') }}"><i class="fa fa-clock-o"></i> Historique Etat Groupe</a></li>
                 <li><a href="{{ path('vidange_resume') }}"><i class="fa fa-info"></i> Récap. vidange & filtre</a></li>

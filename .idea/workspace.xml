@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ed90ec69-647c-4885-b969-0f1098cb82e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.run/Symfony-Run.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/Symfony-Run.run.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonExpedition/imprimer.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonLivraison/imprimer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Controller/MissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Controller/MissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Entity/Mission.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Entity/Mission.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +19,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3">
     <include_path>
@@ -70,6 +79,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1sCOnFA3y56rNPD2q4AvVRn5RHi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -79,15 +91,28 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/GroupeBundle/Resources/views/mission" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\locapro\src\GroupeBundle\Resources\views\mission" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="s doctrine:generate:entities GestionBundle:BonLivraison" />
+      <command value="s doctrine:generate:entities GroupeBundle:Mission" />
+      <command value="s debug:router" />
+      <command value="s cache:clear" />
+      <command value="s cache:clear --env" />
+      <command value="s cache:clear --env=prod" />
       <command value="s doctrine:schema:update --dump-sql --force" />
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -106,68 +131,18 @@
       <workItem from="1620711049903" duration="6581000" />
       <workItem from="1620808136412" duration="2622000" />
       <workItem from="1620970464194" duration="6990000" />
+      <workItem from="1621317916347" duration="6015000" />
+      <workItem from="1621940586400" duration="7430000" />
+      <workItem from="1622444914968" duration="1069000" />
+      <workItem from="1622447681785" duration="457000" />
+      <workItem from="1622449192563" duration="847000" />
+      <workItem from="1622627658418" duration="1185000" />
+      <workItem from="1622636562958" duration="590000" />
+      <workItem from="1623045648434" duration="7314000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="349" y="72" key="#CLI_Interpreters" timestamp="1620809771551">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="349" y="72" key="#CLI_Interpreters/0.0.1536.834@0.0.1536.834" timestamp="1620809771551" />
-    <state x="578" y="310" key="#Composer" timestamp="1620373422535">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="578" y="310" key="#Composer/0.0.1536.834@0.0.1536.834" timestamp="1620373422535" />
-    <state x="475" y="60" key="#PHP" timestamp="1620809776828">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="475" y="60" key="#PHP/0.0.1536.834@0.0.1536.834" timestamp="1620809776828" />
-    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1620970578782">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1620970578782" />
-    <state x="549" y="157" key="FileChooserDialogImpl" timestamp="1620377734075">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="549" y="157" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1620377734075" />
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1620982497381">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1620982497381" />
-    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1620982497381">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1620982497381" />
-    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1620982497381">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1620982497381" />
-    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1620982497381">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1620982497381" />
-    <state x="277" y="62" key="SettingsEditor" timestamp="1620377757126">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="277" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1620377757126" />
-    <state x="490" y="159" width="540" height="524" key="StructurePopup" timestamp="1620971256580">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="490" y="159" width="540" height="524" key="StructurePopup/0.0.1536.834@0.0.1536.834" timestamp="1620971256580" />
-    <state x="581" y="319" key="SymfonyPathDialog" timestamp="1620377736169">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="581" y="319" key="SymfonyPathDialog/0.0.1536.834@0.0.1536.834" timestamp="1620377736169" />
-    <state x="425" y="189" width="672" height="677" key="run.anything.popup" timestamp="1620715120052">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="425" y="189" width="672" height="677" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1620715120052" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1620809908187">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1620809908187" />
+    <option name="version" value="3" />
   </component>
 </project>

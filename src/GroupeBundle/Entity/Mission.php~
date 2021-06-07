@@ -22,6 +22,13 @@ class Mission
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=50, unique=true, nullable=true)
+     */
+    private $numero;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateDebut", type="datetime")
@@ -49,7 +56,12 @@ class Mission
      */
     private $noteFin;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=50, nullable=true)
+     */
+    private $etat;
 
 
     //-----------------------------------------------------
@@ -271,5 +283,29 @@ class Mission
     public function getEmployeMissions()
     {
         return $this->employeMissions;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param string $numero
+     *
+     * @return Mission
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return string
+     */
+    public function getNumero()
+    {
+        return $this->numero;
     }
 }
