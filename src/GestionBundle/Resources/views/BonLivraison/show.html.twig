@@ -103,6 +103,17 @@
                                     <td>{{ bonLivraison.posteAgent2 }}</td>
                                 </tr>
                             {% endif %}
+
+                            {% if bonLivraison.chauffeur %}
+                                <tr>
+                                    <td>Chauffeur</td>
+                                    <td>
+                                        {{ bonLivraison.chauffeur }}
+                                        <br>
+                                        {{ bonLivraison.immatriculationVehicule }}
+                                    </td>
+                                </tr>
+                            {% endif %}
                         </table>
                     </div>
 

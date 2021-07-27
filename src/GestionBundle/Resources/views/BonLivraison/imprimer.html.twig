@@ -275,7 +275,7 @@
 
             {#---------------- //// LIGNE COMMENTAIRE ///// ---------------#}
 
-            {% for i in nbrLigne..28 %}
+            {% for i in nbrLigne..27 %}
                 <tr>
                     <td ></td>
                     <td></td>
@@ -283,14 +283,24 @@
                 </tr>
             {% endfor %}
 
+            {% if bonLivraison.chauffeur %}
+                <tr >
+                    <td id="piedtr1" ></td>
+                    <td id="piedtr1">Chauffeur: {{ bonLivraison.chauffeur }} - {{ bonLivraison.immatriculationVehicule }}</td>
+                    <td id="piedtr1"></td>
+                </tr>
+            {% else %}
+                <tr >
+                    <td id="piedtr1" ></td>
+                    <td id="piedtr1"></td>
+                    <td id="piedtr1"></td>
+                </tr>
+            {% endif %}
+
+
             </tbody>
             <tfoot>
-            <tr >
-                <td id="piedtr1" ></td>
-                <td id="piedtr1"></td>
-                <td id="piedtr1"></td>
 
-            </tr>
             </tfoot>
         </table>
         <br>

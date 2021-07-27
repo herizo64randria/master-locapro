@@ -712,6 +712,17 @@ class BonLivraisonController extends Controller
 
             // ------------------///// AGENT /////------------------
 
+            // ------------------ CHAUFFEUR & VEHICULE ------------------
+
+            if (isset($_POST['chauffeur'])){
+                $bonLivraison->setChauffeur($_POST['chauffeur']);
+            }
+            if (isset($_POST['immatriculationVehicule'])){
+                $bonLivraison->setImmatriculationVehicule($_POST['immatriculationVehicule']);
+            }
+
+            // ------------------///// CHAUFFEUR & VEHICULE /////------------------
+
             // ------------------- EMPLACEMEMNT ---------------------
 
             if($_POST['emplacement'] == 'site'){

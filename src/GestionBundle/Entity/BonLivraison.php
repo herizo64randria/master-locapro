@@ -126,6 +126,20 @@ class BonLivraison
      */
     private $posteAgent2;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="chauffeur", type="string", length=50, nullable=true)
+     */
+    private $chauffeur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="immatriculation_vehicule", type="string", length=50, nullable=true)
+     */
+    private $immatriculationVehicule;
+
 
 //-------------------------------------------------------------------------------
 
@@ -849,5 +863,53 @@ class BonLivraison
     public function getLigneCommantaireLivraisons()
     {
         return $this->ligneCommantaireLivraisons;
+    }
+
+    /**
+     * Set chauffeur
+     *
+     * @param string $chauffeur
+     *
+     * @return BonLivraison
+     */
+    public function setChauffeur($chauffeur)
+    {
+        $this->chauffeur = $chauffeur;
+
+        return $this;
+    }
+
+    /**
+     * Get chauffeur
+     *
+     * @return string
+     */
+    public function getChauffeur()
+    {
+        return $this->chauffeur;
+    }
+
+    /**
+     * Set immatriculationVehicule
+     *
+     * @param string $immatriculationVehicule
+     *
+     * @return BonLivraison
+     */
+    public function setImmatriculationVehicule($immatriculationVehicule)
+    {
+        $this->immatriculationVehicule = $immatriculationVehicule;
+
+        return $this;
+    }
+
+    /**
+     * Get immatriculationVehicule
+     *
+     * @return string
+     */
+    public function getImmatriculationVehicule()
+    {
+        return $this->immatriculationVehicule;
     }
 }
