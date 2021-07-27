@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed90ec69-647c-4885-b969-0f1098cb82e7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/imprimer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/imprimer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Entity/Produit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProduitBundle/Form/ProduitType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +107,7 @@
       <command value="s cache:clear" />
       <command value="s cache:clear --env" />
       <command value="s cache:clear --env=prod" />
+      <command value="s doctrine:generate:entities ProduitBundle:Produit" />
       <command value="s doctrine:schema:update --dump-sql --force" />
     </option>
   </component>
@@ -138,6 +139,11 @@
       <workItem from="1622636562958" duration="590000" />
       <workItem from="1623045648434" duration="7314000" />
       <workItem from="1625638246326" duration="945000" />
+      <workItem from="1625816907302" duration="1581000" />
+      <workItem from="1626849397367" duration="3481000" />
+      <workItem from="1626935748177" duration="2056000" />
+      <workItem from="1627020039359" duration="1375000" />
+      <workItem from="1627367675331" duration="879000" />
     </task>
     <servers />
   </component>

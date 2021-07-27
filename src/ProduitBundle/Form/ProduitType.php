@@ -38,7 +38,14 @@ class ProduitType extends AbstractType
                 'required' => false,
             ))
             ->add('refEqui', TextType::class,array(
-                'label' => 'Référenece equivalente.',
+                'label' => 'Référenece equivalente',
+                'attr' => array(
+                    'class' => 'form-control text-primary',
+                ),
+                'required' => false,
+            ))
+            ->add('numeroDeSerie', TextType::class,array(
+                'label' => 'Numéro de série',
                 'attr' => array(
                     'class' => 'form-control text-primary',
                 ),

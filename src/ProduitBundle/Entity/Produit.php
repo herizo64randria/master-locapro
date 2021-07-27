@@ -98,6 +98,13 @@ class Produit
      */
     private $note;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_de_serie", type="string", length=255, nullable=true)
+     */
+    private $numeroDeSerie;
+
 
 //------------\\\\\\\////////////-----------
 
@@ -493,5 +500,29 @@ class Produit
     public function getReflistepiece()
     {
         return $this->reflistepiece;
+    }
+
+    /**
+     * Set numeroDeSerie
+     *
+     * @param string $numeroDeSerie
+     *
+     * @return Produit
+     */
+    public function setNumeroDeSerie($numeroDeSerie)
+    {
+        $this->numeroDeSerie = $numeroDeSerie;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroDeSerie
+     *
+     * @return string
+     */
+    public function getNumeroDeSerie()
+    {
+        return $this->numeroDeSerie;
     }
 }
