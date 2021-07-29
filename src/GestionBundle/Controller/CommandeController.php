@@ -91,6 +91,26 @@ class CommandeController extends Controller
     /**
      * INDEX
      *
+     * @Route("/API/commande/get/ligne/{id}", name="API_getLigneCommande")
+     */
+    public function APIGetLigneCommandeAction(ligneCommande $ligneCommande)
+    {
+        $arrayReturn = array(
+            'id' => $ligneCommande->getId(),
+            'designation' => $ligneCommande->getDesignation(),
+            'quantite' => $ligneCommande->getQuantite(),
+            'prix' => $ligneCommande->getPrix(),
+            'remise' => $ligneCommande->getRemise(),
+            'editLink' => $this->generateUrl('commande_editLigne', array('id' => $ligneCommande->getId()))
+
+        );
+
+        return new Response(json_encode($arrayReturn));
+    }
+
+    /**
+     * INDEX
+     *
      * @Route("/liste-commande", name="commande_index")
      */
     public function indexAction()
@@ -653,5 +673,35 @@ class CommandeController extends Controller
             'depots' => $depots,
             'sites' => $sites,
         ));
+    }
+
+    /**
+     * nouveau entity.
+     *
+     * @Route("/editLigne/{id}", name="commande_editLigne")
+     */
+    public function editLigneLigneAction(Request $request, ligneCommande $ligne)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->getMethod() === 'POST'){
+
+            $ligne->setDesignation($_POST['ligneCommande_designation']);
+            $ligne->setQuantite($_POST['ligneCommande_quantite']);
+
+            if (isset($_POST['ligneCommande_prix']))
+                $ligne->setPrix($_POST['ligneCommande_prix']);
+
+            if (isset($_POST['ligneCommande_remise']))
+                $ligne->setRemise($_POST['ligneCommande_remise']);
+
+            $em->persist($ligne);
+            $em->flush();
+
+            return $this->redirectToRoute('commande_afficher', array('id' => $ligne->getCommande()->getId()));
+        }
+
+        throw new Exception('Erreur! 404 Not-Found');
+
     }
 }

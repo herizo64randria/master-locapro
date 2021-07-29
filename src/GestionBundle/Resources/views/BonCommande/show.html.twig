@@ -316,13 +316,16 @@
 
                                     {# ------------- ////////// CALCUL MONTANT TOTAL//////////  ------------- #}
 
-                                    <td class="text-right" style="white-space: nowrap">{{ montantLigne|number_format(2, ',', ' ') }}</td>
+                                    <td class="text-right" style="white-space: nowrap"> {{ montantLigne|number_format(2, ',', ' ') }} </td>
 
-                                    {% if commande.modifiable and commande.userCreer == app.user %}
-                                        <td class="action">
+                                    <td>
+                                        {% if commande.modifiable and commande.userCreer == app.user %}
                                             <button type="button" class="btn btn-xs btn-danger btnSupprimerLigne"  lien="{{ path('commande_supprimerLigne',{id:lignecommande.id}) }}"><i class="fa fa-minus-circle "></i></button>
-                                        </td>
-                                    {% endif %}
+                                        {% endif %}
+                                        {% if commande.modifiable and commande.userCreer == app.user %}
+                                            <button type="button" class="btn btn-xs btn-primary btnEditLigne"  data-link="{{ path('API_getLigneCommande', {'id' : lignecommande.id}) }}"><i class="fa fa-edit "></i></button>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -532,10 +535,16 @@
     </div>
     <!-- /.modal -->
 
+{#    MODAL EDIT LIGNE#}
+    {% include '@Gestion/BonCommande/modalEditLigneCommande.html.twig' %}
+
+
     {#    MODAL PIECE JOINTE#}
     {% set typeDoc = 'commande' %}
     {% set idDoc = commande.id %}
     {% include '@Gestion/pieceJointe/modalPieceJointe.html.twig' %}
+
+
 
 
 {#    NUMERAL FORMAT#}
@@ -633,6 +642,8 @@
             $('#modalSupprimerLigne').modal();
         });
     </script>
+
+
 
 
 
