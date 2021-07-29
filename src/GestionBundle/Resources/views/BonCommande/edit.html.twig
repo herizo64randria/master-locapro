@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block titre_page %} <strong class="text-success">Modifier bon de commande</strong> {% endblock %}
+{% block titre_page %} <strong class="text-primary">Modifier bon de commande</strong> {% endblock %}
 {% block titre_description %}Modification du bon de commande N° {{ commande.numero }}{% endblock %}
 {% block body %}
     {% set i =0 %}
@@ -85,7 +85,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="submit" value="Créer" class="btn btn-success btn-block" />
+                            <button class="btn btn-primary btn-block" type="submit">Confirmer</button>
                         </div>
                         <div class="col-md-6">
                             <a href="{{ path('entre_index') }}" class="btn btn-default btn-block">Annuler</a>
