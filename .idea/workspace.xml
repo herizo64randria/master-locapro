@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ed90ec69-647c-4885-b969-0f1098cb82e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Controller/CommandeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Controller/CommandeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Entity/ligneCommande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionBundle/Resources/views/BonCommande/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,6 +148,14 @@
       <workItem from="1627367675331" duration="2975000" />
       <workItem from="1627372073018" duration="881000" />
       <workItem from="1627537054635" duration="8336000" />
+      <workItem from="1633502653800" duration="1174000" />
+      <workItem from="1633587559300" duration="4952000" />
+      <workItem from="1633679971888" duration="478000" />
+      <workItem from="1633681245386" duration="912000" />
+      <workItem from="1633931047710" duration="1467000" />
+      <workItem from="1634019818489" duration="591000" />
+      <workItem from="1634107864410" duration="1319000" />
+      <workItem from="1634279371393" duration="5987000" />
     </task>
     <servers />
   </component>

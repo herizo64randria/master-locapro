@@ -229,7 +229,7 @@
                         <table class="table table-striped table-bordered" id="tableCoommande">
                             <thead>
                             <tr>
-                                <th>Code Produit</th>
+                                <th>Code Produit & Groupe-Site</th>
                                 <th>Libellé</th>
                                 <th>Réf. produit</th>
                                 <th>Quantité</th>
@@ -267,6 +267,11 @@
                                         {% endif %}
 
                                         <a href="{{ pathProduit }}" target="_blank">{{ ligneCode|raw }}</a>
+
+                                        {% if lignecommande.groupe %}
+                                            <br>
+                                            {{ lignecommande.groupe.numero }} - {{ lignecommande.site.emplacement }}
+                                        {% endif %}
                                     </td>
                                     <td>
                                         {{ lignecommande.designation }}
@@ -365,6 +370,13 @@
                                     <td>
                                         <div class="form-group text-center">
                                             <input required type="text" class="form-control only_float" name="quantite" id="quantite" placeholder="Quantité"  />
+                                            <br>
+                                            <select class="form-control" name="groupe" id="groupe" >
+                                                <option value=""></option>
+                                                {% for groupe in groupes %}
+                                                    <option value="{{ groupe.id }}">{{ groupe.numero }} - {{ groupe.site.emplacement }} </option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                     </td>
                                     <td>
@@ -535,7 +547,7 @@
     </div>
     <!-- /.modal -->
 
-{#    MODAL EDIT LIGNE#}
+    {#    MODAL EDIT LIGNE#}
     {% include '@Gestion/BonCommande/modalEditLigneCommande.html.twig' %}
 
 
@@ -578,6 +590,7 @@
         $('#imgLoading').addClass('hide');
 
         $('#produit').select2();
+        $('#groupe').select2();
     </script>
 
 {#    ----------------- SCRIPT SELECTION DU PRODUIT ----------------- #}

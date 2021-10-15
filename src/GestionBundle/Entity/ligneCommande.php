@@ -70,6 +70,18 @@ class ligneCommande
      */
     private $commande;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Groupe")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $groupe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GroupeBundle\Entity\Site")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $site;
+
 //------------\\\\\\\////////////-----------
     /**
      * Get id
@@ -247,5 +259,53 @@ class ligneCommande
     public function getRemise()
     {
         return $this->remise;
+    }
+
+    /**
+     * Set groupe
+     *
+     * @param \GroupeBundle\Entity\Groupe $groupe
+     *
+     * @return ligneCommande
+     */
+    public function setGroupe(\GroupeBundle\Entity\Groupe $groupe = null)
+    {
+        $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Get groupe
+     *
+     * @return \GroupeBundle\Entity\Groupe
+     */
+    public function getGroupe()
+    {
+        return $this->groupe;
+    }
+
+    /**
+     * Set site
+     *
+     * @param \GroupeBundle\Entity\Site $site
+     *
+     * @return ligneCommande
+     */
+    public function setSite(\GroupeBundle\Entity\Site $site = null)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return \GroupeBundle\Entity\Site
+     */
+    public function getSite()
+    {
+        return $this->site;
     }
 }

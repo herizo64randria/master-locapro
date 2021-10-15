@@ -9,6 +9,8 @@ use GestionBundle\Entity\Entre;
 use GestionBundle\Entity\ligneCommande;
 use GestionBundle\Entity\ligneEntre;
 use GestionBundle\Entity\NumDoc;
+use GroupeBundle\Entity\Groupe;
+use GroupeBundle\Repository\GroupeRepository;
 use ProduitBundle\Entity\HistoriqueProduit;
 use ProduitBundle\Entity\Stock_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -185,18 +187,26 @@ class CommandeController extends Controller
      *
      * @Route("/afficher/R85{id}L715", name="commande_afficher")
      */
-    public function afficherAction(Request $request, Commande $commande){
+    public function afficherAction(
+        Request $request,
+        Commande $commande
+    ){
 
         $em = $this->getDoctrine()->getManager();
+        $groupeRepository = $em->getRepository(Groupe::class);
+
         $entre=$em->getRepository('GestionBundle:Entre')->findOneBy(array('commande'=>$commande));
         $produits = $em->getRepository('ProduitBundle:Produit')->findAll();
-
+        $groupes = $groupeRepository->findAll();
 
 
         return $this->render('@Gestion/BonCommande/show.html.twig', array(
             'commande' => $commande,
             'produits' => $produits,
             'entre'=>$entre,
+            'groupes' => $groupes,
+
+            'lignecommande' => new ligneCommande(),
         ));
     }
     /**
@@ -248,6 +258,21 @@ class CommandeController extends Controller
             $produit = $repositoryProduit->findOneBy(array('id' => $idProduit));
 
             $ligne->setProduit($produit);
+
+            // ------------------ GROUPE & SITE ------------------
+
+            $groupeRepository = $em->getRepository(Groupe::class);
+
+            $groupe = $groupeRepository->findOneBy(array(
+                'id' => $_POST['groupe']
+            ));
+
+            if ($groupe){
+                $ligne->setGroupe($groupe);
+                $ligne->setSite($groupe->getSite());
+            }
+
+            // ------------------///// GROUPE & SITE /////------------------
 
             $em->persist($ligne);
             $em->flush();
