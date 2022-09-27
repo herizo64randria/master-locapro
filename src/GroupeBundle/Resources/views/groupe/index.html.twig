@@ -14,7 +14,6 @@
             <li><a href="{{ path('groupe_new') }}" class="btn btn-lg btn-success"><i class="fa fa-plus"></i> Inscrire groupe</a></li>
         {% endif %}
     </ul>
-
     <div class="row">
         <div class="col-md-10">
             <div class="box">
@@ -29,9 +28,8 @@
                             <th>Numero</th>
                             <th>Site</th>
                             <th>Marque</th>
-                            <th>Statut</th>
+                            <th>Historique du groupe</th>
                             <th>Actions</th>
-                        </tr>
                         </thead>
                         <tbody>
                         {% for groupe in groupes %}
@@ -43,14 +41,22 @@
                                 <td>{{ groupe.site.emplacement }}</td>
                                 <td>{{ groupe.marque }}</td>
                                 <td class="{{ 'text-'~groupe.etatGroupe.couleur }}"><i class="fa fa-circle "></i> {{ groupe.etatGroupe.etat }}</td>
+                            
+                              {% for m in mission %}
+                               <td>{{ m.dateDebut}}</td>
+                                <td>{{ m.dateFin}}</td>
+                              {% endfor %}
+                              
                                 <td>
                                     <a href="{{ path('groupe_show', {'id' : groupe.id}) }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle"></i> Afficher</a>
                                     {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
                                         <a href="{{ path('groupe_edit', {'id' : groupe.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
                                     {% endif %}
                                 </td>
-                            </tr>
+                               
+                                 </tr>
                         {% endfor %}
+
                         </tbody>
                     </table>
                 </div>

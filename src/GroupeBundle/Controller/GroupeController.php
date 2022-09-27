@@ -32,11 +32,17 @@ class GroupeController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        $mission =  "mission";
         $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
+
+        $sql = "SELECT *from mission limit 2";
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
         return $this->render('@Groupe/groupe/index.html.twig', array(
             'groupes' => $groupes,
+            'mission'=>$result
         ));
     }
 
@@ -141,7 +147,7 @@ class GroupeController extends Controller
             $moteur->setAnnee($_POST['moteur_annee']);
             $moteur->setPuissance($_POST['moteur_puissance']);
 
-            if (isset($_POST['moteur_dateDebutServce']))
+            if (isset($_POST['moteur_dateDebutService']))
                 $moteur->setDateDebutService(\DateTime::createFromFormat('d/m/Y',$_POST['moteur_dateDebutServce']));
 
             $em->persist($moteur);
@@ -185,7 +191,7 @@ class GroupeController extends Controller
             'groupe' => $groupe,
             'form' => $form->createView(),
             'sites' => $sites,
-            'catalogues' => $catalogues
+            'catalogues' => $catalogues,
         ));
     }
 
