@@ -1,24 +1,181 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}Liste groupe{% endblock %}
-{% block titre_page %}Liste groupe{% endblock %}
-{% block titre_description %}<br>Liste des groupes disponibles{% endblock %}
+{% block titre %}Liste groupe
+{% endblock %}
+{% block titre_page %}Liste groupe
+{% endblock %}
+{% block titre_description %}<br>Liste des groupes disponibles
+{% endblock %}
 {% block body %}
 
-    {% set ETAT_ENATTENTE = 'En attente'  %}
-    {% set ETAT_DISPONIBLE = 'Disponible'  %}
-    {% set ETAT_INDISPONIBLE = 'Indisponible'  %}
+	{% set ETAT_ENATTENTE = 'En attente'  %}
+	{% set ETAT_DISPONIBLE = 'Disponible'  %}
+	{% set ETAT_INDISPONIBLE = 'Indisponible'  %}
 
-    <ul class="list-inline">
-        {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
-            <li><a href="{{ path('groupe_new') }}" class="btn btn-lg btn-success"><i class="fa fa-plus"></i> Inscrire groupe</a></li>
-        {% endif %}
-    </ul>
-    <div class="row">
-        <div class="col-md-10">
+	<ul class="list-inline">
+		{% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+			<li>
+				<a href="{{ path('groupe_new') }}" class="btn btn-lg btn-success">
+					<i class="fa fa-plus"></i>
+					Inscrire groupe</a>
+			</li>
+		{% endif %}
+	</ul>
+	<div class="row">
+		<div class="col-md-10">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Table liste</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-striped table-bordered" id="tableGroupe">
+						<thead>
+							<tr>
+								<th>Numero</th>
+								<th>Site</th>
+								<th>Marque</th>
+								<th>Historique du groupe</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for groupe in groupes %}
+
+								<tr>
+									<td>
+										<a href="{{ path('groupe_show', {'id' : groupe.id}) }}">{{ groupe.numero }}</a>
+									</td>
+									<td>{{ groupe.site.emplacement }}</td>
+									<td>{{ groupe.marque }}</td>
+									<td class="{{ 'text-'~groupe.etatGroupe.couleur }}">
+										<i class="fa fa-circle "></i>
+										{{ groupe.etatGroupe.etat }}</td>
+
+									{% for m in mission %}
+										<td>{{ m.dateDebut}}</td>
+										<td>{{ m.dateFin}}</td>
+									{% endfor %}
+
+									<td>
+										<a href="{{ path('groupe_show', {'id' : groupe.id}) }}" class="btn btn-xs btn-default">
+											<i class="fa fa-info-circle"></i>
+											Afficher</a>
+										{% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+											<a href="{{ path('groupe_edit', {'id' : groupe.id}) }}" class="btn btn-xs btn-primary">
+												<i class="fa fa-edit"></i>
+												Modifier</a>
+										{% endif %}
+									</td>
+
+								</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Sites -->
+	<div class="row">
+		<div class="col-md-7">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Tableau</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+            <div class="col-sm-6">
+            <tbody>
+                <div class="col-sm-5">
+                <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 540.333px; padding-right: 14px;"><table class="table table-striped dataTable no-footer" role="grid" style="margin-left: 0px; width: 540.333px;"><thead>
+                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="tableSite" rowspan="1" colspan="1" style="width: 118.771px;" aria-sort="ascending" aria-label="Emplacement: activer pour trier la colonne par ordre décroissant">Emplacement</th><th class="sorting" tabindex="0" aria-controls="tableSite" rowspan="1" colspan="1" style="width: 156.271px;" aria-label="Nombre de groupe: activer pour trier la colonne par ordre croissant">Nombre de groupe</th><th class="sorting" tabindex="0" aria-controls="tableSite" rowspan="1" colspan="1" style="width: 151.292px;" aria-label="Actions: activer pour trier la colonne par ordre croissant">Actions</th></tr>
+                </thead></table></div></div>
+					<table class="table table-striped" id="tableSite">
+						<thead>
+							<tr>
+								<th>Emplacement</th>
+								<th>Nombre de groupe</th>
+								{% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+									<th>Actions</th>
+								{% endif %}
+
+							</tr>
+						</thead>
+						<tbody>
+                            <tfoot>
+                            <div class="dataTables_info" id="tableSite_info" role="status" aria-live="polite">Affichage de l'élement 1 à 39 sur 39 éléments</div></div>
+                            </tfoot>
+                        <div class="col-sm-5">
+                   
+							{% for site in sites %}
+								{#                            -------SET COUILEUR--------- #}
+								{% set tmpCouleur = '#0a629d' %}
+								<tr>
+									<td>
+										{{ site.emplacement }}
+									</td>
+									<td class="text-center">{{ site.groupes|length }}</td>
+									<td>
+										<a href="{{ path('site_show', {'id' : site.id}) }}" class="btn btn-xs btn-default">
+											<i class="fa fa-info-circle"></i>
+											Afficher</a>
+										{% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
+											<a href="{{ path('site_edit', {'id' : site.id}) }}" class="btn btn-xs btn-primary">
+												<i class="fa fa-edit"></i>
+												Modifier</a>
+										{% endif %}
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!--Liste Problème-->
+        <div class="row">
+        <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Table liste</h3>
+                </div>
+                <!-- /.box-header -->
+   
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tableau liste des missions</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-striped table-bordered" id="tableSortie">
+                        <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Nom</th>
+                            <th>Date de début</th>
+                            <th>Date fin</th>
+                            <th>Site</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--Heures de marche-->
+	<div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-primary">Liste des groupes</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -26,37 +183,30 @@
                         <thead>
                         <tr>
                             <th>Numero</th>
-                            <th>Site</th>
                             <th>Marque</th>
-                            <th>Historique du groupe</th>
-                            <th>Actions</th>
+                            <th>Site</th>
+                            <th>Heure(s) de marche</th>
+                            <th></th>
+                        </tr>
                         </thead>
                         <tbody>
                         {% for groupe in groupes %}
-
                             <tr>
                                 <td>
-                                    <a href="{{ path('groupe_show', {'id' : groupe.id}) }}">{{ groupe.numero }}</a>
+                                    <a  href="{{ path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id}) }}" class="{{ groupe.id }}" onclick="modal({{ groupe.id }})" href="#">{{ groupe.numero }}</a>
                                 </td>
-                                <td>{{ groupe.site.emplacement }}</td>
                                 <td>{{ groupe.marque }}</td>
-                                <td class="{{ 'text-'~groupe.etatGroupe.couleur }}"><i class="fa fa-circle "></i> {{ groupe.etatGroupe.etat }}</td>
-                            
-                              {% for m in mission %}
-                               <td>{{ m.dateDebut}}</td>
-                                <td>{{ m.dateFin}}</td>
-                              {% endfor %}
-                              
-                                <td>
-                                    <a href="{{ path('groupe_show', {'id' : groupe.id}) }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle"></i> Afficher</a>
-                                    {% if app.user|ifRole('ROLE_GESTION_GROUPE') %}
-                                        <a href="{{ path('groupe_edit', {'id' : groupe.id}) }}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Modifier</a>
-                                    {% endif %}
+                                <td>{{ groupe.site.emplacement }}</td>
+                                <td class="text-right">
+                                    {{ groupe.heureMarche|affichageHm(groupe.minuteMarche) }}
                                 </td>
-                               
-                                 </tr>
+                                <td>
+                                    <a class="btn btn-default" href="{{  path('GroupeHeureMarche_detailHeureGroupe',{'id':groupe.id})  }}">
+                                        <i class="fa fa-info-circle"></i> Détails
+                                    </a>
+                                </td>
+                            </tr>
                         {% endfor %}
-
                         </tbody>
                     </table>
                 </div>
@@ -64,43 +214,46 @@
         </div>
     </div>
 
-    <!-- DataTables JS -->
-    <script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet"  href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
+		<!-- DataTables JS -->
+		<script src="{{ asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+		<script src="{{ asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+		<!-- DataTables CSS -->
+		<link rel="stylesheet" href="{{ asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
 
-    <script>
-        $(document).ready(function() {
-            $('#tableGroupe').DataTable({
-                pageLength: 25,
-                order: [[ 0, "asc" ]],
-                language: {
-                    processing:     "Traitement en cours...",
-                    search:         "Rechercher&nbsp;:",
-                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    infoPostFix:    "",
-                    loadingRecords: "Chargement en cours...",
-                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    emptyTable:     "Aucune donnée disponible dans le tableau",
-                    paginate: {
-                        first:      "Premier",
-                        previous:   "Pr&eacute;c&eacute;dent",
-                        next:       "Suivant",
-                        last:       "Dernier"
-                    },
-                    aria: {
-                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
-                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
-                    }
-                }
-            });
-        } );
-    </script>
+		<script>
+			$(document).ready(function () {
+$('#tableGroupe').DataTable({
+pageLength: 25,
+order: [
+[0, "asc"]
+],
+language: {
+processing: "Traitement en cours...",
+search: "Rechercher&nbsp;:",
+lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+infoPostFix: "",
+loadingRecords: "Chargement en cours...",
+zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+emptyTable: "Aucune donnée disponible dans le tableau",
+paginate: {
+first: "Premier",
+previous: "Pr&eacute;c&eacute;dent",
+next: "Suivant",
+last: "Dernier"
+},
+aria: {
+sortAscending: ": activer pour trier la colonne par ordre croissant",
+sortDescending: ": activer pour trier la colonne par ordre décroissant"
+}
+}
+});
+});
+		</script>
 
 
-{% endblock %}
+	{% endblock %}

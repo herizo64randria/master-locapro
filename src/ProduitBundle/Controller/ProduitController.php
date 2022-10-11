@@ -53,10 +53,10 @@ class ProduitController extends Controller
         $form = $this->createForm('ProduitBundle\Form\ProduitType', $produit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
-            $em->flush();
+             $em->flush();
 
            // ---HISTORIQUE GLOBAL-----
 

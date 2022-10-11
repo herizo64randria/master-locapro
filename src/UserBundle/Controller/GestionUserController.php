@@ -23,6 +23,7 @@ class GestionUserController extends Controller
      *
      * @Route("/liste-users", name="utilisateur_index")
      */
+
     public function listeAction(Request $request)
     {
         $userManager = $this->get('fos_user.user_manager');
@@ -56,6 +57,7 @@ class GestionUserController extends Controller
             $userManager = $this->get('fos_user.user_manager');
             $user->setUsername($_POST['username']);
             $user->setRoles(array());
+            dump($user);
             if(isset($_POST['roles'])){
                 $user->setRoles($_POST['roles']);
             }
@@ -113,7 +115,7 @@ class GestionUserController extends Controller
      */
     public function activerAction(Request $request,User $user)
     {
-
+           
 
         $userManager = $this->get('fos_user.user_manager');
 

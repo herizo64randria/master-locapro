@@ -98,12 +98,7 @@ class Produit
      */
     private $note;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numero_de_serie", type="string", length=255, nullable=true)
-     */
-    private $numeroDeSerie;
+
 
 
 //------------\\\\\\\////////////-----------
@@ -122,13 +117,20 @@ class Produit
      * @ORM\JoinColumn(nullable=true)
      */
     private $reflistepiece;
-//------------\\\\\\\////////////-----------
-
 
     /**
+     * @ORM\OneToOne(targetEntity="ProduitBundle\Entity\Pvsn")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $numeroSerie;
+
+
+//------------\\\\\\\////////////-----------
+
+   /**
      * Constructor
      */
-    public function __construct()
+    function __construct()
     {
         $this->stocks = new \Doctrine\Common\Collections\ArrayCollection();
         $this->historiqueProduits = new \Doctrine\Common\Collections\ArrayCollection();
@@ -501,28 +503,24 @@ class Produit
     {
         return $this->reflistepiece;
     }
-
-    /**
-     * Set numeroDeSerie
-     *
-     * @param string $numeroDeSerie
-     *
-     * @return Produit
+  /**
+     * @return mixed
      */
-    public function setNumeroDeSerie($numeroDeSerie)
+    public function getNumeroSerie()
     {
-        $this->numeroDeSerie = $numeroDeSerie;
-
-        return $this;
+        return $this->numeroSerie;
     }
 
     /**
-     * Get numeroDeSerie
-     *
-     * @return string
+     * @param mixed $numeroSerie
      */
-    public function getNumeroDeSerie()
+    public function setNumeroSerie($numeroSerie)
     {
-        return $this->numeroDeSerie;
+        $this->numeroSerie = $numeroSerie;
+    }
+    public function __toString(): string 
+    {
+        return $this->getNumeroSerie();
     }
 }
+

@@ -34,7 +34,11 @@ class GroupeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $mission =  "mission";
         $groupes = $em->getRepository('GroupeBundle:Groupe')->findAll();
-
+        $sites = $em->getRepository('GroupeBundle:Site')->findBy(
+            array(),
+            array('emplacement' => 'asc'))
+        ;
+    
         $sql = "SELECT *from mission limit 2";
         $stmt = $em->getConnection()->prepare($sql);
         $stmt->execute();
@@ -42,7 +46,8 @@ class GroupeController extends Controller
 
         return $this->render('@Groupe/groupe/index.html.twig', array(
             'groupes' => $groupes,
-            'mission'=>$result
+            'mission'=>$result,
+            'sites'=>$sites,
         ));
     }
 

@@ -2,11 +2,14 @@
 
 namespace ProduitBundle\Form;
 
+use ProduitBundle\Entity\Pvsn;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProduitType extends AbstractType
 {
@@ -44,13 +47,13 @@ class ProduitType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('numeroDeSerie', TextType::class,array(
-                'label' => 'Numéro de série',
-                'attr' => array(
-                    'class' => 'form-control text-primary',
-                ),
-                'required' => false,
-            ))
+            // ->add('numeroDeSerie', TextType::class,array(
+            //     'label' => 'Numéro de série',
+            //     'attr' => array(
+            //         'class' => 'form-control text-primary',
+            //     ),
+            //     'required' => false,
+            // ))
             ->add('prixAchat', TextType::class,array(
                 'label' => 'Prix d\'achat',
                 'attr' => array(
@@ -80,24 +83,23 @@ class ProduitType extends AbstractType
                 ),
                 'required' => false,
             ))
-        ;
-    }/**
+            ->add("numeroSerie", EntityType::class, [
+                "class" => Pvsn::class,
+                "choice_label" => "numeroSerie",
+                "label" => 'Numero de Série: ',
+                'attr' => [
+                    'class' => 'form-control text-primary',
+                ],
+                //"property" => "numeroSerie"
+
+            ]);
+  }/**
      * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'ProduitBundle\Entity\Produit'
-        ));
-    }
+     */ 
+    public function configureOptions(OptionsResolver $resolver){
+        $resolver->setDefaults(array( 'data_class' => 'ProduitBundle\Entity\Produit'));}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'produitbundle_produit';
-    }
-
-
+        /** * {@inheritdoc}*/
+        public function getBlockPrefix()
+        { return 'produitbundle_produit';}
 }

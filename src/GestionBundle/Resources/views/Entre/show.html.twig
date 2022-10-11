@@ -157,6 +157,13 @@
             </div>
         {% elseif entre.etat == DEMANDE_REFUSER and app.user|ifRole('ROLE_RESP') %}
             <div class="col-md-4">
+                {% if is_granted('ROLE_ADMIN') %}
+                Administrator
+                {% elseif is_granted('ROLE_USER') %}
+                    User
+                {% else %}
+                    Anonymous
+                {% endif %}
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Menu confirmation</h3>
@@ -180,6 +187,13 @@
         {% else %}
             <div class="col-md-4">
                 <div class="box">
+                {% if is_granted('ROLE_ADMIN') %}
+                    Administrator
+                    {% elseif is_granted('ROLE_USER') %}
+                        user
+                        {% else %}
+                        Anonymous
+        {% endif %}
                     <div class="box-header with-border">
                         <h3 class="box-title">Menu confirmation</h3>
                     </div>
